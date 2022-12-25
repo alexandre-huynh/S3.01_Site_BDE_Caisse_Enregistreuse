@@ -40,7 +40,7 @@ class Model
     public function getProduits($filter = "default", $type = "default", $name = "default" )
     {
       // Requête de base auquelle on ajoutera des conditions order by ou filtre
-      $texte_req = 'SELECT * FROM produit';
+      $texte_req = 'SELECT * FROM Produit';
 
       // ------------------
       // $type
@@ -85,7 +85,7 @@ class Model
 
     public function getProduitsNouveau($limit)
     {
-      $req = $this->bd->prepare('SELECT * FROM produit ORDER BY date_ajout DESC LIMIT :limit');
+      $req = $this->bd->prepare('SELECT * FROM Produit ORDER BY date_ajout DESC LIMIT :limit');
       $req->bindValue(':limit', $limit);
       $req->execute();
       $reponse = [];
@@ -97,7 +97,7 @@ class Model
 
     public function getProduitsPopulaire($limit)
     {
-      $req = $this->bd->prepare('SELECT * FROM produit ORDER BY nb_ventes DESC LIMIT :limit');
+      $req = $this->bd->prepare('SELECT * FROM Produit ORDER BY nb_ventes DESC LIMIT :limit');
       $req->bindValue(':limit', $limit);
       $req->execute();
       $reponse = [];
