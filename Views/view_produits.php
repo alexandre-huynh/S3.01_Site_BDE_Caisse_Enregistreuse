@@ -11,8 +11,8 @@
   <ul>
     <li>Image_ici</li>
     <!--<li> < ? = e($ligne["img_produit"])?> </li> -->
-    <li> <?=e($ligne["nom"])?> </li>
-    <li> <?=e($ligne["prix"])?> </li>
+    <li> <?=e($ligne["Nom"])?> </li>
+    <li> <?=e($ligne["Prix"])?> </li>
   </ul>
 <?php endforeach ?>
 
