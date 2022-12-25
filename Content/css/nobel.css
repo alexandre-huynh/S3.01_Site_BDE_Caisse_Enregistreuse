@@ -1,0 +1,95 @@
+/* Utilisation de fonts */
+@font-face { font-family: "Merienda"; src: url('../fonts/MeriendaOne-Regular.ttf'); }
+@font-face { font-family: "dancing_in_the_rainbow"; src: url('../fonts/dancing_in_the_rainbow.ttf'); }
+
+
+
+* {
+  box-sizing: border-box;
+}
+
+
+
+body {  width : 90%; background-color : #686887; margin:auto; overflow-y: scroll ; position: relative;}
+header { width : 75%;  padding : 30px; text-align : center; color : #D2B5FF; margin:auto;}
+main {   background-color : #C9C9D9; border-radius : 10px; padding : 30px; position: relative; }
+
+
+/* En-tête de la page */
+header h1 { padding : 0px; height : 120px; width : 90%; margin:auto; background-image:url('../img/nobel_prize.png');
+            background-size: 120px; background-repeat: no-repeat;  background-position:center right;
+          min-height: 120px; margin:auto;}
+header h1 a {display :block; margin : 0px; font-family: Merienda; height: 100%; text-decoration: none; color : inherit;}
+
+
+
+
+
+
+/* Menu de navigation */
+nav ul { margin:0;  padding:0;}
+nav li {  list-style-type : none; padding : 0px; margin-bottom : 10px; }
+nav li a { display : block; margin : 0; background-color : #C9C9D9; border-radius : 10px; padding-top : 20px; padding-bottom : 20px; padding-left : 10px; padding-right : 10px; width:100%; vertical-align : middle; text-align : center; text-decoration : none; color : #686887; font-style : italic; }
+
+
+
+h1 { font-family: "dancing_in_the_rainbow"; font-size: 3.5em; text-align: center; margin-top: 0px;  }
+.synopsis,.biographie { width: 80%; text-align: justify;}
+
+label { display : block;  width : 150px; }
+table { border-collapse : collapse; margin : auto; }
+td,th { border : 1px solid black;  width : 300px; height : 30px; text-align : center;}
+.sansBordure { border : 0px; width : 30px; padding-left : 0px;}
+
+img.icone { width: 16px; }
+
+
+/* Liste des pages de résultats */
+.listePages { width : 400px; margin : auto; padding-top : 20px; text-align: center; }
+.listePages p { color : blue; padding: 0px; margin:0px;}
+a.lienStart { text-decoration: none; display: inline-block; width : 25px; font-size: smaller; color : blue;}
+a.active { color : red;}
+
+
+
+body{
+  display:grid;
+  grid-template-columns: 1fr 6fr;
+  column-gap: 1em;
+  grid-template-areas:
+  "h h"
+  "menu main";
+}
+
+nav{
+  grid-area: menu;
+}
+header{
+  grid-area: h;
+}
+
+main{
+  grid-area: main;
+}
+
+
+/* Si l'écran ne fait pas plus  de 1000 pixels de large */
+@media (max-width:1000px) {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+    "h"
+    "menu"
+    "main";
+   }
+  header h1 { font-size : 2.5em; padding-top: 20px; height : 100px; }
+  main, header{ margin-left : 0px; }
+
+  nav ul{
+    
+      display: flex;
+      justify-content: center;
+   
+  }
+  nav li {display: inline-block; margin: 2em;}
+}
