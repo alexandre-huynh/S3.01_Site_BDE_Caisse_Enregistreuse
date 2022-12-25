@@ -17,7 +17,7 @@
   <?php foreach ($popular_prod as $v): ?>
     <!-- <td>Image</td> -->
     <td>
-      <img src="<?=$v['img_produit']?>" alt="img_<?=e($v['nom'])?>">
+      <img src="<?=$v['img_produit']?>" alt="img_<?=e($v['Nom'])?>">
     </td>
 
   <?php endforeach ?>
@@ -25,7 +25,7 @@
   <!-- Ligne infos produit -->
   <tr>
   <?php foreach ($popular_prod as $v): ?>
-    <td> <?=e($v["nom"])?> - <?=e($v["prix"])?> € </td>
+    <td> <?=e($v["Nom"])?> - <?=e($v["Prix"])?> € </td>
   <?php endforeach ?>
   </tr>
 </table>
@@ -45,7 +45,7 @@
   <!-- Ligne infos produit -->
   <tr>
   <?php foreach ($nouv_prod as $np): ?>
-    <td> <?=e($np["nom"])?> - <?=e($np["prix"])?> € </td>
+    <td> <?=e($np["Nom"])?> - <?=e($np["Prix"])?> € </td>
   <?php endforeach ?>
   </tr>
 </table>
