@@ -17,7 +17,7 @@ class Model
      */
     private function __construct()
     {
-        include "Utils/credentials.php"; // ou credentials.php
+        include "/home/student/905/12102253/public_html/Utils/credentials.php"; // ou credentials.php
         //include "../../Utils/credentials.php"; marche pas
         $this->bd = new PDO($dsn, $login, $mdp);
         $this->bd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -53,19 +53,19 @@ class Model
 
       // food = que confiseries/snacks
       if ($type=="food"){
-        $texte_req = $texte_req . " WHERE categorie = 'Confiserie'";
+        $texte_req = $texte_req . " WHERE Categorie = 'Confiserie'";
       }
 
       // drink = que boissons : boisson, sirop, soda
       elseif ($type=="drink"){
-        $texte_req = $texte_req . " WHERE categorie = 'Boisson' or categorie = 'Sirop' or categorie = 'Soda'";
+        $texte_req = $texte_req . " WHERE Categorie = 'Boisson' or Categorie = 'Sirop' or Categorie = 'Soda'";
       }
 
       // autre = par exemple soda, affichage seuelement des sodas
       // problème éventuel : casse
       // solution : adapter les boutons de filtrage
       elseif ($type!="default"){
-        $texte_req = $texte_req . " WHERE categorie = '" . $type . "'";
+        $texte_req = $texte_req . " WHERE Categorie = '" . $type . "'";
       }
 
       // ------------------
@@ -109,7 +109,7 @@ class Model
 
     public function getPrixProduit($id_prod)
     {
-      $req = $this->bd->prepare('SELECT prix FROM Produit WHERE :id_prod');
+      $req = $this->bd->prepare('SELECT Prix FROM Produit WHERE :id_prod');
       $req->bindValue(':id_prod', $id_prod);
       $req->execute();
       return $req->fetch(PDO::FETCH_NUM)[0];
