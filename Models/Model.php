@@ -86,7 +86,7 @@ class Model
     public function getProduitsNouveau($limit)
     {
       $req = $this->bd->prepare('SELECT * FROM Produit ORDER BY date_ajout DESC LIMIT :limit');
-      $req->bindValue(':limit', $limit);
+      $req->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
       $req->execute();
       $reponse = [];
       while ($ligne = $req->fetch(PDO::FETCH_ASSOC)) {
@@ -98,7 +98,7 @@ class Model
     public function getProduitsPopulaire($limit)
     {
       $req = $this->bd->prepare('SELECT * FROM Produit ORDER BY nb_ventes DESC LIMIT :limit');
-      $req->bindValue(':limit', $limit);
+      $req->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
       $req->execute();
       $reponse = [];
       while ($ligne = $req->fetch(PDO::FETCH_ASSOC)) {
