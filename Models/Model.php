@@ -17,7 +17,7 @@ class Model
      */
     private function __construct()
     {
-        include "/home/student/905/12102253/public_html/Utils/credentials.php"; // ou credentials.php
+        include "Utils/credentials.php"; // ou credentials.php
         //include "../../Utils/credentials.php"; marche pas
         $this->bd = new PDO($dsn, $login, $mdp);
         $this->bd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
