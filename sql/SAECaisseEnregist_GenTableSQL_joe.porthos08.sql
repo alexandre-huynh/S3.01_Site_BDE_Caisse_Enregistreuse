@@ -58,7 +58,7 @@ CREATE TABLE Produit
     Nom VARCHAR(50),
     Categorie VARCHAR(50),
     Prix FLOAT,
-    Img_produit BYTEA,
+    Img_produit VARCHAR(50),
     Date_ajout DATE,
     Stock INT,
     Nb_ventes INT

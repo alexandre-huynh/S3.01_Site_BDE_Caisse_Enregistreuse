@@ -32,6 +32,6 @@ SELECT id_client, Nom, count(*) as "Produits achetés"
 -- elle affichera notamment que le client a acheté à la date x 
 -- tel produit de quantité = n et pour un total prix = k
 SELECT distinct id_client, date_vente, nom_produit, count(*) as "Quantité" , sum(prix) as "Total prix"
-  FROM Client join Vente using(id_client) join produit using(id_produit)
+  FROM Client join Vente using(id_client) join Produit using(id_produit)
   WHERE id_client=1
   GROUP BY id_client, date_vente, nom_produit;
