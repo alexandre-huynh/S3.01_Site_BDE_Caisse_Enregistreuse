@@ -17,7 +17,7 @@
             <div class="liste_produits_actuels">
             <?php foreach ($popular_prod as $ligne): ?>
               <ul>
-                <li><img src="Content/img/<?=e($ligne["img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>"/></li>
+                <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                 <li><?=e($ligne["Nom"])?></li>
                 <li><?=e($ligne["Prix"])?></li>
               </ul>
@@ -32,7 +32,7 @@
             <div class="liste_produits_nouveautes">
             <?php foreach ($nouv_prod as $ligne): ?>
               <ul>
-                <li><img src="Content/img/<?=e($ligne["img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>"/></li>
+                <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                 <li><?=e($ligne["Nom"])?></li>
                 <li><?=e($ligne["Prix"])?></li>
               </ul>
