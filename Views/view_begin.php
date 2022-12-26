@@ -1,22 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8"/>
-		<title>Stand de confiseries Wolf BDE - IUT de Villetaneuse</title>
-		<link rel="stylesheet" href="Content/css/nobel.css"/>
-	</head>
-	<body>
-		<nav>
-			<ul>
-				<li><a href="?controller=list&action=last"> Last Nobel Prizes</a></li>
-				<li><a href="?controller=set&action=form_add"> Add a Nobel prize</a></li>
-				<!-- <li><a href="?controller=list&action=pagination"> All the Nobel Prizes</a></li> -->
-				<!-- <li><a href="?controller=search"> Search among te Nobel prizes</a></li> -->
-			</ul>
-		</nav>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name = "author" content="JoePorthos">
+    <meta name="description" content="Stand de confisseries du BDE">
+    <meta name="keywords" content="bde, stand, confisseries, boissons, iut, villetaneuse, iutv, université, paris, paris13, sorbonne, paris nord">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo $title; ?> | Stand de confiseries du BDE</title>
+</head>
+<body>
 
-		<header>
-			<h1><a href="?"> Nobel Prizes </a></h1>
-		</header>
+    <!-- Entête de la page-->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="page_accueil.html"><img src="../images/logo_bde.png" alt="logo-bde" width="100" height="100"></a></li>
+                <li><a href="page_confisseries.html" title="Confisseries">Confisseries</a></li>
+                <li><a href="page_boissons.html" title="Boissons">Boissons</a></li>
+                <li>><a href="page_espace_client.html" target="_blank" title="Mon Espace">Mon Espace</a></li>
+                <li><a href="page_connexion.html" title="Se connecter / S'inscrire">Se connecter / S'inscrire</a></li>
 
-		<main>
+                <!--Menu deroulant pour changer la langue du site-->
+                <li>
+                    <div class="menu_deroulant_langues">
+                        <button class="changer_langues">Langues</button>
+                        <div class="contenu_menu_langues">
+                            <li><a href="#"><img src="../images/logo_français_langue.png" width="40" height="40"></a></li>
+                            <li><a href="#"><img src="../images/logo_english_language.png" width="40" height="40"></a></li>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <!--Fin de l'entête de la page-->
+
+    <!--Corps de la page-->
+    <main>
