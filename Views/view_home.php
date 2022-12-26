@@ -1,4 +1,7 @@
-<?php require "view_begin.php";?>
+<?php 
+require "view_begin.php";
+$title = 'Accueil';
+?>
 
 <h1> Bienvenue au Stand de confiseries du BDE de l'IUT de Villetaneuse !</h1>
 
