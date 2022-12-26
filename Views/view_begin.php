@@ -15,10 +15,10 @@
     <header>
         <nav>
             <ul>
-                <li><a href="page_accueil.html"><img src="../images/logo_bde.png" alt="logo-bde" width="100" height="100"></a></li>
-                <li><a href="page_confisseries.html" title="Confisseries">Confisseries</a></li>
-                <li><a href="page_boissons.html" title="Boissons">Boissons</a></li>
-                <li>><a href="page_espace_client.html" target="_blank" title="Mon Espace">Mon Espace</a></li>
+                <li><a href="index.php?controller=home&action=home"><img src="Content/img/logo_bde.png" alt="logo-bde" width="100" height="100"></a></li>
+                <li><a href="?controller=list&action=confiseries" title="Confiseries">Confiseries</a></li>
+                <li><a href="?controller=list&action=boissons" title="Boissons">Boissons</a></li>
+                <li><a href="page_espace_client.html" target="_blank" title="Mon Espace">Mon Espace</a></li>
                 <li><a href="page_connexion.html" title="Se connecter / S'inscrire">Se connecter / S'inscrire</a></li>
 
                 <!--Menu deroulant pour changer la langue du site-->
@@ -26,8 +26,8 @@
                     <div class="menu_deroulant_langues">
                         <button class="changer_langues">Langues</button>
                         <div class="contenu_menu_langues">
-                            <li><a href="#"><img src="../images/logo_français_langue.png" width="40" height="40"></a></li>
-                            <li><a href="#"><img src="../images/logo_english_language.png" width="40" height="40"></a></li>
+                            <li><a href="#"><img src="Content/img/flag_fr.png" width="40" height="40"></a></li>
+                            <li><a href="#"><img src="Content/img/flag_en.png" width="40" height="40"></a></li>
                         </div>
                     </div>
                 </li>
