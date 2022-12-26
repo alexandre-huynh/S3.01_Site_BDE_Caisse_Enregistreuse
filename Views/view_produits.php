@@ -9,8 +9,7 @@
 
 <?php foreach ($produits as $ligne): ?>
   <ul>
-    <li>Image_ici</li>
-    <!--<li> < ? = e($ligne["img_produit"])?> </li> -->
+    <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
     <li> <?=e($ligne["Nom"])?> </li>
     <li> <?=e($ligne["Prix"])?> </li>
   </ul>
