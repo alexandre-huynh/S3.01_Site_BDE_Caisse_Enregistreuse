@@ -2,7 +2,7 @@
 
         <section class="banniere_accueil">
             <div class="phrase_bienvenue">
-                <h1>Bienvenue au stand de confisseries du BDE</h1>
+                <h1>Bienvenue au stand de confiseries du BDE</h1>
             </div>
         </section>
 
