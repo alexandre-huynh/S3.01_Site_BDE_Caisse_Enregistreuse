@@ -13,7 +13,7 @@
           genre un petit bloc carré jsp
         -->
         <section class="produits_du_moment">
-            <h4>Nos produits du moments</h4>
+            <h4>Nos produits du moment</h4>
             <div class="liste_produits_actuels">
             <?php foreach ($popular_prod as $ligne): ?>
               <ul>
