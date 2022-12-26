@@ -7,7 +7,7 @@
 <footer>
     <div class="contenu_footer">
         <div>
-            <img src="../images/logo_uspn.jpg" alt="Logo Université Sorbonne Paris Nord" width="100" height="50">
+            <img src="Content/img/logo_uspn.png" alt="Logo Université Sorbonne Paris Nord" width="100" height="50">
         </div>
         <ul>
             <li>

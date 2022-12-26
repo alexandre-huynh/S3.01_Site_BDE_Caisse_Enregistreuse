@@ -1,56 +1,52 @@
-<?php 
-require "view_begin.php";
-$title = 'Accueil';
-?>
+<?php require "view_begin.php"; ?>
 
-<h1> Bienvenue au Stand de confiseries du BDE de l'IUT de Villetaneuse !</h1>
+        <section class="banniere_accueil">
+            <div class="phrase_bienvenue">
+                <h1>Bienvenue au stand de confisseries du BDE</h1>
+            </div>
+        </section>
 
-<!-- Diaporama -->
+        <!-- Produits populaires -->
+        <!--
+          TODO Pour l'instant en format table,
+          adapter à un format "carte produit"
+          genre un petit bloc carré jsp
+        -->
+        <section class="produits_du_moment">
+            <h4>Nos produits du moments</h4>
+            <div class="liste_produits_actuels">
+            <?php foreach ($popular_prod as $ligne): ?>
+              <ul>
+                <li><img src="Content/img/<?=e($ligne["img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>"/></li>
+                <li><?=e($ligne["Nom"])?></li>
+                <li><?=e($ligne["Prix"])?></li>
+              </ul>
+              </br> <!-- à enlever si nécessaire--> 
+            <?php endforeach ?>
+            </div>
 
-<!-- Produits populaires -->
-<!--
-  TODO Pour l'instant en format table,
-  adapter à un format "carte produit"
-  genre un petit bloc carré jsp
--->
-<h2>Nos produits du moment</h2>
-<table>
-  <!-- Ligne image produit -->
-  <tr>
-  <?php foreach ($popular_prod as $v): ?>
-    <!-- <td>Image</td> -->
-    <td>
-      <img src="<?=$v['Img_produit']?>" alt="img_<?=e($v['Nom'])?>">
-    </td>
+        </section>
 
-  <?php endforeach ?>
-  </tr>
-  <!-- Ligne infos produit -->
-  <tr>
-  <?php foreach ($popular_prod as $v): ?>
-    <td> <?=e($v["Nom"])?> - <?=e($v["Prix"])?> € </td>
-  <?php endforeach ?>
-  </tr>
-</table>
+        <section class="produits_nouveautes">
+            <h4>Nos nouveautés</h4>
+            <div class="liste_produits_nouveautes">
+            <?php foreach ($nouv_prod as $ligne): ?>
+              <ul>
+                <li><img src="Content/img/<?=e($ligne["img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>"/></li>
+                <li><?=e($ligne["Nom"])?></li>
+                <li><?=e($ligne["Prix"])?></li>
+              </ul>
+              </br> <!-- à enlever si nécessaire--> 
+            <?php endforeach ?>
+            </div>
 
-<br>
+        </section>
 
-<!-- Nouveau produits -->
-<h2>Nos nouveautés</h2>
-<table>
-  <!-- Ligne image produit -->
-  <tr>
-  <?php foreach ($nouv_prod as $np): ?>
-    <td>Image</td>
-    <!--<td> < ? = e($v["Img_produit"])?> </td> -->
-  <?php endforeach ?>
-  </tr>
-  <!-- Ligne infos produit -->
-  <tr>
-  <?php foreach ($nouv_prod as $np): ?>
-    <td> <?=e($np["Nom"])?> - <?=e($np["Prix"])?> € </td>
-  <?php endforeach ?>
-  </tr>
-</table>
+        <section class="bde_presentation">
+            <div>
+                <h4>Le Wolf BDE</h4>
+            </div>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi nemo perspiciatis voluptatibus ex eos optio similique repellat eius quibusdam reiciendis, repellendus vel accusantium ipsa, libero assumenda et dignissimos fugiat deserunt.</p>
+        </section>
 
 <?php require "view_end.php";?>

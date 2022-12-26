@@ -7,7 +7,7 @@
     <meta name="keywords" content="bde, stand, confisseries, boissons, iut, villetaneuse, iutv, université, paris, paris13, sorbonne, paris nord">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $title; ?> | Stand de confiseries du BDE</title>
+    <title>Stand de confiseries du BDE</title>
 </head>
 <body>
 
