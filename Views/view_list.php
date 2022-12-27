@@ -21,11 +21,11 @@
         <select name="attribut">
           <?php if ($listed_elements=="gestion_clients") : ?>
             <!-- Le php ici sert juste à ce que l'attribut de recherche choisi soit sélectionné parmi les autres -->
-            <option value="num_etudiant" <?php if ($_GET["attribut"]=="num_etudiant") : ?>selected<?php endif ?>>Numéro étudiant</option>
-            <option value="Nom" <?php if ($_GET["attribut"]=="Nom") : ?>selected<?php endif ?>>Nom</option>
-            <option value="Prenom" <?php if ($_GET["attribut"]=="Prenom") : ?>selected<?php endif ?>>Prénom</option>
-            <option value="Tel" <?php if ($_GET["attribut"]=="Tel") : ?>selected<?php endif ?>>Numéro de Téléphone</option>
-            <option value="Email" <?php if ($_GET["attribut"]=="Email") : ?>selected<?php endif ?>>Email</option>
+            <option value="num_etudiant" <?php if (isset($_GET["attribut"]) && $_GET["attribut"]=="num_etudiant") : ?>selected<?php endif ?>>Numéro étudiant</option>
+            <option value="Nom" <?php if (isset($_GET["attribut"]) && $_GET["attribut"]=="Nom") : ?>selected<?php endif ?>>Nom</option>
+            <option value="Prenom" <?php if (isset($_GET["attribut"]) && $_GET["attribut"]=="Prenom") : ?>selected<?php endif ?>>Prénom</option>
+            <option value="Tel" <?php if (isset($_GET["attribut"]) && $_GET["attribut"]=="Tel") : ?>selected<?php endif ?>>Numéro de Téléphone</option>
+            <option value="Email" <?php if (isset($_GET["attribut"]) && $_GET["attribut"]=="Email") : ?>selected<?php endif ?>>Email</option>
           <?php endif ?>
           <!-- Pour afficher tous les attributs possibles dont on veut trier avec
           < ?php foreach ($colonnes as $v): ?>
