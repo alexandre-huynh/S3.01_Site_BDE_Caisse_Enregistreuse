@@ -1,10 +1,12 @@
+<?php require "view_begin.php";?>
+
 <!-- Titre de la liste d'élements -->
 <h1> <?= e($titre) ?> </h1>
 
 <!-- TODO: voir comment faire un truc de recherche avec le système actuel -->
 <!-- peut être que c'est plus simple en faisant des view différentes -->
 <!-- par exemple $listed_elements -> action=gestion_clients -->
-<form action = "?controller=list&action=<?= e($listed_elements) ?>">
+<form action = "index.php?controller=list&action=<?= e($listed_elements) ?>">
    <p>
       <label> Rechercher : <input type="text" name="search"/> </label>
    </p>
@@ -66,3 +68,5 @@
   <?php endforeach ?>
 
 </table>
+
+<?php require "view_end.php";?>
