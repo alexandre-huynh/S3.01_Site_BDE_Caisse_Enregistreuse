@@ -37,9 +37,8 @@
             <li>
                 <h5>REJOINS-NOUS</h5>
                 <ul>
-                    <li><a href="#"><img src="Content/img/logo_instagram.png"></a></li>
-                    <li><a href="#"><img src="Content/img/logo_tiktok.png"></a></li>
-                    
+                    <li><a href="#"><img src="Content/img/logo_instagram.png" height=60 ></a></li>
+                    <li><a href="#"><img src="Content/img/logo_tiktok.png" height=60 ></a></li> 
                 </ul>
             </li>
         </ul>
