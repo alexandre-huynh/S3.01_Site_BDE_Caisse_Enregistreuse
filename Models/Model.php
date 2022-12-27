@@ -133,10 +133,25 @@ class Model
       return $req->fetch(PDO::FETCH_NUM)[0];
     }
 
-    public function getClients($search="default", $attribut="default")
+    public function getClients($search="default")
     {
       // $search si on veut chercher un client en particulier
       $texte_req = 'SELECT * FROM Client';
+
+      if ($search!="default") {
+        $texte_req = $texte_req . " WHERE 
+          num_etudiant LIKE '%:search%' OR 
+          Nom LIKE '%:search%' OR 
+          Prenom LIKE '%:search%' OR 
+          Tel LIKE '%:search%' OR 
+          Email LIKE '%:search%'"; 
+      }
+
+      $req = $this->bd->prepare($texte_req);
+      $req->bindValue(':search', $search);
+      $req->execute();
+      return $req->fetchAll(PDO::FETCH_ASSOC);
+      /*Ancien code
 
       if ($search!="default" && $attribut!="default"){
         if ($attribut=="num_etudiant") {
@@ -158,15 +173,16 @@ class Model
       }
 
       $req = $this->bd->prepare($texte_req);
-      /* 
+      /*
       normalement, utilisation de marqueur de place mais 
       difficilement utilisable à cause des du signe " devant et derrière l'attribut
       idéal aurait été d'insérer directement la variable mais faille SQLi dans ce cas
       $req->bindValue(':attribut', $attribut);
-      */
+      * /
       $req->bindValue(':search', $search);
       $req->execute();
       return $req->fetchAll(PDO::FETCH_ASSOC);
+      */
     }
 
     public function getAdmins($search="default", $attribut="default")

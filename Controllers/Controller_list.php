@@ -97,11 +97,11 @@ class Controller_list extends Controller{
     // peut être faire un if search est str, alors ucfirst() pour mettre la 1ère lettre en majuscule?
     // ou faire un msg annonçant que la casse est importante
     $search = "default";
-    $attribut = "default";
+    //$attribut = "default";
 
     if (isset($_GET["search"])) {
       $search = e($_GET["search"]); // risque: si search est un int (on sait jamais), fonction e aka htmlspecialchars problématique?
-      $attribut = e($_GET["attribut"]);
+      // $attribut = e($_GET["attribut"]);
     }
     //--------------------------------------------------------
     $m = Model::getModel();
@@ -119,7 +119,7 @@ class Controller_list extends Controller{
         "listed_elements" => "gestion_clients",
         "id_element" => "id_client",
         "colonnes" => $colonnes,
-        "liste" => $m->getClients($search, $attribut)
+        "liste" => $m->getClients($search)
       ];
 
     $this->render("list", $data);
