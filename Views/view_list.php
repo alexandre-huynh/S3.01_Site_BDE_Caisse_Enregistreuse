@@ -6,7 +6,8 @@
 <!-- TODO: voir comment faire un truc de recherche avec le système actuel -->
 <!-- peut être que c'est plus simple en faisant des view différentes -->
 <!-- par exemple $listed_elements -> action=gestion_clients -->
-<form action = "index.php?controller=list&action=<?= e($listed_elements) ?>">
+<!--<form action = "index.php?controller=list&action=< ?= e($listed_elements) ?>">-->
+<form action = ""> <!-- car on est sur le même script -->
    <p>
       <label> Rechercher : <input type="text" name="search"/> </label>
    </p>
@@ -23,7 +24,7 @@
    <p>
      <input type="submit" value="Rechercher"/>
    </p>
- </form>
+</form>
 <!--=======================================================-->
 
 <!-- Liste des éléments sous forme de table -->
