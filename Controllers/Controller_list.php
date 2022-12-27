@@ -101,7 +101,7 @@ class Controller_list extends Controller{
 
     if (isset($_GET["search"])) {
       $search = e($_GET["search"]); // risque: si search est un int (on sait jamais), fonction e aka htmlspecialchars problématique?
-      $attribut = ucfirst(e($_GET["attribut"]));
+      $attribut = e($_GET["attribut"]);
     }
     //--------------------------------------------------------
     $m = Model::getModel();

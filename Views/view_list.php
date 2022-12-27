@@ -6,12 +6,11 @@
 <!-- TODO: voir comment faire un truc de recherche avec le système actuel -->
 <!-- peut être que c'est plus simple en faisant des view différentes -->
 <!-- par exemple $listed_elements -> action=gestion_clients -->
-<form action = "index.php?controller=list&action=<?=e($listed_elements)?>">
+<!--<form action = "index.php?controller=list&action=< ?=e($listed_elements)?>">-->
+<form action ="">
   <!-- Si ca marche toujours pas -->
-  <!--
   <input type="hidden" name="controller" value="list" />
-  <input type="hidden" name="action" value="< ?=e($listed_elements)?>" />
-  -->
+  <input type="hidden" name="action" value="<?=e($listed_elements)?>" />
   <!-- -->
    <p>
       <label> Rechercher : <input type="text" name="search"/> </label>
@@ -20,9 +19,18 @@
      <!-- Pour indiquer qu'on cherche par exemple un nom de produit correspondant, ou un email etc -->
      <label> Par : 
         <select name="attribut">
-          <?php foreach ($colonnes as $v): ?>
-            <option value="<?=strtolower(e($v))?>"><?=e($v)?></option>
-          <?php endforeach ?>
+          <?php if ($listed_elements=="gestion_clients") : ?>
+            <option value="num_etudiant">Numéro étudiant</option>
+            <option value="Nom">Nom</option>
+            <option value="Prenom">Prénom</option>
+            <option value="Tel">Numéro de Téléphone</option>
+            <option value="Email">Email</option>
+          <?php endif ?>
+          <!-- Pour afficher tous les attributs possibles dont on veut trier avec
+          < ?php foreach ($colonnes as $v): ?>
+            <option value="< ?=strtolower(e($v))?>">< ?=e($v)?></option>
+          < ?php endforeach ?>
+          -->
         </select>
      </label>
    </p>

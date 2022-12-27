@@ -143,7 +143,7 @@ class Model
       }
 
       $req = $this->bd->prepare($texte_req);
-      $req->bindValue(':attribut', ucfirst($attribut));
+      $req->bindValue(':attribut', $attribut);
       $req->bindValue(':search', $search);
       //
       $req->execute();
@@ -160,7 +160,7 @@ class Model
       }
 
       $req = $this->bd->prepare($texte_req);
-      $req->bindValue(':attribut', ucfirst($attribut));
+      $req->bindValue(':attribut', $attribut);
       $req->bindValue(':search', $search);
       //
       $req->execute();
