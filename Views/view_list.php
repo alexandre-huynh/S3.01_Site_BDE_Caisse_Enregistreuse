@@ -15,6 +15,8 @@
                                   name="search" 
                                   <?php if (isset($_GET["search"])) : ?>
                                     value=<?=e($_GET["search"])?>
+                                  <?php else : ?>
+                                    value=""
                                   <?php endif ?> 
                                   placeholder="Rechercher par mot clé" /> 
       </label>
