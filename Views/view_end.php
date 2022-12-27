@@ -22,14 +22,14 @@
                 <h5>BDE</h5>
                 <ul>
                     <li><a href="#">Qui sommes-nous ?</a></li>
-                    <li><a href="#">Cartre du BDE</a></li>
+                    <li><a href="#">Charte du BDE</a></li>
                 </ul>
             </li>
 
             <li>
                 <h5>CGU</h5>
                 <ul>
-                    <li><a href="#">Accéssibilité</a></li>
+                    <li><a href="#">Accessibilité</a></li>
                     <li><a href="#">Produits</a></li>
                 </ul>
             </li>
@@ -37,8 +37,8 @@
             <li>
                 <h5>REJOINS-NOUS</h5>
                 <ul>
-                    <li><a href="#"><img src="../images/logo_instagram.png"></a></li>
-                    <li><a href="#"><img src="../images/logo_tiktok.png"></a></li>
+                    <li><a href="#"><img src="Content/img/logo_instagram.png"></a></li>
+                    <li><a href="#"><img src="Content/img/logo_tiktok.png"></a></li>
                     
                 </ul>
             </li>
