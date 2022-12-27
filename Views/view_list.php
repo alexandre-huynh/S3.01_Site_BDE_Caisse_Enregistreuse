@@ -39,6 +39,10 @@
      <input type="submit" value="Rechercher"/>
    </p>
 </form>
+
+<!-- Réinitialiser recherche -->
+<a href="index.php?controller=list&action=<?=e($listed_elements)?>">Réinitialiser</a>
+
 <!--=======================================================-->
 
 <!-- Liste des éléments sous forme de table -->
