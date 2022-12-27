@@ -39,7 +39,7 @@
   <tr>
     <!-- Ici si on prend que les clés, on a les noms de colonnes-->
     <?php foreach ($colonnes as $v): ?>
-    <th><?=e($c)?></th>
+    <th><?=e($v)?></th>
     <?php endforeach ?>
   </tr>
   <!-- Lignes d'éléments / Tuples -->
