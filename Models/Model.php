@@ -138,14 +138,33 @@ class Model
       // $search si on veut chercher un client en particulier
       $texte_req = 'SELECT * FROM Client';
 
-      if ($search!="default"){
-        $texte_req = $texte_req . " WHERE :attribut = :search";
+      if ($search!="default" && $attribut!="default"){
+        if ($attribut=="num_etudiant") {
+          $texte_req = $texte_req . " WHERE num_etudiant = :search";
+        }
+        elseif ($attribut=="Nom") {
+          $texte_req = $texte_req . " WHERE Nom = :search";
+        }
+        elseif ($attribut=="Prenom") {
+          $texte_req = $texte_req . " WHERE Prenom = :search";
+        }
+        elseif ($attribut=="Tel") {
+          $texte_req = $texte_req . " WHERE Tel = :search";
+        }
+        elseif ($attribut=="Email") {
+          $texte_req = $texte_req . " WHERE Email = :search";
+        }
+        //$texte_req = $texte_req . " WHERE :attribut = :search";
       }
 
       $req = $this->bd->prepare($texte_req);
+      /* 
+      normalement, utilisation de marqueur de place mais 
+      difficilement utilisable à cause des du signe " devant et derrière l'attribut
+      idéal aurait été d'insérer directement la variable mais faille SQLi dans ce cas
       $req->bindValue(':attribut', $attribut);
+      */
       $req->bindValue(':search', $search);
-      //
       $req->execute();
       return $req->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -155,14 +174,33 @@ class Model
       // $search si on veut chercher un admin en particulier
       $texte_req = 'SELECT * FROM Admin';
 
-      if ($search!="default"){
-        $texte_req = $texte_req . " WHERE :attribut = :search";
+      if ($search!="default" && $attribut!="default"){
+        if ($attribut=="num_etudiant") {
+          $texte_req = $texte_req . " WHERE num_etudiant = :search";
+        }
+        elseif ($attribut=="Nom") {
+          $texte_req = $texte_req . " WHERE Nom = :search";
+        }
+        elseif ($attribut=="Prenom") {
+          $texte_req = $texte_req . " WHERE Prenom = :search";
+        }
+        elseif ($attribut=="Tel") {
+          $texte_req = $texte_req . " WHERE Tel = :search";
+        }
+        elseif ($attribut=="Email") {
+          $texte_req = $texte_req . " WHERE Email = :search";
+        }
+        //$texte_req = $texte_req . " WHERE :attribut = :search";
       }
 
       $req = $this->bd->prepare($texte_req);
+      /* 
+      normalement, utilisation de marqueur de place mais 
+      difficilement utilisable à cause des du signe " devant et derrière l'attribut
+      idéal aurait été d'insérer directement la variable mais faille SQLi dans ce cas
       $req->bindValue(':attribut', $attribut);
+      */
       $req->bindValue(':search', $search);
-      //
       $req->execute();
       return $req->fetchAll(PDO::FETCH_ASSOC);
     }
