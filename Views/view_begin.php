@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name = "author" content="JoePorthos">
-    <meta name="description" content="Stand de confisseries du BDE">
-    <meta name="keywords" content="bde, stand, confisseries, boissons, iut, villetaneuse, iutv, université, paris, paris13, sorbonne, paris nord">
+    <meta name="description" content="Stand de confiseries du BDE">
+    <meta name="keywords" content="bde, stand, confiseries, snack, boissons, iut, villetaneuse, iutv, université, paris, paris13, sorbonne, paris nord">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stand de confiseries du BDE</title>
