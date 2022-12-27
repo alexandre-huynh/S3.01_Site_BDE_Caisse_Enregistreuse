@@ -38,7 +38,7 @@ class Model
     //===========================================================================================
     // TODO faire les autres filters
     // peut être pas de barre de recherche donc pas de $name??
-    public function getProduits($filter = "default", $type = "default", $name = "default" )
+    public function getProduits($filter = "default", $type = "default", $search = "default")
     {
       // Requête de base auquelle on ajoutera des conditions order by ou filtre
       $texte_req = 'SELECT * FROM Produit';
@@ -55,11 +55,23 @@ class Model
       // food = que confiseries/snacks
       if ($type=="food"){
         $texte_req = $texte_req . " WHERE Categorie = 'Confiserie'";
+        /* si on décide d'implémenter des boutons de tri ET une barre de recherche dans la page de l'inventaire
+        if ($search!="default"){
+          $search = "%" . $search . "%";
+          $texte_req = $texte_req . " AND id_produit LIKE :search OR Nom LIKE :search ";
+        }
+        */
       }
 
       // drink = que boissons : boisson, sirop, soda
       elseif ($type=="drink"){
-        $texte_req = $texte_req . " WHERE Categorie = 'Boisson' or Categorie = 'Sirop' or Categorie = 'Soda'";
+        $texte_req = $texte_req . " WHERE Categorie = 'Boisson' OR Categorie = 'Sirop' OR Categorie = 'Soda'";
+        /* si on décide d'implémenter des boutons de tri ET une barre de recherche dans la page de l'inventaire
+        if ($search!="default"){
+          $search = "%" . $search . "%";
+          $texte_req = $texte_req . " AND id_produit LIKE :search OR Nom LIKE :search ";
+        }
+        */
       }
 
       // autre = par exemple soda, affichage seuelement des sodas
@@ -67,16 +79,23 @@ class Model
       // solution : adapter les boutons de filtrage
 
       elseif ($type!="default"){
-        // $use_marqueur=True;
         $texte_req = $texte_req . " WHERE Categorie = :type";
+        /* si on décide d'implémenter des boutons de tri ET une barre de recherche dans la page de l'inventaire
+        if ($search!="default"){
+          $search = "%" . $search . "%";
+          $texte_req = $texte_req . " AND id_produit LIKE :search OR Nom LIKE :search ";
+        }
+        */
       }
 
-      // problème ici: faille SQLi possible, code mis de côté
-      /*
-      elseif ($type!="default"){
-        $texte_req = $texte_req . " WHERE Categorie = '" . $type . "'";
+      // ------------------
+      // $search
+      // -----------------
+      // destiné à l'affichage de l'inventaire
+      if ($type=="default" && $search!="default"){
+        $search = "%" . $search . "%";
+        $texte_req = $texte_req . " WHERE id_produit LIKE :search OR Nom LIKE :search OR Categorie LIKE :search ";
       }
-      */
 
       // ------------------
       // $filter
@@ -89,14 +108,8 @@ class Model
       }
 
       $req = $this->bd->prepare($texte_req);
-      // Mesure anti SQLi
       $req->bindValue(':type', $type);
-      /*
-      if ($use_marqueur==True){
-        $req->bindValue(':type', $type);
-      }
-      */
-      //
+      $req->bindValue(':search', $search);
       $req->execute();
       return $req->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -149,7 +162,6 @@ class Model
           Email LIKE :search "; 
       }
 
-
       $req = $this->bd->prepare($texte_req);
       $req->bindValue(':search', $search);
       $req->execute();
@@ -188,37 +200,44 @@ class Model
       */
     }
 
-    public function getAdmins($search="default", $attribut="default")
+    public function getAdmins($search="default")
     {
       // $search si on veut chercher un admin en particulier
+      $search = "%" . $search . "%";
+
       $texte_req = 'SELECT * FROM Admin';
 
-      if ($search!="default" && $attribut!="default"){
-        if ($attribut=="num_etudiant") {
-          $texte_req = $texte_req . " WHERE num_etudiant = :search";
-        }
-        elseif ($attribut=="Nom") {
-          $texte_req = $texte_req . " WHERE Nom = :search";
-        }
-        elseif ($attribut=="Prenom") {
-          $texte_req = $texte_req . " WHERE Prenom = :search";
-        }
-        elseif ($attribut=="Tel") {
-          $texte_req = $texte_req . " WHERE Tel = :search";
-        }
-        elseif ($attribut=="Email") {
-          $texte_req = $texte_req . " WHERE Email = :search";
-        }
-        //$texte_req = $texte_req . " WHERE :attribut = :search";
+      if ($search!="%default%") {
+        $texte_req = $texte_req . " WHERE 
+          num_etudiant LIKE :search OR 
+          Nom LIKE :search OR 
+          Prenom LIKE :search OR 
+          Tel LIKE :search OR 
+          Email LIKE :search "; 
       }
 
       $req = $this->bd->prepare($texte_req);
-      /* 
-      normalement, utilisation de marqueur de place mais 
-      difficilement utilisable à cause des du signe " devant et derrière l'attribut
-      idéal aurait été d'insérer directement la variable mais faille SQLi dans ce cas
-      $req->bindValue(':attribut', $attribut);
-      */
+      $req->bindValue(':search', $search);
+      $req->execute();
+      return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getHistoriqueAchats($search="default") // ou getVentes
+    {
+      // $search si on veut chercher une vente en particulier
+      $search = "%" . $search . "%";
+
+      $texte_req = 'SELECT * FROM Vente';
+
+      if ($search!="%default%") {
+        $texte_req = $texte_req . " WHERE 
+          num_vente LIKE :search OR 
+          Nom_produit LIKE :search OR 
+          Date_vente LIKE :search OR 
+          Paiement LIKE :search "; 
+      }
+
+      $req = $this->bd->prepare($texte_req);
       $req->bindValue(':search', $search);
       $req->execute();
       return $req->fetchAll(PDO::FETCH_ASSOC);

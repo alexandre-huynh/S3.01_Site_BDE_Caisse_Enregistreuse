@@ -94,8 +94,6 @@ class Controller_list extends Controller{
 
   public function action_gestion_clients(){
     // TODO: Pour Cléante --> implémenter sécurité, vérification variable session, si connecté et si c'est bien un admin
-    // peut être faire un if search est str, alors ucfirst() pour mettre la 1ère lettre en majuscule?
-    // ou faire un msg annonçant que la casse est importante
     $search = "default";
     //$attribut = "default";
 
@@ -115,7 +113,7 @@ class Controller_list extends Controller{
 
     $data =
       [
-        "titre" => "Gestion des clients",
+        "titre" => "Gestion des comptes clients",
         "listed_elements" => "gestion_clients",
         "id_element" => "id_client",
         "colonnes" => $colonnes,
@@ -125,6 +123,100 @@ class Controller_list extends Controller{
     $this->render("list", $data);
   }
 
+  public function action_gestion_admins(){
+    // TODO: Pour Cléante --> implémenter sécurité, vérification variable session, si connecté et si c'est bien un super-admin
+    $search = "default";
+    //$attribut = "default";
+
+    if (isset($_GET["search"])) {
+      $search = e($_GET["search"]); // risque: si search est un int (on sait jamais), fonction e aka htmlspecialchars problématique?
+      // $attribut = e($_GET["attribut"]);
+    }
+    //--------------------------------------------------------
+    $m = Model::getModel();
+
+    $colonnes = $m->getAdmins();
+    $colonnes = array_keys($colonnes[0]);
+    // titre sera destiné au titre en grand en haut de tableau/liste
+
+    // listed_elements sert à adapter les liens de view_list.php 
+    // au traitement par controller-action associé à ce dernier
+
+    $data =
+      [
+        "titre" => "Gestion des comptes administrateurs",
+        "listed_elements" => "gestion_admins",
+        "id_element" => "id_admin",
+        "colonnes" => $colonnes,
+        "liste" => $m->getAdmins($search)
+      ];
+
+    $this->render("list", $data);
+  }
+
+  public function action_gestion_ventes(){
+    // TODO: Pour Cléante --> implémenter sécurité, vérification variable session, si connecté et si c'est bien un super-admin
+    $search = "default";
+    //$attribut = "default";
+
+    if (isset($_GET["search"])) {
+      $search = e($_GET["search"]); // risque: si search est un int (on sait jamais), fonction e aka htmlspecialchars problématique?
+      // $attribut = e($_GET["attribut"]);
+    }
+    //--------------------------------------------------------
+    $m = Model::getModel();
+
+    $colonnes = $m->getHistoriqueAchats();
+    $colonnes = array_keys($colonnes[0]);
+    // titre sera destiné au titre en grand en haut de tableau/liste
+
+    // listed_elements sert à adapter les liens de view_list.php 
+    // au traitement par controller-action associé à ce dernier
+
+    $data =
+      [
+        "titre" => "Historique des ventes du stand",
+        "listed_elements" => "gestion_ventes",
+        "id_element" => "num_vente",
+        "colonnes" => $colonnes,
+        "liste" => $m->getHistoriqueAchats($search)
+      ];
+
+    $this->render("list", $data);
+  }
+
+  public function action_gestion_inventaire(){
+    // TODO: Pour Cléante --> implémenter sécurité, vérification variable session, si connecté et si c'est bien un super-admin
+    // TODO: pour Alex H., changer l'ordre des attributs pour qu'on ait les images des produits d'abord? ici ou dans view_list
+    $search = "default";
+    //$attribut = "default";
+
+    if (isset($_GET["search"])) {
+      $search = e($_GET["search"]); // risque: si search est un int (on sait jamais), fonction e aka htmlspecialchars problématique?
+      // $attribut = e($_GET["attribut"]);
+    }
+    //--------------------------------------------------------
+    $m = Model::getModel();
+
+    $colonnes = $m->getProduits();
+    $colonnes = array_keys($colonnes[0]);
+    // titre sera destiné au titre en grand en haut de tableau/liste
+
+    // listed_elements sert à adapter les liens de view_list.php 
+    // au traitement par controller-action associé à ce dernier
+
+    $data =
+      [
+        "titre" => "Inventaire des produits du stand",
+        "listed_elements" => "gestion_inventaire",
+        "id_element" => "id_produit",
+        "colonnes" => $colonnes,
+        "liste" => $m->getProduits("default","default",$search)
+      ];
+
+    $this->render("list", $data);
+  }
+  
   public function action_default(){
     $this->action_produits();
   }
