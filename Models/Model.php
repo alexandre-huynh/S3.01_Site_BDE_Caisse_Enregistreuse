@@ -35,6 +35,7 @@ class Model
         return self::$instance;
     }
 
+    //===========================================================================================
     // TODO faire les autres filters
     // peut être pas de barre de recherche donc pas de $name??
     public function getProduits($filter = "default", $type = "default", $name = "default" )
@@ -64,9 +65,18 @@ class Model
       // autre = par exemple soda, affichage seuelement des sodas
       // problème éventuel : casse
       // solution : adapter les boutons de filtrage
+
+      elseif ($type!="default"){
+        // $use_marqueur=True;
+        $texte_req = $texte_req . " WHERE Categorie = :type";
+      }
+
+      // problème ici: faille SQLi possible, code mis de côté
+      /*
       elseif ($type!="default"){
         $texte_req = $texte_req . " WHERE Categorie = '" . $type . "'";
       }
+      */
 
       // ------------------
       // $filter
@@ -79,6 +89,14 @@ class Model
       }
 
       $req = $this->bd->prepare($texte_req);
+      // Mesure anti SQLi
+      $req->bindValue(':type', $type);
+      /*
+      if ($use_marqueur==True){
+        $req->bindValue(':type', $type);
+      }
+      */
+      //
       $req->execute();
       return $req->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -115,6 +133,38 @@ class Model
       return $req->fetch(PDO::FETCH_NUM)[0];
     }
 
+    public function getClients($search="default", $attribut="default")
+    {
+      // $search si on veut chercher un client en particulier
+      $texte_req = 'SELECT * FROM Client';
 
+      if ($search!="default"){
+        $texte_req = $texte_req . " WHERE :attribut = :search";
+      }
+
+      $req = $this->bd->prepare($texte_req);
+      $req->bindValue(':attribut', ucfirst($attribut));
+      $req->bindValue(':search', $search);
+      //
+      $req->execute();
+      return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getAdmins($search="default", $attribut="default")
+    {
+      // $search si on veut chercher un admin en particulier
+      $texte_req = 'SELECT * FROM Admin';
+
+      if ($search!="default"){
+        $texte_req = $texte_req . " WHERE :attribut = :search";
+      }
+
+      $req = $this->bd->prepare($texte_req);
+      $req->bindValue(':attribut', ucfirst($attribut));
+      $req->bindValue(':search', $search);
+      //
+      $req->execute();
+      return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 }

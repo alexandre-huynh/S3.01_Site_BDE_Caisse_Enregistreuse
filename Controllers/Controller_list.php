@@ -92,6 +92,37 @@ class Controller_list extends Controller{
     */
   }
 
+  public function action_gestion_clients(){
+    // TODO: Pour Cléante --> implémenter sécurité, vérification variable session, si connecté et si c'est bien un admin
+    // peut être faire un if search est str, alors ucfirst() pour mettre la 1ère lettre en majuscule?
+    // ou faire un msg annonçant que la casse est importante
+    $search = "default";
+    $attribut = "default";
+
+    if (isset($_GET["search"])) {
+      $search = e($_GET["search"]); // risque: si search est un int (on sait jamais), fonction e aka htmlspecialchars problématique?
+      $attribut = ucfirst(e($_GET["attribut"]));
+    }
+    //--------------------------------------------------------
+    $m = Model::getModel();
+
+    // titre sera destiné au titre en grand en haut de tableau/liste
+
+    // listed_elements sert à adapter les liens de view_list.php 
+    // au traitement par controller-action associé à ce dernier
+
+    // liste sera destiné 
+    $data =
+      [
+        "titre" => "Gestion des clients",
+        "listed_elements" => "gestion_clients",
+        "id_element" => "id_client",
+        "liste" => $m->getClients($search, $attribut)
+      ];
+
+    $this->render("list", $data);
+  }
+
   public function action_default(){
     $this->action_produits();
   }
