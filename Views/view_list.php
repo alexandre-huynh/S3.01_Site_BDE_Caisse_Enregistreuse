@@ -13,10 +13,8 @@
    <p>
       <label> Rechercher : <input type="text" 
                                   name="search" 
-                                  <?php if (isset($_GET["search"])) : ?>
+                                  <?php if (isset($_GET["search"]) && $_GET["search"]!="") : ?>
                                     value=<?=e($_GET["search"])?>
-                                  <?php else : ?>
-                                    value=""
                                   <?php endif ?> 
                                   placeholder="Rechercher par mot clé" /> 
       </label>
