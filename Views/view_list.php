@@ -6,8 +6,13 @@
 <!-- TODO: voir comment faire un truc de recherche avec le système actuel -->
 <!-- peut être que c'est plus simple en faisant des view différentes -->
 <!-- par exemple $listed_elements -> action=gestion_clients -->
-<!--<form action = "index.php?controller=list&action=< ?= e($listed_elements) ?>">-->
-<form action = ""> <!-- car on est sur le même script -->
+<form action = "index.php?controller=list&action=<?=e($listed_elements)?>">
+  <!-- Si ca marche toujours pas -->
+  <!--
+  <input type="hidden" name="controller" value="list" />
+  <input type="hidden" name="action" value="< ?=e($listed_elements)?>" />
+  -->
+  <!-- -->
    <p>
       <label> Rechercher : <input type="text" name="search"/> </label>
    </p>
@@ -15,8 +20,8 @@
      <!-- Pour indiquer qu'on cherche par exemple un nom de produit correspondant, ou un email etc -->
      <label> Par : 
         <select name="attribut">
-          <?php foreach ($liste[0] as $c=>$v): ?>
-          <option value="<?=strtolower(e($c))?>"><?=e($c)?></option>
+          <?php foreach ($colonnes as $v): ?>
+            <option value="<?=strtolower(e($v))?>"><?=e($v)?></option>
           <?php endforeach ?>
         </select>
      </label>
@@ -33,7 +38,7 @@
   <!-- Titres de colonnes / attributs -->
   <tr>
     <!-- Ici si on prend que les clés, on a les noms de colonnes-->
-    <?php foreach ($liste[0] as $c=>$v): ?>
+    <?php foreach ($colonnes as $v): ?>
     <th><?=e($c)?></th>
     <?php endforeach ?>
   </tr>
@@ -44,7 +49,7 @@
       Cases, 1 ligne = $clé=>$valeur
       par exemple Nom => Blanc, Prénom => Laurent
       -->
-      <?php foreach ($ligne as $c=>$v): ?>
+      <?php foreach ($ligne as $v): ?>
         <td><?=e($v)?></td>
       <?php endforeach ?>
       <!-- 

@@ -106,17 +106,19 @@ class Controller_list extends Controller{
     //--------------------------------------------------------
     $m = Model::getModel();
 
+    $colonnes = $m->getClients();
+    $colonnes = array_keys($colonnes[0]);
     // titre sera destiné au titre en grand en haut de tableau/liste
 
     // listed_elements sert à adapter les liens de view_list.php 
     // au traitement par controller-action associé à ce dernier
 
-    // liste sera destiné 
     $data =
       [
         "titre" => "Gestion des clients",
         "listed_elements" => "gestion_clients",
         "id_element" => "id_client",
+        "colonnes" => $colonnes,
         "liste" => $m->getClients($search, $attribut)
       ];
 
