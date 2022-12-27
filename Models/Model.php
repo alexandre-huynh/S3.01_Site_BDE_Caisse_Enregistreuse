@@ -136,16 +136,19 @@ class Model
     public function getClients($search="default")
     {
       // $search si on veut chercher un client en particulier
+      $search = "%" . $search . "%";
+
       $texte_req = 'SELECT * FROM Client';
 
-      if ($search!="default") {
+      if ($search!="%default%") {
         $texte_req = $texte_req . " WHERE 
-          num_etudiant LIKE '%:search%' OR 
-          Nom LIKE '%:search%' OR 
-          Prenom LIKE '%:search%' OR 
-          Tel LIKE '%:search%' OR 
-          Email LIKE '%:search%'"; 
+          num_etudiant LIKE :search OR 
+          Nom LIKE :search OR 
+          Prenom LIKE :search OR 
+          Tel LIKE :search OR 
+          Email LIKE :search "; 
       }
+
 
       $req = $this->bd->prepare($texte_req);
       $req->bindValue(':search', $search);
