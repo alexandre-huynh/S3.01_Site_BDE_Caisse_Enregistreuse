@@ -8,7 +8,8 @@
 < ?php endif ?>
 -->
 
-<h1> Add a Nobel Prize </h1>
+<!-- Titre de la liste d'élements -->
+<h1> <?= e($titre) ?> </h1>
 
 <form action = "?controller=set&action=add" method="post">
     <p> <label> Name: <input type="text" name="name"/> </label>

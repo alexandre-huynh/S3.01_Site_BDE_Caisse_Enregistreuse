@@ -147,8 +147,8 @@ class Model
 
     public function getPrixProduit($id_prod)
     {
-      $req = $this->bd->prepare('SELECT Prix FROM Produit WHERE :id_prod');
-      $req->bindValue(':id_prod', $id_prod);
+      $req = $this->bd->prepare('SELECT Prix FROM Produit WHERE id_produit = :id_prod');
+      $req->bindValue(':id_prod', (int) $id_prod, PDO::PARAM_INT);
       $req->execute();
       return $req->fetch(PDO::FETCH_NUM)[0];
     }

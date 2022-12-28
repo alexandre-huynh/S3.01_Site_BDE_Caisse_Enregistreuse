@@ -188,7 +188,7 @@ class Controller_list extends Controller{
           "id_admin" => $m->getPrenomNomAdmin($ligne["id_admin"]),
           "id_produit" => $ligne["id_produit"],
           "Nom_produit" => $ligne["Nom_produit"],
-          // "prix" => $m->getPrix($ligne["id_admin"]),
+          "Prix" => $m->getPrixProduit($ligne["id_produit"]),
           "Date_vente" => $ligne["Date_vente"],
           "Paiement" => $ligne["Paiement"]
         ];
@@ -205,7 +205,7 @@ class Controller_list extends Controller{
         "titre" => "Historique des ventes du stand",
         "listed_elements" => "gestion_ventes",
         "id_element" => "num_vente",
-        "colonnes" => ["Numéro de vente", "Client acheteur", "Responsable de la vente", "ID produit", "Produit acheté", "Date de la vente", "Méthode de paiement"],
+        "colonnes" => ["Numéro de vente", "Client acheteur", "Responsable de la vente", "ID produit", "Produit acheté", "Prix", "Date de la vente", "Méthode de paiement"],
         "liste" => $liste_nouv
       ];
 
