@@ -40,6 +40,7 @@ class Model
     // peut être pas de barre de recherche donc pas de $name??
     public function getProduits($filter = "default", $type = "default", $search = "default")
     {
+      $use_marqueur = False;
       // Requête de base auquelle on ajoutera des conditions order by ou filtre
       $texte_req = 'SELECT * FROM Produit';
 
