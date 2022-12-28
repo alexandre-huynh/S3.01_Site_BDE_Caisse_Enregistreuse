@@ -250,4 +250,22 @@ class Model
       return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getPrenomNomClient($id)
+    {
+      $req = $this->bd->prepare('SELECT CONCAT(Prenom, " ", Nom) as Prenom_Nom FROM Client WHERE id_client = :id ');
+      $req->bindValue(':id', (int) $id, PDO::PARAM_INT);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+
+    public function getPrenomNomAdmin($id)
+    {
+      $req = $this->bd->prepare('SELECT CONCAT(Prenom, " ", Nom) as Prenom_Nom FROM Admin WHERE id_admin = :id ');
+      $req->bindValue(':id', (int) $id, PDO::PARAM_INT);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+
 }

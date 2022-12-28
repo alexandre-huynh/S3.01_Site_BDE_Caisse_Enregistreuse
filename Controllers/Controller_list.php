@@ -166,8 +166,12 @@ class Controller_list extends Controller{
     //--------------------------------------------------------
     $m = Model::getModel();
 
-    $colonnes = $m->getHistoriqueAchats();
-    $colonnes = array_keys($colonnes[0]);
+    $liste = $m->getHistoriqueAchats($search);
+
+    foreach ($liste as $ligne){
+      $ligne["id_client"] = $m->getPrenomNomClient($ligne["id_client"]);
+      $ligne["id_admin"] = $m->getPrenomNomAdmin($ligne["id_admin"]);
+    }
     // titre sera destiné au titre en grand en haut de tableau/liste
 
     // listed_elements sert à adapter les liens de view_list.php 
@@ -178,8 +182,8 @@ class Controller_list extends Controller{
         "titre" => "Historique des ventes du stand",
         "listed_elements" => "gestion_ventes",
         "id_element" => "num_vente",
-        "colonnes" => $colonnes,
-        "liste" => $m->getHistoriqueAchats($search)
+        "colonnes" => ["Numéro de vente", "Client acheteur", "Responsable de la vente", "ID produit", "Produit acheté", "Date de la vente", "Méthode de paiement"],
+        "liste" => $liste
       ];
 
     $this->render("list", $data);
