@@ -198,8 +198,10 @@ class Controller_list extends Controller{
     //--------------------------------------------------------
     $m = Model::getModel();
 
+    /*
     $colonnes = $m->getProduits();
     $colonnes = array_keys($colonnes[0]);
+    */
     // titre sera destiné au titre en grand en haut de tableau/liste
 
     // listed_elements sert à adapter les liens de view_list.php 
@@ -210,7 +212,7 @@ class Controller_list extends Controller{
         "titre" => "Inventaire des produits du stand",
         "listed_elements" => "gestion_inventaire",
         "id_element" => "id_produit",
-        "colonnes" => $colonnes,
+        "colonnes" => ["Identifiant", "Image", "Nom du produit", "Catégorie", "Prix", "Date d'ajout", "En stock", "Vendus"],
         "liste" => $m->getProduits("default","default",$search)
       ];
 

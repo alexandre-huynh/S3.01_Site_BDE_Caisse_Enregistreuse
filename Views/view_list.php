@@ -1,10 +1,16 @@
 <?php require "view_begin.php";?>
 
+<!-- Pour plus tard quand les variables sessions seront crées
+< ?php if ($connected==True) : ?>
+  < ?php require "view_begin_connected.php";?>
+< ?php else : ?>
+  < ?php require "view_begin.php";?>
+< ?php endif ?>
+-->
+
 <!-- Titre de la liste d'élements -->
 <h1> <?= e($titre) ?> </h1>
 
-<!-- TODO: voir comment faire un truc de recherche avec le système actuel -->
-<!-- peut être que c'est plus simple en faisant des view différentes -->
 <!-- par exemple $listed_elements -> action=gestion_clients -->
 <!-- ne marche pas, redirige vers l'accueil : <form action = "index.php?controller=list&action=< ?=e($listed_elements)?>">-->
 <form action ="">
@@ -59,19 +65,41 @@
   <tr>
     <!-- Ici si on prend que les clés, on a les noms de colonnes-->
     <?php foreach ($colonnes as $v): ?>
-    <th><?=e($v)?></th>
+      <th><?=e($v)?></th>
     <?php endforeach ?>
   </tr>
   <!-- Lignes d'éléments / Tuples -->
   <?php foreach ($liste as $ligne): ?>
   <tr>
-      <!-- 
-      Cases, 1 ligne = $clé=>$valeur
-      par exemple Nom => Blanc, Prénom => Laurent
-      -->
-      <?php foreach ($ligne as $v): ?>
-        <td><?=e($v)?></td>
-      <?php endforeach ?>
+      <!-- -------------------------------------------------------------------  
+      Affichage spécial pour les produits (ordre spécifique et plus pratique)
+      Normalement pas besoin de vérifier si action=gestion_truc existe avec isset  
+      car si elle n'existait pas on ne serait même pas sur cette page
+      ------------------------------------------------------------------- -->
+      <?php if ($_GET["action"]=="gestion_inventaire") : ?>
+        <td><?=e($ligne["id_produit"])?></td>
+        <td><img src="Content/img/<?=e($ligne["Img_produit"])?>" height=60 /></td>
+        <td><?=e($ligne["Nom"])?></td>
+        <td><?=e($ligne["Categorie"])?></td>
+        <td><?=e($ligne["Prix"])?> €</td>
+        <td><?=e($ligne["Date_ajout"])?></td>
+        <td><?=e($ligne["Stock"])?><img src="Content/img/logo_stock" height=10 /></td>
+        <td><?=e($ligne["Nb_ventes"])?><img src="Content/img/logo_ventes" height=10 /></td>
+      <!-- ------------------------------------------------------------------- -->
+      <!--< ?php elseif ($_GET["action"]=="gestion_quelquechose") : ?>-->
+      <!-- ------------------------------------------------------------------- 
+      Affichage par défaut, général 
+      (même ordre de colonnes/attributs que dans base de données)
+      ------------------------------------------------------------------- -->
+      <?php else : ?>
+        <!-- 
+        Cases, on parcourt 1 ligne = $clé=>$valeur
+        par exemple Nom => Blanc, Prénom => Laurent
+        -->
+        <?php foreach ($ligne as $v): ?>
+          <td><?=e($v)?></td>
+        <?php endforeach ?>
+      <?php endif ?> 
       <!-- 
       $id_element peut être id_produit, id_client, id_admin ou num vente,
       s'adaptera selon $variable passé dans $data
@@ -79,12 +107,16 @@
       TODO: voir si lien = form_update&id ou form_update& < ?=$id_element?>, 
       dépend de comment on organise le formulaire de maj
       -->
+
+      
+      <!-- Case modifier cette ligne -->
       <td>
         <a href="?controller=set&action=form_update&id=<?=e($ligne[$id_element])?>">
           <img src="Content/img/edit-icon.png" alt="update"/>
         </a>
       </td>
-
+      
+      <!-- Case supprimer cette ligne -->
       <td>
         <a href="?controller=set&action=remove&id=<?=e($ligne[$id_element])?>">
           <img src="Content/img/remove-icon.png" alt="suppr"/>

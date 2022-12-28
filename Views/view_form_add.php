@@ -1,5 +1,13 @@
 <?php require "view_begin.php";?>
 
+<!-- Pour plus tard quand les variables sessions seront crées
+< ?php if ($connected==True) : ?>
+  < ?php require "view_begin_connected.php";?>
+< ?php else : ?>
+  < ?php require "view_begin.php";?>
+< ?php endif ?>
+-->
+
 <h1> Add a Nobel Prize </h1>
 
 <form action = "?controller=set&action=add" method="post">
