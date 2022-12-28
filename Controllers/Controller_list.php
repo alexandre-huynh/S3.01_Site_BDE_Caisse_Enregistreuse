@@ -212,7 +212,7 @@ class Controller_list extends Controller{
         "titre" => "Inventaire des produits du stand",
         "listed_elements" => "gestion_inventaire",
         "id_element" => "id_produit",
-        "colonnes" => ["Identifiant", "Image", "Nom du produit", "Catégorie", "Prix", "Date d'ajout", "En stock", "Vendus"],
+        "colonnes" => ["Identifiant", "Date d'ajout", "Image", "Nom du produit", "Catégorie", "Prix", "En stock", "Vendus"],
         "liste" => $m->getProduits("default","default",$search)
       ];
 

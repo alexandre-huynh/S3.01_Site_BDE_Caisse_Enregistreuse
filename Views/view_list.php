@@ -78,13 +78,13 @@
       ------------------------------------------------------------------- -->
       <?php if ($_GET["action"]=="gestion_inventaire") : ?>
         <td><?=e($ligne["id_produit"])?></td>
+        <td><?=e($ligne["Date_ajout"])?></td>
         <td><img src="Content/img/<?=e($ligne["Img_produit"])?>" height=60 /></td>
         <td><?=e($ligne["Nom"])?></td>
         <td><?=e($ligne["Categorie"])?></td>
         <td><?=e($ligne["Prix"])?> €</td>
-        <td><?=e($ligne["Date_ajout"])?></td>
-        <td><?=e($ligne["Stock"])?><img src="Content/img/logo_stock" height=10 /></td>
-        <td><?=e($ligne["Nb_ventes"])?><img src="Content/img/logo_ventes" height=10 /></td>
+        <td><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" height=20 /></td>
+        <td><?=e($ligne["Nb_ventes"])?><img src="Content/img/logo_ventes.png" height=20 /></td>
       <!-- ------------------------------------------------------------------- -->
       <!--< ?php elseif ($_GET["action"]=="gestion_quelquechose") : ?>-->
       <!-- ------------------------------------------------------------------- 
