@@ -168,10 +168,33 @@ class Controller_list extends Controller{
 
     $liste = $m->getHistoriqueAchats($search);
 
+    // tentative pour remplacer les id par des prénom et noms pour que ça soit + concret
+    // ne marche pas
+    // solution: créer un nouveau tableau séparé qui copierait les valeurs ?
+    /*
     foreach ($liste as $ligne){
       $ligne["id_client"] = $m->getPrenomNomClient($ligne["id_client"]);
       $ligne["id_admin"] = $m->getPrenomNomAdmin($ligne["id_admin"]);
     }
+    */
+    // à essayer :
+    $liste_nouv = [];
+    $i=0;
+    foreach ($liste as $ligne){
+      $liste_nouv[$i] = 
+        [
+          "num_vente" => $ligne["num_vente"], 
+          "id_client" => $m->getPrenomNomClient($ligne["id_client"]),
+          "id_admin" => $m->getPrenomNomAdmin($ligne["id_admin"]),
+          "id_produit" => $ligne["id_produit"],
+          "Nom_produit" => $ligne["Nom_produit"],
+          // "prix" => $m->getPrix($ligne["id_admin"]),
+          "Date_vente" => $ligne["Date_vente"],
+          "Paiement" => $ligne["Paiement"]
+        ];
+      $i+=1;
+    }
+
     // titre sera destiné au titre en grand en haut de tableau/liste
 
     // listed_elements sert à adapter les liens de view_list.php 
@@ -183,7 +206,7 @@ class Controller_list extends Controller{
         "listed_elements" => "gestion_ventes",
         "id_element" => "num_vente",
         "colonnes" => ["Numéro de vente", "Client acheteur", "Responsable de la vente", "ID produit", "Produit acheté", "Date de la vente", "Méthode de paiement"],
-        "liste" => $liste
+        "liste" => $liste_nouv
       ];
 
     $this->render("list", $data);
