@@ -234,14 +234,25 @@ class Model
       // $search si on veut chercher une vente en particulier
       $search = "%" . $search . "%";
 
-      $texte_req = 'SELECT * FROM Vente';
+      //$texte_req = 'SELECT * FROM Vente';
 
+      //peut être:
+      $texte_req = 'SELECT Vente.*, Client.Nom, Client.Prenom, Admin.Nom, Admin.Prenom 
+                      FROM Client JOIN Vente USING(id_client) 
+                                  JOIN Admin USING(id_admin)';
+      // TODO : rajouter quelque chose pour traiter les recherches par nom prénom 
+      // sachant que la table ventes ne possède pas ces attributs
+      // solution: jointure?
       if ($search!="%default%") {
         $texte_req = $texte_req . " WHERE 
           num_vente LIKE :search OR 
           Nom_produit LIKE :search OR 
           Date_vente LIKE :search OR 
-          Paiement LIKE :search "; 
+          Paiement LIKE :search OR
+          Client.Nom LIKE :search OR
+          Client.Prenom LIKE :search OR
+          Admin.Nom LIKE :search OR
+          Admin.Prenom LIKE :search ";//OR  enlever OR si à la fin
       }
 
       $req = $this->bd->prepare($texte_req);
