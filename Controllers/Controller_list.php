@@ -52,9 +52,9 @@ class Controller_list extends Controller{
 
     $data =
       [
-        "boissons" => $m->getProduits($filter, "boisson", "default"),
-        "sodas" => $m->getProduits($filter, "soda", "default"),
-        "sirops" => $m->getProduits($filter, "sirop", "default")
+        "boissons" => $m->getProduits($filter, "Boisson", "default"),
+        "sodas" => $m->getProduits($filter, "Soda", "default"),
+        "sirops" => $m->getProduits($filter, "Sirop", "default")
       ];
 
     $this->render("produits_boissons", $data);
