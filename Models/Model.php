@@ -59,6 +59,7 @@ class Model
         if ($search!="default"){
           $search = "%" . $search . "%";
           $texte_req = $texte_req . " AND id_produit LIKE :search OR Nom LIKE :search ";
+          $use_marqueur = True;
         }
         */
       }
@@ -70,6 +71,7 @@ class Model
         if ($search!="default"){
           $search = "%" . $search . "%";
           $texte_req = $texte_req . " AND id_produit LIKE :search OR Nom LIKE :search ";
+          $use_marqueur = True;
         }
         */
       }
@@ -84,6 +86,7 @@ class Model
         if ($search!="default"){
           $search = "%" . $search . "%";
           $texte_req = $texte_req . " AND id_produit LIKE :search OR Nom LIKE :search ";
+          $use_marqueur = True;
         }
         */
       }
@@ -91,10 +94,11 @@ class Model
       // ------------------
       // $search
       // -----------------
-      // destiné à l'affichage de l'inventaire
+      // destiné à l'affichage de l'inventaire, quand on utilise la barre de recherche
       if ($type=="default" && $search!="default"){
         $search = "%" . $search . "%";
         $texte_req = $texte_req . " WHERE id_produit LIKE :search OR Nom LIKE :search OR Categorie LIKE :search ";
+        $use_marqueur = True;
       }
 
       // ------------------
@@ -109,7 +113,9 @@ class Model
 
       $req = $this->bd->prepare($texte_req);
       $req->bindValue(':type', $type);
-      $req->bindValue(':search', $search);
+      if ($use_marqueur==True){
+        $req->bindValue(':search', $search);
+      }
       $req->execute();
       return $req->fetchAll(PDO::FETCH_ASSOC);
     }
