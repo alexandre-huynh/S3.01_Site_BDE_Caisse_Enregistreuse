@@ -18,6 +18,7 @@ class Controller_set extends Controller{
     $this->render("message", $data);
 
   }
+  
   public function action_remove() {
     $m = Model::getModel();
 

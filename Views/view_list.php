@@ -125,18 +125,17 @@
       </td>
   </tr>
   <?php endforeach ?>
-
-  <!--Risque de ne pas être vu ? étant donné que le tableau va peut-être être long-->
-  <p>
-    <a href="index.php?controller=set&action=form_add">
-      Créer <?=e($str_add_element)?>
-      <!-- 
-      ou
-      Ajouter < ?=e($str_add_element)?>
-      -->
-    </a>
-  </p>
-
 </table>
+
+<!--Risque de ne pas être vu ? étant donné que le tableau va peut-être être long-->
+<p>
+  <a href="index.php?controller=set&action=form_add">
+    Créer <?=e($str_add_element)?>
+    <!-- 
+    ou
+    Ajouter < ?=e($str_add_element)?>
+    -->
+  </a>
+</p>
 
 <?php require "view_end.php";?>
