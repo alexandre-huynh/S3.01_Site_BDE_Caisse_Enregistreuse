@@ -13,14 +13,9 @@
 
 <!-- par exemple $listed_elements -> action=gestion_clients -->
 <!-- ne marche pas, redirige vers l'accueil : <form action = "index.php?controller=list&action=< ?=e($listed_elements)?>">-->
-<!--
 <form action ="">
--->
-<form action = "?controller=list&action=<?=e($listed_elements)?>">
-  <!--
   <input type="hidden" name="controller" value="list" />
   <input type="hidden" name="action" value="<?=e($listed_elements)?>" />
-  -->
    <p>
       <label> Rechercher : <input type="text" 
                                   name="search" 
