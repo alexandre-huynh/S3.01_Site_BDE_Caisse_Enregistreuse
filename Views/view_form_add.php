@@ -45,7 +45,20 @@
       </p>
       <p>
         <label>Prix :
-          <input type="text" name="Prix" /> 
+          <input type="number" name="Prix" /> 
+        </label>
+      </p>
+      <p>
+        <label>Image du produit :
+          <!-- TODO: adapter si jpeg, à modifier dans affichage de produits et inventaire-->
+          <input type="file" name="Img_produit" accept=".png"/> 
+        </label>
+      </p>
+      <p>
+        <label>Date d'ajout :
+          <!-- TODO: un truc pour avoir la date du jour-->
+          <!-- utiliser fonction date('d-m-y') -->
+          <input type="date" name="Date_ajout" value="<?=e($date_actuel)?>" /> 
         </label>
       </p>
       

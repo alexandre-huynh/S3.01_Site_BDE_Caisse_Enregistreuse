@@ -17,12 +17,13 @@
   <input type="hidden" name="controller" value="list" />
   <input type="hidden" name="action" value="<?=e($listed_elements)?>" />
    <p>
-      <label> Rechercher : <input type="text" 
+      <label> Rechercher : <input type="search" 
                                   name="search" 
                                   <?php if (isset($_GET["search"]) && $_GET["search"]!="") : ?>
                                     value=<?=e($_GET["search"])?>
                                   <?php endif ?> 
-                                  placeholder="Rechercher par mot clé" /> 
+                                  placeholder="Rechercher par mot clé" 
+                                  required /> 
       </label>
    </p>
    <!--========================================ANCIEN CODE RECHERCHE PAR ATTRIBUT SELECTIONNABLE===========================
