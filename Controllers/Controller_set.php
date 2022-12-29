@@ -5,69 +5,21 @@ class Controller_set extends Controller{
   public function action_form_add(){
     // on récupère le Model
     $m = Model::getModel();
-    $data = ["categories" => $m->getCategories() ]; // np pour nobelprize
+    $data = [
+      "categories" => $m->getCategories() 
+      ]; // np pour nobelprize
 
     $this->render("form_add", $data);
   }
 
   public function action_add(){
 
-    $ajout = false;
-
-    if (isset($_POST["name"]) and ! preg_match ("/^ *$/", $_POST["name"])
-      and isset($_POST["category"]) and ! preg_match("/^ *$/", $_POST["category"])
-      and isset($_POST["year"]) and preg_match("/^[12]\d{3}$/", $_POST["year"])) {
-      // On vérifie que la catégorie est une des catégories possibles
-      $m = Model::getModel();
-      if (in_array($_POST["category"], $m->getCategories())){
-        //prép tableau $infos
-        $infos = [];
-        $noms = ["year", "category", "name", "birthdate", "birthplace", "county", "motivation"];
-        foreach ($noms as $v) {
-          if (isset($_POST[$v]) and ! preg_match("/^ *$/", $_POST[$v]) ) {
-            $infos[$v] = $_POST[$v];
-          } else {
-            $infos[$v] = null;
-          }
-        }
-        // récup du modèle
-        $m = Model::getModel();
-        //Ajout du prix nobel dans la base
-        $ajout = $m->addNobelPrize($infos);
-      }
-    }
-    // prép $data et affichage vue message
-    $data = ["title" => "Adding a Nobel Prize"];
-    if ($ajout) {
-      $data["message"] = "The Nobel Prize has been added in the database.";
-    } else {
-      $data["message"] = "There was a problem! The Nobel Prize could not be added to the list";
-    }
+    
     $this->render("message", $data);
 
-    /* // ce que j'ai fais mais pas correct
-    if(isset($_POST["name"]) and preg_match("/^[a-z]+$/", $_GET["name"]) and
-      isset($_POST["category"]) and preg_match("/^[a-z]+$/", $_GET["category"]) and
-      isset($_POST["year"]) and preg_match("/^[0-9]+$/", $_GET["year"])) {
-      $m = Model::getModel();
-      $data = $m->addNobelPrize([$_POST["name"],$_POST[""]]);
-    }
-    */
   }
   public function action_remove() {
-    if (isset($_GET["id"]) and preg_match("/^[1-9]\d*$/", $_GET["id"])) {
-      $id = $_GET["id"];
-
-      $m = Model::getModel();
-      $supression = $m->removeNobelPrize($id);
-      if ($supression) {
-        $message = "The Nobel Prize has been removed.";
-      } else {
-        $message = "There is no Nobel Prize with id " . $id . "!";
-      }
-    } else {
-      $message = "There is no id in the URL!";
-    }
+    $m = Model::getModel();
 
     $data = [
       "title" => "Removing a Nobel Prize.",
