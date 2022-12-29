@@ -116,6 +116,7 @@ class Controller_list extends Controller{
         "titre" => "Gestion des comptes clients",
         "listed_elements" => "gestion_clients",
         "id_element" => "id_client",
+        "str_add_element" => "un compte client",
         "colonnes" => $colonnes,
         "liste" => $m->getClients($search)
       ];
@@ -147,6 +148,7 @@ class Controller_list extends Controller{
         "titre" => "Gestion des comptes administrateurs",
         "listed_elements" => "gestion_admins",
         "id_element" => "id_admin",
+        "str_add_element" => "un compte administrateur",
         "colonnes" => $colonnes,
         "liste" => $m->getAdmins($search)
       ];
@@ -205,6 +207,7 @@ class Controller_list extends Controller{
         "titre" => "Historique des ventes du stand",
         "listed_elements" => "gestion_ventes",
         "id_element" => "num_vente",
+        "str_add_element" => "une vente",
         "colonnes" => ["Numéro de vente", "Client acheteur", "Responsable de la vente", "ID produit", "Produit acheté", "Prix", "Date de la vente", "Méthode de paiement"],
         "liste" => $liste_nouv
       ];
@@ -239,6 +242,7 @@ class Controller_list extends Controller{
         "titre" => "Inventaire des produits du stand",
         "listed_elements" => "gestion_inventaire",
         "id_element" => "id_produit",
+        "str_add_element" => "un produit",
         "colonnes" => ["Identifiant", "Date d'ajout", "Image", "Nom du produit", "Catégorie", "Prix", "En stock", "Vendus"],
         "liste" => $m->getProduits("default","default",$search)
       ];
