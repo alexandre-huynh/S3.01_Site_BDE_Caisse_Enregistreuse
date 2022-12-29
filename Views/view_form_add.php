@@ -11,7 +11,7 @@
 <!-- Titre de la liste d'élements -->
 <h1> <?= e($titre) ?> </h1>
 
-<form action = "?controller=set&action=add" method="post">
+<form action = "?controller=set&action=add_<?=e($element_to_add)?>" method="post">
     <p> <label> Name: <input type="text" name="name"/> </label>
 
     </p>

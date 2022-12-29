@@ -15,9 +15,9 @@
     <header>
         <nav>
             <ul>
-                <li><a href="index.php?controller=home&action=home"><img src="Content/img/logo_bde.png" alt="logo-bde" width="100" height="100"></a></li>
-                <li><a href="index.php?controller=list&action=confiseries" title="Confiseries">Confiseries</a></li>
-                <li><a href="index.php?controller=list&action=boissons" title="Boissons">Boissons</a></li>
+                <li><a href="?controller=home&action=home"><img src="Content/img/logo_bde.png" alt="logo-bde" width="100" height="100"></a></li>
+                <li><a href="?controller=list&action=confiseries" title="Confiseries">Confiseries</a></li>
+                <li><a href="?controller=list&action=boissons" title="Boissons">Boissons</a></li>
                 <li><a href="page_espace_client.html" target="_blank" title="Mon Espace">Mon Espace</a></li>
                 <li><a href="page_connexion.html" title="Se connecter / S'inscrire">Se connecter / S'inscrire</a></li>
 
