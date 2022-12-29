@@ -55,7 +55,7 @@
 
 <!-- Réinitialiser recherche -->
 <p>
-  <a href="index.php?controller=list&action=<?=e($listed_elements)?>">Réinitialiser la recherche</a>
+  <a href="?controller=list&action=<?=e($listed_elements)?>">Réinitialiser la recherche</a>
 </p>
 <!--=======================================================-->
 
@@ -129,7 +129,7 @@
 
 <!--Risque de ne pas être vu ? étant donné que le tableau va peut-être être long-->
 <p>
-  <a href="index.php?controller=set&action=form_add">
+  <a href="?controller=set&action=form_add">
     Créer <?=e($str_add_element)?>
     <!-- 
     ou

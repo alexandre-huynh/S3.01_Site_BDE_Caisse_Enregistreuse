@@ -12,23 +12,56 @@
 <h1> <?= e($titre) ?> </h1>
 
 <form action = "?controller=set&action=add_<?=e($element_to_add)?>" method="post">
-    <p> <label> Name: <input type="text" name="name"/> </label>
+    <!--
+    Champs de saisie
+    manuellement rédigé pour adapter le type de saisie
+    -->
+    <!-- -----------Ajout produit---------------- -->
+    <!-- TODO: voir si $id_disponible dépend si on comble les id non utilisés ou si on rajoute à la fin-->
+    <?php if ($element_to_add=="produit") : ?>
+      <p>
+        <label>Identifiant produit :
+          <input type="number" name="id_produit" value="<?=e($id_disponible)?>" disabled /> 
+        </label>
+      </p>
+      <p>
+        <label>Nom de produit :
+          <input type="text" name="Nom" /> 
+        </label>
+      </p>
+      <p>
+        <label>Catégorie :
+          <select name="Categorie">
+            <!-- TODO: réfléchir si optgroup (grande catégorie) et option de noms similaire = confus? -->
+            <optgroup label="[===Confiseries===]">
+              <option value="Confiserie">Confiserie</option>
+            </optgroup>
+            <optgroup label="[===Boissons===]">
+              <option value="Boisson">Boisson</option>
+              <option value="Soda">Soda</option>
+              <option value="Sirop">Eau + Sirop</option>
+            </optgroup>
+        </label>
+      </p>
+      <p>
+        <label>Prix :
+          <input type="text" name="Prix" /> 
+        </label>
+      </p>
+      
+      <label><input type="text" name="< ?=e($valeur)?>" /> </label></p>
+    <?php endif ?>
+    <!-- -----------Ajout autrechose---------------- -->
+    
+    <!--
+    Champs de saisie par défaut (toutes les saisies sont des champs textes
+    < ?php foreach ($attributs as $valeur): ?>
+      <p><label> < ?=e($valeur)?> <input type="text" name="< ?=e($valeur)?>" /> </label></p>
+    < ?php endforeach ?>
+    -->
 
-    </p>
-    <p> <label> Year: <input type="text" name="year"/> </label></p>
-    <p> <label> Birth Date: <input type="text" name="birthdate"/></label> </p>
-    <p> <label> Birth Place: <input type="text" name="birthplace"/> </label></p>
-    <p> <label> County: <input type="text" name="county"/></label> </p>
-
-    <p>
-    <?php foreach ($categories as $v): ?>
-        <label> <input type="radio" name="category" value="<?=e($v)?>"/> <?=e(ucfirst($v))?> </label>
-    <?php endforeach ?>
-    </p>
-
-
-    <textarea name="motivation" cols="70" rows="10"></textarea>
-    <p>  <input type="submit" value="Add in database"/> </p>
+    <!--Validation-->
+    <p> <input type="submit" value="Ajouter à la base de données"/> </p>
 </form>
 
 <?php require "view_end.php";?>
