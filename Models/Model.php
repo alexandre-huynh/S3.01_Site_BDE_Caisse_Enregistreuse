@@ -145,9 +145,18 @@ class Model
       return $reponse;
     }
 
+    public function getNomProduit($id)
+    {
+      $req = $this->bd->prepare('SELECT CONCAT(Prenom, " ", Nom) as Prenom_Nom FROM Admin WHERE id_admin = :id ');
+      $req->bindValue(':id', (int) $id, PDO::PARAM_INT);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+
     public function getPrixProduit($id_prod)
     {
-      $req = $this->bd->prepare('SELECT Prix FROM Produit WHERE id_produit = :id_prod');
+      $req = $this->bd->prepare('SELECT ROUND(Prix,2) FROM Produit WHERE id_produit = :id_prod');
       $req->bindValue(':id_prod', (int) $id_prod, PDO::PARAM_INT);
       $req->execute();
       return $req->fetch(PDO::FETCH_NUM)[0];
@@ -278,5 +287,7 @@ class Model
       $tab = $req->fetch(PDO::FETCH_NUM);
         return $tab[0];
     }
+
+
 
 }
