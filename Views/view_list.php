@@ -130,9 +130,12 @@
   <?php endforeach ?>
 </table>
 
-<!--Risque de ne pas être vu ? étant donné que le tableau va peut-être être long-->
+<!--
+  Risque de ne pas être vu ? étant donné que le tableau va peut-être être long
+  Solution : pagination PHP ou Javascript(mieux)
+-->
 <p>
-  <a href="?controller=set&action=form_add">
+  <a href="?controller=set&action=form_add_<?=e($str_add_element)?>">
     Créer <?=e($str_add_element)?>
     <!-- 
     ou

@@ -288,6 +288,9 @@ class Model
         return $tab[0];
     }
 
+    // retourne l'id s'il existe dans la BD, sinon retourne false
+    public function getIdDisponible($table,)
+    {
 
-
+    }
 }

@@ -11,7 +11,9 @@
 <!-- Titre de la liste d'élements -->
 <h1> <?= e($titre) ?> </h1>
 
-<form action = "?controller=set&action=add_<?=e($element_to_add)?>" method="post">
+<!--<form action = "?controller=set&action=add_< ?=e($element_to_add)?>" method="post">-->
+<!-- TODO: vérifier dans le cas où le lien redirigé ne marche pas / ou donne la page d'accueil-->
+<form action = "?controller=set&action=add" method="post">  
   <!--
   Champs de saisie
   manuellement rédigé pour adapter le type de saisie

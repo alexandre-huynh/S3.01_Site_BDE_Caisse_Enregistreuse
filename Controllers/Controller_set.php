@@ -2,23 +2,40 @@
 
 class Controller_set extends Controller{
 
-  public function action_form_add(){
+  /*
+  ===========================================================
+                       AJOUT D'ELEMENT
+  ===========================================================
+  */
+
+  // Affichage du formulaire
+  public function action_form_add_produit(){
     // on récupère le Model
     $m = Model::getModel();
+
     $data = [
-      "categories" => $m->getCategories() 
-      ]; // np pour nobelprize
+      "titre" => "Création d'un nouveau produit",
+      "date_today" => date(y-m-d),
+      "element_to_add" => produit
+      ]; 
 
     $this->render("form_add", $data);
   }
 
+  // Traitement du formulaire
   public function action_add(){
-
+    // TODO: si quelqu'un peut s'occuper de faire les vérifications logiques des données avec isset
+    // genre si c'est bien un int, c'est bien supérieur à 0 mais inférieur à truc etc
     
-    $this->render("message", $data);
 
+    $this->render("message", $data);
   }
-  
+
+  /*
+  ===========================================================
+                       SUPPRESSION D'ELEMENT
+  ===========================================================
+  */
   public function action_remove() {
     $m = Model::getModel();
 
@@ -56,6 +73,11 @@ class Controller_set extends Controller{
     }
   }
 
+  /*
+  ===========================================================
+                       MODIFICATION D'ELEMENT
+  ===========================================================
+  */
   public function action_update(){
 
     $in_database = false;
