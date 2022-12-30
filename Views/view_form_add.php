@@ -66,6 +66,16 @@
       </label>
     </p>
     <p>
+      <label>Nombre de points fidélité requis pour obtenir ce produit gratuitement* :
+        <input type="number" name="Pts_fidelite_requis" step="1" min="0" required/> pts
+      </label>
+    </p>
+    <p>
+      <label>Nombre de points fidélité octroyés/donnés lors de l'achat de ce produit* :
+        <input type="number" name="Pts_fidelite_donner" step="1" min="0" required/> pts
+      </label>
+    </p>
+    <p>
       <label>Stock disponible* :
         <input type="number" name="Stock" step="1" min="0" required />
       </label>
