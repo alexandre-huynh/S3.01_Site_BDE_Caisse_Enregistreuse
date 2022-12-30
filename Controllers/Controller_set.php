@@ -13,10 +13,80 @@ class Controller_set extends Controller{
     // on récupère le Model
     $m = Model::getModel();
 
+    // timezone date, pas nécessaire vu qu'on traite date du jour mais au cas où
+    date_default_timezone_set('Europe/Paris');
+
+    /* trouver l'idée le 1er id disponible dans la bd: idée abandonné/mis en suspend
+    $i=0;
+    $liste = $m->getProduits();
+    foreach ($liste as $c=>$v){
+      $v;
+      $i++;
+    }
+    */
+
     $data = [
       "titre" => "Création d'un nouveau produit",
-      "date_today" => date(y-m-d),
-      "element_to_add" => produit
+      "date_today" => date("y-m-d"),
+      "element_to_add" => "produit",
+      "id_disponible" => $m->getDernierIdDisponible("Produit")
+      ]; 
+
+    $this->render("form_add", $data);
+  }
+
+  // Affichage du formulaire
+  public function action_form_add_client(){
+    // on récupère le Model
+    $m = Model::getModel();
+
+    // timezone date, pas nécessaire vu qu'on traite date du jour mais au cas où
+    date_default_timezone_set('Europe/Paris');
+
+    $data = [
+      "titre" => "Création d'un nouveau compte client",
+      "date_today" => date("y-m-d"),
+      "element_to_add" => "client",
+      "id_disponible" => $m->getDernierIdDisponible("Client")
+      ]; 
+
+    $this->render("form_add", $data);
+  }
+
+  // Affichage du formulaire
+  public function action_form_add_admin(){
+    // on récupère le Model
+    $m = Model::getModel();
+
+    // timezone date, pas nécessaire vu qu'on traite date du jour mais au cas où
+    date_default_timezone_set('Europe/Paris');
+
+    $data = [
+      "titre" => "Création d'un nouveau compte administrateur",
+      "date_today" => date("y-m-d"),
+      "element_to_add" => "admin",
+      "id_disponible" => $m->getDernierIdDisponible("Admin")
+      ]; 
+
+    $this->render("form_add", $data);
+  }
+
+  // Affichage du formulaire
+  //
+  // A FINIR
+  //
+  public function action_form_add_vente(){
+    // on récupère le Model
+    $m = Model::getModel();
+
+    // timezone date, pas nécessaire vu qu'on traite date du jour mais au cas où
+    date_default_timezone_set('Europe/Paris');
+
+    $data = [
+      "titre" => "Création manuelle d'une vente",
+      "date_today" => date("y-m-d"),
+      "element_to_add" => "vente",
+      "id_disponible" => $m->getDernierIdDisponible("Vente")
       ]; 
 
     $this->render("form_add", $data);

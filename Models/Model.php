@@ -289,8 +289,43 @@ class Model
     }
 
     // retourne l'id s'il existe dans la BD, sinon retourne false
+    // Idée abandonnée pour l'instant
+    // TODO: Trouver un moyen de trouver un id disponible dans la table
+    // afin d'éviter les trous dans la bd
+    /*
     public function getIdDisponible($table,)
     {
 
     }
+    */
+
+    // TODO: y'aura des trous de ID non utilisé dans la bd, trouver une solution?
+    // pour ajouter une ligne à la fin de la table avec un id non encore utilisé
+    // problème: trous ID non utilisé dans la BD
+    // solution: utiliser AUTO INCREMENT pour les attributs id : id MEDIUMINT NOT NULL AUTO_INCREMENT,
+    // https://dev.mysql.com/doc/refman/8.0/en/example-auto-increment.html 
+    public function getDernierIdDisponible($table)
+    {
+      if ($table=="Produit"){
+        $req = $this->bd->prepare('SELECT MAX(id_produit)+1 as LastIDAvailable FROM Produit');
+      }
+      elseif ($table=="Client") {
+        $req = $this->bd->prepare('SELECT MAX(id_client)+1 as LastIDAvailable FROM Client');
+      }
+      elseif ($table=="Admin"){
+        $req = $this->bd->prepare('SELECT MAX(id_admin)+1 as LastIDAvailable FROM Admin');
+      }
+      elseif ($table=="Vente"){
+        $req = $this->bd->prepare('SELECT MAX(num_vente)+1 as LastIDAvailable FROM Vente');
+      }
+      //probablement non utilisé mais au cas où
+      elseif ($table=="SuperAdmin"){
+        $req = $this->bd->prepare('SELECT MAX(id_superadmin)+1 as LastIDAvailable FROM SuperAdmin');
+      }
+
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+
 }

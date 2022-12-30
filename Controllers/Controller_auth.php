@@ -27,7 +27,20 @@ class Controller_auth extends Controller{
 
 
     // Vérifier si l'utilisateur existe dans la base de données avec les fonction isInDatabaseClient et isInDatabaseAdmin 
-    if ($m->isInDatabaseClient($username)){
+    if ($m->isInDatabaseAdmin($username)){
+        session_start();
+        
+        // Enregistre l'utilisateur dans la session
+        $_SESSION['id_etud'] = $username;
+        
+        // Redirige l'admin vers la page d'accueil admin
+        $data = [
+            // "nom" => $m->getPrenomNomAdmin($username)
+            ]; 
+        $this->render("espace_client", $data);
+    }
+    
+    elseif ($m->isInDatabaseClient($username)){
     
         session_start();
         
@@ -40,19 +53,6 @@ class Controller_auth extends Controller{
             ]; 
         $this->render("espace_client", $data);
     } 
-    
-    elseif ($m->isInDatabaseAdmin($username)){
-        session_start();
-        
-        // Enregistre l'utilisateur dans la session
-        $_SESSION['id_etud'] = $username;
-        
-        // Redirige l'admin vers la page d'accueil admin
-        $data = [
-            // "nom" => $m->getPrenomNomAdmin($username)
-            ]; 
-        $this->render("espace_client", $data);
-    }
     
     else {
       // Affiche un message d'erreur
