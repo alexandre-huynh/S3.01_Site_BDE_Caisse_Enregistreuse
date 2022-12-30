@@ -37,10 +37,10 @@
       <label>Catégorie* :
         <select name="Categorie" required >
           <!-- TODO: réfléchir si optgroup (grande catégorie) et option de noms similaire = confus? -->
-          <optgroup label="[===Confiseries===]">
+          <optgroup label="-Confiseries-">
             <option value="Confiserie">Confiserie</option>
           </optgroup>
-          <optgroup label="[===Boissons===]">
+          <optgroup label="-Boissons-">
             <option value="Boisson">Boisson</option>
             <option value="Soda">Soda</option>
             <option value="Sirop">Eau + Sirop</option>
@@ -49,7 +49,7 @@
       </label>
     </p>
     <p>
-      <label>Prix :
+      <label>Prix* :
         <input type="number" name="Prix" step="0.01" min="0" required/> €
       </label>
     </p>
@@ -95,9 +95,9 @@
     <p>
       <label>Identifiant 
         <?php if ($element_to_add=="client") : ?>
-          client
+          client*
         <?php elseif ($element_to_add=="admin") : ?>
-          admin
+          admin*
         <?php endif ?> :
         <input type="number" 
                name=

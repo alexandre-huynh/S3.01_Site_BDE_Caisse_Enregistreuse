@@ -16,6 +16,9 @@ class Controller_set extends Controller{
     // timezone date, pas nécessaire vu qu'on traite date du jour mais au cas où
     date_default_timezone_set('Europe/Paris');
 
+    // date du jour
+    $date_today = date("y-m-d");
+
     /* trouver l'idée le 1er id disponible dans la bd: idée abandonné/mis en suspend
     $i=0;
     $liste = $m->getProduits();
@@ -27,7 +30,7 @@ class Controller_set extends Controller{
 
     $data = [
       "titre" => "Création d'un nouveau produit",
-      "date_today" => date("y-m-d"),
+      "date_today" => $date_today,
       "element_to_add" => "produit",
       "id_disponible" => $m->getDernierIdDisponible("Produit")
       ]; 
@@ -43,9 +46,12 @@ class Controller_set extends Controller{
     // timezone date, pas nécessaire vu qu'on traite date du jour mais au cas où
     date_default_timezone_set('Europe/Paris');
 
+    // date du jour
+    $date_today = date("y-m-d");
+
     $data = [
       "titre" => "Création d'un nouveau compte client",
-      "date_today" => date("y-m-d"),
+      "date_today" => $date_today,
       "element_to_add" => "client",
       "id_disponible" => $m->getDernierIdDisponible("Client")
       ]; 
@@ -61,9 +67,12 @@ class Controller_set extends Controller{
     // timezone date, pas nécessaire vu qu'on traite date du jour mais au cas où
     date_default_timezone_set('Europe/Paris');
 
+    // date du jour
+    $date_today = date("y-m-d");
+
     $data = [
       "titre" => "Création d'un nouveau compte administrateur",
-      "date_today" => date("y-m-d"),
+      "date_today" => $date_today,
       "element_to_add" => "admin",
       "id_disponible" => $m->getDernierIdDisponible("Admin")
       ]; 
@@ -81,6 +90,9 @@ class Controller_set extends Controller{
 
     // timezone date, pas nécessaire vu qu'on traite date du jour mais au cas où
     date_default_timezone_set('Europe/Paris');
+
+    // date du jour
+    $date_today = date("y-m-d");
 
     $data = [
       "titre" => "Création manuelle d'une vente",
