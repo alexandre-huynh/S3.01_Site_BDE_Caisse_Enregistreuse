@@ -17,7 +17,7 @@ class Controller_set extends Controller{
     date_default_timezone_set('Europe/Paris');
 
     // date du jour
-    $date_today = date("y-m-d");
+    $date_today = date("Y-m-d");
 
     /* trouver l'idée le 1er id disponible dans la bd: idée abandonné/mis en suspend
     $i=0;
@@ -47,7 +47,7 @@ class Controller_set extends Controller{
     date_default_timezone_set('Europe/Paris');
 
     // date du jour
-    $date_today = date("y-m-d");
+    $date_today = date("Y-m-d");
 
     $data = [
       "titre" => "Création d'un nouveau compte client",
@@ -68,7 +68,7 @@ class Controller_set extends Controller{
     date_default_timezone_set('Europe/Paris');
 
     // date du jour
-    $date_today = date("y-m-d");
+    $date_today = date("Y-m-d");
 
     $data = [
       "titre" => "Création d'un nouveau compte administrateur",
@@ -92,7 +92,7 @@ class Controller_set extends Controller{
     date_default_timezone_set('Europe/Paris');
 
     // date du jour
-    $date_today = date("y-m-d");
+    $date_today = date("Y-m-d");
 
     $data = [
       "titre" => "Création manuelle d'une vente",
