@@ -183,16 +183,21 @@ class Controller_list extends Controller{
     $liste_nouv = [];
     $i=0;
     foreach ($liste as $ligne){
+      $use_fidelite = "Non";
+      if ($ligne["Use_fidelite"]){
+        $use_fidelite = "Oui";
+      }
       $liste_nouv[$i] = 
         [
           "num_vente" => $ligne["num_vente"], 
           "id_client" => $m->getPrenomNomClient($ligne["id_client"]),
           "id_admin" => $m->getPrenomNomAdmin($ligne["id_admin"]),
           "id_produit" => $ligne["id_produit"],
-          "Nom_produit" => $ligne["Nom_produit"],
+          "Nom_produit" => $m->getNomProduit($ligne["id_produit"]),
           "Prix" => $m->getPrixProduit($ligne["id_produit"]),
           "Date_vente" => $ligne["Date_vente"],
-          "Paiement" => $ligne["Paiement"]
+          "Paiement" => $ligne["Paiement"],
+          "Use_fidelite" => $use_fidelite
         ];
       $i+=1;
     }
@@ -208,7 +213,7 @@ class Controller_list extends Controller{
         "listed_elements" => "gestion_ventes",
         "id_element" => "num_vente",
         "str_add_element" => "une vente",
-        "colonnes" => ["Numéro de vente", "Client acheteur", "Responsable de la vente", "ID produit", "Produit acheté", "Prix", "Date de la vente", "Méthode de paiement"],
+        "colonnes" => ["Numéro de vente", "Client acheteur", "Responsable de la vente", "ID produit", "Produit acheté", "Prix", "Date de la vente", "Méthode de paiement", "A utilisé points de fidélité"],
         "liste" => $liste_nouv
       ];
 
@@ -243,7 +248,7 @@ class Controller_list extends Controller{
         "listed_elements" => "gestion_inventaire",
         "id_element" => "id_produit",
         "str_add_element" => "un produit",
-        "colonnes" => ["Identifiant", "Date d'ajout", "Image", "Nom du produit", "Catégorie", "Prix", "En stock", "Vendus"],
+        "colonnes" => ["Identifiant", "Date d'ajout", "Image", "Nom du produit", "Catégorie", "Prix", "Nb pts fidélité requis", "Nb pts fidélité donné", "En stock", "Vendus"],
         "liste" => $m->getProduits("default","default",$search)
       ];
 

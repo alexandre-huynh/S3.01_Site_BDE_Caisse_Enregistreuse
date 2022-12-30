@@ -85,6 +85,8 @@
         <td><?=e($ligne["Nom"])?></td>
         <td><?=e($ligne["Categorie"])?></td>
         <td><?=e($ligne["Prix"])?> €</td>
+        <td><?=e($ligne["Pts_fidelite_requis"])?> pts</td>
+        <td><?=e($ligne["Pts_fidelite_donner"])?> pts</td>
         <td><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" height=20 /></td>
         <td><?=e($ligne["Nb_ventes"])?><img src="Content/img/logo_ventes.png" height=20 /></td>
       <!-- ------------------------------------------------------------------- -->

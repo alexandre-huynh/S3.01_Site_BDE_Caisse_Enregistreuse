@@ -60,6 +60,8 @@ CREATE TABLE Produit
     Prix FLOAT,
     Img_produit VARCHAR(50),
     Date_ajout DATE,
+    Pts_fidelite_requis INT,
+    Pts_fidelite_donner INT,
     Stock INT,
     Nb_ventes INT
 );
@@ -68,12 +70,13 @@ CREATE TABLE Produit
 CREATE TABLE Vente
 (
     num_vente INT PRIMARY KEY NOT NULL,
-    id_client int,
-    id_admin int,
-    id_produit int,
-    Nom_produit VARCHAR(50),
+    id_client INT,
+    id_admin INT,
+    id_produit INT,
+    --Nom_produit VARCHAR(50), romperait une forme normale
     Date_vente DATE,
     Paiement VARCHAR(50),
+    Use_fidelite BOOLEAN,
     FOREIGN KEY (id_client) REFERENCES Client(id_client),
     FOREIGN KEY (id_admin) REFERENCES Admin(id_admin),
     FOREIGN KEY (id_produit) REFERENCES Produit(id_produit)
