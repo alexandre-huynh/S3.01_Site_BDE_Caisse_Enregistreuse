@@ -135,7 +135,7 @@
   Solution : pagination PHP ou Javascript(mieux)
 -->
 <p>
-  <a href="?controller=set&action=form_add_<?=e($str_add_element)?>">
+  <a href="?controller=set&action=form_add_<?=e($redirect_add_element)?>">
     Créer <?=e($str_add_element)?>
     <!-- 
     ou
