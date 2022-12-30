@@ -73,7 +73,6 @@ CREATE TABLE Vente
     id_client INT,
     id_admin INT,
     id_produit INT,
-    --Nom_produit VARCHAR(50), romperait une forme normale
     Date_vente DATE,
     Paiement VARCHAR(50),
     Use_fidelite BOOLEAN,
