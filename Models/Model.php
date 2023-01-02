@@ -335,7 +335,7 @@ class Model
         $requete->execute();
         $reponse = [];
         while ($ligne = $requete->fetch(PDO::FETCH_ASSOC)) {
-            $reponse[] = $ligne['category'];
+            $reponse[] = $ligne['Categorie'];
         }
         return $reponse;
     }
