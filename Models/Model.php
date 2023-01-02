@@ -224,7 +224,7 @@ class Model
       $search = "%" . $search . "%";
 
       //$texte_req = 'SELECT * FROM Admin';
-      $texte_req = "SELECT id_client, num_etudiant, Nom, Prenom, Tel, Email, DATE_FORMAT(Date_creation, '%e/%c/%Y') AS 'Date_creation', Pts_fidelite FROM Admin";
+      $texte_req = "SELECT id_admin, num_etudiant, Nom, Prenom, Tel, Email, DATE_FORMAT(Date_creation, '%e/%c/%Y') AS 'Date_creation', Pts_fidelite FROM Admin";
 
       if ($search!="%default%") {
         $texte_req = $texte_req . " WHERE 
