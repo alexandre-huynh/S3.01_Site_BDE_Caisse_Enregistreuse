@@ -179,7 +179,7 @@
         <select name="id_client" required >
           <?php foreach ($clients as $ligne): ?>
             <option value="<?=e($ligne["id_client"])?>">
-              <?=e($ligne["id_client"])?> - <?=e($ligne["Prenom"])?> <?=e($ligne["Nom"])?> (<?=e($ligne["num_etudiant"])?>)
+              n°<?=e($ligne["id_client"])?> - <?=e($ligne["Prenom"])?> <?=e($ligne["Nom"])?> (n° étud : <?=e($ligne["num_etudiant"])?>)
             </option>
           <?php endforeach ?>
         </select>
@@ -191,7 +191,7 @@
         <select name="id_admin" required >
           <?php foreach ($admins as $ligne): ?>
             <option value="<?=e($ligne["id_admin"])?>">
-              <?=e($ligne["id_admin"])?> - <?=e($ligne["Prenom"])?> <?=e($ligne["Nom"])?> (<?=e($ligne["num_etudiant"])?>)
+              n°<?=e($ligne["id_admin"])?> - <?=e($ligne["Prenom"])?> <?=e($ligne["Nom"])?> (n° étud : <?=e($ligne["num_etudiant"])?>)
             </option>
           <?php endforeach ?>
         </select>
