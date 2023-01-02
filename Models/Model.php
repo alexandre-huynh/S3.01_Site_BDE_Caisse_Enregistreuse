@@ -43,7 +43,7 @@ class Model
       $use_marqueur = False;
       // Requête de base auquelle on ajoutera des conditions order by ou filtre
       //$texte_req = "SELECT * FROM Produit";
-      $texte_req = "SELECT id_produit, Nom, Categorie, ROUND(Prix,2), Img_produit, DATE_FORMAT(Date_ajout, '%e/%c/%Y'), Pts_fidelite_requis, Pts_fidelite_donner, Stock, Nb_ventes FROM Produit";
+      $texte_req = "SELECT id_produit, Nom, Categorie, ROUND(Prix,2) AS 'Prix' , Img_produit, DATE_FORMAT(Date_ajout, '%e/%c/%Y') AS 'Date_ajout', Pts_fidelite_requis, Pts_fidelite_donner, Stock, Nb_ventes FROM Produit";
 
       // ------------------
       // $type
