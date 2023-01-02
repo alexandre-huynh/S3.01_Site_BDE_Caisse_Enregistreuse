@@ -147,7 +147,7 @@ class Model
 
     public function getNomProduit($id)
     {
-      $req = $this->bd->prepare('SELECT CONCAT(Prenom, " ", Nom) as Prenom_Nom FROM Admin WHERE id_admin = :id ');
+      $req = $this->bd->prepare('SELECT Nom FROM Produit WHERE id_produit = :id ');
       $req->bindValue(':id', (int) $id, PDO::PARAM_INT);
       $req->execute();
       $tab = $req->fetch(PDO::FETCH_NUM);
