@@ -96,8 +96,14 @@ class Controller_set extends Controller{
 
     $data = [
       "titre" => "Création manuelle d'une vente",
-      "date_today" => date("y-m-d"),
+      "date_today" => $date_today,
       "element_to_add" => "vente",
+      "clients" => $m->getClients(),
+      "admins" => $m->getAdmins(),
+      "confiseries" => $m->getProduits("default","Confiserie","default"),
+      "boissons" => $m->getProduits("default", "Boisson", "default"),
+      "sodas" => $m->getProduits("default", "Soda", "default"),
+      "sirops" => $m->getProduits("default", "Sirop", "default"),
       "id_disponible" => $m->getDernierIdDisponible("Vente")
       ]; 
 

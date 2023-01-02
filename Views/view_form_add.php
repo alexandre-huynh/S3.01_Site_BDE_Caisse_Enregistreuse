@@ -160,7 +160,7 @@
       -->
       <p>
         <label>Rôle de super-administrateur (ATTENTION: soyez-sûr de votre choix) :
-          <input type="checkbox" name="Create_superadmin" required />
+          <input type="checkbox" name="Create_superadmin" value="True" required />
         </label>
       </p>
     <?php endif ?>
@@ -168,7 +168,105 @@
         Ajout Vente
   ------------------------------->
   <?php elseif ($element_to_add=="vente") : ?>
-
+    <p>
+      <label>Numéro de vente* :
+        <input type="number" name="num_vente" value="<?=e($id_disponible)?>" step="1" min="0" disabled required /> 
+      </label>
+    </p>
+    <!--Sélection client-->
+    <p>
+      <label>Client acheteur* :
+        <select name="id_client" required >
+          <?php foreach ($clients as $ligne): ?>
+            <option value="<?=e($ligne["id_client"])?>">
+              <?=e($ligne["id_client"])?> - <?=e($ligne["Prenom"])?> <?=e($ligne["Nom"])?> (<?=e($ligne["num_etudiant"])?>)
+            </option>
+          <?php endforeach ?>
+        </select>
+      </label>
+    </p>
+    <!--Sélection responsable/admin-->
+    <p>
+      <label>Responsable de la vente (administrateur)* :
+        <select name="id_admin" required >
+          <?php foreach ($admins as $ligne): ?>
+            <option value="<?=e($ligne["id_admin"])?>">
+              <?=e($ligne["id_admin"])?> - <?=e($ligne["Prenom"])?> <?=e($ligne["Nom"])?> (<?=e($ligne["num_etudiant"])?>)
+            </option>
+          <?php endforeach ?>
+        </select>
+      </label>
+    </p>
+    <!--Sélection produit-->
+    <!-- 
+      TODO: possibilité de faire un input saisie si le produit est acheté n fois,
+      créer n lignes de ventes avec incrémentation du numéro de vente
+      (à faire dans controller set action add vente)
+    -->
+    <p>
+      <label>Produit vendu (si le même produit est acheté plusieurs fois, créer une autre vente)* :
+        <select name="id_produit" required >
+          <optgroup label="-Confiseries-">
+            <?php foreach ($confiseries as $ligne): ?>
+              <option value="<?=e($ligne["id_produit"])?>">
+                <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> (<?=e($ligne["Prix"])?> en stock)
+              </option>
+            <?php endforeach ?>
+          </optgroup>
+          <optgroup label="-Boissons-">
+            <?php foreach ($boissons as $ligne): ?>
+              <option value="<?=e($ligne["id_produit"])?>">
+                <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> (<?=e($ligne["Prix"])?> en stock)
+              </option>
+            <?php endforeach ?>
+          </optgroup>
+          <optgroup label="-Sodas-">
+            <?php foreach ($sodas as $ligne): ?>
+              <option value="<?=e($ligne["id_produit"])?>">
+                <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> (<?=e($ligne["Prix"])?> en stock)
+              </option>
+            <?php endforeach ?>
+          </optgroup>
+          <optgroup label="-Eau + Sirop-">
+            <?php foreach ($sirops as $ligne): ?>
+              <option value="<?=e($ligne["id_produit"])?>">
+                <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> (<?=e($ligne["Prix"])?> en stock)
+              </option>
+            <?php endforeach ?>
+          </optgroup>
+          <!-- 
+            Si on veut tous les produits sans catégoriser, 
+            gain de performance possible, mais moins ergonomique
+          < ?php foreach ($produits as $ligne): ?>
+            <option value="< ?=e($ligne["id_produit"])?>">
+              < ?=e($ligne["Nom"])?> - < ?=e($ligne["Prix"])?> (< ?=e($ligne["Prix"])?> en stock)
+            </option>
+          < ?php endforeach ?>
+          -->
+        </select>
+      </label>
+    </p>
+    <p>
+      <label>Date de la vente* (corriger si nécessaire) :
+        <input type="date" name="Date_vente" value="<?=e($date_today)?>" required /> 
+      </label>
+    </p>
+    <p>
+      <label>Moyen de paiement utilisé* :
+        <input id="payer_espece" type="radio" name="Paiement" value="Espece" required /> 
+        <label for="payer_espece">Espèce</label>
+        <input id="payer_carte" type="radio" name="Paiement" value="Carte bancaire" required />
+        <label for="payer_carte">Carte bancaire</label>
+      </label>
+    </p>
+    <p>
+      <label>Le client a-t-il utilisé ses points de fidélité pour obtenir ce produit gratuitement ? :
+        <input id="oui" type="radio" name="Use_fidelite" value="True" /> 
+        <label for="oui">Oui</label>
+        <input id="non" type="radio" name="Use_fidelite" value="False" checked/>
+        <label for="non">Non</label>
+      </label>
+    </p>
   <?php endif ?>
   <!--
   Champs de saisie par défaut (toutes les saisies sont des champs textes)
