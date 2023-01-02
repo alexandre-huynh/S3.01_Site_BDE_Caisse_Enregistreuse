@@ -135,9 +135,15 @@ class Controller_set extends Controller{
                 $infos = [];
                 $noms = ["id_produit", "Nom", "Categorie", "Prix", "Date_ajout", "Pts_fidelite_requis", "Pts_fidelite_donner", "Stock", "Nb_ventes"];
                 foreach ($noms as $v) {
+                  if (isset($_POST[$v])) {
+                    $infos[$v] = $_POST[$v];
+                    /* erreur ici, id produit devient nul dans tout les cas
                     if (isset($_POST[$v]) && (is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])) || ((is_int($_POST[$v]) || is_float($_POST[$v])) && $_POST[$v]>=0)) {
                       $infos[$v] = $_POST[$v];
-                    /*  if (isset($_POST[$v])) {
+                    */
+
+                    /*  même erreur
+                    if (isset($_POST[$v])) {
                       // si c'est un STR
                       if (is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])){
                         $infos[$v] = $_POST[$v];
