@@ -25,7 +25,7 @@
   <?php if ($element_to_add=="produit") : ?>
     <p>
       <label>Identifiant produit* :
-        <input type="number" name="id_produit" value="<?=e($id_disponible)?>" step="1" min="0" disabled required /> 
+        <input type="number" name="id_produit" value="<?=e($id_disponible)?>" step="1" min="0" readonly required /> 
       </label>
     </p>
     <p>
@@ -108,7 +108,7 @@
                   admin
                 <?php endif ?>
                 " 
-               value="<?=e($id_disponible)?>" step="1" min="0" disabled required /> 
+               value="<?=e($id_disponible)?>" step="1" min="0" readonly required /> 
       </label>
     </p>
     <p>
@@ -170,7 +170,7 @@
   <?php elseif ($element_to_add=="vente") : ?>
     <p>
       <label>Numéro de vente* :
-        <input type="number" name="num_vente" value="<?=e($id_disponible)?>" step="1" min="0" disabled required /> 
+        <input type="number" name="num_vente" value="<?=e($id_disponible)?>" step="1" min="0" readonly required /> 
       </label>
     </p>
     <!--Sélection client-->
