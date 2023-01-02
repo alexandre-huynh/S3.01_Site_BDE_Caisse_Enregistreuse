@@ -209,28 +209,28 @@
           <optgroup label="-Confiseries-">
             <?php foreach ($confiseries as $ligne): ?>
               <option value="<?=e($ligne["id_produit"])?>">
-                <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> (<?=e($ligne["Prix"])?> en stock)
+                <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> (en stock : <?=e($ligne["Stock"])?>)
               </option>
             <?php endforeach ?>
           </optgroup>
           <optgroup label="-Boissons-">
             <?php foreach ($boissons as $ligne): ?>
               <option value="<?=e($ligne["id_produit"])?>">
-                <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> (<?=e($ligne["Prix"])?> en stock)
+                <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> (en stock : <?=e($ligne["Stock"])?>)
               </option>
             <?php endforeach ?>
           </optgroup>
           <optgroup label="-Sodas-">
             <?php foreach ($sodas as $ligne): ?>
               <option value="<?=e($ligne["id_produit"])?>">
-                <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> (<?=e($ligne["Prix"])?> en stock)
+                <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> (en stock : <?=e($ligne["Stock"])?>)
               </option>
             <?php endforeach ?>
           </optgroup>
           <optgroup label="-Eau + Sirop-">
             <?php foreach ($sirops as $ligne): ?>
               <option value="<?=e($ligne["id_produit"])?>">
-                <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> (<?=e($ligne["Prix"])?> en stock)
+                <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> (en stock : <?=e($ligne["Stock"])?>)
               </option>
             <?php endforeach ?>
           </optgroup>
