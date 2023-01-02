@@ -216,7 +216,7 @@ class Controller_list extends Controller{
         "id_element" => "num_vente",
         "redirect_add_element" => "vente",
         "str_add_element" => "une vente",
-        "colonnes" => ["Numéro de vente", "Client acheteur", "Responsable de la vente", "ID produit", "Produit acheté", "Prix", "Date de la vente (ANNEE/MOIS/JOUR)", "Méthode de paiement", "A utilisé points de fidélité"],
+        "colonnes" => ["Numéro de vente", "Client acheteur", "Responsable de la vente", "ID produit", "Produit acheté", "Prix", "Date de la vente", "Méthode de paiement", "A utilisé points de fidélité"],
         "liste" => $liste_nouv
       ];
 
@@ -252,7 +252,7 @@ class Controller_list extends Controller{
         "id_element" => "id_produit",
         "redirect_add_element" => "produit",
         "str_add_element" => "un produit",
-        "colonnes" => ["Identifiant", "Date d'ajout (ANNEE/MOIS/JOUR)", "Image", "Nom du produit", "Catégorie", "Prix", "Nb pts fidélité requis", "Nb pts fidélité donné", "En stock", "Vendus"],
+        "colonnes" => ["Identifiant", "Date d'ajout", "Image", "Nom du produit", "Catégorie", "Prix", "Nb pts fidélité requis", "Nb pts fidélité donné", "En stock", "Vendus"],
         "liste" => $m->getProduits("default","default",$search)
       ];
 

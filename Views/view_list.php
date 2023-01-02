@@ -81,7 +81,7 @@
       <?php if ($_GET["action"]=="gestion_inventaire") : ?>
         <td><?=e($ligne["id_produit"])?></td>
         <td><?=e($ligne["Date_ajout"])?></td>
-        <td><img src="Content/img/<?=e($ligne["Img_produit"])?>" height=60 /></td>
+        <td><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height=60 /></td>
         <td><?=e($ligne["Nom"])?></td>
         <td><?=e($ligne["Categorie"])?></td>
         <td><?=e($ligne["Prix"])?> €</td>
