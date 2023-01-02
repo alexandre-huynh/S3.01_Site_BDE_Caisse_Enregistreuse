@@ -124,7 +124,7 @@ class Model
 
     public function getProduitsNouveau($limit)
     {
-      $req = $this->bd->prepare('SELECT * FROM Produit ORDER BY date_ajout DESC LIMIT :limit');
+      $req = $this->bd->prepare("SELECT id_produit, Nom, ROUND(Prix,2) AS 'Prix' , Img_produit FROM Produit ORDER BY date_ajout DESC LIMIT :limit");
       $req->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
       $req->execute();
       $reponse = [];
@@ -136,7 +136,7 @@ class Model
 
     public function getProduitsPopulaire($limit)
     {
-      $req = $this->bd->prepare('SELECT * FROM Produit ORDER BY nb_ventes DESC LIMIT :limit');
+      $req = $this->bd->prepare("SELECT id_produit, Nom, ROUND(Prix,2) AS 'Prix' , Img_produit FROM Produit ORDER BY nb_ventes DESC LIMIT :limit");
       $req->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
       $req->execute();
       $reponse = [];
@@ -168,7 +168,8 @@ class Model
       // $search si on veut chercher un client en particulier
       $search = "%" . $search . "%";
 
-      $texte_req = 'SELECT * FROM Client';
+      //$texte_req = 'SELECT * FROM Client';
+      $texte_req = "SELECT id_client, num_etudiant, Nom, Prenom, Tel, Email, DATE_FORMAT(Date_creation, '%e/%c/%Y') AS 'Date_creation', Pts_fidelite FROM Client";
 
       if ($search!="%default%") {
         $texte_req = $texte_req . " WHERE 
@@ -222,7 +223,8 @@ class Model
       // $search si on veut chercher un admin en particulier
       $search = "%" . $search . "%";
 
-      $texte_req = 'SELECT * FROM Admin';
+      //$texte_req = 'SELECT * FROM Admin';
+      $texte_req = "SELECT id_client, num_etudiant, Nom, Prenom, Tel, Email, DATE_FORMAT(Date_creation, '%e/%c/%Y') AS 'Date_creation', Pts_fidelite FROM Admin";
 
       if ($search!="%default%") {
         $texte_req = $texte_req . " WHERE 
@@ -247,9 +249,9 @@ class Model
       //$texte_req = 'SELECT * FROM Vente';
 
       //peut être:
-      $texte_req = 'SELECT Vente.*, Client.Nom, Client.Prenom, Admin.Nom, Admin.Prenom 
+      $texte_req = "SELECT num_vente, Vente.id_client, Vente.id_admin, Vente.id_produit, DATE_FORMAT(Date_vente, '%e/%c/%Y') AS 'Date_vente', Paiement, Use_fidelite ,Client.Nom, Client.Prenom, Admin.Nom, Admin.Prenom 
                       FROM Client JOIN Vente USING(id_client) 
-                                  JOIN Admin USING(id_admin)';
+                                  JOIN Admin USING(id_admin)";
       // TODO : rajouter quelque chose pour traiter les recherches par nom prénom 
       // sachant que la table ventes ne possède pas ces attributs
       // solution: jointure?
