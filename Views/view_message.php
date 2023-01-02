@@ -9,6 +9,10 @@
     <?= e($message) ?>
 </p>
 
-
+<?php if (isset($lien_retour) && isset($str_lien_retour)) : ?>
+    <p>   
+        <a href="<?= e($lien_retour) ?>"><?= e($str_lien_retour) ?></a>
+    </p>
+<?php endif ?>
 
 <?php require "view_end.php"; ?>

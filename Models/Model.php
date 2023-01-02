@@ -328,4 +328,16 @@ class Model
         return $tab[0];
     }
 
+    // Catégories de produits
+    public function getCategories()
+    {
+        $requete = $this->bd->prepare('SELECT DISTINCT Categorie FROM Produit');
+        $requete->execute();
+        $reponse = [];
+        while ($ligne = $requete->fetch(PDO::FETCH_ASSOC)) {
+            $reponse[] = $ligne['category'];
+        }
+        return $reponse;
+    }
+
 }

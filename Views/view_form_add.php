@@ -13,7 +13,7 @@
 
 <!--<form action = "?controller=set&action=add_< ?=e($element_to_add)?>" method="post">-->
 <!-- TODO: vérifier dans le cas où le lien redirigé ne marche pas / ou donne la page d'accueil-->
-<form action = "?controller=set&action=add" method="post">  
+<form action = "?controller=set&action=add_<?= e($element_to_add) ?>" method="post">  
   <!--
   Champs de saisie
   manuellement rédigé pour adapter le type de saisie
@@ -209,28 +209,28 @@
           <optgroup label="-Confiseries-">
             <?php foreach ($confiseries as $ligne): ?>
               <option value="<?=e($ligne["id_produit"])?>">
-                <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> (en stock : <?=e($ligne["Stock"])?>)
+                <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> € (en stock : <?=e($ligne["Stock"])?>)
               </option>
             <?php endforeach ?>
           </optgroup>
           <optgroup label="-Boissons-">
             <?php foreach ($boissons as $ligne): ?>
               <option value="<?=e($ligne["id_produit"])?>">
-                <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> (en stock : <?=e($ligne["Stock"])?>)
+                <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> € (en stock : <?=e($ligne["Stock"])?>)
               </option>
             <?php endforeach ?>
           </optgroup>
           <optgroup label="-Sodas-">
             <?php foreach ($sodas as $ligne): ?>
               <option value="<?=e($ligne["id_produit"])?>">
-                <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> (en stock : <?=e($ligne["Stock"])?>)
+                <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> € (en stock : <?=e($ligne["Stock"])?>)
               </option>
             <?php endforeach ?>
           </optgroup>
           <optgroup label="-Eau + Sirop-">
             <?php foreach ($sirops as $ligne): ?>
               <option value="<?=e($ligne["id_produit"])?>">
-                <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> (en stock : <?=e($ligne["Stock"])?>)
+                <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> € (en stock : <?=e($ligne["Stock"])?>)
               </option>
             <?php endforeach ?>
           </optgroup>
