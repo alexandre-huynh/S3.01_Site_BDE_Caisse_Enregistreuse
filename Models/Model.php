@@ -340,4 +340,21 @@ class Model
         return $reponse;
     }
 
+    public function addProduit($infos)
+    {
+        //Préparation de la requête
+        $requete = $this->bd->prepare('INSERT INTO Produit VALUES (:id_produit, :Nom, :Categorie, :Prix, :Img_produit, :Date_ajout, :Pts_fidelite_requis, :Pts_fidelite_donner, :Stock, :Nb_ventes)');
+
+        //Remplacement des marqueurs de place par les valeurs
+        $marqueurs = ["id_produit", "Nom", "Categorie", "Prix", "Img_produit", "Date_ajout", "Pts_fidelite_requis", "Pts_fidelite_donner", "Stock", "Nb_ventes"];
+        foreach ($marqueurs as $value) {
+            $requete->bindValue(':' . $value, $infos[$value]);
+        }
+
+        //Exécution de la requête
+        $requete->execute();
+
+        return (bool) $requete->rowCount();
+    }
+
 }
