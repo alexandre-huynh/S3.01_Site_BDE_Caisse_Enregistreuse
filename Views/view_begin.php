@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stand de confiseries du BDE</title>
-    <link rel="stylesheet" href="../Styles/style_page_accueil.css">
+    <link rel="stylesheet" href="Content/css/style_page_accueil.css">
 </head>
 <body>
 
