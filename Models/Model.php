@@ -360,4 +360,35 @@ class Model
         return (bool) $requete->rowCount();
     }
 
+    public function addClient($infos)
+    {
+        // Ajout dans Authentification
+
+        //Préparation de la requête
+        $requete = $this->bd->prepare('INSERT INTO Authentification VALUES (:num_etudiant, :Password )');
+        $requete->bindValue(':num_etudiant', $infos["num_etudiant"]);
+        $requete->bindValue(':Password', $infos["Password"]);
+
+        //Exécution de la requête
+        $requete->execute();
+
+        // Ajout dans Client
+        unset($infos["Password"]);
+        unset($infos["Password_verify"]);
+
+        //Préparation de la requête
+        $requete = $this->bd->prepare('INSERT INTO Client VALUES (:id_client, :num_etudiant, :Nom, :Prenom, :Tel, :Email, :Date_creation, :Pts_fidelite)');
+
+        //Remplacement des marqueurs de place par les valeurs
+        $marqueurs = ["id_client", "num_etudiant", "Nom", "Prenom", "Tel", "Email", "Date_creation", "Pts_fidelite"];
+        foreach ($marqueurs as $value) {
+            $requete->bindValue(':' . $value, $infos[$value]);
+        }
+
+        //Exécution de la requête
+        $requete->execute();
+
+        return (bool) $requete->rowCount();
+    }
+
 }

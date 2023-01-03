@@ -149,6 +149,16 @@
         <input type="number" name="Pts_fidelite" value="0" step="1" min="0" required />
       </label>
     </p>
+    <p>
+      <label>Mot de passe (min 8 caractères)* :
+        <input type="password" name="Password" minlength="8" required />
+      </label>
+    </p>
+    <p>
+      <label>Confirmer le mot de passe* :
+        <input type="password" name="Password_verify" value="0" step="1" min="0" required />
+      </label>
+    </p>
     <?php if ($element_to_add=="admin") : ?>
       <!--
         TODO: voir si un super administrateur peut créer un super administrateur
