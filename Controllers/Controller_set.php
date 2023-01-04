@@ -249,6 +249,10 @@ class Controller_set extends Controller{
             $ajout = $m->addClient($infos);
             
         }
+
+        else{
+          $this->action_error("Erreur, des informations n'ont pas été saisies ou le mot de passe n'est pas correspondant.");
+        }
         
 
         //Préparation de $data pour l'affichage de la vue message

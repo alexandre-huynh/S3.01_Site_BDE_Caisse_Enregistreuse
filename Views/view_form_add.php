@@ -100,14 +100,7 @@
           admin*
         <?php endif ?> :
         <input type="number" 
-               name=
-                "id_
-                <?php if ($element_to_add=="client") : ?>
-                  client
-                <?php elseif ($element_to_add=="admin") : ?>
-                  admin
-                <?php endif ?>
-                " 
+               name="id_<?php if ($element_to_add=="client") : ?>client<?php elseif ($element_to_add=="admin") : ?>admin<?php endif ?>" 
                value="<?=e($id_disponible)?>" step="1" min="0" readonly required /> 
       </label>
     </p>
