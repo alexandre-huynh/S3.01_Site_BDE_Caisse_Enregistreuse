@@ -5,7 +5,7 @@
                 <h1>Formulaire d'inscription</h1>
             </div>
 
-        <form action="?controller=auth&action=signup">
+        <form action="?controller=auth&action=signup" method="post" >
             
             <div class="form_connexion">
                 <label for="nom"> Nom :</label>

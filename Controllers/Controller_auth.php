@@ -69,7 +69,7 @@ class Controller_auth extends Controller{
     
     else {
       // Affiche un message d'erreur
-      
+      $this->action_error("Erreur, identifiant ou mot de passe incorrect.");
     }
     
     
