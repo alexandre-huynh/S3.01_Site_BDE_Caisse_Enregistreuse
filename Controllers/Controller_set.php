@@ -212,23 +212,22 @@ class Controller_set extends Controller{
             // !!
             // On vérifie que la catégorie est une des catégories possibles
             $m = Model::getModel();
-            if (in_array($_POST["Categorie"], $m->getCategories())) {
-                // Préparation du tableau infos
-                $infos = [];
-                $noms = ["id_client", "num_etudiant", "Nom", "Prenom", "Tel", "Email", "Date_creation", "Pts_fidelite"];
-                foreach ($noms as $v) {
-                    if (isset($_POST[$v]) && (is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])) || ((is_int($_POST[$v]) || is_float($_POST[$v])) && $_POST[$v]>=0)) {
-                      $infos[$v] = $_POST[$v];
-                    } else {
-                      $infos[$v] = null;
-                    }
+            // Préparation du tableau infos
+            $infos = [];
+            $noms = ["id_client", "num_etudiant", "Nom", "Prenom", "Tel", "Email", "Date_creation", "Pts_fidelite"];
+            foreach ($noms as $v) {
+                if (isset($_POST[$v]) && (is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])) || ((is_int($_POST[$v]) || is_float($_POST[$v])) && $_POST[$v]>=0)) {
+                  $infos[$v] = $_POST[$v];
+                } else {
+                  $infos[$v] = null;
                 }
-
-                //Récupération du modèle
-                $m = Model::getModel();
-                //Ajout du produit
-                $ajout = $m->addClient($infos);
             }
+
+            //Récupération du modèle
+            $m = Model::getModel();
+            //Ajout du produit
+            $ajout = $m->addClient($infos);
+            
         }
         
 
