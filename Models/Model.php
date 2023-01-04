@@ -407,22 +407,32 @@ class Model
         $requete->execute();
 
         // Ajout dans Client
-        unset($infos["Password"]);
-        unset($infos["Password_verify"]);
+        //unset($infos["Password"]);
+        //unset($infos["Password_verify"]);
+        $tab=[
+          "id_client" => $infos["id_client"], 
+          "num_etudiant" => $infos["num_etudiant"], 
+          "Nom" => $infos["Nom"], 
+          "Prenom" => $infos["Prenom"], 
+          "Tel" => $infos["Tel"], 
+          "Email" => $infos["Email"], 
+          "Date_creation" => $infos["Date_creation"], 
+          "Pts_fidelite" => $infos["Pts_fidelite"]
+        ];
 
         //Préparation de la requête
-        $requete = $this->bd->prepare('INSERT INTO Client VALUES (:id_client, :num_etudiant, :Nom, :Prenom, :Tel, :Email, :Date_creation, :Pts_fidelite)');
+        $requete2 = $this->bd->prepare('INSERT INTO Client VALUES (:id_client, :num_etudiant, :Nom, :Prenom, :Tel, :Email, :Date_creation, :Pts_fidelite)');
 
         //Remplacement des marqueurs de place par les valeurs
         $marqueurs = ["id_client", "num_etudiant", "Nom", "Prenom", "Tel", "Email", "Date_creation", "Pts_fidelite"];
         foreach ($marqueurs as $value) {
-            $requete->bindValue(':' . $value, $infos[$value]);
+            $requete2->bindValue(':' . $value, $tab[$value]);
         }
 
         //Exécution de la requête
-        $requete->execute();
+        $requete2->execute();
 
-        return (bool) $requete->rowCount();
+        return (bool) $requete2->rowCount();
     }
 
     public function getPassword($email,$table){
