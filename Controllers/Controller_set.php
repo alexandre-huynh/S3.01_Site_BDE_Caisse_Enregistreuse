@@ -219,8 +219,11 @@ class Controller_set extends Controller{
                 if (isset($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])) {
                   // && (is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])) || ((is_int($_POST[$v]) || is_float($_POST[$v])) && $_POST[$v]>=0)
                   $infos[$v] = $_POST[$v];
+                  //debug
+                  echo "Ajout $v OK";
                 } else {
                   $infos[$v] = null;
+                  echo "Ajout $v OK, valeur NULL";
                 }
             }
 
