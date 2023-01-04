@@ -220,10 +220,10 @@ class Controller_set extends Controller{
                   // && (is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])) || ((is_int($_POST[$v]) || is_float($_POST[$v])) && $_POST[$v]>=0)
                   $infos[$v] = $_POST[$v];
                   //debug
-                  echo "Ajout $v OK";
+                  //echo "Ajout $v OK";
                 } else {
                   $infos[$v] = null;
-                  echo "Ajout $v OK, valeur NULL";
+                  //echo "Ajout $v OK, valeur NULL";
                 }
             }
 
@@ -263,7 +263,7 @@ class Controller_set extends Controller{
             "lien_retour" => "?controller=list&action=gestion_clients" 
         ];
         if ($ajout) {
-            $data["message"] = "Le compte client" . $_POST["Prenom"] . $_POST["Nom"] . " a été créé avec succès. Notez que le client devra modifier son mot de passe pour accéder à son compte.";
+            $data["message"] = "Le compte client " . $_POST["Prenom"] . " " . $_POST["Nom"] . " a été créé avec succès.";
         } else {
             $data["message"] = "Erreur dans la saisie des informations, le compte client n'a pas été ajouté.";
         }

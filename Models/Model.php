@@ -407,7 +407,7 @@ class Model
         $requete->execute();
         
         // debug,à enlever
-        echo "addAuthClient OK";
+        //echo "addAuthClient OK";
     }
 
     public function addClient($infos)
@@ -429,7 +429,7 @@ class Model
         $requete->execute();
 
         // debug,à enlever
-        echo "addClient OK";
+        //echo "addClient OK";
 
         return (bool) $requete->rowCount();
     }
