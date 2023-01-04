@@ -214,7 +214,7 @@ class Controller_set extends Controller{
             $m = Model::getModel();
             // Préparation du tableau infos
             $infos = [];
-            $noms = ["id_client", "num_etudiant", "Nom", "Prenom", "Tel", "Email", "Date_creation", "Pts_fidelite", "Password", "Password_verify"];
+            $noms = ["id_client", "num_etudiant", "Nom", "Prenom", "Tel", "Email", "Date_creation", "Pts_fidelite"];
             foreach ($noms as $v) {
                 if (isset($_POST[$v]) && (is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])) || ((is_int($_POST[$v]) || is_float($_POST[$v])) && $_POST[$v]>=0)) {
                   $infos[$v] = $_POST[$v];
@@ -223,9 +223,25 @@ class Controller_set extends Controller{
                 }
             }
 
+            $infosAuth = [$_POST["num_etudiant"], password_hash($_POST["Password"], PASSWORD_DEFAULT)];
+
+            /*
+            $tab=[
+              "id_client" => $infos["id_client"], 
+              "num_etudiant" => $infos["num_etudiant"], 
+              "Nom" => $infos["Nom"], 
+              "Prenom" => $infos["Prenom"], 
+              "Tel" => $infos["Tel"], 
+              "Email" => $infos["Email"], 
+              "Date_creation" => $infos["Date_creation"], 
+              "Pts_fidelite" => $infos["Pts_fidelite"]
+            ];
+            */
+
             //Récupération du modèle
             $m = Model::getModel();
             //Ajout du produit
+            $m->addAuthClient($infosAuth);
             $ajout = $m->addClient($infos);
             
         }
