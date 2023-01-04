@@ -191,7 +191,7 @@ class Controller_set extends Controller{
   public function action_add_client(){
     // TODO: si quelqu'un peut s'occuper de faire les vérifications logiques des données avec isset
     // genre si c'est bien un int, c'est bien supérieur à 0 mais inférieur à truc etc
-    // TODO: voir comment on ajoute un fichier
+    // TODO: vérifier que password et password verify sont identiques
     $ajout = false;
 
         //Test si les informations nécessaires sont fournies
@@ -224,10 +224,6 @@ class Controller_set extends Controller{
                     }
                 }
 
-                //Conversion str image en nom de fichier
-                // ex: Coca - Cola -> coca_-_cola.png
-                $infos["Img_produit"] = str_replace(" ", "_", strtolower($infos["Nom"])) . ".png";
-
                 //Récupération du modèle
                 $m = Model::getModel();
                 //Ajout du produit
@@ -240,13 +236,13 @@ class Controller_set extends Controller{
         $data = [
             "title" => "Création d'un nouveau client",
             "added_element" => "client",
-            "str_lien_retour" => "Retour à la page de gestion de l'inventaire",
-            "lien_retour" => "?controller=list&action=gestion_inventaire" 
+            "str_lien_retour" => "Retour à la page de gestion des comptes clients",
+            "lien_retour" => "?controller=list&action=gestion_clients" 
         ];
         if ($ajout) {
-            $data["message"] = "Le produit " . $_POST["Nom"] . " a été créé avec succès.";
+            $data["message"] = "Le compte client" . $_POST["Prenom"] . $_POST["Nom"] . " a été créé avec succès. Notez que le client devra modifier son mot de passe pour accéder à son compte.";
         } else {
-            $data["message"] = "Erreur dans la saisie des informations, le produit n'a pas été ajouté.";
+            $data["message"] = "Erreur dans la saisie des informations, le compte client n'a pas été ajouté.";
         }
 
     $this->render("message", $data);
