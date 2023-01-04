@@ -360,7 +360,8 @@ class Model
         return (bool) $requete->rowCount();
     }
 
-    public function isInDatabaseClient($id){
+    public function isInDatabaseClient($email){
+      /* Ancien code
       $requete = $this->bd->prepare('SELECT id_client FROM Client WHERE  id_client=:id');
       $requete->bindValue(':id',$id);
       $requete->execute();
@@ -375,11 +376,23 @@ class Model
         // Il est bien présent dans la base de données client 
         return True ;
       }
+      */
+      // Nouveau code plus ergonomique
+      $requete = $this->bd->prepare('SELECT id_client FROM Client WHERE Email=:email');
+      $requete->bindValue(':email', $email);
+      $requete->execute();
+
+      return (bool) $requete->rowCount(); // si rien trouvé = 0 convertit en false, si trouvé, = 1 convertit en true  
     }
 
-    public function isInDatabaseAdmin($id){
+    public function isInDatabaseAdmin($email){
+      /*
       $requete = $this->bd->prepare('SELECT id_admin FROM Admin WHERE id_admin=:id');
       $requete->bindValue(':id',$id);
+      */
+      /*
+      $requete = $this->bd->prepare('SELECT id_admin FROM Admin WHERE Email=:email');
+      $requete->bindValue(':email',$email);
       $requete->execute();
       $nb = $requete->rowCount();
 
@@ -392,6 +405,12 @@ class Model
         // Il est bien présent dans la base de données admin
         return True ;
       }
+      */
+      $requete = $this->bd->prepare('SELECT id_admin FROM Admin WHERE Email=:email');
+      $requete->bindValue(':email', $email);
+      $requete->execute();
+
+      return (bool) $requete->rowCount();
     }
 
     public function addAuthClient($infosAuth)
