@@ -23,6 +23,8 @@ class Controller_auth extends Controller{
       */
       $username = $_POST['email'];
       $password = $_POST['password'];
+      $admin = 'admin';
+      $client = 'client';
     }
 
 
@@ -32,7 +34,8 @@ class Controller_auth extends Controller{
         
         // Enregistre l'utilisateur dans la session
         $_SESSION['id_etud'] = $username;
-        
+        $_SESSION['connected'] = true;
+        $_SESSION['statut'] = $admin;
         // Redirige l'admin vers la page d'accueil admin
         $data = [
             // "nom" => $m->getPrenomNomAdmin($username)
@@ -46,6 +49,8 @@ class Controller_auth extends Controller{
         
         // Enregistre l'utilisateur dans la session
         $_SESSION['id_etud'] = $username;
+        $_SESSION['connected'] = true;
+        $_SESSION['statut'] = $client;
         
         // Redirige le client vers la page d'accueil client
         $data = [
@@ -59,7 +64,6 @@ class Controller_auth extends Controller{
       
     }
     
-    // Fermer la session après peut etre ? 
     
     }
     
@@ -82,8 +86,7 @@ class Controller_auth extends Controller{
 
         // Vérifie la connexion à la base de données
     
-    
-    
+        
     
         // Vérifie si les informations de l'utilisateur sont valides
         if (empty($prenom) ||empty($nom) ||empty($username) || empty($password) || empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {    
@@ -102,17 +105,26 @@ class Controller_auth extends Controller{
             // Vérifie si l'utilisateur existe déjà dans la base de données
             if($nb>0){
                 //Message d'erreur car il existe déjà un utilisateur avec ces informations 
-                // TODO: le message d'erreur
-                $this->action_error("Message erreur");
+                $this->action_error("L'utilisateur existe déjà dans la base de données");
             }
             else{
                 // Requête SQL pour insérer le client dans la base de données authentification afin qu'il puisse se connecter par la suite sans problèmes 
-                $req2 = $this->bd->prepare("INSERT INTO Authentification (num_etudiant,password) VALUES ('$username','$password')");
-                // TODO Marqueur de place et exécution puis return
+                $req2 = $this->bd->prepare("INSERT INTO Authentification (num_etudiant,password) VALUES (':username',':password')");
+                $req2->bindValue(':username',$username);
+                $req2->bindValue(':password',$password);
+                $req2->execute();
+
+
+                // TODO return
 
                 // Requête SQL pour insérer l'utilisateur dans la base de données des clients 
-                $requete = $this->bd->prepare("INSERT INTO Client (nom,prenom,email,num_etudiant) VALUES ('$nom','$prenom','$email','$username')");
-    
+                $requete = $this->bd->prepare("INSERT INTO Client (nom,prenom,email,num_etudiant) VALUES (':nom',':prenom',':email',':username')");
+                $requete->bindValue(':nom',$nom);
+                $requete->bindValue(':prenom',$prenom);
+                $requete->bindValue(':email',$email);
+                $requete->bindValue(':username',$username);
+                $requete->execute();
+
                 
                 // Possibilité d'ajouter un message pour savoir si l'insertion à réussi 
     
@@ -125,7 +137,7 @@ class Controller_auth extends Controller{
     }
 
     public function action_oublimdp(){
-
+        
     }
 
 
