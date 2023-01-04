@@ -361,7 +361,7 @@ class Model
     }
 
     public function isInDatabaseClient($id){
-      $requete = $this->bd->prepare('SELECT id_client FROM client WHERE  id_client=:id');
+      $requete = $this->bd->prepare('SELECT id_client FROM Client WHERE  id_client=:id');
       $requete->bindValue(':id',$id);
       $requete->execute();
       $nb = $requete->rowCount();
@@ -369,16 +369,16 @@ class Model
       if ($nb<1){
         // L'utilisateur n'est pas présent dans la base de données du client
         // Ce n'est donc pas un client 
-        return False 
+        return False ;
       }
       else{
         // Il est bien présent dans la base de données client 
-        return True 
+        return True ;
       }
     }
 
     public function isInDatabaseAdmin($id){
-      $requete = $this->bd->prepare('SELECT id_admin FROM admin WHERE id_admin=:id');
+      $requete = $this->bd->prepare('SELECT id_admin FROM Admin WHERE id_admin=:id');
       $requete->bindValue(':id',$id);
       $requete->execute();
       $nb = $requete->rowCount();
@@ -386,12 +386,14 @@ class Model
       if ($nb<1){
         // L'utilisateur n'est pas présent dans la base de données de l'admin
         // Ce n'est donc pas un admin 
-        return False 
+        return False ;
       }
       else{
         // Il est bien présent dans la base de données admin
-        return True 
+        return True ;
       }
+    }
+
     public function addClient($infos)
     {
         // Ajout dans Authentification
