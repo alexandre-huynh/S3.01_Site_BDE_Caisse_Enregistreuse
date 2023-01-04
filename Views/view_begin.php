@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stand de confiseries du BDE</title>
-    <link rel="stylesheet" href="Content/css/style_page_accueil.css">
+    <link rel="stylesheet" href="Content/css/begin.css">
 </head>
 <body>
 
@@ -17,10 +17,10 @@
         <nav class="accueil_nav">
             <a href="?controller=home&action=home"><img class="logo_bde" src="Content/img/logo_bde.png" alt="logo-bde" width="70" height="70"></a>
             <ul>
-                <li><a href="?controller=list&action=confiseries" title="Confisseries">Confisseries</a></li>
+                <li><a href="?controller=list&action=confiseries" title="Confiseries">Confiseries</a></li>
                 <li><a href="?controller=list&action=boissons" title="Boissons">Boissons</a></li>
                 <li><a href="page_espace_client.html" target="_blank" title="Mon Espace">Mon Espace</a></li>
-                <li><a href="page_connexion.html" title="Se connecter / S'inscrire">Se connecter / S'inscrire</a></li>
+                <li><a href="?controller=auth&action=form_login" title="Se connecter / S'inscrire">Se connecter / S'inscrire</a></li>
 
                 <!--Menu deroulant pour changer la langue du site-->
                 <li class="li_changer_langue">
