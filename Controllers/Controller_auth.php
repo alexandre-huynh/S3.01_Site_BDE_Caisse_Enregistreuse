@@ -58,10 +58,11 @@ class Controller_auth extends Controller{
                 $data = [
                     // "nom" => $m->getPrenomNomClient($username)
                     ]; 
-                $this->render("espace_client", $data);
+                //$this->render("espace_client", $data);
+                $this->render("produits", $data);
         }
       }
-      
+
       else {
         // Affiche un message d'erreur
         $this->action_error("Erreur, identifiant ou mot de passe non saisis.");
