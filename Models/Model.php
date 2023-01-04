@@ -367,7 +367,7 @@ class Model
         //Préparation de la requête
         $requete = $this->bd->prepare('INSERT INTO Authentification VALUES (:num_etudiant, :Password )');
         $requete->bindValue(':num_etudiant', $infos["num_etudiant"]);
-        $requete->bindValue(':Password', $infos["Password"]);
+        $requete->bindValue(':Password', password_hash($infos["Password"], PASSWORD_DEFAULT));
 
         //Exécution de la requête
         $requete->execute();

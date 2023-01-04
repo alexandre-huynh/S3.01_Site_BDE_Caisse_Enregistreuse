@@ -156,7 +156,7 @@
     </p>
     <p>
       <label>Confirmer le mot de passe* :
-        <input type="password" name="Password_verify" value="0" step="1" min="0" required />
+        <input type="password" name="Password_verify" minlength="8" required />
       </label>
     </p>
     <?php if ($element_to_add=="admin") : ?>
