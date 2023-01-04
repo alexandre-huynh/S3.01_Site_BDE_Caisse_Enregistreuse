@@ -15,14 +15,14 @@ class Controller_auth extends Controller{
     $m = Model::getModel();
 
     // Vérifie si l'utilisateur a soumis le formulaire de connexion
-    if (isset($_POST['submit'])) {
+    if (isset($_POST['Email']) and isset($_POST['Password'])) {
       // Récupère les informations de connexion
       /* 
       TODO: Faire une fonction getIdClientFromEmail($email)
       faut que email deviennent un id client ou id admin ou num etudiant
       */
-      $username = $_POST['email'];
-      $password = $_POST['password'];
+      $username = $_POST['Email'];
+      $password = $_POST['Password'];
       $admin = 'admin';
       $client = 'client';
     }
@@ -30,33 +30,41 @@ class Controller_auth extends Controller{
 
     // Vérifier si l'utilisateur existe dans la base de données avec les fonction isInDatabaseClient et isInDatabaseAdmin 
     if ($m->isInDatabaseAdmin($username)){
-        session_start();
-        
-        // Enregistre l'utilisateur dans la session
-        $_SESSION['id_etud'] = $username;
-        $_SESSION['connected'] = true;
-        $_SESSION['statut'] = $admin;
-        // Redirige l'admin vers la page d'accueil admin
-        $data = [
-            // "nom" => $m->getPrenomNomAdmin($username)
-            ]; 
-        $this->render("espace_client", $data);
+        // Vérifier si le mot de passe saisie est correct 
+        if (password_verify($password, $m->getPassword($username,"Admin"))){
+
+            session_start();
+            
+            // Enregistre l'utilisateur dans la session
+            $_SESSION['id_etud'] = $username;
+            $_SESSION['connected'] = true;
+            $_SESSION['statut'] = $admin;
+            // Redirige l'admin vers la page d'accueil admin
+            $data = [
+                // "nom" => $m->getPrenomNomAdmin($username)
+                ]; 
+            $this->render("espace_client", $data);
+        }
     }
+
     
     elseif ($m->isInDatabaseClient($username)){
-    
-        session_start();
-        
-        // Enregistre l'utilisateur dans la session
-        $_SESSION['id_etud'] = $username;
-        $_SESSION['connected'] = true;
-        $_SESSION['statut'] = $client;
-        
-        // Redirige le client vers la page d'accueil client
-        $data = [
-            // "nom" => $m->getPrenomNomClient($username)
-            ]; 
-        $this->render("espace_client", $data);
+        // Vérifier si le mot de passe saisie est correct
+        if(password_verify($password, $m->getPassword($username,"Client"))){
+
+                session_start();
+                
+                // Enregistre l'utilisateur dans la session
+                $_SESSION['id_etud'] = $username;
+                $_SESSION['connected'] = true;
+                $_SESSION['statut'] = $client;
+                
+                // Redirige le client vers la page d'accueil client
+                $data = [
+                    // "nom" => $m->getPrenomNomClient($username)
+                    ]; 
+                $this->render("espace_client", $data);
+        }
     } 
     
     else {
@@ -131,13 +139,13 @@ class Controller_auth extends Controller{
             }
     
         } 
-    
-        // Fermer la connexion à la base de données ? 
-        
+            
     }
 
     public function action_oublimdp(){
+        $email = $_POST['email'];
         
+
     }
 
 
