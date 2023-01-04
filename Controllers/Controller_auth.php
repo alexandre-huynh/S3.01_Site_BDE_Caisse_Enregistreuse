@@ -25,30 +25,25 @@ class Controller_auth extends Controller{
       $password = $_POST['Password'];
       $admin = 'admin';
       $client = 'client';
-    }
+      // Vérifier si l'utilisateur existe dans la base de données avec les fonction isInDatabaseClient et isInDatabaseAdmin 
+      if ($m->isInDatabaseAdmin($username)){
+            // Vérifier si le mot de passe saisie est correct 
+            if (password_verify($password, $m->getPassword($username,"Admin"))){
 
-
-    // Vérifier si l'utilisateur existe dans la base de données avec les fonction isInDatabaseClient et isInDatabaseAdmin 
-    if ($m->isInDatabaseAdmin($username)){
-        // Vérifier si le mot de passe saisie est correct 
-        if (password_verify($password, $m->getPassword($username,"Admin"))){
-
-            session_start();
-            
-            // Enregistre l'utilisateur dans la session
-            $_SESSION['id_etud'] = $username;
-            $_SESSION['connected'] = true;
-            $_SESSION['statut'] = $admin;
-            // Redirige l'admin vers la page d'accueil admin
-            $data = [
-                // "nom" => $m->getPrenomNomAdmin($username)
-                ]; 
-            $this->render("espace_client", $data);
-        }
-    }
-
-    
-    elseif ($m->isInDatabaseClient($username)){
+                session_start();
+                
+                // Enregistre l'utilisateur dans la session
+                $_SESSION['id_etud'] = $username;
+                $_SESSION['connected'] = true;
+                $_SESSION['statut'] = $admin;
+                // Redirige l'admin vers la page d'accueil admin
+                $data = [
+                    // "nom" => $m->getPrenomNomAdmin($username)
+                    ]; 
+                $this->render("espace_client", $data);
+            }
+      }
+      elseif ($m->isInDatabaseClient($username)){
         // Vérifier si le mot de passe saisie est correct
         if(password_verify($password, $m->getPassword($username,"Client"))){
 
@@ -65,8 +60,14 @@ class Controller_auth extends Controller{
                     ]; 
                 $this->render("espace_client", $data);
         }
-    } 
-    
+      }
+      
+      else {
+        // Affiche un message d'erreur
+        $this->action_error("Erreur, identifiant ou mot de passe non saisis.");
+      }
+    }
+
     else {
       // Affiche un message d'erreur
       $this->action_error("Erreur, identifiant ou mot de passe incorrect.");
