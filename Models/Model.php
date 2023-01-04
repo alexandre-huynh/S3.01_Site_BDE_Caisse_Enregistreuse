@@ -423,4 +423,25 @@ class Model
         return (bool) $requete->rowCount();
     }
 
+    public function getPassword($email,$table){
+
+      if($table=="Admin"){
+        $req = $this->bd->prepare('SELECT Password FROM Admin JOIN Authentification USING(num_etudiant) WHERE Email = :email');
+        $req->bindValue(':email',$email);
+        $req->execute();
+        $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+      }
+      elseif($table=="Client"){
+        $req = $this->bd->prepare('SELECT Password FROM Client JOIN Authentification USING(num_etudiant) WHERE Email = :email');
+        $req->bindValue(':email',$email);
+        $req->execute();
+        $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+      }
+
+    }
+
+    
+
 }
