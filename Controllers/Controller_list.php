@@ -264,6 +264,7 @@ class Controller_list extends Controller{
 
     $data =
       [
+        "admin" => $_SESSION["id_admin"],
         "snacks" => $m->getProduits("default", "Confiserie", "default"),
         "boissons" => $m->getProduits("default", "Boisson", "default"),
         "sodas" => $m->getProduits("default", "Soda", "default"),

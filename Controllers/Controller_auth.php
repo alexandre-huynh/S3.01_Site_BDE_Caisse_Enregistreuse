@@ -21,42 +21,46 @@ class Controller_auth extends Controller{
       TODO: Faire une fonction getIdClientFromEmail($email)
       faut que email deviennent un id client ou id admin ou num etudiant
       */
-      $username = $_POST['Email'];
+      $email = $_POST['Email'];
       $password = $_POST['Password'];
       $admin = 'admin';
       $client = 'client';
       // Vérifier si l'utilisateur existe dans la base de données avec les fonction isInDatabaseClient et isInDatabaseAdmin 
-      if ($m->isInDatabaseAdmin($username)){
+      if ($m->isInDatabaseAdmin($email)){
             // Vérifier si le mot de passe saisie est correct 
-            if (password_verify($password, $m->getPassword($username,"Admin"))){
+            if (password_verify($password, $m->getPassword($email,"Admin"))){
 
                 session_start();
                 
                 // Enregistre l'utilisateur dans la session
-                $_SESSION['id_etud'] = $username;
+                $_SESSION['email'] = $email;
+                $_SESSION['id_admin'] = $m->getIdAdminFromEmail($email);
+                $_SESSION['num_etud'] = $m->getNumEtudiantAdminFromEmail($email);
                 $_SESSION['connected'] = true;
                 $_SESSION['statut'] = $admin;
                 // Redirige l'admin vers la page d'accueil admin
                 $data = [
-                    "nomprenom" => $m->getPrenomNomAdmin($username)
+                    "nomprenom" => $m->getPrenomNomAdmin($email)
                     ]; 
                 $this->render("espace_admin", $data);
             }
       }
-      elseif ($m->isInDatabaseClient($username)){
+      elseif ($m->isInDatabaseClient($email)){
         // Vérifier si le mot de passe saisie est correct
-        if(password_verify($password, $m->getPassword($username,"Client"))){
+        if(password_verify($password, $m->getPassword($email,"Client"))){
 
                 session_start();
                 
                 // Enregistre l'utilisateur dans la session
-                $_SESSION['id_etud'] = $username;
+                $_SESSION['email'] = $email;
+                $_SESSION['id_client'] = $m->getIdClientFromEmail($email);
+                $_SESSION['num_etud'] = $m->getNumEtudiantClientFromEmail($email);
                 $_SESSION['connected'] = true;
                 $_SESSION['statut'] = $client;
                 
                 // Redirige le client vers la page d'accueil client
                 $data = [
-                    "nomprenom" => $m->getPrenomNomClient($username)
+                    "nomprenom" => $m->getPrenomNomClient($email)
                     ]; 
                 //$this->render("espace_client", $data);
                 $this->render("espace_client", $data);

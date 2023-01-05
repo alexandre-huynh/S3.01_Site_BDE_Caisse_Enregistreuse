@@ -251,7 +251,7 @@ class Model
       //peut être:
       $texte_req = "SELECT num_vente, Vente.id_client, Vente.id_admin, Vente.id_produit, DATE_FORMAT(Date_vente, '%e/%c/%Y') AS 'Date_vente', Paiement, Use_fidelite ,Client.Nom, Client.Prenom, Admin.Nom, Admin.Prenom 
                       FROM Client JOIN Vente USING(id_client) 
-                                  JOIN Admin USING(id_admin)";
+                                  JOIN Admin USING(id_admin) ORDER BY Date_vente DESC";
       // TODO : rajouter quelque chose pour traiter les recherches par nom prénom 
       // sachant que la table ventes ne possède pas ces attributs
       // solution: jointure?
@@ -272,6 +272,42 @@ class Model
       $req->execute();
       return $req->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    //==================================================
+    // donne l'id client à partir de l'email fourni
+    public function getIdClientFromEmail($email){
+      $req = $this->bd->prepare('SELECT id_client FROM Client WHERE Email = :email');
+      $req->bindValue(':email', $email);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+
+    // donne l'id admin à partir de l'email fourni
+    public function getIdAdminFromEmail($email){
+      $req = $this->bd->prepare('SELECT id_client FROM Admin WHERE Email = :email');
+      $req->bindValue(':email', $email);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+    //=====================================================
+    public function getNumEtudiantClientFromEmail($email){
+      $req = $this->bd->prepare('SELECT num_etudiant FROM Client WHERE Email = :email');
+      $req->bindValue(':email', $email);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+
+    public function getNumEtudiantAdminFromEmail($email){
+      $req = $this->bd->prepare('SELECT num_etudiant FROM Admin WHERE Email = :email');
+      $req->bindValue(':email', $email);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+    //=====================================================
 
     public function getPrenomNomClient($id)
     {
