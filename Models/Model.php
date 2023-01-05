@@ -241,6 +241,8 @@ class Model
       return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    //==================================================
+
     public function getHistoriqueAchats($search="default") // ou getVentes
     {
       // $search si on veut chercher une vente en particulier
@@ -251,7 +253,7 @@ class Model
       //peut être:
       $texte_req = "SELECT num_vente, Vente.id_client, Vente.id_admin, Vente.id_produit, DATE_FORMAT(Date_vente, '%e/%c/%Y') AS 'Date_vente', Paiement, Use_fidelite ,Client.Nom, Client.Prenom, Admin.Nom, Admin.Prenom 
                       FROM Client JOIN Vente USING(id_client) 
-                                  JOIN Admin USING(id_admin)";
+                                  JOIN Admin USING(id_admin) ORDER BY Date_vente DESC";
       // TODO : rajouter quelque chose pour traiter les recherches par nom prénom 
       // sachant que la table ventes ne possède pas ces attributs
       // solution: jointure?
@@ -272,6 +274,81 @@ class Model
       $req->execute();
       return $req->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getHistoriqueAchatsClient($id,$date="default")
+    {
+      $texte_req=
+        'SELECT distinct id_client, date_vente, Produit.nom, count(*) as "Quantité" , sum(prix) as "Total prix"
+        FROM Client join Vente using(id_client) join Produit using(id_produit)
+        WHERE id_client=:id
+        GROUP BY id_client, date_vente, Produit.nom
+        ORDER BY date_vente DESC
+        ';
+
+      // si on cherche les achats d'une date en particulier
+      if ($date!="default"){
+        $texte_req=
+        'SELECT distinct id_client, date_vente, Produit.nom, count(*) as "Quantité" , sum(prix) as "Total prix"
+        FROM Client join Vente using(id_client) join Produit using(id_produit)
+        WHERE id_client=:id AND date_vente=:date
+        GROUP BY id_client, date_vente, Produit.nom
+        ORDER BY date_vente DESC
+        ';
+        $use_marqueur=True;
+      }
+
+      $req = $this->bd->prepare($texte_req);
+      $req->bindValue(':id', (int) $id, PDO::PARAM_INT);
+      if ($use_marqueur==True){
+        $req->bindValue(':date', $date);
+      }
+      $req->execute();
+      return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getDatesVentesClient($id)
+    {
+      $req = $this->bd->prepare('SELECT DISTINCT date_vente FROM Vente WHERE id_client = :id ORDER BY date_vente DESC');
+      $req->bindValue(':id', $id);
+      $req->execute();
+      return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    //==================================================
+    // donne l'id client à partir de l'email fourni
+    public function getIdClientFromEmail($email){
+      $req = $this->bd->prepare('SELECT id_client FROM Client WHERE Email = :email');
+      $req->bindValue(':email', $email);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+
+    // donne l'id admin à partir de l'email fourni
+    public function getIdAdminFromEmail($email){
+      $req = $this->bd->prepare('SELECT id_client FROM Admin WHERE Email = :email');
+      $req->bindValue(':email', $email);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+    //=====================================================
+    public function getNumEtudiantClientFromEmail($email){
+      $req = $this->bd->prepare('SELECT num_etudiant FROM Client WHERE Email = :email');
+      $req->bindValue(':email', $email);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+
+    public function getNumEtudiantAdminFromEmail($email){
+      $req = $this->bd->prepare('SELECT num_etudiant FROM Admin WHERE Email = :email');
+      $req->bindValue(':email', $email);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+    //=====================================================
 
     public function getPrenomNomClient($id)
     {
@@ -476,32 +553,35 @@ class Model
       
       if($table=="Client"){
 
-
         $req = $this->bd->prepare('UPDATE Authentification JOIN Client USING(num_etudiant) SET Password =:pass where Email= :email ');
-          $req->bindValue(':pass',$hashedPassword);
-          $req->bindValue(':email',$email);
-          $req->execute();
+        $req->bindValue(':pass',$hashedPassword);
+        $req->bindValue(':email',$email);
+        $req->execute();
 
-  
+        // Confirm requete réussie
+        return (bool) $requete->rowCount();
       }
       elseif($table=="Admin"){
 
         $req = $this->bd->prepare('UPDATE Authentification JOIN Admin USING(num_etudiant) SET Password =:pass where Email= :email ');
-          $req->bindValue(':pass',$hashedPassword);
-          $req->bindValue(':email',$email);
-          $req->execute();
+        $req->bindValue(':pass',$hashedPassword);
+        $req->bindValue(':email',$email);
+        $req->execute();
       
-          // Envoie message pour valider la modification ? 
+        // Envoie message pour valider la modification ? 
+
+        // Confirm requete réussie
+        return (bool) $requete->rowCount();
       }
       else{
 
-        $this->action_error("Une erreur est survenue .. ");
+        return False;
 
       }
 
     }
 
-    public function 
+   
 
     
 

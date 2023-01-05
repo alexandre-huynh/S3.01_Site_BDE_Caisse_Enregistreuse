@@ -6,12 +6,32 @@
 <div>
     <p> Panier du client </p>
     <ul>
+        <li>2 x Kinder Bueno (exemple)</li>
         <!-- 
             Affichage des produits ici, genre 2x Kinder bueno etc
         -->
     </ul>
     <p>TOTAL : <span id="totalprix"></span></p>
 </div>
+
+<form>
+    <!--Les produits seront ajoutés ici, mais en type=hidden-->
+    <!--
+        exemple:
+        <input type="hidden" name="produit1" value="ID_PRODUIT_ICI" />
+        <input type="hidden" name="produit2" value="ID_PRODUIT_ICI" />
+    -->
+    <!--Méthode de paiement-->
+    <input type="hidden" name="Paiement" required />
+
+    <!--Responsable de la vente-->
+    <input type="hidden" name="id_admin" value="<?=e($admin)?>" required />
+
+    <!--Validation du panier-->
+    <input type="submit" value="Valider" />
+</form>
+
+<hr>
 
 <!-- boutons produits-->
 <table>

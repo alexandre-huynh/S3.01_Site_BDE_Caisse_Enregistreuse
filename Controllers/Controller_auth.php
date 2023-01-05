@@ -21,42 +21,64 @@ class Controller_auth extends Controller{
       TODO: Faire une fonction getIdClientFromEmail($email)
       faut que email deviennent un id client ou id admin ou num etudiant
       */
-      $username = $_POST['Email'];
+      $email = $_POST['Email'];
       $password = $_POST['Password'];
-      $admin = 'admin';
-      $client = 'client';
       // Vérifier si l'utilisateur existe dans la base de données avec les fonction isInDatabaseClient et isInDatabaseAdmin 
-      if ($m->isInDatabaseAdmin($username)){
+      if ($m->isInDatabaseAdmin($email)){
             // Vérifier si le mot de passe saisie est correct 
-            if (password_verify($password, $m->getPassword($username,"Admin"))){
+            if (password_verify($password, $m->getPassword($email,"Admin"))){
 
                 session_start();
                 
                 // Enregistre l'utilisateur dans la session
-                $_SESSION['id_etud'] = $username;
+                $_SESSION['email'] = $email;
+                $_SESSION['id_admin'] = $m->getIdAdminFromEmail($email);
+                $_SESSION['num_etud'] = $m->getNumEtudiantAdminFromEmail($email);
                 $_SESSION['connected'] = true;
-                $_SESSION['statut'] = $admin;
+                // TODO: implémenter un statut superadmin s'il est superadmin,
+                // pour cela, faire une requete SQL dans model
+                $_SESSION['statut'] = 'admin';
                 // Redirige l'admin vers la page d'accueil admin
                 $data = [
-                    "nomprenom" => $m->getPrenomNomAdmin($username)
+                    "nomprenom" => $m->getPrenomNomAdmin($email)
                     ]; 
                 $this->render("espace_admin", $data);
             }
       }
-      elseif ($m->isInDatabaseClient($username)){
+      elseif ($m->isInDatabaseClient($email)){
         // Vérifier si le mot de passe saisie est correct
-        if(password_verify($password, $m->getPassword($username,"Client"))){
+        if(password_verify($password, $m->getPassword($email,"Client"))){
 
                 session_start();
                 
                 // Enregistre l'utilisateur dans la session
-                $_SESSION['id_etud'] = $username;
+                $_SESSION['email'] = $email;
+                $_SESSION['id_client'] = $m->getIdClientFromEmail($email);
+                $_SESSION['num_etud'] = $m->getNumEtudiantClientFromEmail($email);
                 $_SESSION['connected'] = true;
-                $_SESSION['statut'] = $client;
+                $_SESSION['statut'] = 'client';
+
+                //=====================================
+                // Pour affichage des achats récents, par date
+                // TODO: copier le code / action dans list pour quand le client accède
+                // à son espace 
+
+                // mettre en commentaire pour l'instant si problématique
+
+                $idClient = $_SESSION['id_client'];
+
+                $datesVente = $m->getDatesVentesClient($idClient);
+
+                $historique = [];
+
+                foreach($datesVente as $ligne){
+                  $historique[$ligne["date_vente"]] = $m->getHistoriqueAchatsClient($idClient, $ligne["date_vente"]);
+                }
                 
                 // Redirige le client vers la page d'accueil client
                 $data = [
-                    "nomprenom" => $m->getPrenomNomClient($username)
+                    "nomprenom" => $m->getPrenomNomClient($email),
+                    "historique" => $historique
                     ]; 
                 //$this->render("espace_client", $data);
                 $this->render("espace_client", $data);
@@ -74,8 +96,7 @@ class Controller_auth extends Controller{
       $this->action_error("Erreur, identifiant ou mot de passe incorrect.");
     }
     
-    
-    }
+    } // fin de fonction
     
     public function action_form_signup(){
         $m = Model::getModel();
@@ -84,7 +105,7 @@ class Controller_auth extends Controller{
         $this->render("signup", $data);
     }
 
-    public function action_signup(){
+  public function action_signup(){
 
       $ajout = false;
 
@@ -98,7 +119,9 @@ class Controller_auth extends Controller{
       if (isset($_POST["num_etudiant"]) && 
       isset($_POST["Nom"]) && 
       isset($_POST["Prenom"]) && 
-      isset($_POST["Password"]==$_POST["Password_verify"]) &&
+      isset($_POST['Password']) &&
+      isset($_POST['Password_verify']) &&
+      $_POST["Password"]==$_POST["Password_verify"] &&
       isset($_POST['Email']))
       {
         if($m->isInDatabaseClient($_POST['Email'])){
@@ -167,14 +190,14 @@ class Controller_auth extends Controller{
           $data["message"] = "Erreur dans la saisie des informations, le compte client n'a pas été ajouté.";
       }
 
-      $this->render("message", $data);
+    $this->render("message", $data);
 
       
-    }
+  }
         
 
 
-    public function action_oublimdp(){
+  public function action_oublimdp(){
       if(isset($_POST['Email'])){
 
         $password = uniqid();
