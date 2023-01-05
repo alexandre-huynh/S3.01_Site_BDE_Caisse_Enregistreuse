@@ -121,7 +121,7 @@ class Controller_auth extends Controller{
             else{
                 
                 // Requête SQL pour insérer le client dans la base de données authentification afin qu'il puisse se connecter par la suite sans problèmes 
-                // TODO : Faire une fonction dans model 
+                // TODO : Faire une fonction dans model insertion nouveau client  
                 $req2 = $this->bd->prepare("INSERT INTO Authentification (num_etudiant,password) VALUES (':username',':password')");
                 $req2->bindValue(':username',$username);
                 $req2->bindValue(':password',$password);
@@ -131,7 +131,7 @@ class Controller_auth extends Controller{
                 // TODO return
 
                 // Requête SQL pour insérer l'utilisateur dans la base de données des clients 
-                // TODO : Faire une fonction dans model 
+                // TODO : Faire une fonction dans model insertion nouveau client  
                 $requete = $this->bd->prepare("INSERT INTO Client (nom,prenom,email,num_etudiant) VALUES (':nom',':prenom',':email',':username')");
                 $requete->bindValue(':nom',$nom);
                 $requete->bindValue(':prenom',$prenom);
@@ -179,9 +179,11 @@ class Controller_auth extends Controller{
     
         }
     }
+  }
 
 
     public function action_default(){
+
         $this->action_form_login();
     }
 
