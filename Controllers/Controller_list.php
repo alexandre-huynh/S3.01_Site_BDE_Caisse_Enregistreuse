@@ -258,6 +258,20 @@ class Controller_list extends Controller{
 
     $this->render("list", $data);
   }
+
+  public function action_caisse(){
+    $m = Model::getModel();
+
+    $data =
+      [
+        "snacks" => $m->getProduits("default", "Confiserie", "default")
+        "boissons" => $m->getProduits("default", "Boisson", "default"),
+        "sodas" => $m->getProduits("default", "Soda", "default"),
+        "sirops" => $m->getProduits("default", "Sirop", "default")
+      ];
+
+    $this->render("caisse", $data);
+  }
   
   public function action_default(){
     $this->action_produits();
