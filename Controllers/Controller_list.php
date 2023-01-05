@@ -264,7 +264,7 @@ class Controller_list extends Controller{
 
     $data =
       [
-        "snacks" => $m->getProduits("default", "Confiserie", "default")
+        "snacks" => $m->getProduits("default", "Confiserie", "default"),
         "boissons" => $m->getProduits("default", "Boisson", "default"),
         "sodas" => $m->getProduits("default", "Soda", "default"),
         "sirops" => $m->getProduits("default", "Sirop", "default")
