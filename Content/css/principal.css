@@ -85,7 +85,7 @@ footer{
   display: inherit;
 }
 
-table td{
+table td, table th{
     border: 1px solid black;
     padding: 5px;
 }
