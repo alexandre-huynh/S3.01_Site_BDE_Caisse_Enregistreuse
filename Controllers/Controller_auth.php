@@ -181,11 +181,17 @@ class Controller_auth extends Controller{
     }
   }
 
+  public function action_form_oubli_mdp(){
+    $m = Model::getModel();
+    $data = []; 
 
-    public function action_default(){
+    $this->render("", $data);
+  }
 
-        $this->action_form_login();
-    }
+
+  public function action_default(){
+      $this->action_form_login();
+  }
 
 }
 ?>
