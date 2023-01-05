@@ -1,7 +1,7 @@
 </main>
 
 <!--Fin du corps de la page-->
-<link rel="stylesheet" href="Content/css/end.css">
+
 <!--Le pieds de page-->
 
 <footer>
