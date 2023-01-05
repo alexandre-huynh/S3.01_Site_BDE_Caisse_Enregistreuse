@@ -79,10 +79,13 @@ section.banniere_accueil .phrase_bienvenue h1{
     font-family: medium, sans-serif;
 }
 
+footer{
+  display: flex;
+}
+
 .contenu_footer{
   width: 100%;
   height : 160px;
-  display: table;
   background-color: #15AABF;
 }
 
