@@ -38,9 +38,9 @@ class Controller_auth extends Controller{
                 $_SESSION['statut'] = $admin;
                 // Redirige l'admin vers la page d'accueil admin
                 $data = [
-                    // "nom" => $m->getPrenomNomAdmin($username)
+                    "nomprenom" => $m->getPrenomNomAdmin($username)
                     ]; 
-                $this->render("espace_client", $data);
+                $this->render("espace_admin", $data);
             }
       }
       elseif ($m->isInDatabaseClient($username)){
@@ -56,10 +56,10 @@ class Controller_auth extends Controller{
                 
                 // Redirige le client vers la page d'accueil client
                 $data = [
-                    // "nom" => $m->getPrenomNomClient($username)
-                    ]; 
+                    "nomprenom" => $m->getPrenomNomClient($username)
+                  ]; 
                 //$this->render("espace_client", $data);
-                $this->render("produits", $data);
+                $this->render("espace_client", $data);
         }
       }
 
