@@ -106,6 +106,7 @@ class Controller_auth extends Controller{
         else{
     
             // Requête SQL pour vérifier si l'utilisateur existe déjà dans la base de données
+            // TODO : Faire une fonction dans model 
             $req = $this->bd->prepare('SELECT * FROM client WHERE username= :username OR email= :email');
             $req->bindValue(':username',$username);
             $req->bindValue(':email',$email);
@@ -118,7 +119,9 @@ class Controller_auth extends Controller{
                 $this->action_error("L'utilisateur existe déjà dans la base de données");
             }
             else{
+                
                 // Requête SQL pour insérer le client dans la base de données authentification afin qu'il puisse se connecter par la suite sans problèmes 
+                // TODO : Faire une fonction dans model 
                 $req2 = $this->bd->prepare("INSERT INTO Authentification (num_etudiant,password) VALUES (':username',':password')");
                 $req2->bindValue(':username',$username);
                 $req2->bindValue(':password',$password);
@@ -128,6 +131,7 @@ class Controller_auth extends Controller{
                 // TODO return
 
                 // Requête SQL pour insérer l'utilisateur dans la base de données des clients 
+                // TODO : Faire une fonction dans model 
                 $requete = $this->bd->prepare("INSERT INTO Client (nom,prenom,email,num_etudiant) VALUES (':nom',':prenom',':email',':username')");
                 $requete->bindValue(':nom',$nom);
                 $requete->bindValue(':prenom',$prenom);
@@ -145,7 +149,32 @@ class Controller_auth extends Controller{
     }
 
     public function action_oublimdp(){
-        $email = $_POST['email'];
+      if(isset($_POST['Email'])){
+
+        $password = uniqid();
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    
+        $message = "Bonjour, voici votre nouveau mot de passe : $password";
+        $headers = 'Content-Type: text/plain; charest="utf-8"'." ";
+        
+        if(mail($_POST['Email'], 'Mot de passe oublié',$message, $headers)){
+    
+          
+            // Fonction nouveau mot de passe peut etre ? 
+            // TODO : Faire une fonction dans model UpdatePassword 
+            $req = $this->bd->prepare('UPDATE Authentification SET Password =:pass where Email= :email ');
+            $req->bindValue(':pass',$hashedPassword);
+            $req->bindValue(':email',$_POST['Email']);
+            $req->execute();
+    
+    
+            // Message avec indiqué 'Mot de passe bien modifié'
+        }
+        else{
+    
+            $this->action_error("Une erreur est survenue .. ");
+    
+        }
         
 
     }
