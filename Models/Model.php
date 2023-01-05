@@ -472,6 +472,37 @@ class Model
 
     }
 
+    public function updatePassword($email,$hashedPassword,$table){
+      
+      if($table=="Client"){
+
+
+        $req = $this->bd->prepare('UPDATE Authentification JOIN Client USING(num_etudiant) SET Password =:pass where Email= :email ');
+          $req->bindValue(':pass',$hashedPassword);
+          $req->bindValue(':email',$email);
+          $req->execute();
+
+  
+      }
+      elseif($table=="Admin"){
+
+        $req = $this->bd->prepare('UPDATE Authentification JOIN Admin USING(num_etudiant) SET Password =:pass where Email= :email ');
+          $req->bindValue(':pass',$hashedPassword);
+          $req->bindValue(':email',$email);
+          $req->execute();
+      
+          // Envoie message pour valider la modification ? 
+      }
+      else{
+
+        $this->action_error("Une erreur est survenue .. ");
+
+      }
+
+      
+
+    }
+
     
 
 }
