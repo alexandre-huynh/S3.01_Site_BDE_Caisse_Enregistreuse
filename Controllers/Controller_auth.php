@@ -98,7 +98,9 @@ class Controller_auth extends Controller{
       if (isset($_POST["num_etudiant"]) && 
       isset($_POST["Nom"]) && 
       isset($_POST["Prenom"]) && 
-      isset($_POST["Password"]==$_POST["Password_verify"]) &&
+      isset($_POST['Password']) &&
+      isset($_POST['Password_verify']) &&
+      $_POST["Password"]==$_POST["Password_verify"] &&
       isset($_POST['Email']))
       {
         if($m->isInDatabaseClient($_POST['Email'])){
