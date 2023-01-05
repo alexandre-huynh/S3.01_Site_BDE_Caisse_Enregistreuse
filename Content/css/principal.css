@@ -76,13 +76,13 @@ section.banniere_accueil .phrase_bienvenue h1{
 
 footer{
   display: flex;
+  width: 100%;
+  background-color: #15AABF;
 }
 
 .contenu_footer{
-  width: 100%;
-  height : 160px;
-  display: flex;
-  background-color: #15AABF;
+
+  display: inherit;
 }
 
 table td{
