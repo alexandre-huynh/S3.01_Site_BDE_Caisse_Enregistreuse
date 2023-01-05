@@ -474,7 +474,7 @@ class Model
 
     public function updatePassword($email,$hashedPassword,$table){
       
-      if(isInDatabaseClient($email) and $table=="Client"){
+      if($table=="Client"){
 
 
         $req = $this->bd->prepare('UPDATE Authentification JOIN Client USING(num_etudiant) SET Password =:pass where Email= :email ');
