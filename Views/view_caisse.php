@@ -17,51 +17,51 @@
 <table>
     <tr id="snacks">
         <th>Snacks</th>
+        <?php foreach ($snacks as $ligne): ?>
         <td>
-            <?php foreach ($snacks as $ligne): ?>
-                <ul class="produit">
-                    <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                    <li><?=e($ligne["Nom"])?></li>
-                    <li><?=e($ligne["Prix"])?> €</li>
-                </ul>
-            <?php endforeach ?>
+            <ul class="produit">
+                <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
+                <li><?=e($ligne["Nom"])?></li>
+                <li><?=e($ligne["Prix"])?> €</li>
+            </ul>
         </td>
+        <?php endforeach ?>
     </tr>
     <tr id="boissons">
         <th>Boissons</th>
+        <?php foreach ($boissons as $ligne): ?>
         <td>
-            <?php foreach ($boissons as $ligne): ?>
-                <ul class="produit">
-                    <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                    <li><?=e($ligne["Nom"])?></li>
-                    <li><?=e($ligne["Prix"])?> €</li>
-                </ul>
-            <?php endforeach ?>
+            <ul class="produit">
+                <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
+                <li><?=e($ligne["Nom"])?></li>
+                <li><?=e($ligne["Prix"])?> €</li>
+            </ul>
         </td>
+        <?php endforeach ?>
     </tr>
     <tr id="boissons">
         <th>Sodas</th>
+        <?php foreach ($sodas as $ligne): ?>
         <td>
-            <?php foreach ($sodas as $ligne): ?>
-                <ul class="produit">
-                    <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                    <li><?=e($ligne["Nom"])?></li>
-                    <li><?=e($ligne["Prix"])?> €</li>
-                </ul>
-            <?php endforeach ?>
+            <ul class="produit">
+                <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
+                <li><?=e($ligne["Nom"])?></li>
+                <li><?=e($ligne["Prix"])?> €</li>
+            </ul>
         </td>
+        <?php endforeach ?>
     </tr>
     <tr id="sirops">
         <th>Sirops</th>
+        <?php foreach ($sirops as $ligne): ?>
         <td>
-            <?php foreach ($sirops as $ligne): ?>
-                <ul class="produit">
-                    <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                    <li><?=e($ligne["Nom"])?></li>
-                    <li><?=e($ligne["Prix"])?> €</li>
-                </ul>
-            <?php endforeach ?>
+            <ul class="produit">
+                <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
+                <li><?=e($ligne["Nom"])?></li>
+                <li><?=e($ligne["Prix"])?> €</li>
+            </ul>
         </td>
+        <?php endforeach ?>
     </tr>
 </table>
 
