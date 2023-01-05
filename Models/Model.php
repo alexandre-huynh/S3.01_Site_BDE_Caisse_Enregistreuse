@@ -481,11 +481,10 @@ class Model
           $req->bindValue(':pass',$hashedPassword);
           $req->bindValue(':email',$email);
           $req->execute();
-          // Envoie message pour valider la modification ? 
 
   
       }
-      elseif(isInDatabaseAdmin($email) and $table=="Admin"){
+      elseif($table=="Admin"){
 
         $req = $this->bd->prepare('UPDATE Authentification JOIN Admin USING(num_etudiant) SET Password =:pass where Email= :email ');
           $req->bindValue(':pass',$hashedPassword);
