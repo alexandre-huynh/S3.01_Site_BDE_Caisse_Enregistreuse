@@ -57,7 +57,7 @@ class Controller_auth extends Controller{
                 // Redirige le client vers la page d'accueil client
                 $data = [
                     "nomprenom" => $m->getPrenomNomClient($username)
-                  ]; 
+                    ]; 
                 //$this->render("espace_client", $data);
                 $this->render("espace_client", $data);
         }
@@ -121,7 +121,7 @@ class Controller_auth extends Controller{
             else{
                 
                 // Requête SQL pour insérer le client dans la base de données authentification afin qu'il puisse se connecter par la suite sans problèmes 
-                // TODO : Faire une fonction dans model 
+                // TODO : Faire une fonction dans model insertion nouveau client  
                 $req2 = $this->bd->prepare("INSERT INTO Authentification (num_etudiant,password) VALUES (':username',':password')");
                 $req2->bindValue(':username',$username);
                 $req2->bindValue(':password',$password);
@@ -131,7 +131,7 @@ class Controller_auth extends Controller{
                 // TODO return
 
                 // Requête SQL pour insérer l'utilisateur dans la base de données des clients 
-                // TODO : Faire une fonction dans model 
+                // TODO : Faire une fonction dans model insertion nouveau client  
                 $requete = $this->bd->prepare("INSERT INTO Client (nom,prenom,email,num_etudiant) VALUES (':nom',':prenom',':email',':username')");
                 $requete->bindValue(':nom',$nom);
                 $requete->bindValue(':prenom',$prenom);
@@ -159,28 +159,31 @@ class Controller_auth extends Controller{
         
         if(mail($_POST['Email'], 'Mot de passe oublié',$message, $headers)){
     
-          
-            // Fonction nouveau mot de passe peut etre ? 
-            // TODO : Faire une fonction dans model UpdatePassword 
-            $req = $this->bd->prepare('UPDATE Authentification SET Password =:pass where Email= :email ');
-            $req->bindValue(':pass',$hashedPassword);
-            $req->bindValue(':email',$_POST['Email']);
-            $req->execute();
-    
-    
-            // Message avec indiqué 'Mot de passe bien modifié'
+          if($m->isInDatabaseAdmin($email)){
+
+            $table = "Admin";
+            $m->updatePassword($email,$hashedPassword,$table);        
+
+          }
+          elseif($m->isInDatabaseClient($email)){
+
+            $table = "Client";
+            $m->updatePassword($email,$hashedPassword,$table);
+
+          }
+            
         }
         else{
     
             $this->action_error("Une erreur est survenue .. ");
     
         }
-        
-
     }
+  }
 
 
     public function action_default(){
+
         $this->action_form_login();
     }
 
