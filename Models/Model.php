@@ -241,6 +241,8 @@ class Model
       return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    //==================================================
+
     public function getHistoriqueAchats($search="default") // ou getVentes
     {
       // $search si on veut chercher une vente en particulier
@@ -269,6 +271,45 @@ class Model
 
       $req = $this->bd->prepare($texte_req);
       $req->bindValue(':search', $search);
+      $req->execute();
+      return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getHistoriqueAchatsClient($id,$date="default")
+    {
+      $texte_req=
+        'SELECT distinct id_client, date_vente, Produit.nom, count(*) as "Quantité" , sum(prix) as "Total prix"
+        FROM Client join Vente using(id_client) join Produit using(id_produit)
+        WHERE id_client=:id
+        GROUP BY id_client, date_vente, Produit.nom
+        ORDER BY date_vente DESC
+        ';
+
+      // si on cherche les achats d'une date en particulier
+      if ($date!="default"){
+        $texte_req=
+        'SELECT distinct id_client, date_vente, Produit.nom, count(*) as "Quantité" , sum(prix) as "Total prix"
+        FROM Client join Vente using(id_client) join Produit using(id_produit)
+        WHERE id_client=:id AND date_vente=:date
+        GROUP BY id_client, date_vente, Produit.nom
+        ORDER BY date_vente DESC
+        ';
+        $use_marqueur=True;
+      }
+
+      $req = $this->bd->prepare($texte_req);
+      $req->bindValue(':id', (int) $id, PDO::PARAM_INT);
+      if ($use_marqueur==True){
+        $req->bindValue(':date', $date);
+      }
+      $req->execute();
+      return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getDatesVentesClient($id)
+    {
+      $req = $this->bd->prepare('SELECT DISTINCT date_vente FROM Vente WHERE id_client = :id ORDER BY date_vente DESC');
+      $req->bindValue(':id', $id);
       $req->execute();
       return $req->fetchAll(PDO::FETCH_ASSOC);
     }

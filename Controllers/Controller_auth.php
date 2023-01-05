@@ -23,8 +23,6 @@ class Controller_auth extends Controller{
       */
       $email = $_POST['Email'];
       $password = $_POST['Password'];
-      $admin = 'admin';
-      $client = 'client';
       // Vérifier si l'utilisateur existe dans la base de données avec les fonction isInDatabaseClient et isInDatabaseAdmin 
       if ($m->isInDatabaseAdmin($email)){
             // Vérifier si le mot de passe saisie est correct 
@@ -37,7 +35,9 @@ class Controller_auth extends Controller{
                 $_SESSION['id_admin'] = $m->getIdAdminFromEmail($email);
                 $_SESSION['num_etud'] = $m->getNumEtudiantAdminFromEmail($email);
                 $_SESSION['connected'] = true;
-                $_SESSION['statut'] = $admin;
+                // TODO: implémenter un statut superadmin s'il est superadmin,
+                // pour cela, faire une requete SQL dans model
+                $_SESSION['statut'] = 'admin';
                 // Redirige l'admin vers la page d'accueil admin
                 $data = [
                     "nomprenom" => $m->getPrenomNomAdmin($email)
@@ -56,11 +56,29 @@ class Controller_auth extends Controller{
                 $_SESSION['id_client'] = $m->getIdClientFromEmail($email);
                 $_SESSION['num_etud'] = $m->getNumEtudiantClientFromEmail($email);
                 $_SESSION['connected'] = true;
-                $_SESSION['statut'] = $client;
+                $_SESSION['statut'] = 'client';
+
+                //=====================================
+                // Pour affichage des achats récents, par date
+                // TODO: copier le code / action dans list pour quand le client accède
+                // à son espace 
+
+                // mettre en commentaire pour l'instant si problématique
+
+                $idClient = $_SESSION['id_client'];
+
+                $datesVente = $m->getDatesVentesClient($idClient);
+
+                $historique = [];
+
+                foreach($datesVente as $ligne){
+                  $historique[$ligne["date_vente"]] = $m->getHistoriqueAchatsClient($idClient, $ligne["date_vente"]);
+                }
                 
                 // Redirige le client vers la page d'accueil client
                 $data = [
-                    "nomprenom" => $m->getPrenomNomClient($email)
+                    "nomprenom" => $m->getPrenomNomClient($email),
+                    "historique" => $historique
                     ]; 
                 //$this->render("espace_client", $data);
                 $this->render("espace_client", $data);
