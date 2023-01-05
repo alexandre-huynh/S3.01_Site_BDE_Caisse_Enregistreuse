@@ -205,6 +205,7 @@ class Controller_set extends Controller{
         isset($_POST["num_etudiant"]) && 
         isset($_POST["Nom"]) && 
         isset($_POST["Prenom"]) && 
+        isset($_POST["Email"]) &&
         isset($_POST["Date_creation"]) && 
         isset($_POST["Pts_fidelite"]) && $_POST["Password"]==$_POST["Password_verify"]) {
             // !!
