@@ -179,9 +179,11 @@ class Controller_auth extends Controller{
     
         }
     }
+  }
 
 
     public function action_default(){
+
         $this->action_form_login();
     }
 
