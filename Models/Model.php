@@ -476,26 +476,29 @@ class Model
       
       if($table=="Client"){
 
-
         $req = $this->bd->prepare('UPDATE Authentification JOIN Client USING(num_etudiant) SET Password =:pass where Email= :email ');
-          $req->bindValue(':pass',$hashedPassword);
-          $req->bindValue(':email',$email);
-          $req->execute();
+        $req->bindValue(':pass',$hashedPassword);
+        $req->bindValue(':email',$email);
+        $req->execute();
 
-  
+        // Confirm requete réussie
+        return (bool) $requete->rowCount();
       }
       elseif($table=="Admin"){
 
         $req = $this->bd->prepare('UPDATE Authentification JOIN Admin USING(num_etudiant) SET Password =:pass where Email= :email ');
-          $req->bindValue(':pass',$hashedPassword);
-          $req->bindValue(':email',$email);
-          $req->execute();
+        $req->bindValue(':pass',$hashedPassword);
+        $req->bindValue(':email',$email);
+        $req->execute();
       
-          // Envoie message pour valider la modification ? 
+        // Envoie message pour valider la modification ? 
+
+        // Confirm requete réussie
+        return (bool) $requete->rowCount();
       }
       else{
 
-        $this->action_error("Une erreur est survenue .. ");
+        return False;
 
       }
 

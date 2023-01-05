@@ -74,8 +74,7 @@ class Controller_auth extends Controller{
       $this->action_error("Erreur, identifiant ou mot de passe incorrect.");
     }
     
-    
-    }
+    } // fin de fonction
     
     public function action_form_signup(){
         $m = Model::getModel();
@@ -84,7 +83,7 @@ class Controller_auth extends Controller{
         $this->render("signup", $data);
     }
 
-    public function action_signup(){
+  public function action_signup(){
 
       $ajout = false;
 
@@ -169,14 +168,14 @@ class Controller_auth extends Controller{
           $data["message"] = "Erreur dans la saisie des informations, le compte client n'a pas été ajouté.";
       }
 
-      $this->render("message", $data);
+    $this->render("message", $data);
 
       
-    }
+  }
         
 
 
-    public function action_oublimdp(){
+  public function action_oublimdp(){
       if(isset($_POST['Email'])){
 
         $password = uniqid();
