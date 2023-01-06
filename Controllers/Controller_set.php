@@ -205,6 +205,7 @@ class Controller_set extends Controller{
         isset($_POST["num_etudiant"]) && 
         isset($_POST["Nom"]) && 
         isset($_POST["Prenom"]) && 
+        isset($_POST["Email"]) &&
         isset($_POST["Date_creation"]) && 
         isset($_POST["Pts_fidelite"]) && $_POST["Password"]==$_POST["Password_verify"]) {
             // !!
@@ -214,20 +215,45 @@ class Controller_set extends Controller{
             $m = Model::getModel();
             // Préparation du tableau infos
             $infos = [];
-            $noms = ["id_client", "num_etudiant", "Nom", "Prenom", "Tel", "Email", "Date_creation", "Pts_fidelite", "Password", "Password_verify"];
+            $noms = ["id_client", "num_etudiant", "Nom", "Prenom", "Tel", "Email", "Date_creation", "Pts_fidelite"];
             foreach ($noms as $v) {
-                if (isset($_POST[$v]) && (is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])) || ((is_int($_POST[$v]) || is_float($_POST[$v])) && $_POST[$v]>=0)) {
+                if (isset($_POST[$v]) && ((is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])) || ((is_int($_POST[$v]) || is_float($_POST[$v])) && $_POST[$v]>=0))
+                ) {
+                  // && (is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])) || ((is_int($_POST[$v]) || is_float($_POST[$v])) && $_POST[$v]>=0)
                   $infos[$v] = $_POST[$v];
+                  //debug
+                  //echo "Ajout $v OK";
                 } else {
                   $infos[$v] = null;
+                  //echo "Ajout $v OK, valeur NULL";
                 }
             }
+
+            $infosAuth = [$_POST["num_etudiant"], password_hash($_POST["Password"], PASSWORD_DEFAULT)];
+
+            /*
+            $tab=[
+              "id_client" => $infos["id_client"], 
+              "num_etudiant" => $infos["num_etudiant"], 
+              "Nom" => $infos["Nom"], 
+              "Prenom" => $infos["Prenom"], 
+              "Tel" => $infos["Tel"], 
+              "Email" => $infos["Email"], 
+              "Date_creation" => $infos["Date_creation"], 
+              "Pts_fidelite" => $infos["Pts_fidelite"]
+            ];
+            */
 
             //Récupération du modèle
             $m = Model::getModel();
             //Ajout du produit
+            $m->addAuthClient($infosAuth);
             $ajout = $m->addClient($infos);
             
+        }
+
+        else{
+          $this->action_error("Erreur, des informations n'ont pas été saisies ou le mot de passe n'est pas correspondant.");
         }
         
 
@@ -239,7 +265,7 @@ class Controller_set extends Controller{
             "lien_retour" => "?controller=list&action=gestion_clients" 
         ];
         if ($ajout) {
-            $data["message"] = "Le compte client" . $_POST["Prenom"] . $_POST["Nom"] . " a été créé avec succès. Notez que le client devra modifier son mot de passe pour accéder à son compte.";
+            $data["message"] = "Le compte client " . $_POST["Prenom"] . " " . $_POST["Nom"] . " a été créé avec succès.";
         } else {
             $data["message"] = "Erreur dans la saisie des informations, le compte client n'a pas été ajouté.";
         }

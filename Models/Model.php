@@ -241,6 +241,8 @@ class Model
       return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    //==================================================
+
     public function getHistoriqueAchats($search="default") // ou getVentes
     {
       // $search si on veut chercher une vente en particulier
@@ -251,7 +253,7 @@ class Model
       //peut être:
       $texte_req = "SELECT num_vente, Vente.id_client, Vente.id_admin, Vente.id_produit, DATE_FORMAT(Date_vente, '%e/%c/%Y') AS 'Date_vente', Paiement, Use_fidelite ,Client.Nom, Client.Prenom, Admin.Nom, Admin.Prenom 
                       FROM Client JOIN Vente USING(id_client) 
-                                  JOIN Admin USING(id_admin)";
+                                  JOIN Admin USING(id_admin) ORDER BY Date_vente DESC";
       // TODO : rajouter quelque chose pour traiter les recherches par nom prénom 
       // sachant que la table ventes ne possède pas ces attributs
       // solution: jointure?
@@ -272,6 +274,81 @@ class Model
       $req->execute();
       return $req->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getHistoriqueAchatsClient($id,$date="default")
+    {
+      $texte_req=
+        'SELECT distinct id_client, date_vente, Produit.nom, count(*) as "Quantité" , sum(prix) as "Total prix"
+        FROM Client join Vente using(id_client) join Produit using(id_produit)
+        WHERE id_client=:id
+        GROUP BY id_client, date_vente, Produit.nom
+        ORDER BY date_vente DESC
+        ';
+
+      // si on cherche les achats d'une date en particulier
+      if ($date!="default"){
+        $texte_req=
+        'SELECT distinct id_client, date_vente, Produit.nom, count(*) as "Quantité" , sum(prix) as "Total prix"
+        FROM Client join Vente using(id_client) join Produit using(id_produit)
+        WHERE id_client=:id AND date_vente=:date
+        GROUP BY id_client, date_vente, Produit.nom
+        ORDER BY date_vente DESC
+        ';
+        $use_marqueur=True;
+      }
+
+      $req = $this->bd->prepare($texte_req);
+      $req->bindValue(':id', (int) $id, PDO::PARAM_INT);
+      if ($use_marqueur==True){
+        $req->bindValue(':date', $date);
+      }
+      $req->execute();
+      return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getDatesVentesClient($id)
+    {
+      $req = $this->bd->prepare('SELECT DISTINCT date_vente FROM Vente WHERE id_client = :id ORDER BY date_vente DESC');
+      $req->bindValue(':id', $id);
+      $req->execute();
+      return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    //==================================================
+    // donne l'id client à partir de l'email fourni
+    public function getIdClientFromEmail($email){
+      $req = $this->bd->prepare('SELECT id_client FROM Client WHERE Email = :email');
+      $req->bindValue(':email', $email);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+
+    // donne l'id admin à partir de l'email fourni
+    public function getIdAdminFromEmail($email){
+      $req = $this->bd->prepare('SELECT id_client FROM Admin WHERE Email = :email');
+      $req->bindValue(':email', $email);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+    //=====================================================
+    public function getNumEtudiantClientFromEmail($email){
+      $req = $this->bd->prepare('SELECT num_etudiant FROM Client WHERE Email = :email');
+      $req->bindValue(':email', $email);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+
+    public function getNumEtudiantAdminFromEmail($email){
+      $req = $this->bd->prepare('SELECT num_etudiant FROM Admin WHERE Email = :email');
+      $req->bindValue(':email', $email);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+    //=====================================================
 
     public function getPrenomNomClient($id)
     {
@@ -360,7 +437,8 @@ class Model
         return (bool) $requete->rowCount();
     }
 
-    public function isInDatabaseClient($id){
+    public function isInDatabaseClient($email){
+      /* Ancien code
       $requete = $this->bd->prepare('SELECT id_client FROM Client WHERE  id_client=:id');
       $requete->bindValue(':id',$id);
       $requete->execute();
@@ -375,11 +453,23 @@ class Model
         // Il est bien présent dans la base de données client 
         return True ;
       }
+      */
+      // Nouveau code plus ergonomique
+      $requete = $this->bd->prepare('SELECT id_client FROM Client WHERE Email=:email');
+      $requete->bindValue(':email', $email);
+      $requete->execute();
+
+      return (bool) $requete->rowCount(); // si rien trouvé = 0 convertit en false, si trouvé, = 1 convertit en true  
     }
 
-    public function isInDatabaseAdmin($id){
+    public function isInDatabaseAdmin($email){
+      /*
       $requete = $this->bd->prepare('SELECT id_admin FROM Admin WHERE id_admin=:id');
       $requete->bindValue(':id',$id);
+      */
+      /*
+      $requete = $this->bd->prepare('SELECT id_admin FROM Admin WHERE Email=:email');
+      $requete->bindValue(':email',$email);
       $requete->execute();
       $nb = $requete->rowCount();
 
@@ -392,47 +482,52 @@ class Model
         // Il est bien présent dans la base de données admin
         return True ;
       }
+      */
+      $requete = $this->bd->prepare('SELECT id_admin FROM Admin WHERE Email=:email');
+      $requete->bindValue(':email', $email);
+      $requete->execute();
+
+      return (bool) $requete->rowCount();
+    }
+
+    public function addAuthClient($infosAuth)
+    {
+      // Ajout dans Authentification
+
+        //Préparation de la requête
+        $requete = $this->bd->prepare('INSERT INTO Authentification VALUES (:num_etudiant, :Password )');
+        $requete->bindValue(':num_etudiant', $infosAuth[0]);
+        $requete->bindValue(':Password', $infosAuth[1]);
+
+        //Exécution de la requête
+        $requete->execute();
+        
+        // debug,à enlever
+        //echo "addAuthClient OK";
     }
 
     public function addClient($infos)
     {
-        // Ajout dans Authentification
-
-        //Préparation de la requête
-        $requete = $this->bd->prepare('INSERT INTO Authentification VALUES (:num_etudiant, :Password )');
-        $requete->bindValue(':num_etudiant', $infos["num_etudiant"]);
-        $requete->bindValue(':Password', password_hash($infos["Password"], PASSWORD_DEFAULT));
-
-        //Exécution de la requête
-        $requete->execute();
-
         // Ajout dans Client
         //unset($infos["Password"]);
         //unset($infos["Password_verify"]);
-        $tab=[
-          "id_client" => $infos["id_client"], 
-          "num_etudiant" => $infos["num_etudiant"], 
-          "Nom" => $infos["Nom"], 
-          "Prenom" => $infos["Prenom"], 
-          "Tel" => $infos["Tel"], 
-          "Email" => $infos["Email"], 
-          "Date_creation" => $infos["Date_creation"], 
-          "Pts_fidelite" => $infos["Pts_fidelite"]
-        ];
 
         //Préparation de la requête
-        $requete2 = $this->bd->prepare('INSERT INTO Client VALUES (:id_client, :num_etudiant, :Nom, :Prenom, :Tel, :Email, :Date_creation, :Pts_fidelite)');
+        $requete = $this->bd->prepare('INSERT INTO Client VALUES (:id_client, :num_etudiant, :Nom, :Prenom, :Tel, :Email, :Date_creation, :Pts_fidelite)');
 
         //Remplacement des marqueurs de place par les valeurs
         $marqueurs = ["id_client", "num_etudiant", "Nom", "Prenom", "Tel", "Email", "Date_creation", "Pts_fidelite"];
         foreach ($marqueurs as $value) {
-            $requete2->bindValue(':' . $value, $tab[$value]);
+            $requete->bindValue(':' . $value, $infos[$value]);
         }
 
         //Exécution de la requête
-        $requete2->execute();
+        $requete->execute();
 
-        return (bool) $requete2->rowCount();
+        // debug,à enlever
+        //echo "addClient OK";
+
+        return (bool) $requete->rowCount();
     }
 
     public function getPassword($email,$table){
@@ -453,6 +548,40 @@ class Model
       }
 
     }
+
+    public function updatePassword($email,$hashedPassword,$table){
+      
+      if($table=="Client"){
+
+        $req = $this->bd->prepare('UPDATE Authentification JOIN Client USING(num_etudiant) SET Password =:pass where Email= :email ');
+        $req->bindValue(':pass',$hashedPassword);
+        $req->bindValue(':email',$email);
+        $req->execute();
+
+        // Confirm requete réussie
+        return (bool) $requete->rowCount();
+      }
+      elseif($table=="Admin"){
+
+        $req = $this->bd->prepare('UPDATE Authentification JOIN Admin USING(num_etudiant) SET Password =:pass where Email= :email ');
+        $req->bindValue(':pass',$hashedPassword);
+        $req->bindValue(':email',$email);
+        $req->execute();
+      
+        // Envoie message pour valider la modification ? 
+
+        // Confirm requete réussie
+        return (bool) $requete->rowCount();
+      }
+      else{
+
+        return False;
+
+      }
+
+    }
+
+   
 
     
 
