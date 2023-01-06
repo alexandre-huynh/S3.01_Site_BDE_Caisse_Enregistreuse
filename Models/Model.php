@@ -490,7 +490,15 @@ class Model
       return (bool) $requete->rowCount();
     }
 
-    public function addAuthClient($infosAuth)
+    public function isInDatabaseSuperAdmin($id){
+      $requete = $this->bd->prepare('SELECT * FROM SuperAdmin WHERE id_admin=:id');
+      $requete->bindValue(':id', (int) $id, PDO::PARAM_INT);
+      $requete->execute();
+
+      return (bool) $requete->rowCount();
+    }
+
+    public function addAuth($infosAuth)
     {
       // Ajout dans Authentification
 
