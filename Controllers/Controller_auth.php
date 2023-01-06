@@ -40,7 +40,7 @@ class Controller_auth extends Controller{
                 $_SESSION['statut'] = 'admin';
                 // Redirige l'admin vers la page d'accueil admin
                 $data = [
-                    "nomprenom" => $m->getPrenomNomAdmin($email)
+                    "nomprenom" => $m->getPrenomNomAdmin($m->getIdAdminFromEmail($email))
                     ]; 
                 $this->render("espace_admin", $data);
             }
@@ -77,7 +77,7 @@ class Controller_auth extends Controller{
                 
                 // Redirige le client vers la page d'accueil client
                 $data = [
-                    "nomprenom" => $m->getPrenomNomClient($email),
+                    "nomprenom" => $m->getPrenomNomClient($m->getIdClientFromEmail($email)),
                     "historique" => $historique
                     ]; 
                 //$this->render("espace_client", $data);
