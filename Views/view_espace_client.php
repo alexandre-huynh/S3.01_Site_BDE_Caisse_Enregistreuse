@@ -2,6 +2,13 @@
 
 <h1>Bonjour, espace client de <?=e($nomprenom)?></h1>
 
+<!-- DEBUG-->
+<ul>
+    <?php foreach ($_SESSION as $c=>$v): ?>
+        <li><?=e($c)?> = <?=e($v)?></li>
+    <?php endforeach ?>
+</ul>
+
 <h2>Historique des achats</h2>
 
 <?php foreach ($historique as $date=>$ligne): ?>
