@@ -341,7 +341,7 @@ class Controller_set extends Controller{
             "title" => "Création d'un nouveau compte administrateur",
             "added_element" => "admin",
             "str_lien_retour" => "Retour à la page de gestion des comptes administrateurs",
-            "lien_retour" => "?controller=list&action=gestion_clients" 
+            "lien_retour" => "?controller=list&action=gestion_admins" 
         ];
         if ($ajout) {
             $data["message"] = "Le compte administrateur " . $_POST["Prenom"] . " " . $_POST["Nom"] . " a été créé avec succès.";

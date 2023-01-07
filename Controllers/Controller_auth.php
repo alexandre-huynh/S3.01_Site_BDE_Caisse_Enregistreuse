@@ -68,32 +68,35 @@ class Controller_auth extends Controller{
       $password = $_POST['Password'];
       // Vérifier si l'utilisateur existe dans la base de données avec les fonction isInDatabaseClient et isInDatabaseAdmin 
       if ($m->isInDatabaseAdmin($email)){
-            // Vérifier si le mot de passe saisie est correct 
-            if (password_verify($password, $m->getPassword($email,"Admin"))){
+        // Vérifier si le mot de passe saisie est correct 
+        if (password_verify($password, $m->getPassword($email,"Admin"))){
 
-                //session_start();
-                
-                // Enregistre l'utilisateur dans la session
-                $_SESSION['email'] = $email;
-                $_SESSION['id_admin'] = $m->getIdAdminFromEmail($email);
-                $_SESSION['prenomnom'] = $m->getPrenomNomAdmin($_SESSION['id_admin']);
-                $_SESSION['num_etudiant'] = $m->getNumEtudiantAdminFromEmail($email);
-                $_SESSION['connected'] = true;
-                $_SESSION['statut'] = 'admin';
-                // TODO: implémenter un statut superadmin s'il est superadmin,
-                // pour cela, faire une requete SQL dans model
-                if ($m->isInDatabaseSuperAdmin($_SESSION['id_admin'])){
-                  $_SESSION['superadmin'] = true;
-                }
-                // Redirige l'admin vers la page d'accueil admin                
-                $data = [
-                    "nomprenom" => $m->getPrenomNomAdmin($m->getIdAdminFromEmail($email)),
-                    "recettes_today" => $m->getRecettesJour(),
-                    "recettes_week" => $m->getRecettesSemaine(),
-                    "recettes_month" => $m->getRecettesMois(),
-                    ]; 
-                $this->render("espace_admin", $data);
+            //session_start();
+            
+            // Enregistre l'utilisateur dans la session
+            $_SESSION['email'] = $email;
+            $_SESSION['id_admin'] = $m->getIdAdminFromEmail($email);
+            $_SESSION['prenomnom'] = $m->getPrenomNomAdmin($_SESSION['id_admin']);
+            $_SESSION['num_etudiant'] = $m->getNumEtudiantAdminFromEmail($email);
+            $_SESSION['connected'] = true;
+            $_SESSION['statut'] = 'admin';
+            // TODO: implémenter un statut superadmin s'il est superadmin,
+            // pour cela, faire une requete SQL dans model
+            if ($m->isInDatabaseSuperAdmin($_SESSION['id_admin'])){
+              $_SESSION['superadmin'] = true;
             }
+            // Redirige l'admin vers la page d'accueil admin                
+            $data = [
+                "nomprenom" => $m->getPrenomNomAdmin($_SESSION['id_admin']),
+                "recettes_today" => $m->getRecettesJour(),
+                "recettes_week" => $m->getRecettesSemaine(),
+                "recettes_month" => $m->getRecettesMois(),
+                ]; 
+            $this->render("espace_admin", $data);
+        }
+        else {
+          $this->action_error("Erreur, est bien détecté comme admin mais mot de passe ne marche pas");
+        }
       }
       elseif ($m->isInDatabaseClient($email)){
         // Vérifier si le mot de passe saisie est correct
