@@ -389,6 +389,8 @@ class Controller_set extends Controller{
                 
             //Récupération du modèle
             $m = Model::getModel();
+            //Décrement -1 du produit acheté
+            $m->updateStock($_POST["id_produit"]);
             //Ajout de la vente
             $ajout = $m->addVente($infos);
             }
