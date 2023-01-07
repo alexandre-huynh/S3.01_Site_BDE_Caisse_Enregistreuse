@@ -70,18 +70,21 @@ class Controller_auth extends Controller{
             // Vérifier si le mot de passe saisie est correct 
             if (password_verify($password, $m->getPassword($email,"Admin"))){
 
-                session_start();
+                //session_start();
                 
                 // Enregistre l'utilisateur dans la session
                 $_SESSION['email'] = $email;
                 $_SESSION['id_admin'] = $m->getIdAdminFromEmail($email);
                 $_SESSION['prenomnom'] = $m->getPrenomNomAdmin($_SESSION['id_admin']);
-                $_SESSION['num_etud'] = $m->getNumEtudiantAdminFromEmail($email);
+                $_SESSION['num_etudiant'] = $m->getNumEtudiantAdminFromEmail($email);
                 $_SESSION['connected'] = true;
+                $_SESSION['statut'] = 'admin';
                 // TODO: implémenter un statut superadmin s'il est superadmin,
                 // pour cela, faire une requete SQL dans model
-                $_SESSION['statut'] = 'admin';
-                // Redirige l'admin vers la page d'accueil admin
+                if ($m->isInDatabaseSuperAdmin($_SESSION['id_admin'])){
+                  $_SESSION['superadmin'] = true;
+                }
+                // Redirige l'admin vers la page d'accueil admin                
                 $data = [
                     "nomprenom" => $m->getPrenomNomAdmin($m->getIdAdminFromEmail($email))
                     ]; 
@@ -92,13 +95,13 @@ class Controller_auth extends Controller{
         // Vérifier si le mot de passe saisie est correct
         if(password_verify($password, $m->getPassword($email,"Client"))){
 
-                session_start();
+                //session_start();
                 
                 // Enregistre l'utilisateur dans la session
                 $_SESSION['email'] = $email;
                 $_SESSION['id_client'] = $m->getIdClientFromEmail($email);
                 $_SESSION['prenomnom'] = $m->getPrenomNomClient($_SESSION['id_client']);
-                $_SESSION['num_etud'] = $m->getNumEtudiantClientFromEmail($email);
+                $_SESSION['num_etudiant'] = $m->getNumEtudiantClientFromEmail($email);
                 $_SESSION['connected'] = true;
                 $_SESSION['statut'] = 'client';
 

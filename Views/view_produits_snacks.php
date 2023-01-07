@@ -1,9 +1,8 @@
-<?php require "view_begin.php";?>
-
-<!--
-  http://localhost/~12102253/index.php?controller=list&action=snacks
-  http://localhost/~12102253/index.php?controller=list&action=snacks&filter=croissant
--->
+<?php if (isset($_SESSION["connected"]) && $_SESSION["connected"]==True) : ?>
+  <?php require "view_begin_connected.php";?>
+<?php else : ?>
+  <?php require "view_begin.php";?>
+<?php endif ?>
 
       <section class="snacks">
           <h1>Nos snacks</h1>
