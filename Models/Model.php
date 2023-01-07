@@ -576,7 +576,7 @@ class Model
         // Ajout dans Vente
 
         //Préparation de la requête
-        $requete = $this->bd->prepare('INSERT INTO Admin VALUES (:num_vente, :id_client, :id_admin, :id_produit, :Date_vente, :Paiement, :Use_fidelite)');
+        $requete = $this->bd->prepare('INSERT INTO Vente VALUES (:num_vente, :id_client, :id_admin, :id_produit, :Date_vente, :Paiement, :Use_fidelite)');
 
         //Remplacement des marqueurs de place par les valeurs
         $marqueurs = ["num_vente", "id_client", "id_admin", "id_produit", "Date_vente", "Paiement", "Use_fidelite"];
