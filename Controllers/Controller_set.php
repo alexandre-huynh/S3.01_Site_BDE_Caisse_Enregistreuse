@@ -370,30 +370,40 @@ class Controller_set extends Controller{
           isset($_POST["id_produit"]) &&
           isset($_POST["Date_vente"]) && 
           isset($_POST["Paiement"]) &&
-          isset($_POST["Use_fidelite"])) {
-            // !!
-            // RAJOUTER DES TESTS / CONTROLE DE SAISIE DANS LE IF !!!
-            // !!
-            // On vérifie que la catégorie est une des catégories possibles
-            $m = Model::getModel();
+          isset($_POST["Use_fidelite"])) 
+        {
+          // !!
+          // RAJOUTER DES TESTS / CONTROLE DE SAISIE DANS LE IF !!!
+          // !!
+          // On vérifie que la catégorie est une des catégories possibles
+          $m = Model::getModel();
 
-            // Préparation du tableau infos
-            $infos = [];
-            $noms = ["num_vente", "id_client", "id_admin", "id_produit", "Date_vente", "Paiement", "Use_fidelite"];
-            foreach ($noms as $v) {
-                if (isset($_POST[$v]) && (is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])) || ((is_int($_POST[$v]) || is_float($_POST[$v])) && $_POST[$v]>=0)) {
-                  $infos[$v] = $_POST[$v];
-                } else {
-                  $infos[$v] = null;
+          // Préparation du tableau infos
+          $infos = [];
+          $noms = ["num_vente", "id_client", "id_admin", "id_produit", "Date_vente", "Paiement", "Use_fidelite"];
+          foreach ($noms as $v) {
+            if (isset($_POST[$v]) && (is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])) || ((is_int($_POST[$v]) || is_float($_POST[$v])) && $_POST[$v]>=0)) {
+              $infos[$v] = $_POST[$v];
+            } else {
+              $infos[$v] = null;
             }
-                
-            //Récupération du modèle
-            $m = Model::getModel();
-            //Décrement -1 du produit acheté
-            $m->updateStock($_POST["id_produit"]);
-            //Ajout de la vente
-            $ajout = $m->addVente($infos);
-            }
+          }
+
+          //Conversion use_fidelite en bool MYSQL
+          if ($infos["Use_fidelite"]=="False"){
+            $infos["Use_fidelite"] = 0;
+          }
+          else {
+            $infos["Use_fidelite"] = 1;
+          }
+          
+              
+          //Récupération du modèle
+          $m = Model::getModel();
+          //Ajout de la vente
+          $ajout = $m->addVente($infos);
+          //Décrement -1 du produit acheté
+          $m->updateStock($_POST["id_produit"]);          
         }
         
 
