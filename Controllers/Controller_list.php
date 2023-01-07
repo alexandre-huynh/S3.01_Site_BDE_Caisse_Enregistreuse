@@ -278,6 +278,7 @@ class Controller_list extends Controller{
       // Redirige le client vers la page d'accueil client
       $data = [
           "nomprenom" => $m->getPrenomNomClient($m->getIdClientFromEmail($_SESSION["email"])),
+          "ptsfidelite" => $m->getPointsFidelite($_SESSION['id_client'],"Client"),
           "historique" => $historique
           ]; 
       $this->render("espace_client", $data);

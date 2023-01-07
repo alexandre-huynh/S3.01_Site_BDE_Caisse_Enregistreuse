@@ -379,7 +379,7 @@ class Model
       $req->bindValue(':id', (int) $id, PDO::PARAM_INT);
       $req->execute();
       $tab = $req->fetch(PDO::FETCH_NUM);
-        return $tab[0];
+      return $tab[0];
     }
 
     public function getPrenomNomAdmin($id)
@@ -388,7 +388,21 @@ class Model
       $req->bindValue(':id', (int) $id, PDO::PARAM_INT);
       $req->execute();
       $tab = $req->fetch(PDO::FETCH_NUM);
-        return $tab[0];
+      return $tab[0];
+    }
+
+    public function getPointsFidelite($id, $table)
+    {
+      if ($table=="Client"){
+        $req = $this->bd->prepare('SELECT Pts_fidelite FROM Client WHERE id_client = :id ');
+      } 
+      elseif ($table=="Admin"){
+        $req = $this->bd->prepare('SELECT Pts_fidelite FROM Admin WHERE id_admin = :id ');
+      }
+      $req->bindValue(':id', (int) $id, PDO::PARAM_INT);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+      return $tab[0];
     }
 
     // retourne l'id s'il existe dans la BD, sinon retourne false
