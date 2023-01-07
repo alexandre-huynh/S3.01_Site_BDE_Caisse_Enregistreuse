@@ -291,7 +291,7 @@ class Controller_list extends Controller{
     if (isset($_SESSION["connected"]) && isset($_SESSION['statut']) && $_SESSION["connected"] && $_SESSION['statut']=="admin"){
 
       $data = [
-          "nomprenom" => $m->getPrenomNomClient($m->getIdClientFromEmail($_SESSION["email"])),
+          "nomprenom" => $m->getPrenomNomAdmin($_SESSION["id_admin"]),
           "recettes_today" => $m->getRecettesJour(),
           "recettes_week" => $m->getRecettesSemaine(),
           "recettes_month" => $m->getRecettesMois(),
