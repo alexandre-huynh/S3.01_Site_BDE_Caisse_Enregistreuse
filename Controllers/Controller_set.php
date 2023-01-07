@@ -389,8 +389,14 @@ class Controller_set extends Controller{
             }
           }
 
-          //Conversion use_fidelite en bool
-          $infos["Use_fidelite"] = (bool) $infos["Use_fidelite"];
+          //Conversion use_fidelite en bool MYSQL
+          if ($infos["Use_fidelite"]=="False"){
+            $infos["Use_fidelite"] = 0;
+          }
+          else {
+            $infos["Use_fidelite"] = 1;
+          }
+          
               
           //Récupération du modèle
           $m = Model::getModel();
