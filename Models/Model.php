@@ -349,7 +349,7 @@ class Model
 
     // donne l'id admin à partir de l'email fourni
     public function getIdAdminFromEmail($email){
-      $req = $this->bd->prepare('SELECT id_client FROM Admin WHERE Email = :email');
+      $req = $this->bd->prepare('SELECT id_admin FROM Admin WHERE Email = :email');
       $req->bindValue(':email', $email);
       $req->execute();
       $tab = $req->fetch(PDO::FETCH_NUM);
