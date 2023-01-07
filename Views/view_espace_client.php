@@ -5,7 +5,7 @@
 <h2>Historique des achats</h2>
 
 <?php foreach ($historique as $date=>$ligne): ?>
-    <h3><?=e($date)?></h3>
+    <h3><?=date("J F Y",strtotime(e($date)))?></h3>
     <table>
         <tr>
             <?php foreach ($ligne[0] as $c=>$v): ?>

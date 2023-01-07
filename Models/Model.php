@@ -307,7 +307,7 @@ class Model
 
     public function getDatesVentesClient($id)
     {
-      $req = $this->bd->prepare('SELECT DISTINCT DATE_FORMAT(Date_vente, "%W %e %M %Y") FROM Vente WHERE id_client = :id ORDER BY date_vente DESC');
+      $req = $this->bd->prepare('SELECT DISTINCT Date_vente FROM Vente WHERE id_client = :id ORDER BY date_vente DESC');
       $req->bindValue(':id', $id);
       $req->execute();
       return $req->fetchAll(PDO::FETCH_ASSOC);

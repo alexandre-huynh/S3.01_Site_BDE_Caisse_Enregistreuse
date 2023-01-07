@@ -74,6 +74,8 @@ class Controller_auth extends Controller{
                 foreach($datesVente as $ligne){
                   $historique[$ligne["Date_vente"]] = $m->getHistoriqueAchatsClient($idClient, $ligne["Date_vente"]);
                 }
+
+                date_default_timezone_set('Europe/Paris');
                 
                 // Redirige le client vers la page d'accueil client
                 $data = [
