@@ -533,62 +533,76 @@ class Model
         $requete->execute();
 
         return (bool) $requete->rowCount();
-      }
+    }
   
-      public function addAdmin($infos)
-      {
-          // Ajout dans Admin
-  
-          //Préparation de la requête
-          $requete = $this->bd->prepare('INSERT INTO Admin VALUES (:id_admin, :num_etudiant, :Nom, :Prenom, :Tel, :Email, :Date_creation, :Pts_fidelite)');
-  
-          //Remplacement des marqueurs de place par les valeurs
-          $marqueurs = ["id_admin", "num_etudiant", "Nom", "Prenom", "Tel", "Email", "Date_creation", "Pts_fidelite"];
-          foreach ($marqueurs as $value) {
-              $requete->bindValue(':' . $value, $infos[$value]);
-          }
-  
-          //Exécution de la requête
-          $requete->execute();
-  
-          return (bool) $requete->rowCount();
-      }
-  
-      public function addSuperAdmin($infos)
-      {
-          // Ajout dans SuperAdmin
-  
-          //Préparation de la requête
-          $requete = $this->bd->prepare('INSERT INTO SuperAdmin VALUES (:id_superadmin, :id_admin)');
-  
-          //Remplacement par marqueur de place
-          $requete->bindValue(':id_superadmin', $infos[0]);
-          $requete->bindValue(':id_admin', $infos[1]);
-  
-          //Exécution de la requête
-          $requete->execute();
-  
-          return (bool) $requete->rowCount();
-      }
+    public function addAdmin($infos)
+    {
+        // Ajout dans Admin
 
-      public function addVente($infos)
-      {
-          // Ajout dans Vente
-  
-          //Préparation de la requête
-          $requete = $this->bd->prepare('INSERT INTO Admin VALUES (:num_vente, :id_client, :id_admin, :id_produit, :Date_vente, :Paiement, :Use_fidelite)');
-  
-          //Remplacement des marqueurs de place par les valeurs
-          $marqueurs = ["num_vente", "id_client", "id_admin", "id_produit", "Date_vente", "Paiement", "Use_fidelite"];
-          foreach ($marqueurs as $value) {
-              $requete->bindValue(':' . $value, $infos[$value]);
-          }
-  
-          //Exécution de la requête
-          $requete->execute();
-  
-          return (bool) $requete->rowCount();
-      }
+        //Préparation de la requête
+        $requete = $this->bd->prepare('INSERT INTO Admin VALUES (:id_admin, :num_etudiant, :Nom, :Prenom, :Tel, :Email, :Date_creation, :Pts_fidelite)');
+
+        //Remplacement des marqueurs de place par les valeurs
+        $marqueurs = ["id_admin", "num_etudiant", "Nom", "Prenom", "Tel", "Email", "Date_creation", "Pts_fidelite"];
+        foreach ($marqueurs as $value) {
+            $requete->bindValue(':' . $value, $infos[$value]);
+        }
+
+        //Exécution de la requête
+        $requete->execute();
+
+        return (bool) $requete->rowCount();
+    }
+
+    public function addSuperAdmin($infos)
+    {
+        // Ajout dans SuperAdmin
+
+        //Préparation de la requête
+        $requete = $this->bd->prepare('INSERT INTO SuperAdmin VALUES (:id_superadmin, :id_admin)');
+
+        //Remplacement par marqueur de place
+        $requete->bindValue(':id_superadmin', $infos[0]);
+        $requete->bindValue(':id_admin', $infos[1]);
+
+        //Exécution de la requête
+        $requete->execute();
+
+        return (bool) $requete->rowCount();
+    }
+
+    public function addVente($infos)
+    {
+        // Ajout dans Vente
+
+        //Préparation de la requête
+        $requete = $this->bd->prepare('INSERT INTO Admin VALUES (:num_vente, :id_client, :id_admin, :id_produit, :Date_vente, :Paiement, :Use_fidelite)');
+
+        //Remplacement des marqueurs de place par les valeurs
+        $marqueurs = ["num_vente", "id_client", "id_admin", "id_produit", "Date_vente", "Paiement", "Use_fidelite"];
+        foreach ($marqueurs as $value) {
+            $requete->bindValue(':' . $value, $infos[$value]);
+        }
+
+        //Exécution de la requête
+        $requete->execute();
+
+        return (bool) $requete->rowCount();
+    }
+
+    public function updateStock($id_produit)
+    {
+      //Préparation de la requête
+      $requete = $this->bd->prepare('UPDATE Produit SET Stock = ((SELECT Stock FROM Produit WHERE id_produit = :id_produit) - 1) WHERE id_produit = :id_produit');
+
+      //Remplacement des marqueurs de place par les valeurs
+      $req->bindValue(':id_produit',$id_produit);
+
+      //Exécution de la requête
+      $requete->execute();
+
+      return (bool) $requete->rowCount();
+    }
 
     public function getPassword($email,$table){
 
