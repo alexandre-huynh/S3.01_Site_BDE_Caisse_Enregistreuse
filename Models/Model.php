@@ -596,7 +596,7 @@ class Model
       $requete = $this->bd->prepare('UPDATE Produit SET Stock = ((SELECT Stock FROM Produit WHERE id_produit = :id_produit) - 1) WHERE id_produit = :id_produit');
 
       //Remplacement des marqueurs de place par les valeurs
-      $req->bindValue(':id_produit',$id_produit);
+      $requete->bindValue(':id_produit', $id_produit);
 
       //Exécution de la requête
       $requete->execute();
