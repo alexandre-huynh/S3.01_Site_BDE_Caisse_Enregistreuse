@@ -351,6 +351,66 @@ class Controller_set extends Controller{
     $this->render("message", $data);
   }
 
+  public function action_add_vente(){
+    // TODO: si quelqu'un peut s'occuper de faire les vérifications logiques des données avec isset
+    // genre si c'est bien un int, c'est bien supérieur à 0 mais inférieur à truc etc
+    // TODO: voir comment on ajoute un fichier
+    $ajout = false;
+
+        //Test si les informations nécessaires sont fournies
+        /* exemple de vérification
+        if (isset($_POST["name"]) and ! preg_match("/^ *$/", $_POST["name"])
+            and isset($_POST["category"]) and ! preg_match("/^ *$/", $_POST["category"])
+            and isset($_POST["year"]) and preg_match("/^[12]\d{3}$/", $_POST["year"])) {
+        */
+        
+        if (isset($_POST["num_vente"]) &&
+          isset($_POST["id_client"]) &&
+          isset($_POST["id_admin"]) &&
+          isset($_POST["id_produit"]) &&
+          isset($_POST["Date_vente"]) && 
+          isset($_POST["Paiement"]) &&
+          isset($_POST["Use_fidelite"])) {
+            // !!
+            // RAJOUTER DES TESTS / CONTROLE DE SAISIE DANS LE IF !!!
+            // !!
+            // On vérifie que la catégorie est une des catégories possibles
+            $m = Model::getModel();
+
+            // Préparation du tableau infos
+            $infos = [];
+            $noms = ["num_vente", "id_client", "id_admin", "id_produit", "Date_vente", "Paiement", "Use_fidelite"];
+            foreach ($noms as $v) {
+                if (isset($_POST[$v]) && (is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])) || ((is_int($_POST[$v]) || is_float($_POST[$v])) && $_POST[$v]>=0)) {
+                  $infos[$v] = $_POST[$v];
+                } else {
+                  $infos[$v] = null;
+            }
+                
+            //Récupération du modèle
+            $m = Model::getModel();
+            //Ajout de la vente
+            $ajout = $m->addVente($infos);
+            }
+        }
+        
+
+        //Préparation de $data pour l'affichage de la vue message
+        $data = [
+            "title" => "Création d'une nouvelle vente",
+            "added_element" => "vente",
+            "str_lien_retour" => "Retour à la page de l'historique des ventes",
+            "lien_retour" => "?controller=list&action=gestion_ventes" 
+        ];
+        if ($ajout) {
+            $data["message"] = "La vente du produit " . $m->getNomProduit($_POST["id_produit"]) . " géré par le responsable " . $m->getPrenomNomAdmin($_POST["id_admin"]) . " pour le client " . $m->getPrenomNomClient($_POST["id_client"]) . " a été répertorié avec succès.";
+        } else {
+            $data["message"] = "Erreur dans la saisie des informations, la vente n'a pas été ajouté.";
+        }
+
+    $this->render("message", $data);
+  }
+
   /*
   ===========================================================
                        SUPPRESSION D'ELEMENT

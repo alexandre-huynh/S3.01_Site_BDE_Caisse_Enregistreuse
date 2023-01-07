@@ -571,6 +571,25 @@ class Model
           return (bool) $requete->rowCount();
       }
 
+      public function addVente($infos)
+      {
+          // Ajout dans Vente
+  
+          //Préparation de la requête
+          $requete = $this->bd->prepare('INSERT INTO Admin VALUES (:num_vente, :id_client, :id_admin, :id_produit, :Date_vente, :Paiement, :Use_fidelite)');
+  
+          //Remplacement des marqueurs de place par les valeurs
+          $marqueurs = ["num_vente", "id_client", "id_admin", "id_produit", "Date_vente", "Paiement", "Use_fidelite"];
+          foreach ($marqueurs as $value) {
+              $requete->bindValue(':' . $value, $infos[$value]);
+          }
+  
+          //Exécution de la requête
+          $requete->execute();
+  
+          return (bool) $requete->rowCount();
+      }
+
     public function getPassword($email,$table){
 
       if($table=="Admin"){
