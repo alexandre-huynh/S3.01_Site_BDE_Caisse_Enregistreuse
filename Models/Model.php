@@ -318,7 +318,12 @@ class Model
       $req = $this->bd->prepare('SELECT sum(ROUND(Prix,2)) AS "Recettes_Quotidien" FROM Vente JOIN Produit USING(id_produit) WHERE DATE(Date_vente)=CURDATE() AND Paiement!=1');
       $req->execute();
       $tab = $req->fetch(PDO::FETCH_NUM);
-      return $tab[0];
+      if ($tab[0]==NULL || $req->$requete->rowCount()==0){
+        return 0;
+      }
+      else{
+        return $tab[0];
+      }
     }
 
     public function getRecettesSemaine()
