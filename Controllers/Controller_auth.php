@@ -75,6 +75,7 @@ class Controller_auth extends Controller{
                 // Enregistre l'utilisateur dans la session
                 $_SESSION['email'] = $email;
                 $_SESSION['id_admin'] = $m->getIdAdminFromEmail($email);
+                $_SESSION['prenomnom'] = $m->getPrenomNomAdmin($_SESSION['id_admin']);
                 $_SESSION['num_etud'] = $m->getNumEtudiantAdminFromEmail($email);
                 $_SESSION['connected'] = true;
                 // TODO: implémenter un statut superadmin s'il est superadmin,
@@ -96,6 +97,7 @@ class Controller_auth extends Controller{
                 // Enregistre l'utilisateur dans la session
                 $_SESSION['email'] = $email;
                 $_SESSION['id_client'] = $m->getIdClientFromEmail($email);
+                $_SESSION['prenomnom'] = $m->getPrenomNomClient($_SESSION['id_client']);
                 $_SESSION['num_etud'] = $m->getNumEtudiantClientFromEmail($email);
                 $_SESSION['connected'] = true;
                 $_SESSION['statut'] = 'client';

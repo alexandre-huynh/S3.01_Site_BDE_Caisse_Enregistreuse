@@ -7,6 +7,10 @@ require_once "Models/Model.php";
 //Inclusion de la classe Controller
 require_once "Controllers/Controller.php";
 
+//Pour accéder aux variables session
+//sera utile pour adapter la barre de navigation
+session_start();
+
 //Liste des contrôleurs -- A RENSEIGNER
 $controllers = ['home', 'list', 'set', 'search', 'auth'];
 //Nom du contrôleur par défaut-- A RENSEIGNER
