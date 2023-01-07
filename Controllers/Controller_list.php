@@ -20,7 +20,7 @@ class Controller_list extends Controller{
     $this->render("produits", $data);
   }
 
-  public function action_confiseries() {
+  public function action_snacks() {
     // filtrage par ordre croissant/decroissant prix
     // valeurs possible : croissant ou decroissant
     $filter = "default";
@@ -32,10 +32,10 @@ class Controller_list extends Controller{
     $m = Model::getModel();
     $data =
       [
-        "produits" => $m->getProduits($filter, "food", "default")
+        "snacks" => $m->getProduits($filter, "food", "default")
       ];
 
-    $this->render("produits_confiseries", $data);
+    $this->render("produits_snacks", $data);
   }
 
   public function action_boissons() {
@@ -265,7 +265,7 @@ class Controller_list extends Controller{
     $data =
       [
         "admin" => $_SESSION["id_admin"],
-        "snacks" => $m->getProduits("default", "Confiserie", "default"),
+        "snacks" => $m->getProduits("default", "Snack", "default"),
         "boissons" => $m->getProduits("default", "Boisson", "default"),
         "sodas" => $m->getProduits("default", "Soda", "default"),
         "sirops" => $m->getProduits("default", "Sirop", "default")

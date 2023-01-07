@@ -56,7 +56,7 @@ class Model
 
       // food = que confiseries/snacks
       if ($type=="food"){
-        $texte_req = $texte_req . " WHERE Categorie = 'Confiserie'";
+        $texte_req = $texte_req . " WHERE Categorie = 'Confiserie' OR Categorie = 'Snack'";
         /* si on décide d'implémenter des boutons de tri ET une barre de recherche dans la page de l'inventaire
         if ($search!="default"){
           $search = "%" . $search . "%";

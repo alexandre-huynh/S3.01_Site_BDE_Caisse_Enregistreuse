@@ -37,8 +37,8 @@
       <label>Catégorie* :
         <select name="Categorie" required >
           <!-- TODO: réfléchir si optgroup (grande catégorie) et option de noms similaire = confus? -->
-          <optgroup label="-Confiseries-">
-            <option value="Confiserie">Confiserie</option>
+          <optgroup label="-Snacks-">
+            <option value="Snack">Snack</option>
           </optgroup>
           <optgroup label="-Boissons-">
             <option value="Boisson">Boisson</option>
@@ -209,8 +209,8 @@
     <p>
       <label>Produit vendu (si le même produit est acheté plusieurs fois, créer une autre vente)* :
         <select name="id_produit" required >
-          <optgroup label="-Confiseries-">
-            <?php foreach ($confiseries as $ligne): ?>
+          <optgroup label="-Snacks-">
+            <?php foreach ($snacks as $ligne): ?>
               <option value="<?=e($ligne["id_produit"])?>">
                 <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> € (en stock : <?=e($ligne["Stock"])?>)
               </option>

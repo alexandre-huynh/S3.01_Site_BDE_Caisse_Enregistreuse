@@ -8,7 +8,7 @@
       <section class="produits">
           <h1>Nos produits</h1>
           <hr>
-          <div class="liste_confiseries">
+          <div class="liste_produits">
               <?php foreach ($produits as $ligne): ?>
                 <ul class="produit">
                   <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
