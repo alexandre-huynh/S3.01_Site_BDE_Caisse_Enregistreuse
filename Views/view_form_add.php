@@ -1,12 +1,8 @@
-<?php require "view_begin.php";?>
-
-<!-- Pour plus tard quand les variables sessions seront crées
-< ?php if ($connected==True) : ?>
-  < ?php require "view_begin_connected.php";?>
-< ?php else : ?>
-  < ?php require "view_begin.php";?>
-< ?php endif ?>
--->
+<?php if (isset($_SESSION["connected"]) && $_SESSION["connected"]==True) : ?>
+  <?php require "view_begin_connected.php";?>
+<?php else : ?>
+  <?php require "view_begin.php";?>
+<?php endif ?>
 
 <!-- Titre de la liste d'élements -->
 <h1> <?= e($titre) ?> </h1>
