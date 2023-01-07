@@ -10,7 +10,7 @@ class Controller_auth extends Controller{
     // s'il est déjà connecté et est admin
     // au cas où, pour éviter qu'il se reconnecte alors qu'il est déjà connecté
     // =================================================
-    if (isset($_SESSION["connected"]) && $_SESSION['statut'] && $_SESSION["connected"]==True && $_SESSION['statut']=="admin"){
+    if (isset($_SESSION["connected"]) && isset($_SESSION['statut']) && $_SESSION["connected"] && $_SESSION['statut']=="admin"){
 
       //temporaire
 
@@ -25,7 +25,7 @@ class Controller_auth extends Controller{
     // s'il est déjà connecté et est client
     // au cas où, pour éviter qu'il se reconnecte alors qu'il est déjà connecté
     // =================================================
-    elseif (isset($_SESSION["connected"]) && $_SESSION['statut'] && $_SESSION["connected"]==True && $_SESSION['statut']=="client"){
+    elseif (isset($_SESSION["connected"]) && isset($_SESSION['statut']) && $_SESSION["connected"] && $_SESSION['statut']=="client"){
       $idClient = $_SESSION['id_client'];
 
       $datesVente = $m->getDatesVentesClient($idClient);

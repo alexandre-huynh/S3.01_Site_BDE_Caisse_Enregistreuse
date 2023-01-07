@@ -20,7 +20,7 @@
             <ul>
                 <li><a href="?controller=list&action=snacks" title="Snacks">Snacks</a></li>
                 <li><a href="?controller=list&action=boissons" title="Boissons">Boissons</a></li>
-                <li><a href="?controller=auth&action=form_login" target="_blank" title="Mon Espace">Mon Espace</a></li>
+                <li><a href="?controller=auth&action=form_login" title="Mon Espace">Mon Espace</a></li>
                 <li><a href="?controller=auth&action=form_login" title="Se connecter / S'inscrire">Se connecter / S'inscrire</a></li>
 
                 <!--Menu deroulant pour changer la langue du site-->
