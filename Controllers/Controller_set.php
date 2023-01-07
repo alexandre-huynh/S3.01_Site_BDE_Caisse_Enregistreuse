@@ -388,13 +388,16 @@ class Controller_set extends Controller{
               $infos[$v] = null;
             }
           }
+
+          //Conversion use_fidelite en bool
+          $infos["Use_fidelite"] = (bool) $infos["Use_fidelite"];
               
           //Récupération du modèle
           $m = Model::getModel();
-          //Décrement -1 du produit acheté
-          $m->updateStock($_POST["id_produit"]);
           //Ajout de la vente
           $ajout = $m->addVente($infos);
+          //Décrement -1 du produit acheté
+          $m->updateStock($_POST["id_produit"]);          
         }
         
 
