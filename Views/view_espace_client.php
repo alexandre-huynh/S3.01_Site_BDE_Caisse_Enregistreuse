@@ -4,9 +4,14 @@
   <?php require "view_begin.php";?>
 <?php endif ?>
 
-<h1>Bonjour, espace client de <?=e($nomprenom)?></h1>
+<h1>Bonjour <?=e($nomprenom)?> !</h1>
+<hr>
 
-<h2>Historique des achats</h2>
+<h3>Vous avez <?=e($ptsfidelite)?> points de fidélité.</h3>
+<hr>
+<!--peut être inclure une liste des articles dont il est éligible avec autant de points-->
+
+<h2>Historique de vos achats</h2>
 
 <?php foreach ($historique as $date=>$ligne): ?>
     <h3><?=date("d/m/Y",strtotime(e($date)))?></h3>

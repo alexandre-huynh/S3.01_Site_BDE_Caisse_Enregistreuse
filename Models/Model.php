@@ -313,6 +313,30 @@ class Model
       return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getRecettesJour()
+    {
+      $req = $this->bd->prepare('SELECT sum(ROUND(Prix,2)) AS "Recettes_Quotidien" FROM Vente JOIN Produit USING(id_produit) WHERE DATE(Date_vente)=CURDATE() AND Paiement!=1');
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+      return $tab[0];
+    }
+
+    public function getRecettesSemaine()
+    {
+      $req = $this->bd->prepare('SELECT sum(ROUND(Prix,2)) AS "Recettes_Hebdo" FROM Vente JOIN Produit USING(id_produit) WHERE WEEK(Date_vente)=WEEK(now()) AND Paiement!=1');
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+      return $tab[0];
+    }
+
+    public function getRecettesMois()
+    {
+      $req = $this->bd->prepare('SELECT sum(ROUND(Prix,2)) AS "Recettes_Mois" FROM Vente JOIN Produit USING(id_produit) WHERE MONTH(Date_vente)=MONTH(now()) AND Paiement!=1');
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+      return $tab[0];
+    }
+
     //==================================================
     // donne l'id client à partir de l'email fourni
     public function getIdClientFromEmail($email){
@@ -320,7 +344,7 @@ class Model
       $req->bindValue(':email', $email);
       $req->execute();
       $tab = $req->fetch(PDO::FETCH_NUM);
-        return $tab[0];
+      return $tab[0];
     }
 
     // donne l'id admin à partir de l'email fourni

@@ -12,12 +12,12 @@ class Controller_auth extends Controller{
     // =================================================
     if (isset($_SESSION["connected"]) && isset($_SESSION['statut']) && $_SESSION["connected"] && $_SESSION['statut']=="admin"){
 
-      //temporaire
-
       $data = [
           "nomprenom" => $m->getPrenomNomClient($m->getIdClientFromEmail($_SESSION["email"])),
-          ]; 
-
+          "recettes_today" => $m->getRecettesJour(),
+          "recettes_week" => $m->getRecettesSemaine(),
+          "recettes_month" => $m->getRecettesMois(),
+        ]; 
       $this->render("espace_admin", $data);
     }
 
@@ -41,6 +41,7 @@ class Controller_auth extends Controller{
       // Redirige le client vers la page d'accueil client
       $data = [
           "nomprenom" => $m->getPrenomNomClient($m->getIdClientFromEmail($_SESSION["email"])),
+          "ptsfidelite" => $m->getPointsFidelite($_SESSION['id_client']),
           "historique" => $historique
           ]; 
       $this->render("espace_client", $data);
@@ -86,7 +87,10 @@ class Controller_auth extends Controller{
                 }
                 // Redirige l'admin vers la page d'accueil admin                
                 $data = [
-                    "nomprenom" => $m->getPrenomNomAdmin($m->getIdAdminFromEmail($email))
+                    "nomprenom" => $m->getPrenomNomAdmin($m->getIdAdminFromEmail($email)),
+                    "recettes_today" => $m->getRecettesJour(),
+                    "recettes_week" => $m->getRecettesSemaine(),
+                    "recettes_month" => $m->getRecettesMois(),
                     ]; 
                 $this->render("espace_admin", $data);
             }
@@ -127,6 +131,7 @@ class Controller_auth extends Controller{
                 // Redirige le client vers la page d'accueil client
                 $data = [
                     "nomprenom" => $m->getPrenomNomClient($m->getIdClientFromEmail($email)),
+                    "ptsfidelite" => $m->getPointsFidelite($_SESSION['id_client']),
                     "historique" => $historique
                     ]; 
                 //$this->render("espace_client", $data);
