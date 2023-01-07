@@ -131,7 +131,7 @@ class Controller_auth extends Controller{
                 // Redirige le client vers la page d'accueil client
                 $data = [
                     "nomprenom" => $m->getPrenomNomClient($m->getIdClientFromEmail($email)),
-                    "ptsfidelite" => $m->getPointsFidelite($_SESSION['id_client']),
+                    "ptsfidelite" => $m->getPointsFidelite($_SESSION['id_client'],"Client"),
                     "historique" => $historique
                     ]; 
                 //$this->render("espace_client", $data);
