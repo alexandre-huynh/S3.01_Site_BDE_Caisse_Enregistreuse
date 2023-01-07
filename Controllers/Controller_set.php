@@ -317,16 +317,17 @@ class Controller_set extends Controller{
             //Récupération du modèle
             $m = Model::getModel();
 
-            if (isset($_POST["Create_superadmin"])){
-              $infosSuperAdmin=[$m->getDernierIdDisponible("SuperAdmin"), $_POST["id_admin"]];
-              $m->addSuperAdmin($infosSuperAdmin);
-            }
-
             $infosAuth = [$_POST["num_etudiant"], password_hash($_POST["Password"], PASSWORD_DEFAULT)];
 
             //Ajout de l'admin
             $m->addAuth($infosAuth);
-            $ajout = $m->addClient($infos);
+            $ajout = $m->addAdmin($infos);
+            
+            //Si coché, ajout de l'admin à la table des super admins
+            if (isset($_POST["Create_superadmin"])){
+              $infosSuperAdmin=[$m->getDernierIdDisponible("SuperAdmin"), $_POST["id_admin"]];
+              $m->addSuperAdmin($infosSuperAdmin);
+            }
             
         }
 
