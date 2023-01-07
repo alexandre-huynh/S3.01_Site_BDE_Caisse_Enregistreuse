@@ -5,9 +5,51 @@ class Controller_auth extends Controller{
   public function action_form_login()
   {
     $m = Model::getModel();
-    $data = []; 
 
-    $this->render("login", $data);
+    // =================================================
+    // s'il est déjà connecté et est admin
+    // au cas où, pour éviter qu'il se reconnecte alors qu'il est déjà connecté
+    // =================================================
+    if (isset($_SESSION["connected"]) && $_SESSION['statut'] && $_SESSION["connected"]==True && $_SESSION['statut']=="admin"){
+
+      //temporaire
+
+      $data = [
+          "nomprenom" => $m->getPrenomNomClient($m->getIdClientFromEmail($_SESSION["email"])),
+          ]; 
+
+      $this->render("espace_admin", $data);
+    }
+
+    // =================================================
+    // s'il est déjà connecté et est client
+    // au cas où, pour éviter qu'il se reconnecte alors qu'il est déjà connecté
+    // =================================================
+    elseif (isset($_SESSION["connected"]) && $_SESSION['statut'] && $_SESSION["connected"]==True && $_SESSION['statut']=="client"){
+      $idClient = $_SESSION['id_client'];
+
+      $datesVente = $m->getDatesVentesClient($idClient);
+
+      $historique = [];
+
+      foreach($datesVente as $ligne){
+        $historique[$ligne["Date_vente"]] = $m->getHistoriqueAchatsClient($idClient, $ligne["Date_vente"]);
+      }
+
+      date_default_timezone_set('Europe/Paris');
+      
+      // Redirige le client vers la page d'accueil client
+      $data = [
+          "nomprenom" => $m->getPrenomNomClient($m->getIdClientFromEmail($_SESSION["email"])),
+          "historique" => $historique
+          ]; 
+      $this->render("espace_client", $data);
+    }
+    else {
+      $data = []; 
+
+      $this->render("login", $data);
+    }
   }
 
   public function action_login(){
