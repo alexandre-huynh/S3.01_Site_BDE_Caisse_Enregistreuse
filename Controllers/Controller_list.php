@@ -259,6 +259,31 @@ class Controller_list extends Controller{
     $this->render("list", $data);
   }
 
+  public function action_espace_client(){
+    $m = Model::getModel();
+    
+    if (isset($_SESSION["connected"]) && isset($_SESSION['statut']) && $_SESSION["connected"] && $_SESSION['statut']=="client"){
+      $idClient = $_SESSION['id_client'];
+
+      $datesVente = $m->getDatesVentesClient($idClient);
+
+      $historique = [];
+
+      foreach($datesVente as $ligne){
+        $historique[$ligne["Date_vente"]] = $m->getHistoriqueAchatsClient($idClient, $ligne["Date_vente"]);
+      }
+
+      date_default_timezone_set('Europe/Paris');
+      
+      // Redirige le client vers la page d'accueil client
+      $data = [
+          "nomprenom" => $m->getPrenomNomClient($m->getIdClientFromEmail($_SESSION["email"])),
+          "historique" => $historique
+          ]; 
+      $this->render("espace_client", $data);
+    }
+  }
+
   public function action_caisse(){
     $m = Model::getModel();
 
