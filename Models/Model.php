@@ -278,21 +278,20 @@ class Model
     public function getHistoriqueAchatsClient($id,$date="default")
     {
       $texte_req=
-        'SELECT distinct id_client, date_vente, Produit.nom, count(*) as "Quantité" , sum(prix) as "Total prix"
+        'SELECT distinct id_client, date_vente, Produit.nom, count(*) as "Quantité", CONCAT(sum(ROUND(Prix,2))," €") as "Prix total", Paiement AS "Payé par"
         FROM Client join Vente using(id_client) join Produit using(id_produit)
         WHERE id_client=:id
-        GROUP BY id_client, date_vente, Produit.nom
+        GROUP BY id_client, date_vente, Produit.nom, Paiement
         ORDER BY date_vente DESC
         ';
 
       // si on cherche les achats d'une date en particulier
       if ($date!="default"){
         $texte_req=
-        'SELECT distinct id_client, date_vente, Produit.nom, count(*) as "Quantité" , sum(prix) as "Total prix"
+        'SELECT distinct Produit.nom AS "Produit", count(*) as "Quantité", CONCAT(sum(ROUND(Prix,2))," €") as "Prix total", Paiement AS "Payé par"
         FROM Client join Vente using(id_client) join Produit using(id_produit)
         WHERE id_client=:id AND date_vente=:date
-        GROUP BY id_client, date_vente, Produit.nom
-        ORDER BY date_vente DESC
+        GROUP BY Produit.nom, Paiement
         ';
         $use_marqueur=True;
       }
