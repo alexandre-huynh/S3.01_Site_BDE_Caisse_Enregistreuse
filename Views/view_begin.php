@@ -18,7 +18,7 @@
         <nav class="accueil_nav">
             <a href="?controller=home&action=home"><img class="logo_bde" src="Content/img/logo_bde.png" alt="logo-bde" width="70" height="70"></a>
             <ul>
-                <li><a href="?controller=list&action=confiseries" title="Confiseries">Confiseries</a></li>
+                <li><a href="?controller=list&action=snacks" title="Snacks">Snacks</a></li>
                 <li><a href="?controller=list&action=boissons" title="Boissons">Boissons</a></li>
                 <li><a href="page_espace_client.html" target="_blank" title="Mon Espace">Mon Espace</a></li>
                 <li><a href="?controller=auth&action=form_login" title="Se connecter / S'inscrire">Se connecter / S'inscrire</a></li>

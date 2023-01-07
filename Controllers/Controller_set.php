@@ -100,7 +100,7 @@ class Controller_set extends Controller{
       "element_to_add" => "vente",
       "clients" => $m->getClients(),
       "admins" => $m->getAdmins(),
-      "confiseries" => $m->getProduits("default","Confiserie","default"),
+      "snacks" => $m->getProduits("default","Snack","default"),
       "boissons" => $m->getProduits("default", "Boisson", "default"),
       "sodas" => $m->getProduits("default", "Soda", "default"),
       "sirops" => $m->getProduits("default", "Sirop", "default"),
