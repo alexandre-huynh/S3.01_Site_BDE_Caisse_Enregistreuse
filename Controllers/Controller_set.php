@@ -247,15 +247,15 @@ class Controller_set extends Controller{
             //Récupération du modèle
             $m = Model::getModel();
             //Ajout du produit
-            $m->addAuthClient($infosAuth);
+            $m->addAuth($infosAuth);
             $ajout = $m->addClient($infos);
-            
+
         }
 
         else{
           $this->action_error("Erreur, des informations n'ont pas été saisies ou le mot de passe n'est pas correspondant.");
         }
-        
+
 
         //Préparation de $data pour l'affichage de la vue message
         $data = [
@@ -268,6 +268,84 @@ class Controller_set extends Controller{
             $data["message"] = "Le compte client " . $_POST["Prenom"] . " " . $_POST["Nom"] . " a été créé avec succès.";
         } else {
             $data["message"] = "Erreur dans la saisie des informations, le compte client n'a pas été ajouté.";
+        }
+
+    $this->render("message", $data);
+  }
+
+  public function action_add_admin(){
+    // TODO: si quelqu'un peut s'occuper de faire les vérifications logiques des données avec isset
+    // genre si c'est bien un int, c'est bien supérieur à 0 mais inférieur à truc etc
+    // TODO: vérifier que password et password verify sont identiques
+    $ajout = false;
+
+        //Test si les informations nécessaires sont fournies
+        /* exemple de vérification
+        if (isset($_POST["name"]) and ! preg_match("/^ *$/", $_POST["name"])
+            and isset($_POST["category"]) and ! preg_match("/^ *$/", $_POST["category"])
+            and isset($_POST["year"]) and preg_match("/^[12]\d{3}$/", $_POST["year"])) {
+        */
+
+        if (isset($_POST["id_admin"]) && 
+        isset($_POST["num_etudiant"]) && 
+        isset($_POST["Nom"]) && 
+        isset($_POST["Prenom"]) && 
+        isset($_POST["Email"]) &&
+        isset($_POST["Date_creation"]) && 
+        isset($_POST["Pts_fidelite"]) && $_POST["Password"]==$_POST["Password_verify"]) {
+            // !!
+            // RAJOUTER DES TESTS / CONTROLE DE SAISIE DANS LE IF !!!
+            // !!
+            // On vérifie que la catégorie est une des catégories possibles
+            $m = Model::getModel();
+            // Préparation du tableau infos
+            $infos = [];
+            $noms = ["id_client", "num_etudiant", "Nom", "Prenom", "Tel", "Email", "Date_creation", "Pts_fidelite"];
+            foreach ($noms as $v) {
+                if (isset($_POST[$v]) && ((is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])) || ((is_int($_POST[$v]) || is_float($_POST[$v])) && $_POST[$v]>=0))
+                ) {
+                  // && (is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])) || ((is_int($_POST[$v]) || is_float($_POST[$v])) && $_POST[$v]>=0)
+                  $infos[$v] = $_POST[$v];
+                  //debug
+                  //echo "Ajout $v OK";
+                } else {
+                  $infos[$v] = null;
+                  //echo "Ajout $v OK, valeur NULL";
+                }
+            }
+
+            //Récupération du modèle
+            $m = Model::getModel();
+
+            if (isset($_POST["Create_superadmin"])){
+              $infosSuperAdmin=[$m->getDernierIdDisponible("SuperAdmin"), $_POST["id_admin"]];
+              $m->addSuperAdmin($infosSuperAdmin);
+            }
+
+            $infosAuth = [$_POST["num_etudiant"], password_hash($_POST["Password"], PASSWORD_DEFAULT)];
+
+            //Ajout de l'admin
+            $m->addAuth($infosAuth);
+            $ajout = $m->addClient($infos);
+            
+        }
+
+        else{
+          $this->action_error("Erreur, des informations n'ont pas été saisies ou le mot de passe n'est pas correspondant.");
+        }
+        
+
+        //Préparation de $data pour l'affichage de la vue message
+        $data = [
+            "title" => "Création d'un nouveau compte administrateur",
+            "added_element" => "admin",
+            "str_lien_retour" => "Retour à la page de gestion des comptes administrateurs",
+            "lien_retour" => "?controller=list&action=gestion_clients" 
+        ];
+        if ($ajout) {
+            $data["message"] = "Le compte administrateur " . $_POST["Prenom"] . " " . $_POST["Nom"] . " a été créé avec succès.";
+        } else {
+            $data["message"] = "Erreur dans la saisie des informations, le compte administrateur n'a pas été ajouté.";
         }
 
     $this->render("message", $data);

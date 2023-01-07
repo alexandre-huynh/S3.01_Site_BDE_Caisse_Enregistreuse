@@ -167,7 +167,7 @@ class Controller_auth extends Controller{
           //Récupération du modèle
           $m = Model::getModel();
           //Ajout du produit
-          $m->addAuthClient($infosAuth);
+          $m->addAuth($infosAuth);
           $ajout = $m->addClient($infos);
           
       }

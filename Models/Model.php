@@ -490,7 +490,15 @@ class Model
       return (bool) $requete->rowCount();
     }
 
-    public function addAuthClient($infosAuth)
+    public function isInDatabaseSuperAdmin($id){
+      $requete = $this->bd->prepare('SELECT * FROM SuperAdmin WHERE id_admin=:id');
+      $requete->bindValue(':id', (int) $id, PDO::PARAM_INT);
+      $requete->execute();
+
+      return (bool) $requete->rowCount();
+    }
+
+    public function addAuth($infosAuth)
     {
       // Ajout dans Authentification
 
@@ -524,11 +532,44 @@ class Model
         //Exécution de la requête
         $requete->execute();
 
-        // debug,à enlever
-        //echo "addClient OK";
-
         return (bool) $requete->rowCount();
-    }
+      }
+  
+      public function addAdmin($infos)
+      {
+          // Ajout dans Admin
+  
+          //Préparation de la requête
+          $requete = $this->bd->prepare('INSERT INTO Admin VALUES (:id_admin, :num_etudiant, :Nom, :Prenom, :Tel, :Email, :Date_creation, :Pts_fidelite)');
+  
+          //Remplacement des marqueurs de place par les valeurs
+          $marqueurs = ["id_admin", "num_etudiant", "Nom", "Prenom", "Tel", "Email", "Date_creation", "Pts_fidelite"];
+          foreach ($marqueurs as $value) {
+              $requete->bindValue(':' . $value, $infos[$value]);
+          }
+  
+          //Exécution de la requête
+          $requete->execute();
+  
+          return (bool) $requete->rowCount();
+      }
+  
+      public function addSuperAdmin($infos)
+      {
+          // Ajout dans SuperAdmin
+  
+          //Préparation de la requête
+          $requete = $this->bd->prepare('INSERT INTO SuperAdmin VALUES (:id_superadmin, :id_admin)');
+  
+          //Remplacement par marqueur de place
+          $requete->bindValue(':id_superadmin', $infos[0]);
+          $requete->bindValue(':id_admin', $infos[1]);
+  
+          //Exécution de la requête
+          $requete->execute();
+  
+          return (bool) $requete->rowCount();
+      }
 
     public function getPassword($email,$table){
 
