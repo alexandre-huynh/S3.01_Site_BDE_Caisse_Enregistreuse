@@ -72,7 +72,7 @@ class Controller_auth extends Controller{
                 $historique = [];
 
                 foreach($datesVente as $ligne){
-                  $historique[$ligne["date_vente"]] = $m->getHistoriqueAchatsClient($idClient, $ligne["date_vente"]);
+                  $historique[$ligne["Date_vente"]] = $m->getHistoriqueAchatsClient($idClient, $ligne["Date_vente"]);
                 }
                 
                 // Redirige le client vers la page d'accueil client
