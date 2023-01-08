@@ -50,17 +50,13 @@
       </label>
     </p>
     <p>
-      <label>Image du produit* :
-        <!-- TODO: adapter si jpeg, à modifier dans affichage de produits et inventaire-->
-        <!-- TODO: Joe, trouver une manière d'ajouter l'image envoyé au répertoire Content/img/ -->
+      <label>Image du produit* (format .png / .jpg / .jpeg, fond transparent de préférence : Google Images > Outils > Couleur > Transparent) :
         <input type="file" name="produit_<?=e($id_disponible)?>" accept=".png,.jpeg,.jpg" required /> 
         <input type="hidden" name="Img_produit" value="produit_<?=e($id_disponible)?>" /> 
       </label>
     </p>
     <p>
       <label>Date de création* (corriger si nécessaire) :
-        <!-- TODO: un truc pour avoir la date du jour-->
-        <!-- utiliser fonction date('d-m-y'), mais dans controller-->
         <input type="date" name="Date_ajout" value="<?=e($date_today)?>" required /> 
       </label>
     </p>
