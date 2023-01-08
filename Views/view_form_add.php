@@ -156,7 +156,7 @@
       -->
       <p>
         <label>Rôle de super-administrateur (ATTENTION: soyez-sûr de votre choix) :
-          <input type="checkbox" name="Create_superadmin" value="True" required />
+          <input type="checkbox" name="Create_superadmin" value="True"  />
         </label>
       </p>
     <?php endif ?>
