@@ -43,11 +43,11 @@
         <th>Snacks</th>
         <?php foreach ($snacks as $ligne): ?>
         <td>
-            <ul class="produit">
+            <div class="produit">
                 <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                 <li><?=e($ligne["Nom"])?></li>
                 <li><?=e($ligne["Prix"])?> €</li>
-            </ul>
+            </div>
         </td>
         <?php endforeach ?>
     </tr>
