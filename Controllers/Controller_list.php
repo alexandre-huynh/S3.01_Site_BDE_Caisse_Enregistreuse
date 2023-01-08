@@ -97,6 +97,14 @@ class Controller_list extends Controller{
     $search = "default";
     //$attribut = "default";
 
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
+
     if (isset($_GET["search"])) {
       $search = e($_GET["search"]); // risque: si search est un int (on sait jamais), fonction e aka htmlspecialchars problématique?
       // $attribut = e($_GET["attribut"]);
