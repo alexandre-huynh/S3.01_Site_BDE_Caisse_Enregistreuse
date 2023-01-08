@@ -160,14 +160,57 @@ class Controller_set extends Controller{
                     }
                 }
 
+                //=============Ajout de l'image====================
+
+                $msg_error = "";
+
+                $target_dir = "Content/img/";
+                $target_file = $target_dir . basename($_FILES[$_POST["Img_produit"]]["name"]);
+                $uploadOk = 1;
+                $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+                // Check if image file is a actual image or fake image
+                if(isset($_POST["submit"])) {
+                  $check = getimagesize($_FILES[$_POST["Img_produit"]]["tmp_name"]);
+                  if($check !== false) {
+                    //echo "File is an image - " . $check["mime"] . ".";
+                    $uploadOk = 1;
+                  } else {
+                    $msg_error = $msg_error . "File is not an image.";
+                    $uploadOk = 0;
+                  }
+                }
+
+                // Allow certain file formats
+                if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" ) {
+                  $msg_error = $msg_error . "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                  $uploadOk = 0;
+                }
+
+                // Check if $uploadOk is set to 0 by an error
+                if ($uploadOk == 0) {
+                  $this->action_error("Sorry, your file was not uploaded : " . $msg_error);
+                // if everything is ok, try to upload file
+                } else {
+                  if (move_uploaded_file($_FILES[$_POST["Img_produit"]]["tmp_name"], $target_file)) {
+                    //echo "The file ". e( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
+                  } else {
+                    $this->action_error("Sorry, there was an error uploading your file :" . $msg_error);
+                  }
+                }
+                //===============fin ajout image=================
+
                 //Conversion str image en nom de fichier
+                $infos["Img_produit"] = "produit_" . $infos["id_produit"];
+                //ancienne idée
                 // ex: Coca - Cola -> coca_-_cola.png
-                $infos["Img_produit"] = str_replace(" ", "_", strtolower($infos["Nom"])) . ".png";
+                //$infos["Img_produit"] = str_replace(" ", "_", strtolower($infos["Nom"])) . ".png";
 
                 //Récupération du modèle
                 $m = Model::getModel();
                 //Ajout du produit
                 $ajout = $m->addProduit($infos);
+
+
             }
         }
         

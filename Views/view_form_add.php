@@ -9,7 +9,7 @@
 
 <!--<form action = "?controller=set&action=add_< ?=e($element_to_add)?>" method="post">-->
 <!-- TODO: vérifier dans le cas où le lien redirigé ne marche pas / ou donne la page d'accueil-->
-<form action = "?controller=set&action=add_<?= e($element_to_add) ?>" method="post">  
+<form action = "?controller=set&action=add_<?= e($element_to_add) ?>" method="post" enctype="multipart/form-data">  
   <!--
   Champs de saisie
   manuellement rédigé pour adapter le type de saisie
@@ -53,7 +53,8 @@
       <label>Image du produit* :
         <!-- TODO: adapter si jpeg, à modifier dans affichage de produits et inventaire-->
         <!-- TODO: Joe, trouver une manière d'ajouter l'image envoyé au répertoire Content/img/ -->
-        <input type="file" name="Img_produit" accept=".png,.jpeg" required /> 
+        <input type="file" name="produit_<?=e($id_disponible)?>" accept=".png,.jpeg,.jpg" required /> 
+        <input type="hidden" name="Img_produit" value="produit_<?=e($id_disponible)?>" /> 
       </label>
     </p>
     <p>
