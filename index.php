@@ -35,5 +35,5 @@ if (is_readable($nom_fichier)) {
     require_once $nom_fichier;
     new $nom_classe();
 } else {
-    die("Error 404: not found!");
+    die("Erreur 404 !");
 }

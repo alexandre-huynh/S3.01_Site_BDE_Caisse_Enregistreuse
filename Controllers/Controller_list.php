@@ -97,6 +97,8 @@ class Controller_list extends Controller{
     $search = "default";
     //$attribut = "default";
 
+    $m = Model::getModel();
+
     //==================================
     //     TEST SI C'EST UN ADMIN
     //==================================
@@ -110,7 +112,6 @@ class Controller_list extends Controller{
       // $attribut = e($_GET["attribut"]);
     }
     //--------------------------------------------------------
-    $m = Model::getModel();
 
     $colonnes = $m->getClients();
     $colonnes = array_keys($colonnes[0]);
