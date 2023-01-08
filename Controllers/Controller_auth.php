@@ -95,7 +95,7 @@ class Controller_auth extends Controller{
             $this->render("espace_admin", $data);
         }
         else {
-          $this->action_error("Erreur, est bien détecté comme admin mais mot de passe ne marche pas");
+          $this->action_error("Adresse mail ou mot de passe incorrect.");
         }
       }
       elseif ($m->isInDatabaseClient($email)){
@@ -140,17 +140,21 @@ class Controller_auth extends Controller{
                 //$this->render("espace_client", $data);
                 $this->render("espace_client", $data);
         }
+        else {
+          $this->action_error("Adresse mail ou mot de passe incorrect.");
+        }
       }
 
+      // Non client et non admin
       else {
         // Affiche un message d'erreur
-        $this->action_error("Erreur, identifiant ou mot de passe non saisis.");
+        $this->action_error("Les identifiants fournis n'existent pas dans la base de données. Veuillez vous inscrire.");
       }
     }
 
     else {
       // Affiche un message d'erreur
-      $this->action_error("Erreur, identifiant ou mot de passe incorrect.");
+      $this->action_error("L'adresse mail ou le mot de passe n'a pas été saisi.");
     }
     
     } // fin de fonction

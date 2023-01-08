@@ -50,10 +50,11 @@
       </label>
     </p>
     <p>
-      <label>Image du produit* (format .png / .jpg / .jpeg, fond transparent de préférence : Google Images > Outils > Couleur > Transparent) :
+      <label>Image du produit* (format .png / .jpg / .jpeg, taille de fichier max : 5 Mo) :
         <input type="file" name="produit_<?=e($id_disponible)?>" accept=".png,.jpeg,.jpg" required /> 
-        <input type="hidden" name="Img_produit" value="produit_<?=e($id_disponible)?>" /> 
+        <input type="hidden" name="Img_produit" value="produit_<?=e($id_disponible)?>" />
       </label>
+      <span><i>Fond transparent de préférence : Google Images > Outils > Couleur > Transparent</i></span>
     </p>
     <p>
       <label>Date de création* (corriger si nécessaire) :
