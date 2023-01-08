@@ -193,7 +193,7 @@ class Controller_set extends Controller{
                   $this->action_error("Sorry, your file was not uploaded : " . $msg_error);
                 // if everything is ok, try to upload file
                 } else {
-                  if (move_uploaded_file($_FILES[$_POST["Img_produit"]]["tmp_name"], $target_file . $imageFileType)) {
+                  if (move_uploaded_file($_FILES[$_POST["Img_produit"]]["tmp_name"], $target_file . "." . $imageFileType)) {
                     //echo "The file ". e( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
                   } else {
                     $this->action_error("Sorry, there was an error uploading your file :" . $msg_error);
