@@ -44,9 +44,9 @@
         <?php foreach ($snacks as $ligne): ?>
         <td>
             <div class="produit">
-                <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                <li><?=e($ligne["Nom"])?></li>
-                <li><?=e($ligne["Prix"])?> €</li>
+                <div><img src="Content/img/<?=e($divgne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></div>
+                <div><?=e($ligne["Nom"])?></div>
+                <div><?=e($ligne["Prix"])?> €</div>
             </div>
         </td>
         <?php endforeach ?>
