@@ -112,6 +112,9 @@ class Model
       elseif ($filter=="decroissant"){
         $texte_req = $texte_req . " ORDER BY prix DESC";
       }
+      elseif ($filter=="abc"){
+        $texte_req = $texte_req . " ORDER BY Nom";
+      }
 
       $req = $this->bd->prepare($texte_req);
       $req->bindValue(':type', $type);

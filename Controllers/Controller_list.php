@@ -4,8 +4,8 @@ class Controller_list extends Controller{
 
   public function action_produits() {
     // filtrage par ordre croissant/decroissant prix
-    // valeurs possible : croissant ou decroissant
-    $filter = "default";
+    // valeurs possible : croissant ou decroissant ou abc
+    $filter = "abc";
 
     if (isset($_GET["filter"])) {
       $filter = e($_GET["filter"]);
@@ -22,8 +22,8 @@ class Controller_list extends Controller{
 
   public function action_snacks() {
     // filtrage par ordre croissant/decroissant prix
-    // valeurs possible : croissant ou decroissant
-    $filter = "default";
+    // valeurs possible : croissant ou decroissant ou abc
+    $filter = "abc";
 
     if (isset($_GET["filter"])) {
       $filter = e($_GET["filter"]);
@@ -42,7 +42,7 @@ class Controller_list extends Controller{
     //--------------------------------------------------------
     // filtrage par ordre croissant/decroissant prix
     // valeurs possible : croissant ou decroissant
-    $filter = "default";
+    $filter = "abc";
 
     if (isset($_GET["filter"])) {
       $filter = e($_GET["filter"]);
@@ -339,10 +339,10 @@ class Controller_list extends Controller{
     $data =
       [
         "admin" => $_SESSION["id_admin"],
-        "snacks" => $m->getProduits("default", "Snack", "default"),
-        "boissons" => $m->getProduits("default", "Boisson", "default"),
-        "sodas" => $m->getProduits("default", "Soda", "default"),
-        "sirops" => $m->getProduits("default", "Sirop", "default")
+        "snacks" => $m->getProduits("abc", "Snack", "default"),
+        "boissons" => $m->getProduits("abc", "Boisson", "default"),
+        "sodas" => $m->getProduits("abc", "Soda", "default"),
+        "sirops" => $m->getProduits("abc", "Sirop", "default")
       ];
 
     $this->render("caisse", $data);
