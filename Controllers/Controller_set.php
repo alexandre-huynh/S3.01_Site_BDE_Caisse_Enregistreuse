@@ -13,6 +13,14 @@ class Controller_set extends Controller{
     // on récupère le Model
     $m = Model::getModel();
 
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
+
     // timezone date, pas nécessaire vu qu'on traite date du jour mais au cas où
     date_default_timezone_set('Europe/Paris');
 
@@ -43,6 +51,14 @@ class Controller_set extends Controller{
     // on récupère le Model
     $m = Model::getModel();
 
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
+
     // timezone date, pas nécessaire vu qu'on traite date du jour mais au cas où
     date_default_timezone_set('Europe/Paris');
 
@@ -64,6 +80,14 @@ class Controller_set extends Controller{
     // on récupère le Model
     $m = Model::getModel();
 
+    //==================================
+    //  TEST SI C'EST UN SUPER ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"]) || !$m->isInDatabaseSuperAdmin($_SESSION["id_admin"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
+
     // timezone date, pas nécessaire vu qu'on traite date du jour mais au cas où
     date_default_timezone_set('Europe/Paris');
 
@@ -81,12 +105,17 @@ class Controller_set extends Controller{
   }
 
   // Affichage du formulaire
-  //
-  // A FINIR
-  //
   public function action_form_add_vente(){
     // on récupère le Model
     $m = Model::getModel();
+
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
 
     // timezone date, pas nécessaire vu qu'on traite date du jour mais au cas où
     date_default_timezone_set('Europe/Paris');
@@ -114,7 +143,14 @@ class Controller_set extends Controller{
   public function action_add_produit(){
     // TODO: si quelqu'un peut s'occuper de faire les vérifications logiques des données avec isset
     // genre si c'est bien un int, c'est bien supérieur à 0 mais inférieur à truc etc
-    // TODO: voir comment on ajoute un fichier
+    $m = Model::getModel();
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
     $ajout = false;
 
         //Test si les informations nécessaires sont fournies
@@ -124,12 +160,20 @@ class Controller_set extends Controller{
             and isset($_POST["year"]) and preg_match("/^[12]\d{3}$/", $_POST["year"])) {
         */
         
-        if (isset($_POST["Nom"])) {
+        if (isset($_POST["id_produit"]) &&
+          isset($_POST["Nom"]) &&
+          isset($_POST["Categorie"]) &&
+          isset($_POST["Prix"]) &&
+          isset($_POST["Date_ajout"]) &&
+          isset($_POST["Pts_fidelite_requis"]) &&
+          isset($_POST["Pts_fidelite_donner"]) &&
+          isset($_POST["Stock"]) &&
+          isset($_POST["Nb_ventes"])
+          ) {
             // !!
             // RAJOUTER DES TESTS / CONTROLE DE SAISIE DANS LE IF !!!
             // !!
             // On vérifie que la catégorie est une des catégories possibles
-            $m = Model::getModel();
             if (in_array($_POST["Categorie"], $m->getCategories())) {
                 // Préparation du tableau infos
                 $infos = [];
@@ -237,6 +281,14 @@ class Controller_set extends Controller{
     // TODO: si quelqu'un peut s'occuper de faire les vérifications logiques des données avec isset
     // genre si c'est bien un int, c'est bien supérieur à 0 mais inférieur à truc etc
     // TODO: vérifier que password et password verify sont identiques
+    $m = Model::getModel();
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
     $ajout = false;
 
         //Test si les informations nécessaires sont fournies
@@ -256,8 +308,7 @@ class Controller_set extends Controller{
             // !!
             // RAJOUTER DES TESTS / CONTROLE DE SAISIE DANS LE IF !!!
             // !!
-            // On vérifie que la catégorie est une des catégories possibles
-            $m = Model::getModel();
+
             // Préparation du tableau infos
             $infos = [];
             $noms = ["id_client", "num_etudiant", "Nom", "Prenom", "Tel", "Email", "Date_creation", "Pts_fidelite"];
@@ -322,6 +373,15 @@ class Controller_set extends Controller{
     // TODO: si quelqu'un peut s'occuper de faire les vérifications logiques des données avec isset
     // genre si c'est bien un int, c'est bien supérieur à 0 mais inférieur à truc etc
     // TODO: vérifier que password et password verify sont identiques
+    $m = Model::getModel();
+
+    //==================================
+    //  TEST SI C'EST UN SUPER ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"]) || !$m->isInDatabaseSuperAdmin($_SESSION["id_admin"])){
+      $this->action_error("Vous ne possédez pas les droits super administrateurs pour consulter cette page.");
+    }
+    //===================================
     $ajout = false;
 
         //Test si les informations nécessaires sont fournies
@@ -342,7 +402,7 @@ class Controller_set extends Controller{
             // RAJOUTER DES TESTS / CONTROLE DE SAISIE DANS LE IF !!!
             // !!
             // On vérifie que la catégorie est une des catégories possibles
-            $m = Model::getModel();
+
             // Préparation du tableau infos
             $infos = [];
             $noms = ["id_admin", "num_etudiant", "Nom", "Prenom", "Tel", "Email", "Date_creation", "Pts_fidelite"];
@@ -358,9 +418,6 @@ class Controller_set extends Controller{
                   //echo "Ajout $v OK, valeur NULL";
                 }
             }
-
-            //Récupération du modèle
-            $m = Model::getModel();
 
             $infosAuth = [$_POST["num_etudiant"], password_hash($_POST["Password"], PASSWORD_DEFAULT)];
 
@@ -400,7 +457,14 @@ class Controller_set extends Controller{
   public function action_add_vente(){
     // TODO: si quelqu'un peut s'occuper de faire les vérifications logiques des données avec isset
     // genre si c'est bien un int, c'est bien supérieur à 0 mais inférieur à truc etc
-    // TODO: voir comment on ajoute un fichier
+    $m = Model::getModel();
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
     $ajout = false;
 
         //Test si les informations nécessaires sont fournies
@@ -422,7 +486,6 @@ class Controller_set extends Controller{
           // RAJOUTER DES TESTS / CONTROLE DE SAISIE DANS LE IF !!!
           // !!
           // On vérifie que la catégorie est une des catégories possibles
-          $m = Model::getModel();
 
           // Préparation du tableau infos
           $infos = [];
@@ -443,9 +506,6 @@ class Controller_set extends Controller{
             $infos["Use_fidelite"] = 1;
           }
           
-              
-          //Récupération du modèle
-          $m = Model::getModel();
           //Ajout de la vente
           $ajout = $m->addVente($infos);
           //Décrement -1 du produit acheté
@@ -474,8 +534,19 @@ class Controller_set extends Controller{
                        SUPPRESSION D'ELEMENT
   ===========================================================
   */
+
+  // !!! DISTINGUER REMOVE PRODUIT, REMOVE CLIENT ETC? !!!
+  // modifier les liens dans les view de modification pour que ça utilise bien l'action en question
+
   public function action_remove() {
     $m = Model::getModel();
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
 
     $data = [
       "title" => "Removing a Nobel Prize.",
@@ -484,7 +555,24 @@ class Controller_set extends Controller{
     $this->render("message", $data);
   }
 
+  
+
+  /*
+  ===========================================================
+                       MODIFICATION D'ELEMENT
+  ===========================================================
+  */
+
   public function action_form_update(){
+    $m = Model::getModel();
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
+
     $in_database = false;
     if (isset($_GET["id"]) and preg_match("/^[1-9]\d*$/", $_GET["id"])) {
       $m = Model::getModel();
@@ -511,12 +599,16 @@ class Controller_set extends Controller{
     }
   }
 
-  /*
-  ===========================================================
-                       MODIFICATION D'ELEMENT
-  ===========================================================
-  */
   public function action_update(){
+
+    $m = Model::getModel();
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
 
     $in_database = false;
 

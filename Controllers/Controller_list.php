@@ -102,7 +102,7 @@ class Controller_list extends Controller{
     //==================================
     //     TEST SI C'EST UN ADMIN
     //==================================
-    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
       $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
     }
     //===================================
@@ -146,6 +146,14 @@ class Controller_list extends Controller{
     //--------------------------------------------------------
     $m = Model::getModel();
 
+    //==================================
+    //  TEST SI C'EST UN SUPER ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"]) || !$m->isInDatabaseSuperAdmin($_SESSION["id_admin"])){
+      $this->action_error("Vous ne possédez pas les droits super administrateurs pour consulter cette page.");
+    }
+    //===================================
+
     $colonnes = $m->getAdmins();
     $colonnes = array_keys($colonnes[0]);
     // titre sera destiné au titre en grand en haut de tableau/liste
@@ -178,6 +186,14 @@ class Controller_list extends Controller{
     }
     //--------------------------------------------------------
     $m = Model::getModel();
+
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
 
     $liste = $m->getHistoriqueAchats($search);
 
@@ -244,6 +260,14 @@ class Controller_list extends Controller{
     }
     //--------------------------------------------------------
     $m = Model::getModel();
+
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
 
     /*
     $colonnes = $m->getProduits();
