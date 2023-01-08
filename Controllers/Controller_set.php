@@ -174,7 +174,7 @@ class Controller_set extends Controller{
             // RAJOUTER DES TESTS / CONTROLE DE SAISIE DANS LE IF !!!
             // !!
             // On vérifie que la catégorie est une des catégories possibles
-            if (in_array($_POST["Categorie"], $m->getCategories())) {
+            if (in_array($_POST["Categorie"], ["Snack", "Boisson", "Soda", "Sirop"] /*ancien $m->getCategories())*/ )) {
                 // Préparation du tableau infos
                 $infos = [];
                 $noms = ["id_produit", "Nom", "Categorie", "Prix", "Date_ajout", "Pts_fidelite_requis", "Pts_fidelite_donner", "Stock", "Nb_ventes"];
