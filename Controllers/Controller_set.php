@@ -165,9 +165,11 @@ class Controller_set extends Controller{
                 $msg_error = "";
 
                 $target_dir = "Content/img/";
-                $target_file = $target_dir . basename($_FILES[$_POST["Img_produit"]]["name"]);
+                $target_file = $target_dir . $_POST["Img_produit"];//basename($_FILES[$_POST["Img_produit"]]["name"]);
                 $uploadOk = 1;
-                $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+                $temporaire= $target_dir . basename($_FILES[$_POST["Img_produit"]]["name"]);
+                $imageFileType = strtolower(pathinfo($temporaire,PATHINFO_EXTENSION));
+                //$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
                 // Check if image file is a actual image or fake image
                 if(isset($_POST["submit"])) {
                   $check = getimagesize($_FILES[$_POST["Img_produit"]]["tmp_name"]);

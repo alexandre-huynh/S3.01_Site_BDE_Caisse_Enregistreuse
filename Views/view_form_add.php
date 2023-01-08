@@ -19,7 +19,6 @@
   ------------------------------->
   <!-- TODO: voir si $id_disponible dépend si on comble les id non utilisés ou si on rajoute à la fin-->
   <?php if ($element_to_add=="produit") : ?>
-  <?php echo exec('whoami'); ?>
     <p>
       <label>Identifiant produit* :
         <input type="number" name="id_produit" value="<?=e($id_disponible)?>" step="1" min="0" readonly required /> 
