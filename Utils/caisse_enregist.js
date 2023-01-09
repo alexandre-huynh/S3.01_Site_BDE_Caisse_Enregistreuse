@@ -14,11 +14,6 @@ function getSnacks(){
 }
 function addSnacks(product){
     let list_snacks = document.getElementByID('#snacks');
-    list_snacks.addEventListener('click',function(event){console.log('click');
-    if(event.target.nodeName!=='TD'){return;}
-    let ligne= document.createElement('li');
-    ligne.textContent=event.target.textContent;
-    let panier = getElementByID('panier');
     let snacks = getSnacks();
     let foundProduct = snacks.find(p => p.idpanier == product.idpanier);
     if (foundProduct != undefined){
@@ -30,7 +25,7 @@ function addSnacks(product){
         snacks.push(product);
     }
     localStorage.setItem("snacks",JSON.stringify(snacks));
-    saveSnacks(snacks);});};
+    saveSnacks(snacks);}
     
     function removeSnacks(product){
         let snacks = getSnacks();
@@ -205,17 +200,18 @@ function addSirops(product){
 
 
 
-
+    function clickSnacks(){
     let list_snacks = document.querySelectorAll('#snacks td');
     for(let i=0; i<list_snacks.length;i++){
-        list_snacks[i].addEventListener('click',function(event){
-            console.log('click');
-            if(event.target.nodeName!=='TD'){
+    list_snacks[i].addEventListener('click',function(event){
+    console.log('click');
+    if(event.target.nodeName!=='TD'){
                 return;
             }
-
-            
-    
+    let ligne = createElement('li');
+    ligne.textContent=event.target.textContent;
+    addSnacks(ligne);
+    let panier = document.getElementByID('panier');
+    panier.append(ligne);});
         }
-        )
     }
