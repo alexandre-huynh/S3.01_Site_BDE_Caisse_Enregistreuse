@@ -294,6 +294,14 @@ class Controller_list extends Controller{
 
   public function action_espace_client(){
     $m = Model::getModel();
+
+    //==================================
+    //     TEST SI C'EST UN CLIENT
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='client' || !$m->isInDatabaseClient($_SESSION["email"])){
+      $this->action_error("Vous devez être connecté pour accéder à votre espace client.");
+    }
+    //===================================
     
     if (isset($_SESSION["connected"]) && isset($_SESSION['statut']) && $_SESSION["connected"] && $_SESSION['statut']=="client"){
       $idClient = $_SESSION['id_client'];
@@ -320,6 +328,14 @@ class Controller_list extends Controller{
 
   public function action_espace_admin(){
     $m = Model::getModel();
+
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
 
     if (isset($_SESSION["connected"]) && isset($_SESSION['statut']) && $_SESSION["connected"] && $_SESSION['statut']=="admin"){
 

@@ -71,7 +71,7 @@
         </td>
         <?php endforeach ?>
     </tr>
-    <tr id="boissons">
+    <tr id="sodas">
         <th>Sodas</th>
         <?php foreach ($sodas as $ligne): ?>
         <td>
