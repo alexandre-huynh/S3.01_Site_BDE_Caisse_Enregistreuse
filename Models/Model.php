@@ -379,6 +379,15 @@ class Model
       $tab = $req->fetch(PDO::FETCH_NUM);
         return $tab[0];
     }
+
+    public function getIdClientFromNumEtud($num_etud){
+      $req = $this->bd->prepare('SELECT id_client FROM Client WHERE num_etudiant = :num_etud');
+      $req->bindValue(':num_etud', $num_etud);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+    
     //=====================================================
 
     public function getPrenomNomClient($id)

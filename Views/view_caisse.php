@@ -36,7 +36,7 @@
         <p>
             <!-- SERA TRANSFORME EN ID dans le traitement en php-->
             <label>Numéro étudiant du client :
-                <input type="number" name="num_etudiant" step="1" min="0" required />
+                <input type="number" name="num_etudiant_client" step="1" min="0" required />
             </label>
         </p>
 
