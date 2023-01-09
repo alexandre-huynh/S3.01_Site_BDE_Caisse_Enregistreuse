@@ -13,7 +13,6 @@ function getSnacks(){
     }
 }
 function addSnacks(product){
-    let list_snacks = document.getElementByID('#snacks');
     let snacks = getSnacks();
     let foundProduct = snacks.find(p => p.idpanier == product.idpanier);
     if (foundProduct != undefined){
@@ -92,11 +91,9 @@ function addSodas(product){
         product.price = 0.80;
         sodas.push(product);
     }
-    localStorage.setItem("sodas",JSON.stringify(sodas));
-    saveSodas(sodas);}
+}
 
-    function removeSodas(product){
-        let sodas = getSodas();
+function getTotalPanier(){
         sodas = sodas.filter(p =>p.idpanier != product.idpanier);
         saveSodas(sodas);
     }
