@@ -20,14 +20,14 @@
                 <h5>BDE</h5>
                 <a href="#">Qui sommes-nous ?</a>
                 <br>
-                <a href="#">Cartre du BDE</a>
+                <a href="#">Charte du BDE</a>
 
             </div>
 
             <div class="cgu">
 
                 <h5>CGU</h5>
-                <a href="#">Accéssibilité</a>
+                <a href="#">Accessibilité</a>
                 <br>
                 <a href="#">Produits</a>
             </div>
