@@ -9,16 +9,16 @@
             <div>
             <label for="adresse_mail"> Adresse mail :</label>
 
-            <input type="email" id="adresse_mail" name="Email" placeholder="etudiant@iutv.fr" required>
+            <input type="email" id="adresse_mail" name="Email" placeholder="jean.dupont@mail.com" required>
             <br>
             <label for="mot_de_passe"> Mot de passe :</label>
 
             <input type="password" id="mot_de_passe" name="Password" required>
 
-            <p><a href="page_mdp_oublie.html">Mot de passe oublié ? </a></p>
+            <p><a href="?controller=auth&action=form_oublimdp">Mot de passe oublié ? </a></p>
             <button type="submit">Connexion</button>
 
-            <p>Tu n'as de compte ? <a href="page_inscription.html"> &nbsp;Inscris-toi</a></p>
+            <p>Tu n'as de compte ? <a href="?controller=auth&action=form_signup">Inscris-toi</a></p>
 
             </div>
         </form>
