@@ -352,6 +352,14 @@ class Controller_list extends Controller{
   public function action_caisse(){
     $m = Model::getModel();
 
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
+
     $data =
       [
         "admin" => $_SESSION["id_admin"],
