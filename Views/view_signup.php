@@ -5,42 +5,55 @@
 <?php endif ?>
 
 <section class="inscription">
-            <div class="s_inscire">
-                <h1>Formulaire d'inscription</h1>
-            </div>
+  <h1>Formulaire d'inscription</h1>
 
-        <form action="?controller=auth&action=signup" method="post" >
-            
-            <div class="form_connexion">
-                <label for="nom"> Nom :</label>
-                <input type="text" id="nom" name="nom" required>
-                <br>
-    
-                <label for="prenom"> Prénom :</label>
-                <input type="text" id="prenom" name="prenom" required>
-                <br>
+  <form action="?controller=auth&action=signup" method="post" >
+    <!--A mettre directement dans le controller au lieu d'ici-->
+    <input type="hidden" name="id_client" value="<?=e($id_disponible)?>" readonly /> 
+    <p>
+      <label>Numéro étudiant* :
+        <input type="number" name="num_etudiant" step="1" min="0" required />
+      </label>
+    </p>
+    <p>
+      <label>Nom* :
+        <input type="text" name="Nom" maxlength="50" required />
+      </label>
+    </p>
+    <p>
+      <label>Prénom* :
+        <input type="text" name="Prenom" maxlength="50" required />
+      </label>
+    </p>
+    <p>
+      <label>N° de Téléphone (facultatif) :
+        <!--TODO: possible d'implémenter attribut pattern qui utilise une expression régulière-->
+        <input type="tel" name="Tel" maxlength="15" />
+      </label>
+    </p>
+    <p>
+      <label>Adresse mail* :
+        <input type="email" name="Email" maxlength="255" required/>
+      </label>
+    </p>
 
-                <label for="adresse_mail"> Adresse mail :</label>
-                <input type="text" id="adresse_mail" name="adresse_mail" required>
-                <br>
+    <!--A mettre directement dans le controller au lieu d'ici-->
+    <input type="hidden" name="Date_creation" value="<?=e($date_today)?>" /> 
 
-                <label for="telephone"> Téléphone <span>(facultatif) </span> :</label>
-                <input type="text" id="telephone" name="telephone" required>
-                <br>
+    <!--A mettre directement dans le controller au lieu d'ici-->
+    <input type="hidden" name="Pts_fidelite" value="0" />
 
-                <label for="num_etudiant"> Numéro étudiant :</label>
-                <input type="text" id="num_etudiant" name="num_etudiant" required>
-                <br>
-
-                <label for="mot_de_passe"> Mot de passe :</label>
-                <input type="password" id="mot_de_passe" name="mot_de_passe" required>
-
-                <label for="mot_de_passe"> Confirmer mot de passe :</label>
-                <input type="password" id="mot_de_passe" name="mot_de_passe" required>
-
-                <p>* obligatoire</p>
-            </div>
-        </form>
+    <p>
+      <label>Mot de passe (min 8 caractères)* :
+        <input type="password" name="Password" minlength="8" required />
+      </label>
+    </p>
+    <p>
+      <label>Confirmer le mot de passe* :
+        <input type="password" name="Password_verify" minlength="8" required />
+      </label>
+    </p>
+  </form>
 </section>
 
 <?php require "view_end.php";?>

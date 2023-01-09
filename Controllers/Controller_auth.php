@@ -2,8 +2,7 @@
 
 class Controller_auth extends Controller{
 
-  public function action_form_login()
-  {
+  public function action_form_login(){
     $m = Model::getModel();
 
     // =================================================
@@ -51,6 +50,22 @@ class Controller_auth extends Controller{
 
       $this->render("login", $data);
     }
+  }
+
+  public function action_form_signup(){
+    $m = Model::getModel();
+
+    $data = []; 
+
+    $this->render("signup", $data);
+  }
+
+  public function action_form_oublimdp(){
+    $m = Model::getModel();
+
+    $data = []; 
+
+    $this->render("oublimdp", $data);
   }
 
   public function action_login(){

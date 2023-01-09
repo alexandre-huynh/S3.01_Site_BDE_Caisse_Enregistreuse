@@ -321,7 +321,7 @@ class Model
       $req = $this->bd->prepare('SELECT sum(ROUND(Prix,2)) AS "Recettes_Quotidien" FROM Vente JOIN Produit USING(id_produit) WHERE DATE(Date_vente)=CURDATE() AND Paiement!=1');
       $req->execute();
       $tab = $req->fetch(PDO::FETCH_NUM);
-      if ($tab[0]==NULL || $req->$requete->rowCount()==0){
+      if ($tab[0]==NULL || $req->rowCount()==0){
         return 0;
       }
       else{
@@ -379,6 +379,15 @@ class Model
       $tab = $req->fetch(PDO::FETCH_NUM);
         return $tab[0];
     }
+
+    public function getIdClientFromNumEtud($num_etud){
+      $req = $this->bd->prepare('SELECT id_client FROM Client WHERE num_etudiant = :num_etud');
+      $req->bindValue(':num_etud', $num_etud);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+    
     //=====================================================
 
     public function getPrenomNomClient($id)
