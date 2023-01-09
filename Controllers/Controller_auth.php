@@ -172,14 +172,7 @@ class Controller_auth extends Controller{
       $this->action_error("L'adresse mail ou le mot de passe n'a pas été saisi.");
     }
     
-    } // fin de fonction
-    
-    public function action_form_signup(){
-        $m = Model::getModel();
-        $data = []; 
-
-        $this->render("signup", $data);
-    }
+  } // fin de fonction
 
   public function action_signup(){
 
@@ -271,8 +264,6 @@ class Controller_auth extends Controller{
       
   }
         
-
-
   public function action_oublimdp(){
       if(isset($_POST['Email'])){
 
@@ -304,13 +295,6 @@ class Controller_auth extends Controller{
     
         }
     }
-  }
-
-  public function action_form_oubli_mdp(){
-    $m = Model::getModel();
-    $data = []; 
-
-    $this->render("", $data);
   }
 
 

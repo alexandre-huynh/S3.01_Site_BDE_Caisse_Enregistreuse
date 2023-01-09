@@ -687,7 +687,7 @@ class Model
         $req->execute();
 
         // Confirm requete réussie
-        return (bool) $requete->rowCount();
+        return (bool) $req->rowCount();
       }
       elseif($table=="Admin"){
 
@@ -699,7 +699,7 @@ class Model
         // Envoie message pour valider la modification ? 
 
         // Confirm requete réussie
-        return (bool) $requete->rowCount();
+        return (bool) $req->rowCount();
       }
       else{
 
