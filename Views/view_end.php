@@ -5,52 +5,40 @@
 <!--Le pieds de page-->
 
 <footer>
-    <div class="contenu_footer">
-        <div>
-            <img src="Content/img/logo_uspn.png" alt="Logo Université Sorbonne Paris Nord" width="100" height="50">
-        </div>
-        <ul>
-          <div id="aide">
-            <li>
+    <div class="contenu-footer">
+            <a href="https://www.univ-paris13.fr/" class="logo-univ"><img style="border-radius: 4px;" src="Content/img/logo_uspn.jpg" alt="Logo Université Sorbonne Paris Nord" width="100" height="50"></a>
+
+            <div class="aide">
                 <h5>AIDE</h5>
-                <ul>
-                    <li><a href="#">Foire aux questions</a></li>
-                    <li><a href="#">Nous contacter</a></li>
-                </ul>
-            </li>
-          </div>
+                <a href="#" target="_blank" rel="noopener noreferrer">Foire Aux Questions </a>
+                <br>
+                <a href="#" target="_blank" rel="noopener noreferrer">Nous contacter</a>
 
-          <div id="bde">
-            <li>
+            </div>
+
+            <div class="bde">
                 <h5>BDE</h5>
-                <ul>
-                    <li><a href="#">Qui sommes-nous ?</a></li>
-                    <li><a href="#">Charte du BDE</a></li>
-                </ul>
-            </li>
-          </div>
+                <a href="#">Qui sommes-nous ?</a>
+                <br>
+                <a href="#">Cartre du BDE</a>
 
-          <div id="cgu">
-            <li>
+            </div>
+
+            <div class="cgu">
+
                 <h5>CGU</h5>
-                <ul>
-                    <li><a href="#">Accessibilité</a></li>
-                    <li><a href="#">Produits</a></li>
-                </ul>
-            </li>
-          </div>
+                <a href="#">Accéssibilité</a>
+                <br>
+                <a href="#">Produits</a>
+            </div>
 
-          <div id="join">
-            <li>
+            <div class="reseaux-sociaux">
                 <h5>REJOINS-NOUS</h5>
-                <ul>
-                    <li><a href="#"><img src="Content/img/logo_instagram.png" height=60 ></a></li>
-                    <li><a href="#"><img src="Content/img/logo_tiktok.png" height=60 ></a></li>
-                </ul>
-            </li>
-          </div>
-        </ul>
-    </div>
+                <a href="#"><img src="Content/img/logo_instagram.png" width="40px" height="40px"></a>
+                <a href="#"><img src="Content/img/logo_tiktok.png" width="40px" height="40px"></a>
+            </div>
+
+        </div>
 </footer>
 </body>
 </html>
