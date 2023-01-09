@@ -72,10 +72,10 @@
                     <p>Abandon</p>
                 </td>
                 <td id="espece">
-                    <p><img src="Content/img/logo_espece.png" alt="Payer par Espece" /></p>
+                    <p><img src="Content/img/logo_espece.png" alt="Payer par Espece" height="60" /></p>
                 </td>
                 <td id="carte">
-                    <p><img src="Content/img/logo_espece.png" alt="Payer par Carte" /></p>
+                    <p><img src="Content/img/logo_carte.png" alt="Payer par Carte" height="60" /></p>
                 </td>
             </tr>
     </form>
