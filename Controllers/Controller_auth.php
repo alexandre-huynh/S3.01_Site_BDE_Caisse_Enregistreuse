@@ -5,9 +5,52 @@ class Controller_auth extends Controller{
   public function action_form_login()
   {
     $m = Model::getModel();
-    $data = []; 
 
-    $this->render("login", $data);
+    // =================================================
+    // s'il est déjà connecté et est admin
+    // au cas où, pour éviter qu'il se reconnecte alors qu'il est déjà connecté
+    // =================================================
+    if (isset($_SESSION["connected"]) && isset($_SESSION['statut']) && $_SESSION["connected"] && $_SESSION['statut']=="admin"){
+
+      $data = [
+          "nomprenom" => $m->getPrenomNomClient($m->getIdClientFromEmail($_SESSION["email"])),
+          "recettes_today" => $m->getRecettesJour(),
+          "recettes_week" => $m->getRecettesSemaine(),
+          "recettes_month" => $m->getRecettesMois(),
+        ]; 
+      $this->render("espace_admin", $data);
+    }
+
+    // =================================================
+    // s'il est déjà connecté et est client
+    // au cas où, pour éviter qu'il se reconnecte alors qu'il est déjà connecté
+    // =================================================
+    elseif (isset($_SESSION["connected"]) && isset($_SESSION['statut']) && $_SESSION["connected"] && $_SESSION['statut']=="client"){
+      $idClient = $_SESSION['id_client'];
+
+      $datesVente = $m->getDatesVentesClient($idClient);
+
+      $historique = [];
+
+      foreach($datesVente as $ligne){
+        $historique[$ligne["Date_vente"]] = $m->getHistoriqueAchatsClient($idClient, $ligne["Date_vente"]);
+      }
+
+      date_default_timezone_set('Europe/Paris');
+      
+      // Redirige le client vers la page d'accueil client
+      $data = [
+          "nomprenom" => $m->getPrenomNomClient($m->getIdClientFromEmail($_SESSION["email"])),
+          "ptsfidelite" => $m->getPointsFidelite($_SESSION['id_client'],"Client"),
+          "historique" => $historique
+          ]; 
+      $this->render("espace_client", $data);
+    }
+    else {
+      $data = []; 
+
+      $this->render("login", $data);
+    }
   }
 
   public function action_login(){
@@ -21,61 +64,100 @@ class Controller_auth extends Controller{
       TODO: Faire une fonction getIdClientFromEmail($email)
       faut que email deviennent un id client ou id admin ou num etudiant
       */
-      $username = $_POST['Email'];
+      $email = $_POST['Email'];
       $password = $_POST['Password'];
-      $admin = 'admin';
-      $client = 'client';
       // Vérifier si l'utilisateur existe dans la base de données avec les fonction isInDatabaseClient et isInDatabaseAdmin 
-      if ($m->isInDatabaseAdmin($username)){
-            // Vérifier si le mot de passe saisie est correct 
-            if (password_verify($password, $m->getPassword($username,"Admin"))){
+      if ($m->isInDatabaseAdmin($email)){
+        // Vérifier si le mot de passe saisie est correct 
+        if (password_verify($password, $m->getPassword($email,"Admin"))){
 
-                session_start();
-                
-                // Enregistre l'utilisateur dans la session
-                $_SESSION['id_etud'] = $username;
-                $_SESSION['connected'] = true;
-                $_SESSION['statut'] = $admin;
-                // Redirige l'admin vers la page d'accueil admin
-                $data = [
-                    "nomprenom" => $m->getPrenomNomAdmin($username)
-                    ]; 
-                $this->render("espace_admin", $data);
+            //session_start();
+            
+            // Enregistre l'utilisateur dans la session
+            $_SESSION['email'] = $email;
+            $_SESSION['id_admin'] = $m->getIdAdminFromEmail($email);
+            $_SESSION['prenomnom'] = $m->getPrenomNomAdmin($_SESSION['id_admin']);
+            $_SESSION['num_etudiant'] = $m->getNumEtudiantAdminFromEmail($email);
+            $_SESSION['connected'] = true;
+            $_SESSION['statut'] = 'admin';
+            // TODO: implémenter un statut superadmin s'il est superadmin,
+            // pour cela, faire une requete SQL dans model
+            if ($m->isInDatabaseSuperAdmin($_SESSION['id_admin'])){
+              $_SESSION['superadmin'] = true;
             }
+            // Redirige l'admin vers la page d'accueil admin                
+            $data = [
+                "nomprenom" => $m->getPrenomNomAdmin($_SESSION['id_admin']),
+                "recettes_today" => $m->getRecettesJour(),
+                "recettes_week" => $m->getRecettesSemaine(),
+                "recettes_month" => $m->getRecettesMois(),
+                ]; 
+            $this->render("espace_admin", $data);
+        }
+        else {
+          $this->action_error("Adresse mail ou mot de passe incorrect.");
+        }
       }
-      elseif ($m->isInDatabaseClient($username)){
+      elseif ($m->isInDatabaseClient($email)){
         // Vérifier si le mot de passe saisie est correct
-        if(password_verify($password, $m->getPassword($username,"Client"))){
+        if(password_verify($password, $m->getPassword($email,"Client"))){
 
-                session_start();
+                //session_start();
                 
                 // Enregistre l'utilisateur dans la session
-                $_SESSION['id_etud'] = $username;
+                $_SESSION['email'] = $email;
+                $_SESSION['id_client'] = $m->getIdClientFromEmail($email);
+                $_SESSION['prenomnom'] = $m->getPrenomNomClient($_SESSION['id_client']);
+                $_SESSION['num_etudiant'] = $m->getNumEtudiantClientFromEmail($email);
                 $_SESSION['connected'] = true;
-                $_SESSION['statut'] = $client;
+                $_SESSION['statut'] = 'client';
+
+                //=====================================
+                // Pour affichage des achats récents, par date
+                // TODO: copier le code / action dans list pour quand le client accède
+                // à son espace 
+
+                // mettre en commentaire pour l'instant si problématique
+
+                $idClient = $_SESSION['id_client'];
+
+                $datesVente = $m->getDatesVentesClient($idClient);
+
+                $historique = [];
+
+                foreach($datesVente as $ligne){
+                  $historique[$ligne["Date_vente"]] = $m->getHistoriqueAchatsClient($idClient, $ligne["Date_vente"]);
+                }
+
+                date_default_timezone_set('Europe/Paris');
                 
                 // Redirige le client vers la page d'accueil client
                 $data = [
-                    "nomprenom" => $m->getPrenomNomClient($username)
+                    "nomprenom" => $m->getPrenomNomClient($m->getIdClientFromEmail($email)),
+                    "ptsfidelite" => $m->getPointsFidelite($_SESSION['id_client'],"Client"),
+                    "historique" => $historique
                     ]; 
                 //$this->render("espace_client", $data);
                 $this->render("espace_client", $data);
         }
+        else {
+          $this->action_error("Adresse mail ou mot de passe incorrect.");
+        }
       }
 
+      // Non client et non admin
       else {
         // Affiche un message d'erreur
-        $this->action_error("Erreur, identifiant ou mot de passe non saisis.");
+        $this->action_error("Les identifiants fournis n'existent pas dans la base de données. Veuillez vous inscrire.");
       }
     }
 
     else {
       // Affiche un message d'erreur
-      $this->action_error("Erreur, identifiant ou mot de passe incorrect.");
+      $this->action_error("L'adresse mail ou le mot de passe n'a pas été saisi.");
     }
     
-    
-    }
+    } // fin de fonction
     
     public function action_form_signup(){
         $m = Model::getModel();
@@ -84,71 +166,99 @@ class Controller_auth extends Controller{
         $this->render("signup", $data);
     }
 
-    public function action_signup(){
+  public function action_signup(){
 
-        // Récupérer les infos via l'URL 
-        $nom = $_POST['nom'];
-        $prenom = $_POST['prenom'];
-        $email = $_POST['email'];
-        $username = $_POST['etud_num'];
-        // TODO: Faire hashpassword truc
-        $password = $_POST['password'];
+      $ajout = false;
 
-        // Vérifie la connexion à la base de données
-    
-        
-    
-        // Vérifie si les informations de l'utilisateur sont valides
-        if (empty($prenom) ||empty($nom) ||empty($username) || empty($password) || empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {    
-            // Affiche un message d'erreur
-            echo "Informations de l'utilisateur non valides";
+      //Test si les informations nécessaires sont fournies
+      /* exemple de vérification
+      if (isset($_POST["name"]) and ! preg_match("/^ *$/", $_POST["name"])
+          and isset($_POST["category"]) and ! preg_match("/^ *$/", $_POST["category"])
+          and isset($_POST["year"]) and preg_match("/^[12]\d{3}$/", $_POST["year"])) {
+      */
+      
+      if (isset($_POST["num_etudiant"]) && 
+      isset($_POST["Nom"]) && 
+      isset($_POST["Prenom"]) && 
+      isset($_POST['Password']) &&
+      isset($_POST['Password_verify']) &&
+      $_POST["Password"]==$_POST["Password_verify"] &&
+      isset($_POST['Email']))
+      {
+        if($m->isInDatabaseClient($_POST['Email'])){
+
+          $this->action_error("L'adresse mail est déjà utilisée, Veuillez en saisir une autre ");
+
         }
         else{
-    
-            // Requête SQL pour vérifier si l'utilisateur existe déjà dans la base de données
-            // TODO : Faire une fonction dans model 
-            $req = $this->bd->prepare('SELECT * FROM client WHERE username= :username OR email= :email');
-            $req->bindValue(':username',$username);
-            $req->bindValue(':email',$email);
-            $nb = $req->rowCount();
-    
-    
-            // Vérifie si l'utilisateur existe déjà dans la base de données
-            if($nb>0){
-                //Message d'erreur car il existe déjà un utilisateur avec ces informations 
-                $this->action_error("L'utilisateur existe déjà dans la base de données");
-            }
-            else{
-                
-                // Requête SQL pour insérer le client dans la base de données authentification afin qu'il puisse se connecter par la suite sans problèmes 
-                // TODO : Faire une fonction dans model insertion nouveau client  
-                $req2 = $this->bd->prepare("INSERT INTO Authentification (num_etudiant,password) VALUES (':username',':password')");
-                $req2->bindValue(':username',$username);
-                $req2->bindValue(':password',$password);
-                $req2->execute();
+          // !!
+          // RAJOUTER DES TESTS / CONTROLE DE SAISIE DANS LE IF !!!
+          // !!
+          $tab = [
+            "id_client" => $m->getDernierIdDisponible("Client"),
+            "num_etudiant" => $_POST["num_etudiant"], 
+            "Nom" => $_POST["Nom"], 
+            "Prenom" => $_POST["Prenom"], 
+            "Tel" => $_POST["Tel"], 
+            "Email" => $_POST["Email"], 
+            "Date_creation" => date("Y-m-d"), 
+            "Pts_fidelite" => 0
+          ];
+          // On vérifie que la catégorie est une des catégories possibles
+          $m = Model::getModel();
+          // Préparation du tableau infos
+          $infos = [];
+          $noms = ["id_client", "num_etudiant", "Nom", "Prenom", "Tel", "Email", "Date_creation", "Pts_fidelite"];
+          foreach ($noms as $v) {
+              if (isset($tab[$v]) && ((is_string($tab[$v]) && ! preg_match("/^ *$/", $tab[$v])) || ((is_int($tab[$v]) || is_float($tab[$v])) && $tab[$v]>=0))) {
+                // && (is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])) || ((is_int($_POST[$v]) || is_float($_POST[$v])) && $_POST[$v]>=0)
+                $infos[$v] = $tab[$v];
+                //debug
+                //echo "Ajout $v OK";
+              } else {
+                $infos[$v] = null;
+                //echo "Ajout $v OK, valeur NULL";
+              }
+          }
+
+          $infosAuth = [$_POST["num_etudiant"], password_hash($_POST["Password"], PASSWORD_DEFAULT)];
 
 
-                // TODO return
 
-                // Requête SQL pour insérer l'utilisateur dans la base de données des clients 
-                // TODO : Faire une fonction dans model insertion nouveau client  
-                $requete = $this->bd->prepare("INSERT INTO Client (nom,prenom,email,num_etudiant) VALUES (':nom',':prenom',':email',':username')");
-                $requete->bindValue(':nom',$nom);
-                $requete->bindValue(':prenom',$prenom);
-                $requete->bindValue(':email',$email);
-                $requete->bindValue(':username',$username);
-                $requete->execute();
+          //Récupération du modèle
+          $m = Model::getModel();
+          //Ajout du produit
+          $m->addAuth($infosAuth);
+          $ajout = $m->addClient($infos);
+          
+      }
+      }
+      else{
+        $this->action_error("Erreur, des informations n'ont pas été saisies ou le mot de passe n'est pas correspondant.");
+      }
+      
 
-                
-                // Possibilité d'ajouter un message pour savoir si l'insertion à réussi 
-    
-            }
-    
-        } 
-            
-    }
+      //Préparation de $data pour l'affichage de la vue message
+      $data = [
+          "title" => "Bienvenue parmi le Wolf BDE !",
+          "added_element" => "client",
+          "str_lien_retour" => "Retour à la page de gestion d'accueil",
+          "lien_retour" => "?controller=home&action=home" 
+      ];
+      if ($ajout) {
+          $data["message"] = "Votre inscription a bien été prise en compte, " . $_POST["Prenom"] . " " . $_POST["Nom"] . ". Vous pouvez maintenant vous connecter à votre espace client.";
+      } else {
+          $data["message"] = "Erreur dans la saisie des informations, le compte client n'a pas été ajouté.";
+      }
 
-    public function action_oublimdp(){
+    $this->render("message", $data);
+
+      
+  }
+        
+
+
+  public function action_oublimdp(){
       if(isset($_POST['Email'])){
 
         $password = uniqid();
@@ -181,11 +291,17 @@ class Controller_auth extends Controller{
     }
   }
 
+  public function action_form_oubli_mdp(){
+    $m = Model::getModel();
+    $data = []; 
 
-    public function action_default(){
+    $this->render("", $data);
+  }
 
-        $this->action_form_login();
-    }
+
+  public function action_default(){
+      $this->action_form_login();
+  }
 
 }
 ?>

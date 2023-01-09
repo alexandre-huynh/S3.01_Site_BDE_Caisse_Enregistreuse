@@ -1,19 +1,15 @@
-<?php require "view_begin.php";?>
-
-<!-- Pour plus tard quand les variables sessions seront crées
-< ?php if ($connected==True) : ?>
-  < ?php require "view_begin_connected.php";?>
-< ?php else : ?>
-  < ?php require "view_begin.php";?>
-< ?php endif ?>
--->
+<?php if (isset($_SESSION["connected"]) && $_SESSION["connected"]==True) : ?>
+  <?php require "view_begin_connected.php";?>
+<?php else : ?>
+  <?php require "view_begin.php";?>
+<?php endif ?>
 
 <!-- Titre de la liste d'élements -->
 <h1> <?= e($titre) ?> </h1>
 
 <!--<form action = "?controller=set&action=add_< ?=e($element_to_add)?>" method="post">-->
 <!-- TODO: vérifier dans le cas où le lien redirigé ne marche pas / ou donne la page d'accueil-->
-<form action = "?controller=set&action=add_<?= e($element_to_add) ?>" method="post">  
+<form action = "?controller=set&action=add_<?= e($element_to_add) ?>" method="post" enctype="multipart/form-data">  
   <!--
   Champs de saisie
   manuellement rédigé pour adapter le type de saisie
@@ -37,8 +33,8 @@
       <label>Catégorie* :
         <select name="Categorie" required >
           <!-- TODO: réfléchir si optgroup (grande catégorie) et option de noms similaire = confus? -->
-          <optgroup label="-Confiseries-">
-            <option value="Confiserie">Confiserie</option>
+          <optgroup label="-Snacks-">
+            <option value="Snack">Snack</option>
           </optgroup>
           <optgroup label="-Boissons-">
             <option value="Boisson">Boisson</option>
@@ -54,16 +50,15 @@
       </label>
     </p>
     <p>
-      <label>Image du produit* :
-        <!-- TODO: adapter si jpeg, à modifier dans affichage de produits et inventaire-->
-        <!-- TODO: Joe, trouver une manière d'ajouter l'image envoyé au répertoire Content/img/ -->
-        <input type="file" name="Img_produit" accept=".png,.jpeg" required /> 
+      <label>Image du produit* (format .png / .jpg / .jpeg, taille de fichier max : 5 Mo) :
+        <input type="file" name="produit_<?=e($id_disponible)?>" accept=".png,.jpeg,.jpg" required /> 
+        <input type="hidden" name="Img_produit" value="produit_<?=e($id_disponible)?>" />
       </label>
+      </br>
+      <span>Fond transparent de préférence : Google Images > Outils > Couleur > Transparent</span>
     </p>
     <p>
       <label>Date de création* (corriger si nécessaire) :
-        <!-- TODO: un truc pour avoir la date du jour-->
-        <!-- utiliser fonction date('d-m-y'), mais dans controller-->
         <input type="date" name="Date_ajout" value="<?=e($date_today)?>" required /> 
       </label>
     </p>
@@ -163,7 +158,7 @@
       -->
       <p>
         <label>Rôle de super-administrateur (ATTENTION: soyez-sûr de votre choix) :
-          <input type="checkbox" name="Create_superadmin" value="True" required />
+          <input type="checkbox" name="Create_superadmin" value="True"  />
         </label>
       </p>
     <?php endif ?>
@@ -209,8 +204,8 @@
     <p>
       <label>Produit vendu (si le même produit est acheté plusieurs fois, créer une autre vente)* :
         <select name="id_produit" required >
-          <optgroup label="-Confiseries-">
-            <?php foreach ($confiseries as $ligne): ?>
+          <optgroup label="-Snacks-">
+            <?php foreach ($snacks as $ligne): ?>
               <option value="<?=e($ligne["id_produit"])?>">
                 <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> € (en stock : <?=e($ligne["Stock"])?>)
               </option>

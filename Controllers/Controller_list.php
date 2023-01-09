@@ -4,8 +4,8 @@ class Controller_list extends Controller{
 
   public function action_produits() {
     // filtrage par ordre croissant/decroissant prix
-    // valeurs possible : croissant ou decroissant
-    $filter = "default";
+    // valeurs possible : croissant ou decroissant ou abc
+    $filter = "abc";
 
     if (isset($_GET["filter"])) {
       $filter = e($_GET["filter"]);
@@ -20,10 +20,10 @@ class Controller_list extends Controller{
     $this->render("produits", $data);
   }
 
-  public function action_confiseries() {
+  public function action_snacks() {
     // filtrage par ordre croissant/decroissant prix
-    // valeurs possible : croissant ou decroissant
-    $filter = "default";
+    // valeurs possible : croissant ou decroissant ou abc
+    $filter = "abc";
 
     if (isset($_GET["filter"])) {
       $filter = e($_GET["filter"]);
@@ -32,17 +32,17 @@ class Controller_list extends Controller{
     $m = Model::getModel();
     $data =
       [
-        "produits" => $m->getProduits($filter, "food", "default")
+        "snacks" => $m->getProduits($filter, "food", "default")
       ];
 
-    $this->render("produits_confiseries", $data);
+    $this->render("produits_snacks", $data);
   }
 
   public function action_boissons() {
     //--------------------------------------------------------
     // filtrage par ordre croissant/decroissant prix
     // valeurs possible : croissant ou decroissant
-    $filter = "default";
+    $filter = "abc";
 
     if (isset($_GET["filter"])) {
       $filter = e($_GET["filter"]);
@@ -97,12 +97,21 @@ class Controller_list extends Controller{
     $search = "default";
     //$attribut = "default";
 
+    $m = Model::getModel();
+
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
+
     if (isset($_GET["search"])) {
       $search = e($_GET["search"]); // risque: si search est un int (on sait jamais), fonction e aka htmlspecialchars problématique?
       // $attribut = e($_GET["attribut"]);
     }
     //--------------------------------------------------------
-    $m = Model::getModel();
 
     $colonnes = $m->getClients();
     $colonnes = array_keys($colonnes[0]);
@@ -137,6 +146,14 @@ class Controller_list extends Controller{
     //--------------------------------------------------------
     $m = Model::getModel();
 
+    //==================================
+    //  TEST SI C'EST UN SUPER ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"]) || !$m->isInDatabaseSuperAdmin($_SESSION["id_admin"])){
+      $this->action_error("Vous ne possédez pas les droits super administrateurs pour consulter cette page.");
+    }
+    //===================================
+
     $colonnes = $m->getAdmins();
     $colonnes = array_keys($colonnes[0]);
     // titre sera destiné au titre en grand en haut de tableau/liste
@@ -169,6 +186,14 @@ class Controller_list extends Controller{
     }
     //--------------------------------------------------------
     $m = Model::getModel();
+
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
 
     $liste = $m->getHistoriqueAchats($search);
 
@@ -236,6 +261,14 @@ class Controller_list extends Controller{
     //--------------------------------------------------------
     $m = Model::getModel();
 
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
+
     /*
     $colonnes = $m->getProduits();
     $colonnes = array_keys($colonnes[0]);
@@ -259,15 +292,57 @@ class Controller_list extends Controller{
     $this->render("list", $data);
   }
 
+  public function action_espace_client(){
+    $m = Model::getModel();
+    
+    if (isset($_SESSION["connected"]) && isset($_SESSION['statut']) && $_SESSION["connected"] && $_SESSION['statut']=="client"){
+      $idClient = $_SESSION['id_client'];
+
+      $datesVente = $m->getDatesVentesClient($idClient);
+
+      $historique = [];
+
+      foreach($datesVente as $ligne){
+        $historique[$ligne["Date_vente"]] = $m->getHistoriqueAchatsClient($idClient, $ligne["Date_vente"]);
+      }
+
+      date_default_timezone_set('Europe/Paris');
+      
+      // Redirige le client vers la page d'accueil client
+      $data = [
+          "nomprenom" => $m->getPrenomNomClient($m->getIdClientFromEmail($_SESSION["email"])),
+          "ptsfidelite" => $m->getPointsFidelite($_SESSION['id_client'],"Client"),
+          "historique" => $historique
+          ]; 
+      $this->render("espace_client", $data);
+    }
+  }
+
+  public function action_espace_admin(){
+    $m = Model::getModel();
+
+    if (isset($_SESSION["connected"]) && isset($_SESSION['statut']) && $_SESSION["connected"] && $_SESSION['statut']=="admin"){
+
+      $data = [
+          "nomprenom" => $m->getPrenomNomAdmin($_SESSION["id_admin"]),
+          "recettes_today" => $m->getRecettesJour(),
+          "recettes_week" => $m->getRecettesSemaine(),
+          "recettes_month" => $m->getRecettesMois(),
+        ]; 
+      $this->render("espace_admin", $data);
+    }
+  }
+
   public function action_caisse(){
     $m = Model::getModel();
 
     $data =
       [
-        "snacks" => $m->getProduits("default", "Confiserie", "default"),
-        "boissons" => $m->getProduits("default", "Boisson", "default"),
-        "sodas" => $m->getProduits("default", "Soda", "default"),
-        "sirops" => $m->getProduits("default", "Sirop", "default")
+        "admin" => $_SESSION["id_admin"],
+        "snacks" => $m->getProduits("abc", "Snack", "default"),
+        "boissons" => $m->getProduits("abc", "Boisson", "default"),
+        "sodas" => $m->getProduits("abc", "Soda", "default"),
+        "sirops" => $m->getProduits("abc", "Sirop", "default")
       ];
 
     $this->render("caisse", $data);

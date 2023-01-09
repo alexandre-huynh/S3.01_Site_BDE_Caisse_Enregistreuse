@@ -56,7 +56,7 @@ class Model
 
       // food = que confiseries/snacks
       if ($type=="food"){
-        $texte_req = $texte_req . " WHERE Categorie = 'Confiserie'";
+        $texte_req = $texte_req . " WHERE Categorie = 'Confiserie' OR Categorie = 'Snack'";
         /* si on décide d'implémenter des boutons de tri ET une barre de recherche dans la page de l'inventaire
         if ($search!="default"){
           $search = "%" . $search . "%";
@@ -111,6 +111,9 @@ class Model
       }
       elseif ($filter=="decroissant"){
         $texte_req = $texte_req . " ORDER BY prix DESC";
+      }
+      elseif ($filter=="abc"){
+        $texte_req = $texte_req . " ORDER BY Nom";
       }
 
       $req = $this->bd->prepare($texte_req);
@@ -241,6 +244,8 @@ class Model
       return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    //==================================================
+
     public function getHistoriqueAchats($search="default") // ou getVentes
     {
       // $search si on veut chercher une vente en particulier
@@ -251,7 +256,7 @@ class Model
       //peut être:
       $texte_req = "SELECT num_vente, Vente.id_client, Vente.id_admin, Vente.id_produit, DATE_FORMAT(Date_vente, '%e/%c/%Y') AS 'Date_vente', Paiement, Use_fidelite ,Client.Nom, Client.Prenom, Admin.Nom, Admin.Prenom 
                       FROM Client JOIN Vente USING(id_client) 
-                                  JOIN Admin USING(id_admin)";
+                                  JOIN Admin USING(id_admin) ORDER BY num_vente DESC,Date_vente DESC";
       // TODO : rajouter quelque chose pour traiter les recherches par nom prénom 
       // sachant que la table ventes ne possède pas ces attributs
       // solution: jointure?
@@ -273,13 +278,116 @@ class Model
       return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getHistoriqueAchatsClient($id,$date="default")
+    {
+      $texte_req=
+        'SELECT distinct id_client, date_vente, Produit.nom, count(*) as "Quantité", CONCAT(sum(ROUND(Prix,2))," €") as "Prix total", Paiement AS "Payé par"
+        FROM Client join Vente using(id_client) join Produit using(id_produit)
+        WHERE id_client=:id
+        GROUP BY id_client, date_vente, Produit.nom, Paiement
+        ORDER BY date_vente DESC
+        ';
+
+      // si on cherche les achats d'une date en particulier
+      if ($date!="default"){
+        $texte_req=
+        'SELECT distinct Produit.nom AS "Produit", count(*) as "Quantité", CONCAT(sum(ROUND(Prix,2))," €") as "Prix total", Paiement AS "Payé par"
+        FROM Client join Vente using(id_client) join Produit using(id_produit)
+        WHERE id_client=:id AND date_vente=:date
+        GROUP BY Produit.nom, Paiement
+        ';
+        $use_marqueur=True;
+      }
+
+      $req = $this->bd->prepare($texte_req);
+      $req->bindValue(':id', (int) $id, PDO::PARAM_INT);
+      if ($use_marqueur==True){
+        $req->bindValue(':date', $date);
+      }
+      $req->execute();
+      return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getDatesVentesClient($id)
+    {
+      $req = $this->bd->prepare('SELECT DISTINCT Date_vente FROM Vente WHERE id_client = :id ORDER BY date_vente DESC');
+      $req->bindValue(':id', $id);
+      $req->execute();
+      return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getRecettesJour()
+    {
+      $req = $this->bd->prepare('SELECT sum(ROUND(Prix,2)) AS "Recettes_Quotidien" FROM Vente JOIN Produit USING(id_produit) WHERE DATE(Date_vente)=CURDATE() AND Paiement!=1');
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+      if ($tab[0]==NULL || $req->$requete->rowCount()==0){
+        return 0;
+      }
+      else{
+        return $tab[0];
+      }
+    }
+
+    public function getRecettesSemaine()
+    {
+      $req = $this->bd->prepare('SELECT sum(ROUND(Prix,2)) AS "Recettes_Hebdo" FROM Vente JOIN Produit USING(id_produit) WHERE WEEK(Date_vente)=WEEK(now()) AND Paiement!=1');
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+      return $tab[0];
+    }
+
+    public function getRecettesMois()
+    {
+      $req = $this->bd->prepare('SELECT sum(ROUND(Prix,2)) AS "Recettes_Mois" FROM Vente JOIN Produit USING(id_produit) WHERE MONTH(Date_vente)=MONTH(now()) AND Paiement!=1');
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+      return $tab[0];
+    }
+
+    //==================================================
+    // donne l'id client à partir de l'email fourni
+    public function getIdClientFromEmail($email){
+      $req = $this->bd->prepare('SELECT id_client FROM Client WHERE Email = :email');
+      $req->bindValue(':email', $email);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+      return $tab[0];
+    }
+
+    // donne l'id admin à partir de l'email fourni
+    public function getIdAdminFromEmail($email){
+      $req = $this->bd->prepare('SELECT id_admin FROM Admin WHERE Email = :email');
+      $req->bindValue(':email', $email);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+    //=====================================================
+    public function getNumEtudiantClientFromEmail($email){
+      $req = $this->bd->prepare('SELECT num_etudiant FROM Client WHERE Email = :email');
+      $req->bindValue(':email', $email);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+
+    public function getNumEtudiantAdminFromEmail($email){
+      $req = $this->bd->prepare('SELECT num_etudiant FROM Admin WHERE Email = :email');
+      $req->bindValue(':email', $email);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+    //=====================================================
+
     public function getPrenomNomClient($id)
     {
       $req = $this->bd->prepare('SELECT CONCAT(Prenom, " ", Nom) as Prenom_Nom FROM Client WHERE id_client = :id ');
       $req->bindValue(':id', (int) $id, PDO::PARAM_INT);
       $req->execute();
       $tab = $req->fetch(PDO::FETCH_NUM);
-        return $tab[0];
+      return $tab[0];
     }
 
     public function getPrenomNomAdmin($id)
@@ -288,7 +396,21 @@ class Model
       $req->bindValue(':id', (int) $id, PDO::PARAM_INT);
       $req->execute();
       $tab = $req->fetch(PDO::FETCH_NUM);
-        return $tab[0];
+      return $tab[0];
+    }
+
+    public function getPointsFidelite($id, $table)
+    {
+      if ($table=="Client"){
+        $req = $this->bd->prepare('SELECT Pts_fidelite FROM Client WHERE id_client = :id ');
+      } 
+      elseif ($table=="Admin"){
+        $req = $this->bd->prepare('SELECT Pts_fidelite FROM Admin WHERE id_admin = :id ');
+      }
+      $req->bindValue(':id', (int) $id, PDO::PARAM_INT);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+      return $tab[0];
     }
 
     // retourne l'id s'il existe dans la BD, sinon retourne false
@@ -413,7 +535,15 @@ class Model
       return (bool) $requete->rowCount();
     }
 
-    public function addAuthClient($infosAuth)
+    public function isInDatabaseSuperAdmin($id){
+      $requete = $this->bd->prepare('SELECT * FROM SuperAdmin WHERE id_admin=:id');
+      $requete->bindValue(':id', (int) $id, PDO::PARAM_INT);
+      $requete->execute();
+
+      return (bool) $requete->rowCount();
+    }
+
+    public function addAuth($infosAuth)
     {
       // Ajout dans Authentification
 
@@ -447,10 +577,76 @@ class Model
         //Exécution de la requête
         $requete->execute();
 
-        // debug,à enlever
-        //echo "addClient OK";
+        return (bool) $requete->rowCount();
+    }
+  
+    public function addAdmin($infos)
+    {
+        // Ajout dans Admin
+
+        //Préparation de la requête
+        $requete = $this->bd->prepare('INSERT INTO Admin VALUES (:id_admin, :num_etudiant, :Nom, :Prenom, :Tel, :Email, :Date_creation, :Pts_fidelite)');
+
+        //Remplacement des marqueurs de place par les valeurs
+        $marqueurs = ["id_admin", "num_etudiant", "Nom", "Prenom", "Tel", "Email", "Date_creation", "Pts_fidelite"];
+        foreach ($marqueurs as $value) {
+            $requete->bindValue(':' . $value, $infos[$value]);
+        }
+
+        //Exécution de la requête
+        $requete->execute();
 
         return (bool) $requete->rowCount();
+    }
+
+    public function addSuperAdmin($infos)
+    {
+        // Ajout dans SuperAdmin
+
+        //Préparation de la requête
+        $requete = $this->bd->prepare('INSERT INTO SuperAdmin VALUES (:id_superadmin, :id_admin)');
+
+        //Remplacement par marqueur de place
+        $requete->bindValue(':id_superadmin', $infos[0]);
+        $requete->bindValue(':id_admin', $infos[1]);
+
+        //Exécution de la requête
+        $requete->execute();
+
+        return (bool) $requete->rowCount();
+    }
+
+    public function addVente($infos)
+    {
+        // Ajout dans Vente
+
+        //Préparation de la requête
+        $requete = $this->bd->prepare('INSERT INTO Vente VALUES (:num_vente, :id_client, :id_admin, :id_produit, :Date_vente, :Paiement, :Use_fidelite)');
+
+        //Remplacement des marqueurs de place par les valeurs
+        $marqueurs = ["num_vente", "id_client", "id_admin", "id_produit", "Date_vente", "Paiement", "Use_fidelite"];
+        foreach ($marqueurs as $value) {
+            $requete->bindValue(':' . $value, $infos[$value]);
+        }
+
+        //Exécution de la requête
+        $requete->execute();
+
+        return (bool) $requete->rowCount();
+    }
+
+    public function updateStock($id_produit)
+    {
+      //Préparation de la requête
+      $requete = $this->bd->prepare('UPDATE Produit SET Stock = ((SELECT Stock FROM Produit WHERE id_produit = :id_produit) - 1) WHERE id_produit = :id_produit');
+
+      //Remplacement des marqueurs de place par les valeurs
+      $requete->bindValue(':id_produit', $id_produit);
+
+      //Exécution de la requête
+      $requete->execute();
+
+      return (bool) $requete->rowCount();
     }
 
     public function getPassword($email,$table){
@@ -476,32 +672,35 @@ class Model
       
       if($table=="Client"){
 
-
         $req = $this->bd->prepare('UPDATE Authentification JOIN Client USING(num_etudiant) SET Password =:pass where Email= :email ');
-          $req->bindValue(':pass',$hashedPassword);
-          $req->bindValue(':email',$email);
-          $req->execute();
+        $req->bindValue(':pass',$hashedPassword);
+        $req->bindValue(':email',$email);
+        $req->execute();
 
-  
+        // Confirm requete réussie
+        return (bool) $requete->rowCount();
       }
       elseif($table=="Admin"){
 
         $req = $this->bd->prepare('UPDATE Authentification JOIN Admin USING(num_etudiant) SET Password =:pass where Email= :email ');
-          $req->bindValue(':pass',$hashedPassword);
-          $req->bindValue(':email',$email);
-          $req->execute();
+        $req->bindValue(':pass',$hashedPassword);
+        $req->bindValue(':email',$email);
+        $req->execute();
       
-          // Envoie message pour valider la modification ? 
+        // Envoie message pour valider la modification ? 
+
+        // Confirm requete réussie
+        return (bool) $requete->rowCount();
       }
       else{
 
-        $this->action_error("Une erreur est survenue .. ");
+        return False;
 
       }
 
-      
-
     }
+
+   
 
     
 

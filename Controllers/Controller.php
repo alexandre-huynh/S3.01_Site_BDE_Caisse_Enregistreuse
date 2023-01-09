@@ -58,7 +58,7 @@ abstract class Controller
     protected function action_error($message = '')
     {
         $data = [
-            'title' => "Error",
+            'title' => "Erreur",
             'message' => $message,
         ];
         $this->render("message", $data);

@@ -1,5 +1,34 @@
-<?php require "view_begin.php"; ?>
+<?php if (isset($_SESSION["connected"]) && $_SESSION["connected"]==True) : ?>
+  <?php require "view_begin_connected.php";?>
+<?php else : ?>
+  <?php require "view_begin.php";?>
+<?php endif ?>
 
-<p>Bonjour, espace client de <?=e($nomprenom)?></p>
+<h1>Bonjour <?=e($nomprenom)?> !</h1>
+<hr>
+
+<h3>Vous avez <?=e($ptsfidelite)?> points de fidélité.</h3>
+<hr>
+<!--peut être inclure une liste des articles dont il est éligible avec autant de points-->
+
+<h2>Historique de vos achats</h2>
+
+<?php foreach ($historique as $date=>$ligne): ?>
+    <h3><?=date("d/m/Y",strtotime(e($date)))?></h3>
+    <table>
+        <tr>
+            <?php foreach ($ligne[0] as $c=>$v): ?>
+                <th><?=e($c)?></th>
+            <?php endforeach ?>
+        </tr>
+        <?php foreach ($ligne as $sous_ligne): ?>
+        <tr>
+            <?php foreach ($sous_ligne as $v): ?>
+                <td><?=e($v)?></td>
+            <?php endforeach ?>
+        </tr>
+        <?php endforeach ?>
+    </table>
+<?php endforeach ?>
 
 <?php require "view_end.php";?>

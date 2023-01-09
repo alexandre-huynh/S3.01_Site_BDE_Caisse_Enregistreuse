@@ -1,15 +1,14 @@
-<?php require "view_begin.php";?>
+<?php if (isset($_SESSION["connected"]) && $_SESSION["connected"]==True) : ?>
+  <?php require "view_begin_connected.php";?>
+<?php else : ?>
+  <?php require "view_begin.php";?>
+<?php endif ?>
 
-<!--
-  http://localhost/~12102253/index.php?controller=list&action=confiseries
-  http://localhost/~12102253/index.php?controller=list&action=confiseries&filter=croissant
--->
-
-      <section class="confiseries">
-          <h1>Nos confiseries</h1>
+      <section class="snacks">
+          <h1>Nos snacks</h1>
           <hr>
-          <div class="liste_confiseries">
-              <?php foreach ($produits as $ligne): ?>
+          <div class="liste_snacks">
+              <?php foreach ($snacks as $ligne): ?>
                 <ul class="produit">
                   <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                   <li><?=e($ligne["Nom"])?></li>
