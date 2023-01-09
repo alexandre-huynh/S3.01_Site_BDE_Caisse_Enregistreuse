@@ -75,7 +75,7 @@
                     <p><img src="Content/img/logo_espece.png" alt="Payer par Espece" height="60" /></p>
                 </td>
                 <td id="carte">
-                    <p><img src="Content/img/logo_.png" alt="Payer par Carte" height="60" /></p>
+                    <p><img src="Content/img/logo_carte.png" alt="Payer par Carte" height="60" /></p>
                 </td>
             </tr>
     </form>
