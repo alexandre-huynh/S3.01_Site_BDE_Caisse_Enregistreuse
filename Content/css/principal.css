@@ -116,6 +116,10 @@ footer{
     text-decoration: none;
     color: #EAE3E5;
 }
+
+.contenu-footer div a : hover{
+    text-decoration: underline;
+}
 .logo-univ{
     padding-top: 30px;
 }

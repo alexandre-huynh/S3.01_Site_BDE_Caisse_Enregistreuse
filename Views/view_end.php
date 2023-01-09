@@ -42,7 +42,3 @@
 </footer>
 </body>
 </html>
-
-
-Content/img/
-60
