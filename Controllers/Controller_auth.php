@@ -359,7 +359,7 @@ class Controller_auth extends Controller{
       $data = [
         "title" => "Déconnexion",
         "str_lien_retour" => "Retour à la page d'accueil",
-        "lien_retour" => "?controller=home&action=home" 
+        "lien_retour" => "?controller=home&action=home",
         "message" => "Vous avez été déconnecté."
       ];
       $this->render("message", $data);

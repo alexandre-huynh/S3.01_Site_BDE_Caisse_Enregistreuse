@@ -772,8 +772,10 @@ class Model
       $req1 = $this->bd->prepare('DELETE FROM Authentification WHERE Num_etud = :num_etud');
       $req1->bindValue('num_etud',$num_etud);
       $req1->execute();
-   
-      }
+
+      } 
+
+      
 
     
 
