@@ -45,6 +45,8 @@
         <input type="password" name="Password_verify" minlength="8" required />
       </label>
     </p>
+    <p>* : obligatoire</p>
+    <p> <input type="submit" value="Ajouter à la base de données"/> </p>
   </form>
 </section>
 
