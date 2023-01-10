@@ -235,7 +235,7 @@ class Controller_auth extends Controller{
 
           //Récupération du modèle
           $m = Model::getModel();
-          //Ajout du produit
+          //Ajout du client
           $m->addAuth($infosAuth);
           $ajout = $m->addClient($infos);
           
@@ -248,13 +248,13 @@ class Controller_auth extends Controller{
 
       //Préparation de $data pour l'affichage de la vue message
       $data = [
-          "title" => "Bienvenue parmi le Wolf BDE !",
+          "title" => "Bienvenue parmi nous !",
           "added_element" => "client",
-          "str_lien_retour" => "Retour à la page de gestion d'accueil",
+          "str_lien_retour" => "Retour à la page d'accueil",
           "lien_retour" => "?controller=home&action=home" 
       ];
       if ($ajout) {
-          $data["message"] = "Votre inscription a bien été prise en compte, " . $_POST["Prenom"] . " " . $_POST["Nom"] . ". Vous pouvez maintenant vous connecter à votre espace client.";
+          $data["message"] = "Votre inscription a bien été prise en compte, " . $_POST["Prenom"] . " " . $_POST["Nom"] . ". Vous pouvez maintenant vous connecter à votre espace client en vous connectant.";
       } else {
           $data["message"] = "Erreur dans la saisie des informations, le compte client n'a pas été ajouté.";
       }
