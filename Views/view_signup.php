@@ -8,8 +8,6 @@
   <h1>Formulaire d'inscription</h1>
 
   <form action="?controller=auth&action=signup" method="post" >
-    <!--A mettre directement dans le controller au lieu d'ici-->
-    <input type="hidden" name="id_client" value="<?=e($id_disponible)?>" readonly /> 
     <p>
       <label>Numéro étudiant* :
         <input type="number" name="num_etudiant" step="1" min="0" required />
@@ -37,12 +35,6 @@
       </label>
     </p>
 
-    <!--A mettre directement dans le controller au lieu d'ici-->
-    <input type="hidden" name="Date_creation" value="<?=e($date_today)?>" /> 
-
-    <!--A mettre directement dans le controller au lieu d'ici-->
-    <input type="hidden" name="Pts_fidelite" value="0" />
-
     <p>
       <label>Mot de passe (min 8 caractères)* :
         <input type="password" name="Password" minlength="8" required />
@@ -53,6 +45,8 @@
         <input type="password" name="Password_verify" minlength="8" required />
       </label>
     </p>
+    <p>* : obligatoire</p>
+    <p> <input type="submit" value="Ajouter à la base de données"/> </p>
   </form>
 </section>
 

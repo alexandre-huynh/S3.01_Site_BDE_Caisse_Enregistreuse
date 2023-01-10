@@ -244,6 +244,19 @@ class Model
       return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getInfosIndividu($table, $id)
+    {
+      if ($table=="Client"){
+        $req = $this->bd->prepare('SELECT * FROM Client WHERE id_client = :id');
+      }
+      elseif ($table =="Admin"){
+        $req = $this->bd->prepare('SELECT * FROM Admin WHERE id_admin = :id');
+      }
+      $req->bindValue(':id', $id);
+      $req->execute();
+      return $req->fetch(PDO::FETCH_ASSOC);
+    }
+
     //==================================================
 
     public function getHistoriqueAchats($search="default") // ou getVentes
@@ -658,6 +671,21 @@ class Model
       return (bool) $requete->rowCount();
     }
 
+    public function updatePtsFideliteClient($id_client, $id_produit)
+    {
+      //Préparation de la requête
+      $requete = $this->bd->prepare('UPDATE Client SET Pts_fidelite = ((SELECT Pts_fidelite FROM Client WHERE id_client = :id_client) + (SELECT Pts_fidelite_donner FROM Produit WHERE id_produit = :id_produit)) WHERE id_client = :id_client');
+
+      //Remplacement des marqueurs de place par les valeurs
+      $requete->bindValue(':id_client', $id_client);
+      $requete->bindValue(':id_produit', $id_produit);
+
+      //Exécution de la requête
+      $requete->execute();
+
+      return (bool) $requete->rowCount();
+    }
+
     public function getPassword($email,$table){
 
       if($table=="Admin"){
@@ -707,6 +735,28 @@ class Model
 
       }
 
+    }
+
+    //////
+
+    public function verifNumEtudiant($num_etud){
+      $req = $this->bd->prepare('SELECT * FROM Client WHERE num_etudiant = :num ');
+      $req->bindValue('num', $num_etud);
+      $req->execute();
+      return (bool) $req->rowCount();
+      
+    /* ancien code
+    if(isset($_POST['num_etudiant'])){
+      $req = this->bd->prepare('SELECT * FROM client WHERE Num_etudiant = :num ')
+      $req->bindValue('num',$_POST['num_etudiant']);
+      $req->execute();
+      $nb = $req->rowCount();
+
+      if ($nb>0){
+        $this->action_error("Numéro étudiant déjà utilisé "); 
+      }
+    }
+    */
     }
 
    

@@ -12,6 +12,14 @@
     <?= e($message) ?>
 </p>
 
+<?php if (isset($produits_traite)) : ?>
+  <ul>
+    <?php foreach ($produits_traite as $c => $v): ?>
+      <li><?=e($c)?> - <?=e($v)?> €</li>
+    <?php endforeach ?>
+  </ul>
+<?php endif ?>
+
 <?php if (isset($lien_retour) && isset($str_lien_retour)) : ?>
     <p>   
         <a href="<?= e($lien_retour) ?>"><?= e($str_lien_retour) ?></a>

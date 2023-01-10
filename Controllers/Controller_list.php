@@ -298,7 +298,7 @@ class Controller_list extends Controller{
     //==================================
     //     TEST SI C'EST UN CLIENT
     //==================================
-    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='client' || !$m->isInDatabaseClient($_SESSION["email"])){
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_client']) || !$_SESSION['connected'] || $_SESSION['statut']!='client' || !$m->isInDatabaseClient($_SESSION["email"])){
       $this->action_error("Vous devez être connecté pour accéder à votre espace client.");
     }
     //===================================
@@ -347,6 +347,32 @@ class Controller_list extends Controller{
         ]; 
       $this->render("espace_admin", $data);
     }
+  }
+
+  public function action_infos_compte(){
+    $m = Model::getModel();
+
+    //==================================
+    //     TEST SI CONNECTE
+    //==================================
+    if (!isset($_SESSION['connected']) || !$_SESSION['connected']){
+      $this->action_error("Vous devez être connecté pour consulter ou modifier vos informations.");
+    }
+    //===================================
+    
+    if($m->isInDatabaseAdmin($_SESSION['email'])){
+      $infos = $m->getInfosIndividu("Admin", $_SESSION["id_admin"]);
+    }
+    elseif($m->isInDatabaseClient($_SESSION['email'])){
+      $infos = $m->getInfosIndividu("Client", $_SESSION["id_client"]);
+    }
+
+    $data =
+      [
+        "infos" => $infos
+      ];
+
+    $this->render("informations", $data);
   }
 
   public function action_caisse(){
