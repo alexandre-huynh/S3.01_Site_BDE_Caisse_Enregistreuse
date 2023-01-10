@@ -727,6 +727,7 @@ class Model
     //////
 
     function newMdp(){
+      // A changer les $_SESSION['']
 
       // verif si dans la DB de CLient ou Admin 
       if(isInDatabaseAdmin($_SESSION['email'])){
@@ -743,13 +744,14 @@ class Model
           if (isset($_POST['Password']) and isset($_POST['NewPassword']) and isset($_POST['New_password_verif'])){
 
               // On récupère le password dans la BDD
-              $pas = $m->getPassword($_POST['email'],$table)
+              $pas = $m->getPassword($_POST['email'],$table);
 
               // vérifier si le password correspond bien à celui de l'utilisateur connecté
               if (isset(password_verify( $_POST['Password'],$pas ))){
 
                   if ($_POST['NewPassword']==$_POST['New_password_verif']){
 
+                    // TODO acher le password avant de le stocker 
                     // Pour update le nouveau password dans la BDD 
                     $m->updatePassword($_SESSION['email'],$pas,$table);
                   }
@@ -762,7 +764,7 @@ class Model
     function verif_num_etud(){
 
     if(isset($_POST['num_etudiant'])){
-      $req = this->bd->prepare('SELECT * FROM client WHERE Num_etudiant = :num ')
+      $req = this->bd->prepare('SELECT * FROM Client WHERE Num_etudiant = :num ');
       $req->bindValue('num',$_POST['num_etudiant']);
       $req->execute();
       $nb = $req->rowCount();
@@ -772,6 +774,19 @@ class Model
       }
     }
     }
+   
+    public function removeCompteClient($email){
+
+      $req = this->bd->prepare('DELETE FROM client where Email = :email ');
+      $req->bindValue('email',$email);
+      $req->execute();
+
+      $req1 = this->bd->prepare('DELETE FROM Client JOIN Authentification USING(num_etudiant) WHERE Email = :email');
+      $req1->bindValue('email',$email);
+      $req1->execute();
+        
+      }
+    
 
    
 
