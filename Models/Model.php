@@ -795,12 +795,12 @@ class Model
     public function removeCompteClient($email){
 
       // Suppression de la table client
-      $req = this->bd->prepare('DELETE FROM client where Email = :email ');
+      $req = $this->bd->prepare('DELETE FROM Client where Email = :email ');
       $req->bindValue('email',$email);
       $req->execute();
 
       // Suppression de la table Admin
-      $req1 = this->bd->prepare('DELETE FROM Client JOIN Authentification USING(num_etudiant) WHERE Email = :email');
+      $req1 = $this->bd->prepare('DELETE FROM Client JOIN Authentification USING(num_etudiant) WHERE Email = :email');
       $req1->bindValue('email',$email);
       $req1->execute();
       
