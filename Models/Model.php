@@ -257,6 +257,7 @@ class Model
       return $req->fetch(PDO::FETCH_ASSOC);
     }
 
+
     //==================================================
 
     public function getHistoriqueAchats($search="default") // ou getVentes
@@ -771,20 +772,24 @@ class Model
       }
       */
 
-    function verif_num_etud($num_etudiant){
-
-    if(isset($_POST['num_etudiant'])){
-      $req = this->bd->prepare('SELECT * FROM Client WHERE Num_etudiant = :num ');
-      $req->bindValue('num',$num_etudaint);
-      $req->execute();
-      $nb = $req->rowCount();
-
-      if ($nb>0){
-        $this->action_error("Numéro étudiant déjà utilisé "); 
+      public function verifNumEtudiant($num_etud){
+        $req = $this->bd->prepare('SELECT * FROM Client WHERE num_etudiant = :num ');
+        $req->bindValue('num', $num_etud);
+        $req->execute();
+        return (bool) $req->rowCount();
+        
+      /* ancien code
+      if(isset($_POST['num_etudiant'])){
+        $req = this->bd->prepare('SELECT * FROM client WHERE Num_etudiant = :num ')
+        $req->bindValue('num',$_POST['num_etudiant']);
+        $req->execute();
+        $nb = $req->rowCount();
+  
+        if ($nb>0){
+          $this->action_error("Numéro étudiant déjà utilisé "); 
+        }
       }
-    }
-    */
-    }
+      */
    
     public function removeCompteClient($email){
 
