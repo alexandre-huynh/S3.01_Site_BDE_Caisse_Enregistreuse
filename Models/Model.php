@@ -740,19 +740,19 @@ class Model
 
     //////
     
-    function newMdp(){
+    function newMdp($email){
 
       // Modif les variables $_SESSION 
       // verif si dans la DB de CLient ou Admin 
-      if(isInDatabaseAdmin($_SESSION['email'])){
+      if(isInDatabaseAdmin($email)){
         $table = "Admin";
       }
-      elseif(isInDatabaseClient($_SESSION['email'])){
+      elseif(isInDatabaseClient($email)){
         $table = "Client";
       }
       
               // On récupère le password dans la BDD
-              $pas = $m->getPassword($_POST['email'],$table);
+              $pas = $m->getPassword($email,$table);
 
               // vérifier si le password correspond bien à celui de l'utilisateur connecté
               if (isset(password_verify( $_POST['Password'],$pas ))){
@@ -760,7 +760,7 @@ class Model
                   if ($_POST['NewPassword']==$_POST['New_password_verif']){
 
                     // Pour update le nouveau password dans la BDD 
-                    $m->updatePassword($_SESSION['email'],$pas,$table);
+                    $m->updatePassword($email,$pas,$table);
                   }
               }
           }
@@ -800,7 +800,7 @@ class Model
       $req1 = $this->bd->prepare('DELETE FROM Client JOIN Authentification USING(num_etudiant) WHERE Email = :email');
       $req1->bindValue('email',$email);
       $req1->execute();
-      
+   
       }
     
 
