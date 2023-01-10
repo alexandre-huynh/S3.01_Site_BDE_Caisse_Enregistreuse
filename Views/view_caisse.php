@@ -5,7 +5,7 @@
 <?php endif ?>
 
 <!-- CHARGEMENT JAVASCRIPT CAISSE -->
-<?php echo '<script defer type="text/javascript" src="Utils/caisse_enregistreuse.js"></script>'; ?>
+<?php echo '<script defer type="text/javascript" src="Utils/caisse_enregist.js"></script>'; ?>
 
 <?php echo "<script>document.addEventListener('DOMContentLoaded', () => alert(\"DOM ready!\"));</script>"; ?>
 <!-- CHARGEMENT JAVASCRIPT CAISSE -->
