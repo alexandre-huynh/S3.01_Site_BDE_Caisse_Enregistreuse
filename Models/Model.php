@@ -739,9 +739,10 @@ class Model
     }
 
     //////
-    /*
+    
     function newMdp(){
 
+      // Modif les variables $_SESSION 
       // verif si dans la DB de CLient ou Admin 
       if(isInDatabaseAdmin($_SESSION['email'])){
         $table = "Admin";
@@ -750,10 +751,6 @@ class Model
         $table = "Client";
       }
       
-
-        // Faire verif si les champs ont bien été saisis 
-          if (isset($_POST['Password']) and isset($_POST['NewPassword']) and isset($_POST['New_password_verif'])){
-
               // On récupère le password dans la BDD
               $pas = $m->getPassword($_POST['email'],$table);
 
@@ -767,10 +764,10 @@ class Model
                   }
               }
           }
-      }
+      
 
-      }
-      */
+      
+      
 
       public function verifNumEtudiant($num_etud){
         $req = $this->bd->prepare('SELECT * FROM Client WHERE num_etudiant = :num ');
