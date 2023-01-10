@@ -740,7 +740,7 @@ class Model
     //////
 
     public function verifNumEtudiant($num_etud){
-      $req = $this->bd->prepare('SELECT * FROM client WHERE num_etudiant = :num ');
+      $req = $this->bd->prepare('SELECT * FROM Client WHERE num_etudiant = :num ');
       $req->bindValue('num', $num_etud);
       $req->execute();
       return (bool) $req->rowCount();
