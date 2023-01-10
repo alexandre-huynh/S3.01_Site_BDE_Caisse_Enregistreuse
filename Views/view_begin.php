@@ -12,7 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <!-- Script JS pour sélection langue déplacé dans Utils/langue.js-->
     <!--< ? php echo '<script src="Utils/langue.js"></script>'; ?>-->
-    <?php echo '<script type="text/javasript" src="Utils/load_script">loadScript("Utils/caisse_enregist.js");</script>'; ?>
+    <?php echo '<script type="text/javasript" src="Utils/load_script.js">loadScript("Utils/caisse_enregist.js");</script>'; ?>
 </head>
 <body>
 
