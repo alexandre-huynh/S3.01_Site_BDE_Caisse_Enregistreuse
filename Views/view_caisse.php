@@ -94,18 +94,18 @@
             <th>Snacks</th>
             <?php foreach ($snacks as $ligne): ?>
             <td>
+                <!--
                 <ul class="produit">
                     <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                     <li><?=e($ligne["Nom"])?></li>
                     <li><?=e($ligne["Prix"])?> €</li>
                 </ul>
-                <!--
+                -->
                 <div class="produit">
                     <div><img src="Content/img/< ?=e($ligne["Img_produit"])?>" alt="Image < ?=e($ligne["Nom"])?>" height="60" /></div>
                     <div>< ?=e($ligne["Nom"])?></div>
                     <div>< ?=e($ligne["Prix"])?> €</div>
                 </div>
-                -->
             </td>
             
             <?php endforeach ?>
@@ -150,6 +150,6 @@
 
 </div> <!--fin panier + produits-->  
 
-<script src="Utils/caisse_enregist.js"></script>
+<?php echo '<script type="text/javascript" src="Utils/caisse_enregist.js"></script>'; ?>
 
 <?php require "view_end.php";?>

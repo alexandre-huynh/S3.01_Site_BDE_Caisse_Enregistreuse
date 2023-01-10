@@ -198,11 +198,10 @@ function addSirops(product){
 
 
     function clickSnacks(){
-        let list_snacks = document.querySelectorAll('td');
+        let list_snacks = document.querySelectorAll("#snacks td");
         for(let i=0; i<list_snacks.length; i++){
             list_snacks[i].addEventListener('click',function(event){
             console.log('click');
-            /*
             if(event.target.nodeName!=='TD'){
                 return;
             }
@@ -210,6 +209,6 @@ function addSirops(product){
             ligne.textContent=event.target.textContent;
             addSnacks(ligne);
             let panier = document.getElementByID('panier');
-        panier.append(ligne);*/});
+        panier.append(ligne);});
         }
     }
