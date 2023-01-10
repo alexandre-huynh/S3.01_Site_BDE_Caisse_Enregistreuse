@@ -244,6 +244,19 @@ class Model
       return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getInfosIndividu($table, $id)
+    {
+      if ($table=="Client"){
+        $req = $this->bd->prepare('SELECT * FROM Client WHERE id_client = :id');
+      }
+      elseif ($table =="Admin"){
+        $req = $this->bd->prepare('SELECT * FROM Admin WHERE id_admin = :id');
+      }
+      $req->bindValue(':id', $id);
+      $req->execute();
+      return $req->fetch(PDO::FETCH_ASSOC);
+    }
+
     //==================================================
 
     public function getHistoriqueAchats($search="default") // ou getVentes
@@ -726,41 +739,13 @@ class Model
 
     //////
 
-    function newMdp(){
-
-      // verif si dans la DB de CLient ou Admin 
-      if(isInDatabaseAdmin($_SESSION['email'])){
-        $table = "Admin";
-      }
-      elseif(isInDatabaseClient($_SESSION['email'])){
-        $table = "Client";
-      }
-
-      // Vérif si l'utilisateur est bien connecté 
-      if (isset($_SESSION['connected'] and $_SESSION['connected']==True)){
-
-        // Faire verif si les champs ont bien été saisis 
-          if (isset($_POST['Password']) and isset($_POST['NewPassword']) and isset($_POST['New_password_verif'])){
-
-              // On récupère le password dans la BDD
-              $pas = $m->getPassword($_POST['email'],$table)
-
-              // vérifier si le password correspond bien à celui de l'utilisateur connecté
-              if (isset(password_verify( $_POST['Password'],$pas ))){
-
-                  if ($_POST['NewPassword']==$_POST['New_password_verif']){
-
-                    // Pour update le nouveau password dans la BDD 
-                    $m->updatePassword($_SESSION['email'],$pas,$table);
-                  }
-              }
-          }
-      }
-
-      }
-
-    function verif_num_etud(){
-
+    public function verifNumEtudiant($num_etud){
+      $req = this->bd->prepare('SELECT * FROM client WHERE num_etudiant = :num ');
+      $req->bindValue('num', $num_etud);
+      $req->execute();
+      return (bool) $req->rowCount();
+      
+    /* ancien code
     if(isset($_POST['num_etudiant'])){
       $req = this->bd->prepare('SELECT * FROM client WHERE Num_etudiant = :num ')
       $req->bindValue('num',$_POST['num_etudiant']);
@@ -771,6 +756,7 @@ class Model
         $this->action_error("Numéro étudiant déjà utilisé "); 
       }
     }
+    */
     }
 
    

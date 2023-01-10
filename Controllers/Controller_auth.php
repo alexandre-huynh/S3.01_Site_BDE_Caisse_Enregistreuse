@@ -196,9 +196,11 @@ class Controller_auth extends Controller{
     isset($_POST['Email']))
     {
       if($m->isInDatabaseClient($_POST['Email'])){
-
-        $this->action_error("L'adresse mail est déjà utilisée, Veuillez en saisir une autre ");
-
+        $this->action_error("Cette adresse mail est déjà utilisée, veuillez en saisir une autre.");
+      }
+      elseif($m->verifNumEtudiant($_POST['num_etudiant'])){
+        $this->action_error("Le numéro étudiant saisi est déjà utilisé, veuillez revérifiez votre saisie. 
+        Si le problème persiste, parlez-en aux responsables du BDE");
       }
       else{
         // !!
@@ -233,8 +235,6 @@ class Controller_auth extends Controller{
 
         $infosAuth = [$_POST["num_etudiant"], password_hash($_POST["Password"], PASSWORD_DEFAULT)];
 
-
-
         //Récupération du modèle
         $m = Model::getModel();
         //Ajout du client
@@ -246,7 +246,6 @@ class Controller_auth extends Controller{
     else{
       $this->action_error("Erreur, des informations n'ont pas été saisies ou le mot de passe n'est pas correspondant.");
     }
-    
 
     //Préparation de $data pour l'affichage de la vue message
     $data = [
@@ -267,6 +266,8 @@ class Controller_auth extends Controller{
   }
         
   public function action_oublimdp(){
+    $m = Model::getModel();
+
       if(isset($_POST['Email'])){
 
         $password = uniqid();
@@ -297,6 +298,56 @@ class Controller_auth extends Controller{
     
         }
     }
+  }
+
+  public function action_newmdp(){
+    $m = Model::getModel();
+
+    // verif si dans la DB de CLient ou Admin 
+    if($m->isInDatabaseAdmin($_SESSION['email'])){
+      $table = "Admin";
+    }
+    elseif($m->isInDatabaseClient($_SESSION['email'])){
+      $table = "Client";
+    }
+
+    // Vérif si l'utilisateur est bien connecté 
+    if (isset($_SESSION['connected']) and $_SESSION['connected']){
+
+      // Faire verif si les champs ont bien été saisis 
+        if (isset($_POST['Password']) and isset($_POST['NewPassword']) and isset($_POST['New_password_verif'])){
+
+            // On récupère le password dans la BDD
+            $pas = $m->getPassword($_POST['email'],$table);
+
+            // vérifier si le password correspond bien à celui de l'utilisateur connecté
+            if (password_verify($_POST['Password'],$pas )){
+
+                if ($_POST['NewPassword']==$_POST['New_password_verif']){
+
+                  // Pour update le nouveau password dans la BDD 
+                  $m->updatePassword($_SESSION['email'], password_hash($_POST['NewPassword']), $table);
+                }
+                else {
+                  // Temporaire
+                  $this->action_error("Mot de passe et confirmation non correspondant.");
+                }
+            }
+            else {
+              // Temporaire
+              $this->action_error("Ancien mot de passe non correspondant.");
+            }
+        }
+        else {
+          // Temporaire
+          $this->action_error("Champs non saisies.");
+        }
+    }
+    else {
+      // Temporaire
+      $this->action_error("Non connecté.");
+    }
+
   }
 
 
