@@ -21,9 +21,9 @@
                 <li><a href="?controller=list&action=snacks" title="Snacks">Snacks</a></li>
                 <li><a href="?controller=list&action=boissons" title="Boissons">Boissons</a></li>
                 <li><a href="?controller=list&action=<?php if (isset($_SESSION["statut"]) && $_SESSION["statut"]=="admin") : ?>espace_admin<?php elseif (isset($_SESSION["statut"]) && $_SESSION["statut"]=="client") : ?>espace_client<?php endif ?>" title="Mon Espace">Mon Espace</a></li>
-                <li><a href="?controller=set&action=infos_compte" title="Mes infos">Mes Infos</a></li>
+                <li><a href="?controller=list&action=infos_compte" title="Mes infos">Mes Infos</a></li>
                 <li><img src="Content/img/logo_user.png" width="40px" alt="Image Logo Utilisateur" />  <?=e($_SESSION["prenomnom"])?> (<?=e($_SESSION["num_etudiant"])?>)</li>
-                <!--<li><a href="?controller=auth&action=form_logout" title="Se déconnecter">Se déconnecter</a></li>-->
+                <li><a href="?controller=auth&action=logout" title="Se déconnecter">Se déconnecter</a></li>
 
                 <!--Menu deroulant pour changer la langue du site-->
                 <li class="li_changer_langue">

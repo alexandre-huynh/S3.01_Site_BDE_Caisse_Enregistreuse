@@ -54,7 +54,11 @@ main{
 
 main{
     background-color: #E2F6F0;
+    /* 
+    Alex H. : ça crééait un mini espace sur la droite quand on était connecté
+    après ça enlève la marge entre la barre de navig en haut et le contenu mais bon
     margin: 8px;
+    */
 }
 
 section.banniere_accueil{

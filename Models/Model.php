@@ -244,6 +244,19 @@ class Model
       return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getInfosIndividu($table, $id)
+    {
+      if ($table=="Client"){
+        $req = $this->bd->prepare('SELECT * FROM Client WHERE id_client = :id');
+      }
+      elseif ($table =="Admin"){
+        $req = $this->bd->prepare('SELECT * FROM Admin WHERE id_admin = :id');
+      }
+      $req->bindValue(':id', $id);
+      $req->execute();
+      return $req->fetch(PDO::FETCH_ASSOC);
+    }
+
     //==================================================
 
     public function getHistoriqueAchats($search="default") // ou getVentes
@@ -727,7 +740,6 @@ class Model
     //////
 
     function newMdp(){
-      // A changer les $_SESSION['']
 
       // verif si dans la DB de CLient ou Admin 
       if(isInDatabaseAdmin($_SESSION['email'])){
@@ -744,14 +756,13 @@ class Model
           if (isset($_POST['Password']) and isset($_POST['NewPassword']) and isset($_POST['New_password_verif'])){
 
               // On récupère le password dans la BDD
-              $pas = $m->getPassword($_POST['email'],$table);
+              $pas = $m->getPassword($_POST['email'],$table)
 
               // vérifier si le password correspond bien à celui de l'utilisateur connecté
               if (isset(password_verify( $_POST['Password'],$pas ))){
 
                   if ($_POST['NewPassword']==$_POST['New_password_verif']){
 
-                    // TODO acher le password avant de le stocker 
                     // Pour update le nouveau password dans la BDD 
                     $m->updatePassword($_SESSION['email'],$pas,$table);
                   }
@@ -773,6 +784,7 @@ class Model
         $this->action_error("Numéro étudiant déjà utilisé "); 
       }
     }
+    */
     }
    
     public function removeCompteClient($email){
