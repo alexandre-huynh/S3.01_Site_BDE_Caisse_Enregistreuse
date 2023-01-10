@@ -93,7 +93,7 @@
         <tr id="snacks">
             <th>Snacks</th>
             <?php foreach ($snacks as $ligne): ?>
-            <td class="snack">
+            <td class="snacks">
                 <ul>
                     <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                     <li><?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> €</li>
