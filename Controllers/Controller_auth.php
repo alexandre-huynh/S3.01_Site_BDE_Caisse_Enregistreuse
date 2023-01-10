@@ -325,6 +325,10 @@ class Controller_auth extends Controller{
 
                   // Pour update le nouveau password dans la BDD 
                   $m->updatePassword($_SESSION['email'], password_hash($_POST['NewPassword']), $table);
+                  $data= [
+                    "message" => "Mot de passe modifié."
+                  ];
+                  $this->render("message", $data);
                 }
                 else {
                   // Temporaire
@@ -346,6 +350,20 @@ class Controller_auth extends Controller{
       $this->action_error("Non connecté.");
     }
 
+  }
+  
+  public function action_logout(){
+    if(isset($_SESSION['connected']) && $_SESSION['connected'] !== null ){
+      $_SESSION = array();
+      session_destroy();
+      $date = [
+        "message" => "Vous avez été déconnecté."
+      ];
+      $this->render("message", $data);
+    }
+    else{
+      $this->action_error("Vous n'êtes pas connectés ");
+    }
   }
 
 
