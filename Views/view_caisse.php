@@ -90,7 +90,7 @@
 
     <!-- boutons produits-->
     <table id="liste_produits">
-        <tr id="snacks">
+        <tr>
             <th>Snacks</th>
             <?php foreach ($snacks as $ligne): ?>
             <td class="snacks">
