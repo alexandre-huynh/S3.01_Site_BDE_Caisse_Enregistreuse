@@ -202,7 +202,7 @@ function clickSnacks(){
     for(let d of list_snacks){
         d.addEventListener('click', function(event){
             console.log('click');//});
-            let ligne = createElement('li');
+            let ligne = document.createElement('li');
             ligne.textContent=event.target.textContent;
             addSnacks(ligne);
             let panier = document.getElementByID('panier');

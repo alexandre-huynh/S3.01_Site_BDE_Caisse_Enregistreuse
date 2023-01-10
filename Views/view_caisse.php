@@ -9,14 +9,14 @@
 
 <div id="panier_et_produits">
 
-    <div id="panier">
+    <div>
         <!-- 
         ======================================
                     Partie Graphique
         ======================================
         -->
         <p> Panier du client </p>
-        <ul>
+        <ul id="panier">
             <li>2 x Kinder Bueno (exemple)</li>
             <!-- 
                 Affichage des produits ici, genre 2x Kinder bueno etc
