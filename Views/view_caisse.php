@@ -94,11 +94,14 @@
             <th>Snacks</th>
             <?php foreach ($snacks as $ligne): ?>
             <td>
+                
                 <ul class="produit">
                     <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                     <li><?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> €</li>
                     <li><?=e($ligne["Stock"])?></li>
                 </ul>
+                <!--
+                
                 <!--
                 <div class="produit">
                     <div><img src="Content/img/< ?=e($ligne["Img_produit"])?>" alt="Image < ?=e($ligne["Nom"])?>" height="60" /></div>
