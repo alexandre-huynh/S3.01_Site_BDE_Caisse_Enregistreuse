@@ -163,6 +163,8 @@
 
 <!-- CHARGEMENT JAVASCRIPT CAISSE -->
 <?php echo '<script defer type="text/javascript" src="Utils/caisse_enregist.js"></script>'; ?>
+
+<?php echo '<script>clickSnacks()</script>' ?>
 <!-- CHARGEMENT JAVASCRIPT CAISSE -->
 
 <?php require "view_end.php";?>

@@ -138,82 +138,83 @@ function addSirops(product){
 
 // Fonction générales 
 
-    function changeQuantity(product, quantity){
-        let snacks = getSnacks();
-        let foundProduct = snacks.find(p => p.idpanier == product.idpanier);
-        if (foundProduct!= undefined){
-            foundProduct.quantity += quantity;
-            if  (foundProduct.quantity<=0){
-                removeSnacks(product);
-            }
-            else{
-                saveSnacks(snacks);
-            }
+function changeQuantity(product, quantity){
+    let snacks = getSnacks();
+    let foundProduct = snacks.find(p => p.idpanier == product.idpanier);
+    if (foundProduct!= undefined){
+        foundProduct.quantity += quantity;
+        if  (foundProduct.quantity<=0){
+            removeSnacks(product);
+        }
+        else{
+            saveSnacks(snacks);
         }
     }
-    function getNumberProducts(){
-      
-        let number = 0;
-        let snacks = getSnacks();
-        for(let product of snacks){
-            number+=product.quantity;
-        }
-        let boissons = getBoissons();
-        for(let product of boissons){
-            number+=product.quantity;
-        }
-        let sodas = getSodas();
-        for(let product of sodas){
-            number+=product.quantity;
-        }
-        let sirops = getSirops();
-        for(let product of sirops){
-            number+=product.quantity;
-        }
-
-        return number;
-    }
-
-    function getTotalPanier(){
-        let total = 0;
-        let snacks = getSnacks();
-        for(let product of snacks) {
-            total+=product.quantity*product.price;}
-        let boissons = getBoissons();
-        for(let product of boissons){
-            total+=product.quantity*product.price;
-        }
-        let sodas = getSodas();
-        for(let product of sodas){
-            total+=product.quantity*product.price;
-        }
-        let sirops = getSirops();
-        for(let product of sirops){
-            total+=product.quantity*product.price;
-        }
-        return total;
-    }
-
-console.log('Pitié');
-
-   function clickSnacks(){
-        let list_snacks = document.getElementsByClassName('snacks');
-        for(let d of list_snacks){
-            d.addEventListener('click', function(event){console.log('click');});
-            /*
-            let ligne = createElement('li');
-            ligne.textContent=event.target.textContent;
-            addSnacks(ligne);
-            let panier = document.getElementByID('panier');
-            panier.append(ligne);
-            */
-        }  
-    }
-
+}
+function getNumberProducts(){
     
+    let number = 0;
+    let snacks = getSnacks();
+    for(let product of snacks){
+        number+=product.quantity;
+    }
+    let boissons = getBoissons();
+    for(let product of boissons){
+        number+=product.quantity;
+    }
+    let sodas = getSodas();
+    for(let product of sodas){
+        number+=product.quantity;
+    }
+    let sirops = getSirops();
+    for(let product of sirops){
+        number+=product.quantity;
+    }
 
-    let pdt_snacks = document.querySelectorAll('.produit');
-    for(let i=0;i<pdt_snacks.length;i++){
-    pdt_snacks[i].addEventListener('click',function(){
-        console.log('Test1');
-    });}
+    return number;
+}
+
+function getTotalPanier(){
+    let total = 0;
+    let snacks = getSnacks();
+    for(let product of snacks) {
+        total+=product.quantity*product.price;}
+    let boissons = getBoissons();
+    for(let product of boissons){
+        total+=product.quantity*product.price;
+    }
+    let sodas = getSodas();
+    for(let product of sodas){
+        total+=product.quantity*product.price;
+    }
+    let sirops = getSirops();
+    for(let product of sirops){
+        total+=product.quantity*product.price;
+    }
+    return total;
+}
+
+
+
+function clickSnacks(){
+    console.log('Ca marche');
+    let list_snacks = document.getElementsByClassName('snacks');
+    for(let d of list_snacks){
+        d.addEventListener('click', function(event){console.log('click');});
+        /*
+        let ligne = createElement('li');
+        ligne.textContent=event.target.textContent;
+        addSnacks(ligne);
+        let panier = document.getElementByID('panier');
+        panier.append(ligne);
+        */
+    }  
+}
+
+
+
+let pdt_snacks = document.querySelectorAll('.produit');
+for(let i=0;i<pdt_snacks.length;i++){
+pdt_snacks[i].addEventListener('click',function(){
+    console.log('Test1');
+});}
