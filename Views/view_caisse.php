@@ -150,6 +150,6 @@
 
 </div> <!--fin panier + produits-->  
 
-<script src="Utils/caisse_enregist.js"></script>
+<script defer src="Utils/caisse_enregist.js"></script>
 
 <?php require "view_end.php";?>
