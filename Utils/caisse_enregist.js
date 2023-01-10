@@ -199,8 +199,8 @@ function addSirops(product){
 
     //function clickSnacks(){
         let list_snacks = document.getElementsByClassName('.produit');
-        for(let i=0; i<list_snacks.length; i++){
-            list_snacks[i].addEventListener('click',function(event){
+        for(let d of produits){
+            d.addEventListener('click',function(event){
             console.log('click');
             /*
             if(event.target.nodeName!=='TD'){
