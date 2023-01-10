@@ -651,7 +651,11 @@ class Controller_set extends Controller{
       "message" => $message
     ];
     $this->render("message", $data);
-}
+  }
+
+  public function action_update_infos(){
+    
+  }
 
   /*
   ===========================================================

@@ -260,9 +260,7 @@ class Controller_auth extends Controller{
         $data["message"] = "Erreur dans la saisie des informations, le compte client n'a pas été ajouté.";
     }
 
-  $this->render("message", $data);
-
-      
+    $this->render("message", $data);
   }
         
   public function action_oublimdp(){
@@ -318,7 +316,7 @@ class Controller_auth extends Controller{
         if (isset($_POST['Password']) and isset($_POST['NewPassword']) and isset($_POST['New_password_verif'])){
 
             // On récupère le password dans la BDD
-            $pas = $m->getPassword($_POST['email'],$table);
+            $pas = $m->getPassword($_SESSION['email'],$table);
 
             // vérifier si le password correspond bien à celui de l'utilisateur connecté
             if (password_verify($_POST['Password'],$pas )){
