@@ -202,9 +202,6 @@ function addSirops(product){
         for(let i=0; i<list_snacks.length; i++){
             list_snacks[i].addEventListener('click',function(event){
             console.log('click');
-            if(event.target.nodeName!=='TD'){
-                return;
-            }
             let ligne = createElement('li');
             ligne.textContent=event.target.textContent;
             addSnacks(ligne);
