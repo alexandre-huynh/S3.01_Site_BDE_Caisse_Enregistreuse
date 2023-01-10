@@ -162,9 +162,9 @@
 </div> <!--fin panier + produits-->  
 
 <!-- CHARGEMENT JAVASCRIPT CAISSE -->
-<?php echo '<script defer type="text/javascript" src="Utils/caisse_enregist.js"></script>'; ?>
+<script defer type="text/javascript" src="Utils/caisse_enregist.js"></script>
 
-<?php echo '<script>clickSnacks()</script>' ?>
+<script defer>clickSnacks();</script>
 <!-- CHARGEMENT JAVASCRIPT CAISSE -->
 
 <?php require "view_end.php";?>
