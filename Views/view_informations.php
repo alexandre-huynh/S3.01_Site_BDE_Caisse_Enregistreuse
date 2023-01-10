@@ -1,4 +1,8 @@
-<?php require "view_begin.php";?>
+<?php if (isset($_SESSION["connected"]) && $_SESSION["connected"]==True) : ?>
+  <?php require "view_begin_connected.php";?>
+<?php else : ?>
+  <?php require "view_begin.php";?>
+<?php endif ?>
 
 <h1>Mes informations</h1>
 
@@ -47,9 +51,13 @@
     <p>
       Points fidélité : <!--< ?=e($date_today)?>-->
     </p>
+
+    <!--Validation-->
+
+    <p> <input type="submit" value="Modifier les informations"/> </p>
 </form>
 <form action="?controller=auth&action=newmdp" method="post">
-    <h2>Modifier son mot de passe</h2>
+    <h2>Modification de mot de passe</h2>
     <p>
       <label>Ancien mot de passe* :
         <input type="password" name="Password" minlength="8" required />
@@ -65,6 +73,9 @@
         <input type="password" name="New_password_verif" minlength="8" required />
       </label>
     </p>
+    <!--Validation-->
+    <p>* : obligatoire</p>
+    <p> <input type="submit" value="Modifier le mot de passe"/> </p>
 </form>
 
 <?php require "view_end.php";?>
