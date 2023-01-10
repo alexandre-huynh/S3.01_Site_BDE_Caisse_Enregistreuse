@@ -97,9 +97,10 @@
                 
                 <ul class="produit">
                     <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                    <li><?=e($ligne["Nom"])?></li>
-                    <li><?=e($ligne["Prix"])?> €</li>
+                    <li><?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> €</li>
+                    <li><?=e($ligne["Stock"])?></li>
                 </ul>
+                <!--
                 
                 <!--
                 <div class="produit">
@@ -118,8 +119,8 @@
             <td>
                 <ul class="produit">
                     <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                    <li><?=e($ligne["Nom"])?></li>
-                    <li><?=e($ligne["Prix"])?> €</li>
+                    <li><?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> €</li>
+                    <li><?=e($ligne["Stock"])?></li>
                 </ul>
             </td>
             <?php endforeach ?>
@@ -130,8 +131,8 @@
             <td>
                 <ul class="produit">
                     <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                    <li><?=e($ligne["Nom"])?></li>
-                    <li><?=e($ligne["Prix"])?> €</li>
+                    <li><?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> €</li>
+                    <li><?=e($ligne["Stock"])?></li>
                 </ul>
             </td>
             <?php endforeach ?>
@@ -142,8 +143,8 @@
             <td>
                 <ul class="produit">
                     <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                    <li><?=e($ligne["Nom"])?></li>
-                    <li><?=e($ligne["Prix"])?> €</li>
+                    <li><?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> €</li>
+                    <li><?=e($ligne["Stock"])?></li>
                 </ul>
             </td>
             <?php endforeach ?>
