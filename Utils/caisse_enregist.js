@@ -212,6 +212,9 @@ function clickSnacks(){
 }
 
 
+//initialisation addeventlistener
+clickSnacks();
+
 
 let pdt_snacks = document.querySelectorAll('.produit');
 for(let i=0;i<pdt_snacks.length;i++){
