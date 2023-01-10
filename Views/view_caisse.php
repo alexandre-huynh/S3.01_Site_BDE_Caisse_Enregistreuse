@@ -93,9 +93,8 @@
         <tr id="snacks">
             <th>Snacks</th>
             <?php foreach ($snacks as $ligne): ?>
-            <td>
-                
-                <ul class="produit">
+            <td class="snack">
+                <ul>
                     <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                     <li><?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> €</li>
                     <li><?=e($ligne["Stock"])?></li>
@@ -116,7 +115,7 @@
         <tr id="boissons">
             <th>Boissons</th>
             <?php foreach ($boissons as $ligne): ?>
-            <td>
+            <td class="boissons">
                 <ul class="produit">
                     <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                     <li><?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> €</li>
@@ -128,7 +127,7 @@
         <tr id="sodas">
             <th>Sodas</th>
             <?php foreach ($sodas as $ligne): ?>
-            <td>
+            <td class="sodas">
                 <ul class="produit">
                     <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                     <li><?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> €</li>
@@ -140,7 +139,7 @@
         <tr id="sirops">
             <th>Sirops</th>
             <?php foreach ($sirops as $ligne): ?>
-            <td>
+            <td class="sirops">
                 <ul class="produit">
                     <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                     <li><?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> €</li>
