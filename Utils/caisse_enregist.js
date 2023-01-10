@@ -198,14 +198,14 @@ function addSirops(product){
 
 
     function clickSnacks(){
-        let list_snacks = document.querySelectorAll("td");
-        for(let i=0; i<list_snacks.length; i++){
-            list_snacks[i].addEventListener('click',function(event){
-            console.log('click');
-            let ligne = createElement('li');
+        let list_snacks = document.getElementsByClassName("snacks");
+        for(let d of list_snacks){
+            d.addEventListener('click',function(event){
+            console.log('click');});
+        /*  let ligne = createElement('li');
             ligne.textContent=event.target.textContent;
             addSnacks(ligne);
             let panier = document.getElementByID('panier');
-        panier.append(ligne);});
-        }
-    }
+        panier.append(ligne);
+        } */
+    }}
