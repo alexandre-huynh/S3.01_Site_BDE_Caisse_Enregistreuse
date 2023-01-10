@@ -210,6 +210,8 @@ console.log('Pitié');
         }  
     }
 
+    
+
     let pdt_snacks = document.querySelectorAll('.produit');
     for(let i=0;i<pdt_snacks.length;i++){
     pdt_snacks[i].addEventListener('click',function(){
