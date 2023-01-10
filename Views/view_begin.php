@@ -46,4 +46,4 @@
     <main>
 
     <!-- Script JS pour sélection langue déplacé dans Utils/langue.js-->
-    <script src="Utils/langue.js"></script>
+    <?php echo '<script src="Utils/langue.js"></script>'; ?>
