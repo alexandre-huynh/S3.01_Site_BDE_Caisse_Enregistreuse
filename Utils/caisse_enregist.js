@@ -199,7 +199,7 @@ function addSirops(product){
 
     //function clickSnacks(){
         let list_snacks = document.getElementsByClassName('produit');
-        for(let d of produit){
+        for(let d of list_snacks){
             d.addEventListener('click',function(event){
             console.log('click');
             /*
