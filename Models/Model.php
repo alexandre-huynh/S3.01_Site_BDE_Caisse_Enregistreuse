@@ -778,6 +778,7 @@ class Model
         $req->execute();
         return (bool) $req->rowCount();
         
+      }
       /* ancien code
       if(isset($_POST['num_etudiant'])){
         $req = this->bd->prepare('SELECT * FROM client WHERE Num_etudiant = :num ')
