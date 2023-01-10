@@ -20,11 +20,11 @@ INSERT INTO Admin values (1,11223344, 'Dupont', 'Christine', '0655443322', 'chri
 INSERT INTO SuperAdmin values (0,1);
 
 -- INSERTION PRODUIT
-INSERT INTO Produit values (0, 'Kinder Bueno', 'Confiserie', 0.8, 'kinder_bueno.png', '2004-5-12', 10, 2, 40, 20);
+INSERT INTO Produit values (0, 'Kinder Bueno', 'Snack', 0.8, 'kinder_bueno.png', '2004-5-12', 10, 2, 40, 20);
 INSERT INTO Produit values (1, 'Cristaline (50cl)', 'Boisson', 0.5, 'cristaline_(50cl).png', '2004-4-12', 3, 1, 3, 10);
 INSERT INTO Produit values (2, 'Coca - Cola', 'Soda', 0.8 , 'coca_-_cola.png', '2004-3-12', 10, 2, 10, 5);
-INSERT INTO Produit values (3, 'Lays Nature', 'Confiserie', 0.6 , 'lays_nature.png', '2004-6-20', 7, 1, 30, 25);
-INSERT INTO Produit values (4, 'Lays Barbecue', 'Confiserie', 0.7 , 'lays_barbecue.png', '2004-6-20', 7, 1, 20, 17);
+INSERT INTO Produit values (3, 'Lays Nature', 'Snack', 0.6 , 'lays_nature.png', '2004-6-20', 7, 1, 30, 25);
+INSERT INTO Produit values (4, 'Lays Barbecue', 'Snack', 0.7 , 'lays_barbecue.png', '2004-6-20', 7, 1, 20, 17);
 
 
 -- INSERTION VENTE

@@ -1,10 +1,8 @@
-<?php require "view_begin.php";?>
-
-<!--
-  http://localhost/~12102253/index.php?controller=list&action=boissons
-  http://localhost/~12102253/index.php?controller=list&action=boissons&type=soda
-  http://localhost/~12102253/index.php?controller=list&action=boissons&type=soda&filter=decroissant
--->
+<?php if (isset($_SESSION["connected"]) && $_SESSION["connected"]==True) : ?>
+  <?php require "view_begin_connected.php";?>
+<?php else : ?>
+  <?php require "view_begin.php";?>
+<?php endif ?>
 
 <!-- TODO: avec les 3 boutons pour choisir soit soda, soit boissons etc, cacher le contenu avec JavaScript-->
 <!-- Exemple: on clique sur soda, ça affichera les sodas et ça cachera le reste-->

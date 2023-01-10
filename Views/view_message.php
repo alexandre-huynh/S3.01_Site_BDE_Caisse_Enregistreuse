@@ -1,5 +1,8 @@
-<?php require "view_begin.php"; ?>
-
+<?php if (isset($_SESSION["connected"]) && $_SESSION["connected"]==True) : ?>
+  <?php require "view_begin_connected.php";?>
+<?php else : ?>
+  <?php require "view_begin.php";?>
+<?php endif ?>
 
 <h1> 
     <?= e($title) ?> 
@@ -8,6 +11,14 @@
 <p>   
     <?= e($message) ?>
 </p>
+
+<?php if (isset($produits_traite)) : ?>
+  <ul>
+    <?php foreach ($produits_traite as $c => $v): ?>
+      <li><?=e($c)?> - <?=e($v)?> €</li>
+    <?php endforeach ?>
+  </ul>
+<?php endif ?>
 
 <?php if (isset($lien_retour) && isset($str_lien_retour)) : ?>
     <p>   
