@@ -356,7 +356,7 @@ class Controller_auth extends Controller{
     if(isset($_SESSION['connected']) && $_SESSION['connected'] !== null ){
       $_SESSION = array();
       session_destroy();
-      $date = [
+      $data = [
         "message" => "Vous avez été déconnecté."
       ];
       $this->render("message", $data);
