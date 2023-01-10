@@ -95,9 +95,7 @@
             <?php foreach ($snacks as $ligne): ?>
             <td>
                 <ul class="produit">
-                    <!--
-                    <li><img src="Content/img/< ?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                    -->
+                    <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                     <li><?=e($ligne["Nom"])?></li>
                     <li><?=e($ligne["Prix"])?> €</li>
                 </ul>
@@ -117,9 +115,7 @@
             <?php foreach ($boissons as $ligne): ?>
             <td>
                 <ul class="produit">
-                    <!--
-                    <li><img src="Content/img/< ?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                    -->
+                    <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                     <li><?=e($ligne["Nom"])?></li>
                     <li><?=e($ligne["Prix"])?> €</li>
                 </ul>
@@ -131,9 +127,7 @@
             <?php foreach ($sodas as $ligne): ?>
             <td>
                 <ul class="produit">
-                    <!--
-                    <li><img src="Content/img/< ?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                    -->
+                    <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                     <li><?=e($ligne["Nom"])?></li>
                     <li><?=e($ligne["Prix"])?> €</li>
                 </ul>
@@ -145,9 +139,7 @@
             <?php foreach ($sirops as $ligne): ?>
             <td>
                 <ul class="produit">
-                    <!--
-                    <li><img src="Content/img/< ?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                    -->
+                    <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                     <li><?=e($ligne["Nom"])?></li>
                     <li><?=e($ligne["Prix"])?> €</li>
                 </ul>
