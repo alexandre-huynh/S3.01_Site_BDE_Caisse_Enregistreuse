@@ -198,7 +198,7 @@ function addSirops(product){
 
 
     function clickSnacks(){
-        let list_snacks = document.querySelectorAll('#snacks td');
+        let list_snacks = document.querySelectorAll('td');
         for(let i=0; i<list_snacks.length; i++){
             list_snacks[i].addEventListener('click',function(event){
             console.log('click');
