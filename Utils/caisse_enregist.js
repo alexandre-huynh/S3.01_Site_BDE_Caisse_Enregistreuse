@@ -198,8 +198,8 @@ function addSirops(product){
 
 
     //function clickSnacks(){
-        let list_snacks = document.getElementsByClassName('.produit');
-        for(let d of produits){
+        let list_snacks = document.getElementsByClassName('produit');
+        for(let d of produit){
             d.addEventListener('click',function(event){
             console.log('click');
             /*
