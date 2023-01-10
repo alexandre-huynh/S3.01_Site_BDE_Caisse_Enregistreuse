@@ -194,11 +194,11 @@ function addSirops(product){
         return total;
     }
 
-
+console.log('Pitié');
 
 
     function clickSnacks(){
-        let list_snacks = document.getElementsByClassName("snacks");
+        let list_snacks = document.getElementsByClassName('produits');
         for(let d of list_snacks){
             d.addEventListener('click',function(event){
             console.log('click');});
