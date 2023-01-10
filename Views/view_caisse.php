@@ -88,6 +88,16 @@
 
     <hr>
 
+    <!-- TEST -->
+    <p id="snack">
+        <?php foreach ($snacks as $ligne): ?>
+        <div class="produit">
+            <div><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></div>
+            <div><?=e($ligne["Nom"])?></div>
+            <div><?=e($ligne["Prix"])?> €</div>
+        </div>
+        <?php endforeach ?>
+    </p>
     <!-- boutons produits-->
     <table id="liste_produits">
         <tr>
