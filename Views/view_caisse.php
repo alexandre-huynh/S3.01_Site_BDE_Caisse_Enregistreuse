@@ -4,12 +4,6 @@
   <?php require "view_begin.php";?>
 <?php endif ?>
 
-<!-- CHARGEMENT JAVASCRIPT CAISSE -->
-<?php echo '<script defer type="text/javascript" src="Utils/caisse_enregist.js"></script>'; ?>
-
-<?php echo "<script>document.addEventListener('DOMContentLoaded', () => alert(\"DOM ready!\"));</script>"; ?>
-<!-- CHARGEMENT JAVASCRIPT CAISSE -->
-
 <!-- Implémenter un truc de vérification session aussi, si c'est bien un admin-->
 <h1>Caisse enregistreuse</h1>
 
@@ -165,5 +159,9 @@
     </table>
 
 </div> <!--fin panier + produits-->  
+
+<!-- CHARGEMENT JAVASCRIPT CAISSE -->
+<?php echo '<script defer type="text/javascript" src="Utils/caisse_enregist.js"></script>'; ?>
+<!-- CHARGEMENT JAVASCRIPT CAISSE -->
 
 <?php require "view_end.php";?>
