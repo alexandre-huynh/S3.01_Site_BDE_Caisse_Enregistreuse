@@ -206,15 +206,15 @@ function clickSnacks(){
             let ligne = document.createElement('li');
             ligne.textContent=event.target.textContent;
             addSnacks(ligne);
-            let panier = document.getElementById('#panier');
-            for(var value of panier.values()){
+            let panier = document.querySelectorAll('#panier li');
+            panier.append(ligne);
+            /*for(var value of panier.values()){
             if (ligne.textContent==value){
                 panier.remove(ligne);
                 j++;
                 console.log(j);
             }
-        }
-        panier.append(ligne);
+        }*/
         });
     }  
 }             
