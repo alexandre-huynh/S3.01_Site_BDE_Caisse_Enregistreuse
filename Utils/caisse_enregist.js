@@ -207,15 +207,16 @@ function clickSnacks(){
             ligne.textContent=event.target.textContent;
             addSnacks(ligne);
             let panier = document.querySelectorAll('#panier li');
-            console.log(panier);
-            /*if (panier.indexOf(ligne)!==-1){
+            for(var value of panier.values()){
+            if (ligne.textContent==value){
                 panier.remove(ligne);
                 j++;
                 console.log(j);
             }
             else{
             panier.append(ligne);
-            }*/
+            }
+        }
         
         });
     }  
