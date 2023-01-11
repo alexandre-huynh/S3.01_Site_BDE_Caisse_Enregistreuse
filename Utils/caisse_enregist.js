@@ -207,13 +207,14 @@ function clickSnacks(){
             ligne.textContent=event.target.textContent;
             addSnacks(ligne);
             let panier = document.getElementById('panier');
-            panier.append(ligne);
             if (panier.indexOf(ligne.textContent)!==-1){
                 panier.remove(ligne);
                 j++;
                 console.log(j);
             }
-        
+            else{
+            panier.append(ligne);
+            }
         
         });
     }  
