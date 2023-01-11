@@ -125,6 +125,13 @@ class Model
       return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getProduitPrecis($id){
+      $req = $this->bd->prepare("SELECT * FROM Produit WHERE id_produit = :id");
+      $req->bindValue(':id', (int) $id, PDO::PARAM_INT);
+      $req->execute();
+      return $req->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function getProduitsNouveau($limit)
     {
       $req = $this->bd->prepare("SELECT id_produit, Nom, ROUND(Prix,2) AS 'Prix' , Img_produit FROM Produit ORDER BY date_ajout DESC LIMIT :limit");

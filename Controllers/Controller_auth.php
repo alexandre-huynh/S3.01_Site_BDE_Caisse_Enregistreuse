@@ -268,19 +268,23 @@ class Controller_auth extends Controller{
 
       if(isset($_POST['Email'])){
 
+        $email = $_POST['Email'];
         $password = uniqid();
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    
+        $sujet = 'Mot de passe oublié';
         $message = "Bonjour, voici votre nouveau mot de passe : $password";
-        $headers = 'Content-Type: text/plain; charest="utf-8"'." ";
+        $headers = 'Content-Type: text/plain; charset="utf-8"; DelSp="Yes"; format=flowed '."\r\n" .
+                   'Content-Disposition: inline'. "\r\n" .
+                   'Content-Transfer-Encoding: 7bit'." \r\n" .
+                   'X-Mailer:PHP/'.phpversion();
         
-        if(mail($_POST['Email'], 'Mot de passe oublié',$message, $headers)){
+        if(mail($email, $sujet,$message, $headers)){
     
           if($m->isInDatabaseAdmin($email)){
 
             $table = "Admin";
-            $m->updatePassword($email,$hashedPassword,$table);
-                    
+            $m->updatePassword($email,$hashedPassword,$table);        
+
             $data= [
               "title" => "Oubli de mot de passe",
               "message" => "Un mot de passe temporaire vous a été attribué et envoyé par mail, veuillez consulter votre boîte de messagerie.",
@@ -289,12 +293,12 @@ class Controller_auth extends Controller{
               ];
 
             $this->render("message", $data);
+
           }
           elseif($m->isInDatabaseClient($email)){
 
             $table = "Client";
             $m->updatePassword($email,$hashedPassword,$table);
-            
             $data= [
               "title" => "Oubli de mot de passe",
               "message" => "Un mot de passe temporaire vous a été attribué et envoyé par mail, veuillez consulter votre boîte de messagerie.",
@@ -303,21 +307,24 @@ class Controller_auth extends Controller{
               ];
 
             $this->render("message", $data);
+
+
           }
             
         }
         else{
     
-            $this->action_error("L'identifiant que vous avez saisi n'existe pas, veuillez en créez un.");
-    
+            $this->action_error("L'identifiant que vous avez saisi n'existe pas, veuillez en créez un.");    
         }
       }
       else{
-      
-        $this->action_error("Aucun email n'a été saisi, veuillez en saisir un.");
 
+        $this->action_error("Aucun email n'a été saisi, veuillez en saisir un.");
       }
-  }
+        
+    }
+  
+
 
   public function action_newmdp(){
     $m = Model::getModel();
@@ -352,6 +359,7 @@ class Controller_auth extends Controller{
                     "str_lien_retour" => "Retour à l'espace client",
                     "lien_retour" => "?controller=list&action=espace_client",
                   ];
+              
                   $this->render("message", $data);
                 }
                 else {
@@ -398,5 +406,5 @@ class Controller_auth extends Controller{
       $this->action_form_login();
   }
 
-}
+} 
 ?>
