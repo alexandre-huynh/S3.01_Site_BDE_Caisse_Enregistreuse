@@ -206,8 +206,8 @@ function clickSnacks(){
             let ligne = document.createElement('li');
             ligne.textContent=event.target.textContent;
             addSnacks(ligne);
-            let panier = document.getElementById('panier');
-            if (panier.indexOf(ligne.textContent)!==-1){
+            let panier = document.querySelectorAll('#panier li');
+            if (panier.indexOf(ligne)!==-1){
                 panier.remove(ligne);
                 j++;
                 console.log(j);
