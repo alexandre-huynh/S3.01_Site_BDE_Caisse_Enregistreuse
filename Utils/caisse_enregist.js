@@ -214,7 +214,7 @@ function clickSnacks(){
                 console.log(j);
             }
             else{
-             panier.append(ligne);   
+            panier.push(ligne);   
             }
         }
         });
