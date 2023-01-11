@@ -201,14 +201,22 @@ function clickSnacks(){
     let list_snacks = document.querySelectorAll('.snacks .produit');
     for(let i=0;i<list_snacks.length;i++){
         list_snacks[i].addEventListener('click', function(event){
+            let j=1;
             console.log('click');//});
             let ligne = document.createElement('li');
             ligne.textContent=event.target.textContent;
             addSnacks(ligne);
             let panier = document.getElementById('panier');
-            if (ligne.textContent!=this.textContent){
-            panier.append(ligne);}
-            });
+            if (panier.indexOf(ligne.textContent)!==-1){
+                panier.remove(ligne);
+                j++;
+                console.log(j);
+            }
+            else{
+            panier.append(ligne);
+            }
+        
+        });
     }  
 }             
 
