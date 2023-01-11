@@ -268,7 +268,7 @@ class Controller_auth extends Controller{
 
       if(isset($_POST['Email'])){
 
-        $email = $_POST['Email']
+        $email = $_POST['Email'];
         $password = uniqid();
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $sujet = 'Mot de passe oublié';
