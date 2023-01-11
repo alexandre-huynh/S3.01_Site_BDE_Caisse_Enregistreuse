@@ -198,18 +198,19 @@ function getTotalPanier(){
 
 function clickSnacks(){
     console.log('Ca marche');
-    let list_snacks = document.getElementsByClassName('snacks');
-    for(let d of list_snacks){
-        d.addEventListener('click', function(event){
+    let list_snacks = document.querySelectorAll('.snacks .produit');
+    for(let i=0;i<list_snacks.length;i++){
+        list_snacks[i].addEventListener('click', function(event){
             console.log('click');//});
             let ligne = document.createElement('li');
             ligne.textContent=event.target.textContent;
             addSnacks(ligne);
             let panier = document.getElementById('panier');
-            panier.append(ligne);
+            if (ligne.textContent!=this.textContent){
+            panier.append(ligne);}
             });
     }  
-}
+}             
 
 
 //initialisation addeventlistener
