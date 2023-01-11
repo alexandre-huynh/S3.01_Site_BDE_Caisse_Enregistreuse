@@ -272,7 +272,10 @@ class Controller_auth extends Controller{
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     
         $message = "Bonjour, voici votre nouveau mot de passe : $password";
-        $headers = 'Content-Type: text/plain; charest="utf-8"'." ";
+        $headers = 'Content-Type: text/plain; charset="utf-8"; DelSp="Yes"; format=flowed '."\r\n" .
+                   'Content-Disposition: inline'. "\r\n" .
+                   'Content-Transfer-Encoding: 7bit'." \r\n" .
+                   'X-Mailer:PHP/'.phpversion();
         
         if(mail($_POST['Email'], 'Mot de passe oublié',$message, $headers)){
     
