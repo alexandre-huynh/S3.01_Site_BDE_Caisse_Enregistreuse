@@ -57,7 +57,7 @@ main{
 section.banniere_accueil{
     width: 95%;
     height: 300px;
-    background-image: url(Content/img/bg.jpg);
+    background-image: url(../img/bg.jpg);
     margin:auto;
     border-radius: 10px;
     display: flex;
