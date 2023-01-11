@@ -277,7 +277,7 @@ class Controller_auth extends Controller{
                    'Content-Transfer-Encoding: 7bit'." \r\n" .
                    'X-Mailer:PHP/'.phpversion();
         
-        if(mail($_POST['Email'], 'Mot de passe oublié',$message, $headers)){
+        if(mail($_POST['Email'], 'Mot de passe oublié',$message, $headers)==True){
     
           if($m->isInDatabaseAdmin($email)){
 
