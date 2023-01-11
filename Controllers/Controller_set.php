@@ -591,6 +591,63 @@ class Controller_set extends Controller{
     $this->render("form_update_produit", $data);
   
   }
+
+  public function action_update_produit(){
+    $m = Model::getModel();
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
+
+    $data = [
+      "titre" => "Mis à jour d'un produit",
+      "infos" => $m->getProduitPrecis($_GET["id"])
+      ]; 
+
+    $this->render("form_update_produit", $data);
+
+    $ajout = false;
+
+        if (isset($_POST["num_vente"]) &&
+          isset($_POST["id_client"]) &&
+          isset($_POST["id_admin"]) &&
+          isset($_POST["id_produit"]) &&
+          isset($_POST["Date_vente"]) && 
+          isset($_POST["Paiement"]) &&
+          isset($_POST["Use_fidelite"])) 
+        {
+          // Préparation du tableau infos
+          $infos = [];
+          $noms = ["num_vente", "id_client", "id_admin", "id_produit", "Date_vente", "Paiement", "Use_fidelite"];
+          foreach ($noms as $v) {
+            if (isset($_POST[$v]) && (is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])) || ((is_int($_POST[$v]) || is_float($_POST[$v])) && $_POST[$v]>=0)) {
+              $infos[$v] = $_POST[$v];
+            } else {
+              $infos[$v] = null;
+            }
+          }
+
+          $m->updateProduit($infos);
+
+        }
+        
+
+        //Préparation de $data pour l'affichage de la vue message
+        $data = [
+            "title" => "Modification du produit",
+            "added_element" => "vente",
+            "str_lien_retour" => "Retour à la page de l'historique des ventes",
+            "lien_retour" => "?controller=list&action=gestion_ventes" 
+        ];
+        if ($ajout) {
+            $data["message"] = "La vente du produit " . $m->getNomProduit($_POST["id_produit"]) . " géré par le responsable " . $m->getPrenomNomAdmin($_POST["id_admin"]) . " pour le client " . $m->getPrenomNomClient($_POST["id_client"]) . " a été répertorié avec succès.";
+        } else {
+            $data["message"] = "Erreur dans la saisie des informations, la vente n'a pas été ajouté.";
+        }
+  }
   
 
   public function action_update(){

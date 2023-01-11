@@ -512,6 +512,13 @@ class Model
         return (bool) $requete->rowCount();
     }
 
+    public function updateProduit($attribut){
+
+      
+
+      return (bool) $requete->rowCount();
+    }
+
     public function isInDatabaseClient($email){
       /* Ancien code
       $requete = $this->bd->prepare('SELECT id_client FROM Client WHERE  id_client=:id');
