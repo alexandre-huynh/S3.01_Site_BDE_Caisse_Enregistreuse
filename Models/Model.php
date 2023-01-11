@@ -780,8 +780,27 @@ class Model
       $req1->bindValue('num_etud',$num_etud);
       $req1->execute();
 
+
       } 
 
+      public function removeCompteAdmin($num_etud){
+
+      $req = $this->bd->prepare('DELETE FROM Admin where Num_etud = :num_etud ');
+      $req->bindValue('num_etud',$num_etud);
+      $req->execute();
+      return (bool) $req->rowCount();
+
+
+      }
+
+      public function removeProduit($id_produit){
+
+      $req = $this->bd->prepare('DELETE FROM Produit where id_produit = :id ');
+      $req->bindValue('id',$id_produit);
+      $req->execute();
+      return (bool) $req->rowCount();
+      
+      }
       
 
     
