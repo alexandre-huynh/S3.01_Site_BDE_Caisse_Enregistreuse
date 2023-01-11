@@ -207,6 +207,7 @@ function clickSnacks(){
             ligne.textContent=event.target.textContent;
             addSnacks(ligne);
             let panier = document.getElementById('#panier');
+            panier.append(ligne);
             /*for(var value of panier.values()){
             if (ligne.textContent==value){
                 panier.remove(ligne);
@@ -214,7 +215,6 @@ function clickSnacks(){
                 console.log(j);
             }
         }*/
-        panier.append(ligne);
         });
     }  
 }             
