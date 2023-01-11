@@ -9,14 +9,14 @@
 
 <div id="panier_et_produits">
 
-    <div id="panier">
+    <div>
         <!-- 
         ======================================
                     Partie Graphique
         ======================================
         -->
         <p> Panier du client </p>
-        <ul>
+        <ul id="panier">
             <li>2 x Kinder Bueno (exemple)</li>
             <!-- 
                 Affichage des produits ici, genre 2x Kinder bueno etc
@@ -104,18 +104,18 @@
             <th>Snacks</th>
             <?php foreach ($snacks as $ligne): ?>
             <td class="snacks">
-                <!--
-                <ul>
+                <ul class="produit">
                     <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                     <li><?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> €</li>
                     <li><?=e($ligne["Stock"])?></li>
                 </ul>
-                -->
+                <!--
                 <div class="produit">
                     <div><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></div>
                     <div><?=e($ligne["Nom"])?></div>
                     <div><?=e($ligne["Prix"])?> €</div>
                 </div>
+                -->
             </td>
             
             <?php endforeach ?>
@@ -159,5 +159,9 @@
     </table>
 
 </div> <!--fin panier + produits-->  
+
+<!-- CHARGEMENT JAVASCRIPT CAISSE -->
+<script defer type="text/javascript" src="Utils/caisse_enregist.js"></script>
+<!-- CHARGEMENT JAVASCRIPT CAISSE -->
 
 <?php require "view_end.php";?>

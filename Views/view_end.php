@@ -1,5 +1,8 @@
 </main>
 
+<!-- JS langue-->
+<?php echo '<script src="Utils/langue.js"></script>'; ?>
+
 <!--Fin du corps de la page-->
 
 <!--Le pieds de page-->

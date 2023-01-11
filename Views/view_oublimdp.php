@@ -12,7 +12,7 @@
     les instructions expliquant comment réinitialiser votre mot de passe.
   </p>
 
-  <form action="?controller=auth&action=oublimdp">
+  <form action="?controller=auth&action=oublimdp" method="post" >
       <div>
       <label for="adresse_mail"> Adresse mail :</label>
 
