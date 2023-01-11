@@ -622,19 +622,19 @@ class Controller_set extends Controller{
       }
 
       //=============Changement de l'image====================
-      if (isset($_POST["Img_produit"])){
-        
+      if (isset($_POST["Update_img"]) && $_POST["Update_img"]){
+
         $msg_error = "";
 
         $target_dir = "Content/img/";
-        $target_file = $target_dir . $_POST["Img_produit"];//basename($_FILES[$_POST["Img_produit"]]["name"]);
+        $target_file = $target_dir . $produit["Img_produit"];//basename($_FILES[$_POST["Img_produit"]]["name"]);
         $uploadOk = 1;
         $temporaire= $target_dir . basename($_FILES[$produit["Img_produit"]]["name"]);
         $imageFileType = strtolower(pathinfo($temporaire,PATHINFO_EXTENSION));
         //$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         // Check if image file is a actual image or fake image
         if(isset($_POST["submit"])) {
-          $check = getimagesize($_FILES[$_POST["Img_produit"]]["tmp_name"]);
+          $check = getimagesize($_FILES[$produit["Img_produit"]]["tmp_name"]);
           if($check !== false) {
             //echo "File is an image - " . $check["mime"] . ".";
             $uploadOk = 1;
@@ -646,7 +646,7 @@ class Controller_set extends Controller{
 
         // Allow certain file formats
         if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" ) {
-          $msg_error = $msg_error . "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+          $msg_error = $msg_error . "Sorry, only JPG, JPEG, PNG files are allowed.";
           $uploadOk = 0;
         }
 
@@ -660,7 +660,7 @@ class Controller_set extends Controller{
           $this->action_error("Sorry, your file was not uploaded : " . $msg_error);
         // if everything is ok, try to upload file
         } else {
-          if (move_uploaded_file($_FILES[$_POST["Img_produit"]]["tmp_name"], $target_file . "." . $imageFileType)) {
+          if (move_uploaded_file($_FILES[$produit["Img_produit"]]["tmp_name"], $target_file . "." . $imageFileType)) {
             //echo "The file ". e( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
           } else {
             $this->action_error("Sorry, there was an error uploading your file :" . $msg_error);

@@ -48,9 +48,13 @@
       </label>
     </p>
     <p>
+      <label>Cochez cette case si vous souhaitez mettre à jour l'image du produit dans le champs ci-dessous:
+            <input type="checkbox" name="Update_img" value="True"  />
+      </label>
+    </p>
+    <p>
       <label>Image du produit* (format .png / .jpg / .jpeg, taille de fichier max : 5 Mo) :
-        <input type="file" name="produit_<?=e($infos["id_produit"])?>" accept=".png,.jpeg,.jpg"  /> 
-        <input type="hidden" name="Img_produit" value="produit_<?=e($infos["id_produit"])?>" />
+        <input type="file" name="produit_<?=e($infos["id_produit"])?>" accept=".png,.jpeg,.jpg"  />    
       </label>
       </br>
       <span>Fond transparent de préférence : Google Images > Outils > Couleur > Transparent</span>
