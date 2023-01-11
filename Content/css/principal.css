@@ -154,12 +154,14 @@ a[title="Se connecter / S'inscrire"]{
     border-radius: 20px;
 }
 
-section div ul {
+section div{
     display: flex;
+    margin:auto;
 }
-section div ul li{
-    justify-content: space-evenly;
+section div ul{
+    flex-direction: column;
     padding: 15px;
+
 }
 
 /* -------------------------------- 

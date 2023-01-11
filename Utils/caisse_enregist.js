@@ -200,21 +200,20 @@ function clickSnacks(){
     console.log('Ca marche');
     let list_snacks = document.querySelectorAll('.snacks .produit');
     for(let i=0;i<list_snacks.length;i++){
-        list_snacks[i].addEventListener('click', function(event){
-            let j=1;
-            console.log('click');//});
-            let ligne = document.createElement('li');
-            ligne.textContent=event.target.textContent;
-            addSnacks(ligne);
-            let panier = document.querySelectorAll('#panier li');
-            panier.append(ligne);
-            /*for(var value of panier.values()){
+    list_snacks[i].addEventListener('click', function(event){
+    console.log('click');//});
+    let ligne = document.createElement('li');
+    ligne.textContent=event.target.textContent;
+    addSnacks(ligne);
+    let panier = document.querySelectorAll('panier li');
+    panier.push(ligne);
+            for(var value of panier.values()){
             if (ligne.textContent==value){
                 panier.remove(ligne);
                 j++;
                 console.log(j);
             }
-        }*/
+        }
         });
     }  
 }             
