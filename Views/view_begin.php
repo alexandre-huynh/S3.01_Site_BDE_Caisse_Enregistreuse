@@ -27,14 +27,15 @@
 
         <div class="js">
             <div class="language-picker js-language-picker" data-trigger-class="btn btn--subtle">
-            <form action="" class="language-picker__form">
-              <label for="language-picker-select">Selectionnez votre langue</label>
-              <select name="language-picker-select" id="language-picker-select">
-                <option lang="fr" value="francais" selected>Français</option>
-                <option lang="en" value="english" >English</option>
-              </select>
-            </form>
-          </div></div>
+              <form action="" class="language-picker__form">
+                <label for="language-picker-select">Selectionnez votre langue</label>
+                <select name="language-picker-select" id="language-picker-select">
+                  <option lang="fr" value="francais" selected>Français</option>
+                  <option lang="en" value="english" >English</option>
+                </select>
+              </form>
+            </div>
+        </div>
     </header>
     <!--Fin de l'entête de la page-->
 
