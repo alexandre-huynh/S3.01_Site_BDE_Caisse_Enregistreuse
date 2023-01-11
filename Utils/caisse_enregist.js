@@ -200,13 +200,12 @@ function clickSnacks(){
     console.log('Ca marche');
     let list_snacks = document.querySelectorAll('.snacks .produit');
     for(let i=0;i<list_snacks.length;i++){
-        list_snacks[i].addEventListener('click', function(event){
-            let j=1;
+    list_snacks[i].addEventListener('click', function(event){
             console.log('click');//});
             let ligne = document.createElement('li');
             ligne.textContent=event.target.textContent;
             addSnacks(ligne);
-            let paniers = document.querySelectorAll('#panier li');
+            let paniers = document.getElementById('#panier');
             paniers.append(ligne);
             /*for(var value of panier.values()){
             if (ligne.textContent==value){
