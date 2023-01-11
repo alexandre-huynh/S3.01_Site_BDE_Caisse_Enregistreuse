@@ -673,14 +673,13 @@ class Controller_set extends Controller{
     //Préparation de $data pour l'affichage de la vue message
     $data = [
         "title" => "Modification du produit",
-        "added_element" => "vente",
-        "str_lien_retour" => "Retour à la page de l'historique des ventes",
-        "lien_retour" => "?controller=list&action=gestion_ventes" 
+        "str_lien_retour" => "Retour à la page de l'inventaire des produits",
+        "lien_retour" => "?controller=list&action=gestion_inventaire" 
     ];
     if ($ajout) {
-        $data["message"] = "La vente du produit " . $m->getNomProduit($_POST["id_produit"]) . " géré par le responsable " . $m->getPrenomNomAdmin($_POST["id_admin"]) . " pour le client " . $m->getPrenomNomClient($_POST["id_client"]) . " a été répertorié avec succès.";
+        $data["message"] = "Le produit " . $_POST["Nom"] . " a été mis à jour avec succès.";
     } else {
-        $data["message"] = "Erreur dans la saisie des informations, la vente n'a pas été ajouté.";
+        $data["message"] = "Erreur dans la saisie des informations, le produit n'a pas été modifié.";
     }
   }
   
