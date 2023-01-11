@@ -206,7 +206,7 @@ function clickSnacks(){
     ligne.textContent=event.target.textContent;
     addSnacks(ligne);
     let panier = document.querySelectorAll('panier li');
-    panier.append(ligne);
+    panier.push(ligne);
             for(var value of panier.values()){
             if (ligne.textContent==value){
                 panier.remove(ligne);
