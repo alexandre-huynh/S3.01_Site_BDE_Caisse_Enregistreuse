@@ -589,8 +589,9 @@ class Controller_set extends Controller{
       ]; 
 
     $this->render("form_update_produit", $data);
-    }
+  
   }
+  
 
   public function action_update(){
 
