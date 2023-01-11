@@ -208,7 +208,7 @@ function clickSnacks(){
             addSnacks(ligne);
             let panier = document.getElementById('panier');
             panier.append(ligne);
-            if (panier.includes(ligne.textContent)){
+            if (panier.indexOf(ligne.textContent)!==-1){
                 panier.remove(ligne);
                 j++;
                 console.log(j);
