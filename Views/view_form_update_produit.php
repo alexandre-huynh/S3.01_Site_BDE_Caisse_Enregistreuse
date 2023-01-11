@@ -57,7 +57,7 @@
     </p>
     <p>
       <label>Date de création* (corriger si nécessaire) :
-        <input type="date" name="Date_ajout" value="<?=e($infos["Date_creation"])?>"  /> 
+        <input type="date" name="Date_ajout" value="<?=e($infos["Date_ajout"])?>"  /> 
       </label>
     </p>
     <p>
@@ -77,7 +77,7 @@
     </p>
     <p>
       <label>Ventes effectués* :
-        <input type="number" name="Nb_ventes" value="<?=e($infos["Nb_ventess"])?>" step="1" min="0"  />
+        <input type="number" name="Nb_ventes" value="<?=e($infos["Nb_ventes"])?>" step="1" min="0"  />
       </label>
     </p>
   <!--
