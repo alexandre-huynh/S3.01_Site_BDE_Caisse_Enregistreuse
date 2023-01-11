@@ -270,14 +270,14 @@ class Controller_auth extends Controller{
 
         $password = uniqid();
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    
+        $sujet = 'Mot de passe oublié';
         $message = "Bonjour, voici votre nouveau mot de passe : $password";
         $headers = 'Content-Type: text/plain; charset="utf-8"; DelSp="Yes"; format=flowed '."\r\n" .
                    'Content-Disposition: inline'. "\r\n" .
                    'Content-Transfer-Encoding: 7bit'." \r\n" .
                    'X-Mailer:PHP/'.phpversion();
         
-        if(mail($_POST['Email'], 'Mot de passe oublié',$message, $headers)){
+        if(mail($_POST['Email'], $sujet,$message, $headers)==True){
     
           if($m->isInDatabaseAdmin($email)){
 
@@ -321,9 +321,9 @@ class Controller_auth extends Controller{
         $this->action_error("Aucun email n'a été saisi, veuillez en saisir un.");
       }
         
-
     }
-  }
+  
+
 
   public function action_newmdp(){
     $m = Model::getModel();
