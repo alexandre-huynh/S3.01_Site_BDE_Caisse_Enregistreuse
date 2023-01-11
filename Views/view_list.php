@@ -111,14 +111,14 @@
       
       <!-- Case modifier cette ligne -->
       <td>
-        <a href="?controller=set&action=form_update&id=<?=e($ligne[$id_element])?>">
+        <a href="?controller=set&action=form_update_<?=e($redirect_add_element)?>&id=<?=e($ligne[$id_element])?>">
           <img src="Content/img/edit-icon.png" alt="update"/>
         </a>
       </td>
       
       <!-- Case supprimer cette ligne -->
       <td>
-        <a href="?controller=set&action=remove&id=<?=e($ligne[$id_element])?>">
+        <a href="?controller=set&action=remove_<?=e($redirect_add_element)?>&id=<?=e($ligne[$id_element])?>">
           <img src="Content/img/remove-icon.png" alt="suppr"/>
         </a>
       </td>
