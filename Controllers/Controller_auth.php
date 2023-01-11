@@ -268,6 +268,7 @@ class Controller_auth extends Controller{
 
       if(isset($_POST['Email'])){
 
+        $email = $_POST['Email']
         $password = uniqid();
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $sujet = 'Mot de passe oublié';
@@ -277,7 +278,7 @@ class Controller_auth extends Controller{
                    'Content-Transfer-Encoding: 7bit'." \r\n" .
                    'X-Mailer:PHP/'.phpversion();
         
-        if(mail($_POST['Email'], $sujet,$message, $headers)==True){
+        if(mail($email, $sujet,$message, $headers)){
     
           if($m->isInDatabaseAdmin($email)){
 
