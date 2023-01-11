@@ -125,6 +125,13 @@ class Model
       return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getProduitPrecis($id){
+      $req = $this->bd->prepare("SELECT * FROM Produit WHERE id_produit = :id");
+      $req->bindValue(':id', (int) $id, PDO::PARAM_INT);
+      $req->execute();
+      return $req->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function getProduitsNouveau($limit)
     {
       $req = $this->bd->prepare("SELECT id_produit, Nom, ROUND(Prix,2) AS 'Prix' , Img_produit FROM Produit ORDER BY date_ajout DESC LIMIT :limit");
@@ -773,8 +780,27 @@ class Model
       $req1->bindValue('num_etud',$num_etud);
       $req1->execute();
 
+
       } 
 
+      public function removeCompteAdmin($num_etud){
+
+      $req = $this->bd->prepare('DELETE FROM Admin where Num_etud = :num_etud ');
+      $req->bindValue('num_etud',$num_etud);
+      $req->execute();
+      return (bool) $req->rowCount();
+
+
+      }
+
+      public function removeProduit($id_produit){
+
+      $req = $this->bd->prepare('DELETE FROM Produit where id_produit = :id ');
+      $req->bindValue('id',$id_produit);
+      $req->execute();
+      return (bool) $req->rowCount();
+      
+      }
       
 
     
