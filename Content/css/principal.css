@@ -154,6 +154,14 @@ a[title="Se connecter / S'inscrire"]{
     border-radius: 20px;
 }
 
+section div ul {
+    display: flex;
+}
+section div ul li{
+    justify-content: space-evenly;
+    padding: 15px;
+}
+
 /* -------------------------------- 
 
 Title: Language Picker
