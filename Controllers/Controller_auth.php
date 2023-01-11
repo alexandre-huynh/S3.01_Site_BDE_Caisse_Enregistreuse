@@ -311,7 +311,12 @@ class Controller_auth extends Controller{
             $this->action_error("L'identifiant que vous avez saisi n'existe pas, veuillez en créez un.");
     
         }
-    }
+      }
+      else{
+      
+        $this->action_error("Aucun email n'a été saisi, veuillez en saisir un.");
+
+      }
   }
 
   public function action_newmdp(){
