@@ -17,11 +17,11 @@
     <header class="accueil_header">
         <nav class="accueil_nav">
             <div class="contenu-menu">
-            <a href="?controller=home&action=home"><img class="logo_bde" src="Content/img/logo_bde.png" alt="logo-bde" width="70px" height="70px"></a>
-            <a href="?controller=list&action=snacks" title="Snacks" class="deco">Snacks</a>
-            <a href="?controller=list&action=boissons" title="Boissons" class="deco">Boissons</a>
-            <a href="?controller=auth&action=form_login" title="Mon Espace" class="deco">Mon Espace</a>
-            <a href="?controller=auth&action=form_login" title="Se connecter / S'inscrire" class="deco">Se connecter / S'inscrire</a>
+              <a href="?controller=home&action=home"><img class="logo_bde" src="Content/img/logo_bde.png" alt="logo-bde" width="70px" height="70px"></a>
+              <a href="?controller=list&action=snacks" title="Snacks" class="deco">Snacks</a>
+              <a href="?controller=list&action=boissons" title="Boissons" class="deco">Boissons</a>
+              <a href="?controller=auth&action=form_login" title="Mon Espace" class="deco">Mon Espace</a>
+              <a href="?controller=auth&action=form_login" title="Se connecter / S'inscrire" class="deco">Se connecter / S'inscrire</a>
             </div>
         </nav>
 

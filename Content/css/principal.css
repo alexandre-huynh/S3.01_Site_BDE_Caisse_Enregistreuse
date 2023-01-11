@@ -149,6 +149,11 @@ a[title="Se connecter / S'inscrire"]{
     padding: 15px;
 }
 
+a[title="Se déconnecter"]{
+    background-color: #d10000;
+    padding: 15px;
+}
+
 .language-picker{
     background-color: #DEE2E6;
     border-radius: 20px;
