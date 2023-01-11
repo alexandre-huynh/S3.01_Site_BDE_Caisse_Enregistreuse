@@ -158,7 +158,7 @@ section div ul {
     display: flex;
 }
 section div ul li{
-    justify-content: space-evenly;
+    flex-direction: column;
     padding: 15px;
 }
 
