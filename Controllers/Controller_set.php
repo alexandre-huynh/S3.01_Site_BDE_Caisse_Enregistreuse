@@ -573,7 +573,7 @@ class Controller_set extends Controller{
   ===========================================================
   */
 
-  public function action_form_update(){
+  public function action_form_update_produit(){
     $m = Model::getModel();
     //==================================
     //     TEST SI C'EST UN ADMIN
@@ -583,29 +583,12 @@ class Controller_set extends Controller{
     }
     //===================================
 
-    $in_database = false;
-    if (isset($_GET["id"]) and preg_match("/^[1-9]\d*$/", $_GET["id"])) {
-      $m = Model::getModel();
-      $in_database = $m->isInDataBase($_GET["id"]);
-    }
+    $data = [
+      "titre" => "Mis à jour d'un produit",
+      "infos" => $m->getProduitPrecis($_GET["id"])
+      ]; 
 
-    if ($in_database) {
-      // Récupération des informations du prix nobels
-      $informations = $m->getNobelPrizeInformations($_GET["id"]);
-
-      //Préparation de $data
-      $data = [];
-      foreach ($informations as $c => $v) {
-        if ($v === null) {
-          $data[$c] = "";
-        } else {
-          $data[$c] = $v;
-        }
-      }
-      $data["categories"] = $m->getCategories();
-      $this->render("form_update", $data);
-    } else {
-      $this->action_error("There is no Nobel Prize with such ID, it cannot be updated.");
+    $this->render("form_update_produit", $data);
     }
   }
 
