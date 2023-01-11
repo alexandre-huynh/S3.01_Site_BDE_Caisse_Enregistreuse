@@ -214,10 +214,9 @@ function clickSnacks(){
                 console.log(j);
             }
             else{
-            panier.append(ligne);
+             panier.append(ligne);   
             }
         }
-        
         });
     }  
 }             
