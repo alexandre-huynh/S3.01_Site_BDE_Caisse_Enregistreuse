@@ -321,9 +321,9 @@ class Controller_auth extends Controller{
         $this->action_error("Aucun email n'a été saisi, veuillez en saisir un.");
       }
         
-
     }
-  }
+  
+
 
   public function action_newmdp(){
     $m = Model::getModel();
