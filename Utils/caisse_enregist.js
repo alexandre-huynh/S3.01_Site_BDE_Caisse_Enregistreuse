@@ -208,11 +208,11 @@ function clickSnacks(){
             addSnacks(ligne);
             let panier = document.getElementById('panier');
             panier.append(ligne);
-            if (ligne.textContent in panier){
+            if (panier.includes(ligne.textContent)){
                 panier.remove(ligne);
                 j++;
                 console.log(j);
-            } 
+            }
         
         
         });
