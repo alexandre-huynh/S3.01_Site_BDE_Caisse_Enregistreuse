@@ -156,10 +156,12 @@ a[title="Se connecter / S'inscrire"]{
 
 section div{
     display: flex;
+    margin:auto;
 }
 section div ul{
     flex-direction: column;
     padding: 15px;
+
 }
 
 /* -------------------------------- 
