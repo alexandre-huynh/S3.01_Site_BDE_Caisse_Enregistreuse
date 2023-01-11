@@ -207,14 +207,15 @@ function clickSnacks(){
             ligne.textContent=event.target.textContent;
             addSnacks(ligne);
             let panier = document.querySelectorAll('#panier li');
-            if (panier.indexOf(ligne)!==-1){
+            console.log(panier);
+            /*if (panier.indexOf(ligne)!==-1){
                 panier.remove(ligne);
                 j++;
                 console.log(j);
             }
             else{
             panier.append(ligne);
-            }
+            }*/
         
         });
     }  
