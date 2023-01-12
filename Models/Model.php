@@ -515,10 +515,10 @@ class Model
     public function updateProduit($id_produit, $attribut, $nouv_val){
 
       $tab = ["id_produit", "Nom", "Categorie", "Prix", "Date_ajout", "Pts_fidelite_requis", "Pts_fidelite_donner", "Stock", "Nb_ventes"];
-      foreach ($tab as $c=>$v) {
-        if ($c==$attribut){
+      foreach ($tab as $v) {
+        if ($v==$attribut){
           // pas de faille SQLi étant donné que $c est une variable défini dans cette fonction
-          $requete = $this->bd->prepare('UPDATE Produit SET ' . $c . ' = :nouv_val WHERE id_produit = :id_produit');
+          $requete = $this->bd->prepare('UPDATE Produit SET ' . $v . ' = :nouv_val WHERE id_produit = :id_produit');
           
           //Remplacement des marqueurs de place par les valeurs
           $requete->bindValue(':nouv_val', $nouv_val);
@@ -636,10 +636,10 @@ class Model
     public function updateClient($id_client, $attribut, $nouv_val){
 
       $tab = ["id_client", "num_etudiant", "Nom", "Prenom", "Tel", "Email", "Date_creation", "Pts_fidelite"];
-      foreach ($tab as $c=>$v) {
-        if ($c==$attribut){
+      foreach ($tab as $v) {
+        if ($v==$attribut){
           // pas de faille SQLi étant donné que $c est une variable défini de cette fonction
-          $requete = $this->bd->prepare('UPDATE Client SET ' . $c . ' = :nouv_val WHERE id_client = :id_client');
+          $requete = $this->bd->prepare('UPDATE Client SET ' . $v . ' = :nouv_val WHERE id_client = :id_client');
           
           //Remplacement des marqueurs de place par les valeurs
           $requete->bindValue(':nouv_val', $nouv_val);
@@ -677,10 +677,10 @@ class Model
     public function updateAdmin($id_admin, $attribut, $nouv_val){
 
       $tab = ["id_admin", "num_etudiant", "Nom", "Prenom", "Tel", "Email", "Date_creation", "Pts_fidelite"];
-      foreach ($tab as $c=>$v) {
-        if ($c==$attribut){
+      foreach ($tab as $v) {
+        if ($v==$attribut){
           // pas de faille SQLi étant donné que $c est une variable défini de cette fonction
-          $requete = $this->bd->prepare('UPDATE Admin SET ' . $c . ' = :nouv_val WHERE id_admin = :id_admin');
+          $requete = $this->bd->prepare('UPDATE Admin SET ' . $v . ' = :nouv_val WHERE id_admin = :id_admin');
           
           //Remplacement des marqueurs de place par les valeurs
           $requete->bindValue(':nouv_val', $nouv_val);
@@ -735,10 +735,10 @@ class Model
     public function updateVente($num_vente, $attribut, $nouv_val){
 
       $tab = ["num_vente", "id_client", "id_admin", "id_produit", "Date_vente", "Paiement", "Use_fidelite"];
-      foreach ($tab as $c=>$v) {
-        if ($c==$attribut){
+      foreach ($tab as $v) {
+        if ($v==$attribut){
           // pas de faille SQLi étant donné que $c est une variable défini de cette fonction
-          $requete = $this->bd->prepare('UPDATE Vente SET ' . $c . ' = :nouv_val WHERE num_vente = :num_vente');
+          $requete = $this->bd->prepare('UPDATE Vente SET ' . $v . ' = :nouv_val WHERE num_vente = :num_vente');
           
           //Remplacement des marqueurs de place par les valeurs
           $requete->bindValue(':nouv_val', $nouv_val);
@@ -837,13 +837,13 @@ class Model
     //////
     
     
-      public function verifNumEtudiant($num_etud){
-        $req = $this->bd->prepare('SELECT * FROM Client WHERE num_etudiant = :num ');
-        $req->bindValue('num', $num_etud);
-        $req->execute();
-        return (bool) $req->rowCount();
-        
-      }
+    public function verifNumEtudiant($num_etud){
+      $req = $this->bd->prepare('SELECT * FROM Client WHERE num_etudiant = :num ');
+      $req->bindValue('num', $num_etud);
+      $req->execute();
+      return (bool) $req->rowCount();
+      
+    }
       /* ancien code
       if(isset($_POST['num_etudiant'])){
         $req = this->bd->prepare('SELECT * FROM client WHERE Num_etudiant = :num ')
