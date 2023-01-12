@@ -619,7 +619,7 @@ class Controller_set extends Controller{
       // Préparation du tableau infos
       foreach($produit as $c=>$v){
         if ($c!="Img_produit" && $v!=$_POST[$c]){
-          $ajout = $m->updateProduit($id, $c, $_POST[$c]);
+          $ajout = $m->updateProduit($_POST["id_produit"], $c, $_POST[$c]);
         }
       }
 
