@@ -48,7 +48,7 @@
       </label>
     </p>
     <p>
-      <label>Cochez cette case si vous souhaitez mettre à jour l'image du produit dans le champs ci-dessous:
+      <label><b>Cochez cette case si vous souhaitez mettre à jour l'image du produit dans le champs ci-dessous :</b>
             <input type="checkbox" name="Update_img" value="True"  />
       </label>
     </p>
