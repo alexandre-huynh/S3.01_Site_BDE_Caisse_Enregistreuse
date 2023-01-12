@@ -76,12 +76,12 @@
     </p>
     <p>
       <label>Stock disponible* :
-        <input type="number" name="Stock" value="<?=e($infos["Stock"])?>" step="1" min="0"  />
+        <input type="number" name="Stock" value="<?=e($infos["Stock"])?>" step="1" min="0" /><img src="Content/img/logo_stock.png" alt="Logo Illustration Stock" height=20 />
       </label>
     </p>
     <p>
       <label>Ventes effectués* :
-        <input type="number" name="Nb_ventes" value="<?=e($infos["Nb_ventes"])?>" step="1" min="0"  />
+        <input type="number" name="Nb_ventes" value="<?=e($infos["Nb_ventes"])?>" step="1" min="0" /> <img src="Content/img/logo_ventes.png" alt="Logo Illustration Nb de Ventes" height=20 />
       </label>
     </p>
   <!--

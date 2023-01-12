@@ -83,8 +83,8 @@
         <td><?=e($ligne["Prix"])?> €</td>
         <td><?=e($ligne["Pts_fidelite_requis"])?> pts</td>
         <td><?=e($ligne["Pts_fidelite_donner"])?> pts</td>
-        <td><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" height=20 /></td>
-        <td><?=e($ligne["Nb_ventes"])?><img src="Content/img/logo_ventes.png" height=20 /></td>
+        <td><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Logo Illustration Stock" height=20 /></td>
+        <td><?=e($ligne["Nb_ventes"])?><img src="Content/img/logo_ventes.png" alt="Logo Illustration Nb de Ventes" height=20 /></td>
       <!-- ------------------------------------------------------------------- -->
       <!--< ?php elseif ($_GET["action"]=="gestion_quelquechose") : ?>-->
       <!-- ------------------------------------------------------------------- 

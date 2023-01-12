@@ -74,12 +74,12 @@
     </p>
     <p>
       <label>Stock disponible* :
-        <input type="number" name="Stock" step="1" min="0" required />
+        <input type="number" name="Stock" step="1" min="0" required /> <img src="Content/img/logo_stock.png" alt="Logo Illustration Stock" height=20 />
       </label>
     </p>
     <p>
       <label>Ventes effectués* :
-        <input type="number" name="Nb_ventes" value="0" step="1" min="0" required />
+        <input type="number" name="Nb_ventes" value="0" step="1" min="0" required /> <img src="Content/img/logo_ventes.png" alt="Logo Illustration Nombre de ventes" height=20 />
       </label>
     </p>
   
