@@ -681,6 +681,8 @@ class Controller_set extends Controller{
     } else {
         $data["message"] = "Erreur dans la saisie des informations, le produit n'a pas été modifié.";
     }
+
+    $this->render("message", $data);
   }
   
 
@@ -695,37 +697,7 @@ class Controller_set extends Controller{
     }
     //===================================
 
-    $in_database = false;
-
-    if (isset($_POST["id"]) and preg_match("/^[1-9]\d*$/",$_POST["id"])
-      and isset($_POST["name"]) and ! preg_match ("/^ *$/", $_POST["name"])
-      and isset($_POST["category"]) and ! preg_match("/^ *$/", $_POST["category"])
-      and isset($_POST["year"]) and preg_match("/^[12]\d{3}$/", $_POST["year"])) {
-      $m = Model::getModel();
-      $c_in_database = in_array($_POST["category"], $m->getCategories());
-      $in_database = $c_in_database ? $m->isInDatabase($_POST["id"]) : false;
-    }
-    if ($in_database) {
-      // Préparation $infos pour la mise à jour des informations du prix nobels
-      $infos = [];
-      $noms =  ["id", "year", "category", "name", "birthdate", "birthplace", "county", "motivation"];
-      foreach ($noms as $v) {
-        if (isset($_POST[$v]) and ! preg_match("/^ *$/", $_POST[$v])) {
-          $infos[$v] = $_POST[$v];
-        } else {
-          $infos[$v] = null;
-        }
-      }
-      $m->updateNobelPrize($infos);
-      $message = "The informations of the Nobel Prize have been updated.";
-    } else {
-      $message = "There is no information to update.";
-    }
-    $data = [
-      "title" => "Updating the Nobel Prize informations",
-      "message" => $message
-    ];
-    $this->render("message", $data);
+    
   }
 
   public function action_update_infos(){

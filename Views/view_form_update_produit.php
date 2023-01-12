@@ -15,7 +15,7 @@
   manuellement rédigé pour adapter le type de saisie
   -->
   <!----------------------------- 
-            Ajout produit
+            Update produit
   ------------------------------->
     <p>
       <label>Identifiant produit* :
