@@ -604,13 +604,15 @@ class Controller_set extends Controller{
 
     $ajout = false;
 
-    if (isset($_POST["num_vente"]) &&
-      isset($_POST["id_client"]) &&
-      isset($_POST["id_admin"]) &&
-      isset($_POST["id_produit"]) &&
-      isset($_POST["Date_vente"]) && 
-      isset($_POST["Paiement"]) &&
-      isset($_POST["Use_fidelite"])) 
+    if (isset($_POST["id_produit"]) &&
+      isset($_POST["Nom"]) &&
+      isset($_POST["Categorie"]) &&
+      isset($_POST["Prix"]) &&
+      isset($_POST["Date_ajout"]) &&
+      isset($_POST["Pts_fidelite_requis"]) &&
+      isset($_POST["Pts_fidelite_donner"]) &&
+      isset($_POST["Stock"]) &&
+      isset($_POST["Nb_ventes"])) 
     {
       $produit = $m->getProduitPrecis($_POST["id_produit"]);
 
