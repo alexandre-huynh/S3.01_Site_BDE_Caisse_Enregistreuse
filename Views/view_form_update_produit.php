@@ -18,7 +18,7 @@
             Update produit
   ------------------------------->
     <p>
-      <label>Identifiant produit* :
+      <label>Identifiant produit* (prédéfini par le système) :
         <input type="number" name="id_produit" value="<?=e($infos["id_produit"])?>" step="1" min="0" readonly  /> 
       </label>
     </p>
@@ -65,12 +65,12 @@
       </label>
     </p>
     <p>
-      <label>Nombre de points fidélité requis pour obtenir ce produit gratuitement* :
+      <label>Nombre de points fidélité <b>requis</b> pour obtenir ce produit gratuitement* :
         <input type="number" name="Pts_fidelite_requis" value="<?=e($infos["Pts_fidelite_requis"])?>" step="1" min="0" /> pts
       </label>
     </p>
     <p>
-      <label>Nombre de points fidélité octroyés/donnés lors de l'achat de ce produit* :
+      <label>Nombre de points fidélité <b>octroyés/donnés</b> lors de l'achat de ce produit* :
         <input type="number" name="Pts_fidelite_donner" value="<?=e($infos["Pts_fidelite_donner"])?>" step="1" min="0" /> pts
       </label>
     </p>
