@@ -652,10 +652,12 @@ class Controller_set extends Controller{
           $uploadOk = 0;
         }
 
+        /*
         // Suppression / délien de l'ancienne image
         if(file_exists($target_file)) {
           unlink($target_file . $imageFileType); //remove the file
         }
+        */
 
         // Check if $uploadOk is set to 0 by an error
         if ($uploadOk == 0) {
