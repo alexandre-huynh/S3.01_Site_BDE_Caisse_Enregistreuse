@@ -228,6 +228,13 @@ class Model
       */
     }
 
+    public function getClientPrecis($id_client){
+      $req = $this->bd->prepare("SELECT * FROM Client WHERE id_client = :id");
+      $req->bindValue(':id', (int) $id_client, PDO::PARAM_INT);
+      $req->execute();
+      return $req->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function getAdmins($search="default")
     {
       // $search si on veut chercher un admin en particulier
@@ -249,6 +256,13 @@ class Model
       $req->bindValue(':search', $search);
       $req->execute();
       return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getAdminPrecis($id_admin){
+      $req = $this->bd->prepare("SELECT * FROM Admin WHERE id_admin = :id");
+      $req->bindValue(':id', (int) $id_client, PDO::PARAM_INT);
+      $req->execute();
+      return $req->fetch(PDO::FETCH_ASSOC);
     }
 
     public function getInfosIndividu($table, $id)
