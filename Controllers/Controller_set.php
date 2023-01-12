@@ -629,7 +629,7 @@ class Controller_set extends Controller{
         $msg_error = "";
 
         $target_dir = "Content/img/";
-        $target_file = $target_dir . $produit["Img_produit"];//basename($_FILES[$_POST["Img_produit"]]["name"]);
+        $target_file = $target_dir . basename($_FILES[$produit["Img_produit"]]["name"]);
         $uploadOk = 1;
         $temporaire= $target_dir . basename($_FILES[$produit["Img_produit"]]["name"]);
         $imageFileType = strtolower(pathinfo($temporaire,PATHINFO_EXTENSION));
@@ -664,6 +664,7 @@ class Controller_set extends Controller{
         } else {
           if (move_uploaded_file($_FILES[$produit["Img_produit"]]["tmp_name"], $target_file . "." . $imageFileType)) {
             //echo "The file ". e( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
+            $ajout = ok;
           } else {
             $this->action_error("Sorry, there was an error uploading your file :" . $msg_error);
           }
