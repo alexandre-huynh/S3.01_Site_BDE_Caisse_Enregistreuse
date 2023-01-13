@@ -159,6 +159,7 @@
     </table>
 
 </div> <!--fin panier + produits-->  
+</main>
 
 <!-- CHARGEMENT JAVASCRIPT CAISSE -->
 <script defer type="text/javascript" src="Utils/caisse_enregist.js"></script>

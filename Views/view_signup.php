@@ -50,4 +50,5 @@
   </form>
 </section>
 
+</main>
 <?php require "view_end.php";?>

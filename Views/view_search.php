@@ -19,4 +19,6 @@
    </p>
  </form>
 
+ </main>
+
 <?php require "view_end.php";?>

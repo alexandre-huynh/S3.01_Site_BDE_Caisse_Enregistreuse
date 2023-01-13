@@ -38,4 +38,6 @@
     <?php endif ?>
 </div>
 
+</main>
+
 <?php require "view_end.php";?>

@@ -30,5 +30,6 @@
         <?php endforeach ?>
     </table>
 <?php endforeach ?>
+</main>
 
 <?php require "view_end.php";?>

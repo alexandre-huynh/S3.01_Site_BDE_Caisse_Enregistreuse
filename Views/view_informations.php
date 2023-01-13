@@ -77,5 +77,6 @@
     <p>* : obligatoire</p>
     <p> <input type="submit" value="Modifier le mot de passe"/> </p>
 </form>
+</main>
 
 <?php require "view_end.php";?>
