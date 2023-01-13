@@ -898,22 +898,22 @@ class Model
       $req->execute();
 
       // Suppression de la table Authentification
-      $req1 = $this->bd->prepare('DELETE FROM Authentification WHERE num_etudiant = :num_etud');
+      $req1 = $this->bd->prepare('DELETE FROM Authentification WHERE num_etudiant = (SELECT num_etudiant FROM Client WHERE id_client=:id)');
       $req1->bindValue(':num_etud',$num_etud);
       $req1->execute();
 
 
       } 
 
-      public function removeCompteAdmin($num_etud){
+      public function removeCompteAdmin($id){
 
-      $req = $this->bd->prepare('DELETE FROM Admin where num_etudiant = :num_etud ');
+      $req = $this->bd->prepare('DELETE FROM Admin where num_etudiant = (SELECT num_etudiant FROM Client WHERE id_client=:id) ');
       $req->bindValue(':num_etud',$num_etud);
       $req->execute();
       return (bool) $req->rowCount();
 
-
       }
+      
 
       public function removeProduit($id_produit){
 
@@ -923,6 +923,8 @@ class Model
       return (bool) $req->rowCount();
 
       }
+
+
       
 
     

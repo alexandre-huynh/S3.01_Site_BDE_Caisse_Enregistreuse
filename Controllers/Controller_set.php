@@ -598,7 +598,7 @@ class Controller_set extends Controller{
       // Afficher message, êtes vous sur de vouloir supprimer le client ? 
       // Ceci entrainera la suppression des ventes associés à ce client 
   
-    // Associer à la fonction removeProduit de model.php pour supprimer le produit 
+    // Associer à la fonction removeclient de model.php pour supprimer le client 
     $m->removeCompteClient($_GET['id']);
     }
 
@@ -611,6 +611,39 @@ class Controller_set extends Controller{
     ];
     $this->render("message", $data);
   }
+
+  public function action_remove_admin() {
+
+    //==================================
+    //  TEST SI C'EST UN SUPER ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"]) || !$m->isInDatabaseSuperAdmin($_SESSION["id_admin"])){
+      $this->action_error("Vous ne possédez pas les droits super administrateurs pour consulter cette page.");
+    }
+    //===================================
+  
+      if(!isset($_GET['id_admin'])){
+        $this->action_error("Erreur l'identifiant de l'admin n'est pas valide");
+      }
+      else{
+      
+        // Afficher message, êtes vous sur de vouloir supprimer l'admin ? 
+    
+      // Associer à la fonction removeAdmin de model.php pour supprimer l'admin 
+      $m->removeCompteAdmin($_GET['id']);
+      }
+  
+  
+      $data = [
+        "title" => "Supprimer un admin",
+        "message" => "L'admin à été supprimé avec succès",
+        "str_lien_retour" => "Retour à la page de gestion des comptes",
+        "lien_retour" => "?controller=list&action=gestion_admins" 
+      ];
+      $this->render("message", $data);
+    }
+
+
 
   
 
