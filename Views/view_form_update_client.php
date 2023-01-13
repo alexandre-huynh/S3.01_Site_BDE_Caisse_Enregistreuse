@@ -80,5 +80,6 @@
   <!--Validation-->
   <p> <input type="submit" value="Modifier les informations du client"/> </p>
 </form>
+</main>
 
 <?php require "view_end.php";?>

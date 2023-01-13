@@ -1,5 +1,3 @@
-</main>
-
 <!-- JS langue-->
 <?php echo '<script src="Utils/langue.js"></script>'; ?>
 

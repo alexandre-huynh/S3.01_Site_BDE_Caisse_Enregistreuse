@@ -927,11 +927,11 @@ class Model
 
       public function removeProduit($id_produit){
 
-      $req = $this->bd->prepare('DELETE FROM Produit where id_produit = :id ');
+      $req = $this->bd->prepare('DELETE FROM Produit where Id_produit = :id ');
       $req->bindValue('id',$id_produit);
       $req->execute();
       return (bool) $req->rowCount();
-      
+
       }
       
 

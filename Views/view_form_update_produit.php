@@ -96,5 +96,6 @@
   <!--Validation-->
   <p> <input type="submit" value="Modifier le produit"/> </p>
 </form>
+</main>
 
 <?php require "view_end.php";?>

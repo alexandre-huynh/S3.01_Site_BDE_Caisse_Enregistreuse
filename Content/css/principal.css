@@ -1,5 +1,7 @@
 body{
-    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 .accueil_header{
     background-color: #15AABF;
@@ -96,7 +98,7 @@ section h4{
 footer{
   display: flex;
   width: 100%;
-  /*margin-top: auto;*/
+  margin-top: auto;
   background-color: #15AABF;
 }
 
@@ -160,13 +162,17 @@ a[title="Se déconnecter"]{
 }
 
 section div{
-    display: flex;
-    margin:auto;
+    width: 100%;
 }
 section div ul{
     flex-direction: column;
     padding: 15px;
+    margin: auto;
 
+}
+
+div.liste_produits_nouveautes{
+    margin: auto;
 }
 
 /* -------------------------------- 

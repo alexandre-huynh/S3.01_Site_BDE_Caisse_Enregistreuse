@@ -279,5 +279,6 @@
   <p>* : obligatoire</p>
   <p> <input type="submit" value="Ajouter à la base de données"/> </p>
 </form>
+</main>
 
 <?php require "view_end.php";?>
