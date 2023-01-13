@@ -54,5 +54,6 @@
             </div>
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi nemo perspiciatis voluptatibus ex eos optio similique repellat eius quibusdam reiciendis, repellendus vel accusantium ipsa, libero assumenda et dignissimos fugiat deserunt.</p>
         </section>
+        </main>
 
 <?php require "view_end.php";?>
