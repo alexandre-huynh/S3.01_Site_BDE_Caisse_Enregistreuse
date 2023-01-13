@@ -17,7 +17,7 @@
               <?php endforeach ?>
           </div>
       </section>
-
+</main>
 
 
 <?php require "view_end.php";?>

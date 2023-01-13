@@ -511,6 +511,9 @@ class Controller_set extends Controller{
           // - décrémente stock  
           $m->updateStock($infos["id_produit"]);
 
+          // + incrémente nb vente
+          $m->updateNbVente($infos["id_produit"]);
+
           // + incrément pts fidélité client selon produit acheté
           $m->updatePtsFideliteClient($infos["id_client"], $infos["id_produit"]);
           
@@ -602,8 +605,56 @@ class Controller_set extends Controller{
       ]; 
 
     $this->render("form_update_produit", $data);
-    }
+  
   }
+
+  public function action_form_update_client(){
+    $m = Model::getModel();
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
+
+    $data = [
+      "titre" => "Mis à jour des informations d'un client",
+      "infos" => $m->getClientPrecis($_GET["id"])
+      ]; 
+
+    $this->render("form_update_client", $data);
+  
+  }
+
+  public function action_form_update_admin(){
+    $m = Model::getModel();
+    //==================================
+    //  TEST SI C'EST UN SUPER ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"]) || !$m->isInDatabaseSuperAdmin($_SESSION["id_admin"])){
+      $this->action_error("Vous ne possédez pas les droits super administrateurs pour consulter cette page.");
+    }
+    //===================================
+
+    $data = [
+      "titre" => "Mis à jour des informations d'un administrateur",
+      "infos" => $m->getAdminPrecis($_GET["id"])
+      ]; 
+
+    $this->render("form_update_admin", $data);
+  
+  }
+
+  public function action_update_produit(){
+    $m = Model::getModel();
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
 
   public function action_update(){
 
@@ -735,6 +786,9 @@ class Controller_set extends Controller{
         
         // - décrémente stock  
         $m->updateStock($infos["id_produit"]);
+
+        // + incrémente nb vente
+        $m->updateNbVente($infos["id_produit"]);
 
         // + incrément pts fidélité client selon produit acheté
         $m->updatePtsFideliteClient($infos["id_client"], $infos["id_produit"]);

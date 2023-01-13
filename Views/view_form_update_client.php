@@ -9,7 +9,7 @@
 
 <!--<form action = "?controller=set&action=add_< ?=e($element_to_add)?>" method="post">-->
 <!-- TODO: vérifier dans le cas où le lien redirigé ne marche pas / ou donne la page d'accueil-->
-<form action = "?controller=set&action=update_client" method="post" enctype="multipart/form-data">  
+<form action = "?controller=set&action=update_client" method="post">  
   <!--
   Champs de saisie
   manuellement rédigé pour adapter le type de saisie
@@ -80,5 +80,6 @@
   <!--Validation-->
   <p> <input type="submit" value="Modifier les informations du client"/> </p>
 </form>
+</main>
 
 <?php require "view_end.php";?>
