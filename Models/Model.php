@@ -931,6 +931,11 @@ class Model
 
       public function updateNumEtudiant($num_etud,$new_num_etud,$table){
 
+      $req1 = $this->bd->prepare('UPDATE Authentification SET num_etudiant =:newNum where num_etudiant= :num ');
+      $req1->bindValue(':newNum',$new_num_etud);
+      $req1->bindValue(':num',$num_etud);
+      $req1->execute();
+
       // Update dans client puis dans authentification 
       if($table=='Client'){
         $req = $this->bd->prepare('UPDATE Client SET num_etudiant =:newNum where num_etudiant= :num ');
@@ -945,11 +950,6 @@ class Model
         $req->bindValue(':num',$num_etud);
         $req->execute();
       }
-
-      $req1 = $this->bd->prepare('UPDATE Authentification SET num_etudiant =:newNum where num_etudiant= :num ');
-      $req1->bindValue(':newNum',$new_num_etud);
-      $req1->bindValue(':num',$num_etud);
-      $req1->execute();
 
       return (bool) $req->rowCount();
 
