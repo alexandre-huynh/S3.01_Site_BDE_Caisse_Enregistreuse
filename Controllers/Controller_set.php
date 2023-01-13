@@ -511,6 +511,9 @@ class Controller_set extends Controller{
           // - décrémente stock  
           $m->updateStock($infos["id_produit"]);
 
+          // + incrémente nb vente
+          $m->updateNbVente($infos["id_produit"]);
+
           // + incrément pts fidélité client selon produit acheté
           $m->updatePtsFideliteClient($infos["id_client"], $infos["id_produit"]);
           
@@ -898,6 +901,9 @@ class Controller_set extends Controller{
         
         // - décrémente stock  
         $m->updateStock($infos["id_produit"]);
+
+        // + incrémente nb vente
+        $m->updateNbVente($infos["id_produit"]);
 
         // + incrément pts fidélité client selon produit acheté
         $m->updatePtsFideliteClient($infos["id_client"], $infos["id_produit"]);

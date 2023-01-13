@@ -782,6 +782,19 @@ class Model
       return (bool) $requete->rowCount();
     }
 
+    public function updateNbVente($id_produit)
+    {
+      $requete = $this->bd->prepare('UPDATE Produit SET Nb_ventes = ((SELECT Nb_ventes FROM Produit WHERE id_produit = :id_produit) + 1) WHERE id_produit = :id_produit');
+
+      //Remplacement des marqueurs de place par les valeurs
+      $requete->bindValue(':id_produit', $id_produit);
+
+      //Exécution de la requête
+      $requete->execute();
+
+      return (bool) $requete->rowCount();
+    }
+
     public function updatePtsFideliteClient($id_client, $id_produit)
     {
       //Préparation de la requête
