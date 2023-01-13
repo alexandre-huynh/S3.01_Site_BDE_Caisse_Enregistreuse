@@ -832,13 +832,13 @@ class Controller_set extends Controller{
       foreach($client as $c=>$v){
         if ($v!=$_POST[$c]){
           // si le num étudiant est modifié, modif dans client puis dans authentif
-          if ($v=="num_etudiant"){
+          if ($c=="num_etudiant"){
             // si existe déjà, pas de modif, erreur
             if ($m->verifNumEtudiant($_POST["num_etudiant"], "Admin")){
-              $this->action_error("Le numéro étudiant saisi est déjà utilisé par un admin, veuillez en saisir un autre.");
+              $this->action_error("Le numéro étudiant " . $_POST["num_etudiant"] . " est déjà utilisé par un admin, veuillez en saisir un autre.");
             }
             elseif ($m->verifNumEtudiant($_POST["num_etudiant"], "Client")){
-              $this->action_error("Le numéro étudiant saisi est déjà utilisé par un autre client, veuillez en saisir un autre.");
+              $this->action_error("Le numéro étudiant " . $_POST["num_etudiant"] . " est déjà utilisé par un autre client, veuillez en saisir un autre.");
             }
             // si existe pas déjà, modifie dans client puis dans authentif
             else{
@@ -846,12 +846,12 @@ class Controller_set extends Controller{
             }
           }
           // si email existe déjà
-          elseif($v=="Email"){
+          elseif($c=="Email"){
             if ($m->isInDatabaseAdmin($_POST["Email"])){
-              $this->action_error("Cette adresse mail est déjà utilisé par un admin. Veuillez saisir une autre adresse.");
+              $this->action_error("L'adresse mail " . $_POST["Email"] . " est déjà utilisé par un admin. Veuillez saisir une autre adresse.");
             }
             elseif ($m->isInDatabaseClient($_POST["Email"])){
-              $this->action_error("Cette adresse mail est déjà utilisé par un autre client. Veuillez saisir une autre adresse.");
+              $this->action_error("L'adresse mail " . $_POST["Email"] . " est déjà utilisé par un autre client. Veuillez saisir une autre adresse.");
             }
           }
           else {
@@ -911,13 +911,13 @@ class Controller_set extends Controller{
       // Préparation du tableau infos
       foreach($admin as $c=>$v){
         if ($v!=$_POST[$c]){
-          if ($v=="num_etudiant"){
+          if ($c=="num_etudiant"){
             // si existe déjà, pas de modif, erreur
             if ($m->verifNumEtudiant($_POST["num_etudiant"], "Admin")){
-              $this->action_error("Le numéro étudiant saisi est déjà utilisé par un autre admin, veuillez en saisir un autre.");
+              $this->action_error("Le numéro étudiant " . $_POST["num_etudiant"] . " est déjà utilisé par un autre admin, veuillez en saisir un autre.");
             }
             elseif ($m->verifNumEtudiant($_POST["num_etudiant"], "Client")){
-              $this->action_error("Le numéro étudiant saisi est déjà utilisé par un client, veuillez en saisir un autre.");
+              $this->action_error("Le numéro étudiant " . $_POST["num_etudiant"] . " est déjà utilisé par un client, veuillez en saisir un autre.");
             }
             // si existe pas déjà, modifie dans admin puis dans authentif
             else{
@@ -925,12 +925,12 @@ class Controller_set extends Controller{
             }
           }
           // si email existe déjà
-          elseif($v=="Email"){
+          elseif($c=="Email"){
             if ($m->isInDatabaseAdmin($_POST["Email"])){
-              $this->action_error("Cette adresse mail est déjà utilisé par un autre admin. Veuillez saisir une autre adresse.");
+              $this->action_error("L'adresse mail " . $_POST["Email"] . " est déjà utilisé par un autre admin. Veuillez saisir une autre adresse.");
             }
             elseif ($m->isInDatabaseClient($_POST["Email"])){
-              $this->action_error("Cette adresse mail est déjà utilisé par un client. Veuillez saisir une autre adresse.");
+              $this->action_error("L'adresse mail " . $_POST["Email"] . " est déjà utilisé par un client. Veuillez saisir une autre adresse.");
             }
           }
           else {
