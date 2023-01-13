@@ -343,6 +343,14 @@ class Model
       return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getVentePrecis($num_vente)
+    {
+      $req = $this->bd->prepare("SELECT * FROM Vente WHERE num_vente = :id");
+      $req->bindValue(':id', (int) $num_vente, PDO::PARAM_INT);
+      $req->execute();
+      return $req->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function getDatesVentesClient($id)
     {
       $req = $this->bd->prepare('SELECT DISTINCT Date_vente FROM Vente WHERE id_client = :id ORDER BY date_vente DESC');

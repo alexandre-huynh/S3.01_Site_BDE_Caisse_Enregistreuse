@@ -715,6 +715,34 @@ class Controller_set extends Controller{
   
   }
 
+  public function action_form_update_vente(){
+    // on récupère le Model
+    $m = Model::getModel();
+
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
+
+    $infos = $m->getVentePrecis($_GET["id"]);
+
+    $data = [
+      "titre" => "Mis à jour d'une vente",
+      "infos" => $infos,
+      "clients" => $m->getClients(),
+      "admins" => $m->getAdmins(),
+      "snacks" => $m->getProduits("default","Snack","default"),
+      "boissons" => $m->getProduits("default", "Boisson", "default"),
+      "sodas" => $m->getProduits("default", "Soda", "default"),
+      "sirops" => $m->getProduits("default", "Sirop", "default"),
+      ]; 
+
+    $this->render("form_update_vente", $data);
+  }
+
   public function action_update_produit(){
     $m = Model::getModel();
     //==================================
