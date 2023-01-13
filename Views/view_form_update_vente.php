@@ -104,7 +104,7 @@
       <label>Moyen de paiement utilisé* :
         <input id="payer_espece" type="radio" name="Paiement" value="Espece" <?php if (isset($infos["Paiement"]) && e($infos["Paiement"])=="Espece") : ?>checked<?php endif ?>  /> 
         <label for="payer_espece">Espèce</label>
-        <input id="payer_carte" type="radio" name="Paiement" value="Carte bancaire" <?php if (isset($infos["Paiement"]) && e($infos["Paiement"])=="Carte Bancaire") : ?>checked<?php endif ?>  />
+        <input id="payer_carte" type="radio" name="Paiement" value="Carte bancaire" <?php if (isset($infos["Paiement"]) && e($infos["Paiement"])=="Carte bancaire") : ?>checked<?php endif ?>  />
         <label for="payer_carte">Carte bancaire</label>
       </label>
     </p>
