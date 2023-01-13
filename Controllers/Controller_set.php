@@ -921,7 +921,7 @@ class Controller_set extends Controller{
             }
             // si existe pas déjà, modifie dans admin puis dans authentif
             else{
-              $ajout = $m->updateNumEtud($admin["num_etudiant"], $_POST["num_etudiant"], "Client");
+              $ajout = $m->updateNumEtud($admin["num_etudiant"], $_POST["num_etudiant"], "Admin");
             }
           }
           // si email existe déjà
@@ -934,7 +934,7 @@ class Controller_set extends Controller{
             }
           }
           else {
-            $ajout = $m->updateClient($_POST["id_admin"], $c, $_POST[$c]);
+            $ajout = $m->updateAdmin($_POST["id_admin"], $c, $_POST[$c]);
           }
         }
       }
