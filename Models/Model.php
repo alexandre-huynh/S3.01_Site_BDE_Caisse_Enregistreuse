@@ -769,6 +769,9 @@ class Model
       */
    
     public function removeCompteClient($num_etud){
+      // Supprimer de ventes pour supprimer les ventes du client 
+
+
 
       // Suppression de la table client
       $req = $this->bd->prepare('DELETE FROM Client where Num_etud = :num_etud ');
@@ -795,11 +798,11 @@ class Model
 
       public function removeProduit($id_produit){
 
-      $req = $this->bd->prepare('DELETE FROM Produit where id_produit = :id ');
+      $req = $this->bd->prepare('DELETE FROM Produit where Id_produit = :id ');
       $req->bindValue('id',$id_produit);
       $req->execute();
       return (bool) $req->rowCount();
-      
+
       }
       
 
