@@ -701,9 +701,14 @@ class Controller_set extends Controller{
     }
     //===================================
 
+    $infos = $m->getAdminPrecis($_GET["id"]);
+    if ($m->isInDatabaseSuperAdmin($infos["id_admin"])){
+      $infos["super_admin"]=True;
+    }
+
     $data = [
       "titre" => "Mis à jour des informations d'un administrateur",
-      "infos" => $m->getAdminPrecis($_GET["id"])
+      "infos" => $infos
       ]; 
 
     $this->render("form_update_admin", $data);
@@ -842,7 +847,7 @@ class Controller_set extends Controller{
             }
             // si existe pas déjà, modifie dans client puis dans authentif
             else{
-              $ajout = $m->updateNumEtud($client["num_etudiant"], $_POST["num_etudiant"], "Client");
+              $ajout = $m->updateNumEtudiant($client["num_etudiant"], $_POST["num_etudiant"], "Client");
             }
           }
           // si email existe déjà
@@ -924,7 +929,7 @@ class Controller_set extends Controller{
             }
             // si existe pas déjà, modifie dans admin puis dans authentif
             else{
-              $ajout = $m->updateNumEtud($admin["num_etudiant"], $_POST["num_etudiant"], "Admin");
+              $ajout = $m->updateNumEtudiant($admin["num_etudiant"], $_POST["num_etudiant"], "Admin");
             }
           }
           // si email existe déjà
@@ -953,6 +958,8 @@ class Controller_set extends Controller{
         }
         $m->updatePassword($_POST["Email"],password_hash($_POST["Password"], PASSWORD_DEFAULT),"Admin");     
       }
+
+      //TODO: Traitement si on veut créer un superadmin ou supprimer un superadmin jsp
     }
 
     //Préparation de $data pour l'affichage de la vue message
@@ -969,7 +976,6 @@ class Controller_set extends Controller{
 
     $this->render("message", $data);
   }
-
 
   public function action_update_infos(){
     

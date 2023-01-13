@@ -929,7 +929,7 @@ class Model
 
       }
 
-      public function updateNumetudiant($num_etud,$new_num_etud,$table){
+      public function updateNumEtudiant($num_etud,$new_num_etud,$table){
 
       // Update dans client puis dans authentification 
       if($table=='Client'){
@@ -937,41 +937,24 @@ class Model
         $req->bindValue(':newNum',$new_num_etud);
         $req->bindValue(':num',$num_etud);
         $req->execute();
-
-        $req = $this->bd->prepare('UPDATE Authentification SET num_etudiant =:newNum where num_etudiant= :num ');
-        $req->bindValue(':newNum',$new_num_etud);
-        $req->bindValue(':num',$num_etud);
-        $req->execute();
-
       }
+      // update dans Admin puis dans Authentification
       elseif($table=='Admin'){
-
-        // update dans Admin puis dans Authentification
         $req = $this->bd->prepare('UPDATE Admin SET num_etudiant =:newNum where num_etudiant= :num ');
         $req->bindValue(':newNum',$new_num_etud);
         $req->bindValue(':num',$num_etud);
         $req->execute();
-
-        $req = $this->bd->prepare('UPDATE Authentification JOIN Admin USING(num_etudiant) SET num_etudiant =:newNum where num_etudiant= :num ');
-        $req->bindValue(':newNum',$new_num_etud);
-        $req->bindValue(':num',$num_etud);
-        $req->execute();
-
       }
 
+      $req1 = $this->bd->prepare('UPDATE Authentification SET num_etudiant =:newNum where num_etudiant= :num ');
+      $req1->bindValue(':newNum',$new_num_etud);
+      $req1->bindValue(':num',$num_etud);
+      $req1->execute();
 
-      }
+      return (bool) $req->rowCount();
 
-      
-
-
+    }
 
 
 
-    
-
-   
-
-    
-
-}
+} // fin model
