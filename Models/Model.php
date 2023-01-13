@@ -913,7 +913,7 @@ class Model
       return (bool) $req->rowCount();
 
       }
-      
+
 
       public function removeProduit($id_produit){
 
@@ -924,8 +924,44 @@ class Model
 
       }
 
+      public function updateNumetudiant($num_etud,$new_num_etud,$table){
+
+      // Update dans client puis dans authentification 
+      if($table=='Client'){
+        $req = $this->bd->prepare('UPDATE Client SET num_etudiant =:newNum where num_etudiant= :num ');
+        $req->bindValue(':newNum',$new_num_etud);
+        $req->bindValue(':num',$num_etud);
+        $req->execute();
+
+        $req = $this->bd->prepare('UPDATE Authentification SET num_etudiant =:newNum where num_etudiant= :num ');
+        $req->bindValue(':newNum',$new_num_etud);
+        $req->bindValue(':num',$num_etud);
+        $req->execute();
+
+      }
+      elseif($table=='Admin'){
+
+        // update dans Admin puis dans Authentification
+        $req = $this->bd->prepare('UPDATE Admin SET num_etudiant =:newNum where num_etudiant= :num ');
+        $req->bindValue(':newNum',$new_num_etud);
+        $req->bindValue(':num',$num_etud);
+        $req->execute();
+
+        $req = $this->bd->prepare('UPDATE Authentification JOIN Admin USING(num_etudiant) SET num_etudiant =:newNum where num_etudiant= :num ');
+        $req->bindValue(':newNum',$new_num_etud);
+        $req->bindValue(':num',$num_etud);
+        $req->execute();
+
+      }
+
+
+      }
 
       
+
+
+
+
 
     
 
