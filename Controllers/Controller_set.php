@@ -860,6 +860,7 @@ class Controller_set extends Controller{
     }
 
     $this->render("message", $data);
+   }
   }
 
   public function action_update_admin(){
