@@ -15,10 +15,10 @@
   manuellement rédigé pour adapter le type de saisie
   -->
   <!----------------------------- 
-            Ajout produit
+            Update produit
   ------------------------------->
     <p>
-      <label>Identifiant produit* :
+      <label>Identifiant produit* (prédéfini par le système) :
         <input type="number" name="id_produit" value="<?=e($infos["id_produit"])?>" step="1" min="0" readonly  /> 
       </label>
     </p>
@@ -48,36 +48,40 @@
       </label>
     </p>
     <p>
+      <label><b>Cochez cette case si vous souhaitez mettre à jour l'image du produit dans le champs ci-dessous :</b>
+            <input type="checkbox" name="Update_img" value="True"  />
+      </label>
+    </p>
+    <p>
       <label>Image du produit* (format .png / .jpg / .jpeg, taille de fichier max : 5 Mo) :
-        <input type="file" name="produit_<?=e($infos["id_produit"])?>" accept=".png,.jpeg,.jpg"  /> 
-        <input type="hidden" name="Img_produit" value="produit_<?=e($infos["id_produit"])?>" />
+        <input type="file" name="produit_<?=e($infos["id_produit"])?>" accept=".png,.jpeg,.jpg"  />    
       </label>
       </br>
       <span>Fond transparent de préférence : Google Images > Outils > Couleur > Transparent</span>
     </p>
     <p>
       <label>Date de création* (corriger si nécessaire) :
-        <input type="date" name="Date_ajout" value="<?=e($infos["Date_creation"])?>"  /> 
+        <input type="date" name="Date_ajout" value="<?=e($infos["Date_ajout"])?>"  /> 
       </label>
     </p>
     <p>
-      <label>Nombre de points fidélité requis pour obtenir ce produit gratuitement* :
+      <label>Nombre de points fidélité <b>requis</b> pour obtenir ce produit gratuitement* :
         <input type="number" name="Pts_fidelite_requis" value="<?=e($infos["Pts_fidelite_requis"])?>" step="1" min="0" /> pts
       </label>
     </p>
     <p>
-      <label>Nombre de points fidélité octroyés/donnés lors de l'achat de ce produit* :
+      <label>Nombre de points fidélité <b>octroyés/donnés</b> lors de l'achat de ce produit* :
         <input type="number" name="Pts_fidelite_donner" value="<?=e($infos["Pts_fidelite_donner"])?>" step="1" min="0" /> pts
       </label>
     </p>
     <p>
       <label>Stock disponible* :
-        <input type="number" name="Stock" value="<?=e($infos["Stock"])?>" step="1" min="0"  />
+        <input type="number" name="Stock" value="<?=e($infos["Stock"])?>" step="1" min="0" /><img src="Content/img/logo_stock.png" alt="Logo Illustration Stock" height=20 />
       </label>
     </p>
     <p>
       <label>Ventes effectués* :
-        <input type="number" name="Nb_ventes" value="<?=e($infos["Nb_ventess"])?>" step="1" min="0"  />
+        <input type="number" name="Nb_ventes" value="<?=e($infos["Nb_ventes"])?>" step="1" min="0" /> <img src="Content/img/logo_ventes.png" alt="Logo Illustration Nb de Ventes" height=20 />
       </label>
     </p>
   <!--

@@ -228,6 +228,13 @@ class Model
       */
     }
 
+    public function getClientPrecis($id_client){
+      $req = $this->bd->prepare("SELECT * FROM Client WHERE id_client = :id");
+      $req->bindValue(':id', (int) $id_client, PDO::PARAM_INT);
+      $req->execute();
+      return $req->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function getAdmins($search="default")
     {
       // $search si on veut chercher un admin en particulier
@@ -249,6 +256,13 @@ class Model
       $req->bindValue(':search', $search);
       $req->execute();
       return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getAdminPrecis($id_admin){
+      $req = $this->bd->prepare("SELECT * FROM Admin WHERE id_admin = :id");
+      $req->bindValue(':id', (int) $id_client, PDO::PARAM_INT);
+      $req->execute();
+      return $req->fetch(PDO::FETCH_ASSOC);
     }
 
     public function getInfosIndividu($table, $id)
@@ -512,6 +526,29 @@ class Model
         return (bool) $requete->rowCount();
     }
 
+    public function updateProduit($id_produit, $attribut, $nouv_val){
+
+      $tab = ["id_produit", "Nom", "Categorie", "Prix", "Date_ajout", "Pts_fidelite_requis", "Pts_fidelite_donner", "Stock", "Nb_ventes"];
+      foreach ($tab as $v) {
+        if ($v==$attribut){
+          // pas de faille SQLi étant donné que $c est une variable défini dans cette fonction
+          $requete = $this->bd->prepare('UPDATE Produit SET ' . $v . ' = :nouv_val WHERE id_produit = :id_produit');
+          
+          //Remplacement des marqueurs de place par les valeurs
+          $requete->bindValue(':nouv_val', $nouv_val);
+          $requete->bindValue(':id_produit', $id_produit);
+
+          //Exécution de la requête
+          $requete->execute();
+
+          return (bool) $requete->rowCount();
+        }
+      }
+      //$requete = $this->bd->prepare('UPDATE Produit SET WHERE id_produit = :id_produit');
+
+      return False;
+    }
+
     public function isInDatabaseClient($email){
       /* Ancien code
       $requete = $this->bd->prepare('SELECT id_client FROM Client WHERE  id_client=:id');
@@ -609,6 +646,28 @@ class Model
 
         return (bool) $requete->rowCount();
     }
+
+    public function updateClient($id_client, $attribut, $nouv_val){
+
+      $tab = ["id_client", "num_etudiant", "Nom", "Prenom", "Tel", "Email", "Date_creation", "Pts_fidelite"];
+      foreach ($tab as $v) {
+        if ($v==$attribut){
+          // pas de faille SQLi étant donné que $c est une variable défini de cette fonction
+          $requete = $this->bd->prepare('UPDATE Client SET ' . $v . ' = :nouv_val WHERE id_client = :id_client');
+          
+          //Remplacement des marqueurs de place par les valeurs
+          $requete->bindValue(':nouv_val', $nouv_val);
+          $requete->bindValue(':id_client', $id_client);
+
+          //Exécution de la requête
+          $requete->execute();
+
+          return (bool) $requete->rowCount();
+        }
+      }
+
+      return False;
+    }
   
     public function addAdmin($infos)
     {
@@ -627,6 +686,28 @@ class Model
         $requete->execute();
 
         return (bool) $requete->rowCount();
+    }
+
+    public function updateAdmin($id_admin, $attribut, $nouv_val){
+
+      $tab = ["id_admin", "num_etudiant", "Nom", "Prenom", "Tel", "Email", "Date_creation", "Pts_fidelite"];
+      foreach ($tab as $v) {
+        if ($v==$attribut){
+          // pas de faille SQLi étant donné que $c est une variable défini de cette fonction
+          $requete = $this->bd->prepare('UPDATE Admin SET ' . $v . ' = :nouv_val WHERE id_admin = :id_admin');
+          
+          //Remplacement des marqueurs de place par les valeurs
+          $requete->bindValue(':nouv_val', $nouv_val);
+          $requete->bindValue(':id_admin', $id_admin);
+
+          //Exécution de la requête
+          $requete->execute();
+
+          return (bool) $requete->rowCount();
+        }
+      }
+
+      return False;
     }
 
     public function addSuperAdmin($infos)
@@ -663,6 +744,28 @@ class Model
         $requete->execute();
 
         return (bool) $requete->rowCount();
+    }
+
+    public function updateVente($num_vente, $attribut, $nouv_val){
+
+      $tab = ["num_vente", "id_client", "id_admin", "id_produit", "Date_vente", "Paiement", "Use_fidelite"];
+      foreach ($tab as $v) {
+        if ($v==$attribut){
+          // pas de faille SQLi étant donné que $c est une variable défini de cette fonction
+          $requete = $this->bd->prepare('UPDATE Vente SET ' . $v . ' = :nouv_val WHERE num_vente = :num_vente');
+          
+          //Remplacement des marqueurs de place par les valeurs
+          $requete->bindValue(':nouv_val', $nouv_val);
+          $requete->bindValue(':num_vente', $num_vente);
+
+          //Exécution de la requête
+          $requete->execute();
+
+          return (bool) $requete->rowCount();
+        }
+      }
+
+      return False;
     }
 
     public function updateStock($id_produit)
@@ -748,13 +851,13 @@ class Model
     //////
     
     
-      public function verifNumEtudiant($num_etud){
-        $req = $this->bd->prepare('SELECT * FROM Client WHERE num_etudiant = :num ');
-        $req->bindValue('num', $num_etud);
-        $req->execute();
-        return (bool) $req->rowCount();
-        
-      }
+    public function verifNumEtudiant($num_etud){
+      $req = $this->bd->prepare('SELECT * FROM Client WHERE num_etudiant = :num ');
+      $req->bindValue('num', $num_etud);
+      $req->execute();
+      return (bool) $req->rowCount();
+      
+    }
       /* ancien code
       if(isset($_POST['num_etudiant'])){
         $req = this->bd->prepare('SELECT * FROM client WHERE Num_etudiant = :num ')
@@ -768,12 +871,14 @@ class Model
       }
       */
    
-    public function removeCompteClient($num_etud){
-      // Supprimer de ventes pour supprimer les ventes du client 
+    public function removeCompteClient($num_etud, $id_client){
 
+      // Suppression de la table Vente
+      $req = $this->bd->prepare('DELETE FROM Vente where id_client = :id_client ');
+      $req->bindValue(':id_client',$id_client);
+      $req->execute();
 
-
-      // Suppression de la table client
+      // Suppression de la table Client
       $req = $this->bd->prepare('DELETE FROM Client where Num_etud = :num_etud ');
       $req->bindValue('num_etud',$num_etud);
       $req->execute();
@@ -786,11 +891,22 @@ class Model
 
       } 
 
-      public function removeCompteAdmin($num_etud){
+      public function removeCompteAdmin($num_etud, $id_admin){
+
+      // Suppression de la table Vente
+      $req = $this->bd->prepare('DELETE FROM Vente where id_admin = :id_admin ');
+      $req->bindValue(':id_admin',$id_admin);
+      $req->execute();
 
       $req = $this->bd->prepare('DELETE FROM Admin where Num_etud = :num_etud ');
       $req->bindValue('num_etud',$num_etud);
       $req->execute();
+
+      // Suppression de la table Authentification
+      $req1 = $this->bd->prepare('DELETE FROM Authentification WHERE Num_etud = :num_etud');
+      $req1->bindValue('num_etud',$num_etud);
+      $req1->execute();
+
       return (bool) $req->rowCount();
 
 

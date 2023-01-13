@@ -16,31 +16,28 @@
      <!-- Entête de la page d'accueil-->
      <header class="accueil_header">
         <nav class="accueil_nav">
-            <a href="?controller=home&action=home"><img class="logo_bde" src="Content/img/logo_bde.png" alt="logo-bde" width="70" height="70"></a>
-            <ul>
-                <li><a href="?controller=list&action=snacks" title="Snacks">Snacks</a></li>
-                <li><a href="?controller=list&action=boissons" title="Boissons">Boissons</a></li>
-                <li><a href="?controller=list&action=<?php if (isset($_SESSION["statut"]) && $_SESSION["statut"]=="admin") : ?>espace_admin<?php elseif (isset($_SESSION["statut"]) && $_SESSION["statut"]=="client") : ?>espace_client<?php endif ?>" title="Mon Espace">Mon Espace</a></li>
-                <li><a href="?controller=list&action=infos_compte" title="Mes infos">Mes Infos</a></li>
-                <li><img src="Content/img/logo_user.png" width="40px" alt="Image Logo Utilisateur" />  <?=e($_SESSION["prenomnom"])?> (<?=e($_SESSION["num_etudiant"])?>)</li>
-                <li><a href="?controller=auth&action=logout" title="Se déconnecter">Se déconnecter</a></li>
-
-                <!--Menu deroulant pour changer la langue du site-->
-                <li class="li_changer_langue">
-                <div class="js">
-                    <div class="language-picker js-language-picker" data-trigger-class="btn btn--subtle">
-                    <form action="" class="language-picker__form">
-                        <label for="language-picker-select">Selectionnez votre langue</label>
-                        <select name="language-picker-select" id="language-picker-select">
-                            <option lang="fr" value="francais"selected>Français</option>
-                            <option lang="en" value="english">English</option>
-                        </select>
-                    </form>
-                    </div>
-                </div>
-                </li>
-            </ul>
+            <div class="contenu-menu">
+                <a href="?controller=home&action=home" ><img class="logo_bde" src="Content/img/logo_bde.png" alt="logo-bde" width="70px" height="70px"></a>
+                <a href="?controller=list&action=snacks" title="Snacks" class="deco">Snacks</a>
+                <a href="?controller=list&action=boissons" title="Boissons" class="deco">Boissons</a>
+                <a href="?controller=list&action=<?php if (isset($_SESSION["statut"]) && $_SESSION["statut"]=="admin") : ?>espace_admin<?php elseif (isset($_SESSION["statut"]) && $_SESSION["statut"]=="client") : ?>espace_client<?php endif ?>" title="Mon Espace" class="deco">Mon Espace</a>
+                <a href="?controller=list&action=infos_compte" title="Mes infos" class="deco">Mes Infos</a>
+                <img src="Content/img/logo_user.png" width="40px" alt="Image Logo Utilisateur" />  <?=e($_SESSION["prenomnom"])?> (<?=e($_SESSION["num_etudiant"])?>)
+                <a href="?controller=auth&action=logout" title="Se déconnecter" class="deco">Se déconnecter</a>
+            </div>
         </nav>
+
+        <div class="js">
+            <div class="language-picker js-language-picker" data-trigger-class="btn btn--subtle">
+              <form action="" class="language-picker__form">
+                <label for="language-picker-select">Selectionnez votre langue</label>
+                <select name="language-picker-select" id="language-picker-select">
+                  <option lang="fr" value="francais" selected>Français</option>
+                  <option lang="en" value="english" >English</option>
+                </select>
+              </form>
+            </div>
+        </div>
     </header>
     <!--Fin de l'entête de la page-->
 

@@ -20,7 +20,7 @@
   <!-- TODO: voir si $id_disponible dépend si on comble les id non utilisés ou si on rajoute à la fin-->
   <?php if ($element_to_add=="produit") : ?>
     <p>
-      <label>Identifiant produit* :
+      <label>Identifiant produit* (prédéfini par le système) :
         <input type="number" name="id_produit" value="<?=e($id_disponible)?>" step="1" min="0" readonly required /> 
       </label>
     </p>
@@ -63,23 +63,23 @@
       </label>
     </p>
     <p>
-      <label>Nombre de points fidélité requis pour obtenir ce produit gratuitement* :
-        <input type="number" name="Pts_fidelite_requis" step="1" min="0" required/> pts
+      <label>Nombre de points fidélité <b>requis</b> pour obtenir ce produit gratuitement* :
+        <input type="number" name="Pts_fidelite_requis" value="10" step="1" min="0" required/> pts
       </label>
     </p>
     <p>
-      <label>Nombre de points fidélité octroyés/donnés lors de l'achat de ce produit* :
-        <input type="number" name="Pts_fidelite_donner" step="1" min="0" required/> pts
+      <label>Nombre de points fidélité <b>octroyés/donnés</b> lors de l'achat de ce produit* :
+        <input type="number" name="Pts_fidelite_donner" value="1" step="1" min="0" required/> pts
       </label>
     </p>
     <p>
       <label>Stock disponible* :
-        <input type="number" name="Stock" step="1" min="0" required />
+        <input type="number" name="Stock" step="1" min="0" required /> <img src="Content/img/logo_stock.png" alt="Logo Illustration Stock" height=20 />
       </label>
     </p>
     <p>
       <label>Ventes effectués* :
-        <input type="number" name="Nb_ventes" value="0" step="1" min="0" required />
+        <input type="number" name="Nb_ventes" value="0" step="1" min="0" required /> <img src="Content/img/logo_ventes.png" alt="Logo Illustration Nombre de ventes" height=20 />
       </label>
     </p>
   
@@ -93,7 +93,7 @@
           client*
         <?php elseif ($element_to_add=="admin") : ?>
           admin*
-        <?php endif ?> :
+        <?php endif ?> (prédéfini par le système) :
         <input type="number" 
                name="id_<?php if ($element_to_add=="client") : ?>client<?php elseif ($element_to_add=="admin") : ?>admin<?php endif ?>" 
                value="<?=e($id_disponible)?>" step="1" min="0" readonly required /> 
@@ -167,7 +167,7 @@
   ------------------------------->
   <?php elseif ($element_to_add=="vente") : ?>
     <p>
-      <label>Numéro de vente* :
+      <label>Numéro de vente* (prédéfini par le système):
         <input type="number" name="num_vente" value="<?=e($id_disponible)?>" step="1" min="0" readonly required /> 
       </label>
     </p>
