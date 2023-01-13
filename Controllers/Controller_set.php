@@ -582,8 +582,8 @@ class Controller_set extends Controller{
   }
 
   public function action_remove_client() {
-
-  //==================================
+    $m = Model::getModel();
+    //==================================
     //     TEST SI C'EST UN ADMIN
     //==================================
     if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
@@ -613,7 +613,7 @@ class Controller_set extends Controller{
   }
 
   public function action_remove_admin() {
-
+    $m = Model::getModel();
     //==================================
     //  TEST SI C'EST UN SUPER ADMIN
     //==================================
@@ -747,7 +747,6 @@ class Controller_set extends Controller{
         $msg_error = "";
 
         $target_dir = "Content/img/";
-        $target_file = $target_dir . basename($_FILES[$produit["Img_produit"]]["name"]);
         $target_file = $target_dir . $produit["Img_produit"];//basename($_FILES[$_POST["Img_produit"]]["name"]);
         $uploadOk = 1;
         $temporaire= $target_dir . basename($_FILES[$produit["Img_produit"]]["name"]);
@@ -774,7 +773,6 @@ class Controller_set extends Controller{
         // Suppression / délien de l'ancienne image
         if(file_exists($target_file)) {
           unlink($target_file); //remove the file
-          unlink($target_file . $imageFileType); //remove the file
         }
 
         // Check if $uploadOk is set to 0 by an error
@@ -784,7 +782,7 @@ class Controller_set extends Controller{
         } else {
           if (move_uploaded_file($_FILES[$produit["Img_produit"]]["tmp_name"], $target_file . "." . $imageFileType)) {
             //echo "The file ". e( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
-            $ajout = ok;
+            $ajout = true;
           } else {
             $this->action_error("Sorry, there was an error uploading your file :" . $msg_error);
           }
@@ -835,15 +833,29 @@ class Controller_set extends Controller{
         if ($v!=$_POST[$c]){
           // si le num étudiant est modifié, modif dans client puis dans authentif
           if ($v=="num_etudiant"){
-            if ($m->verifNumEtudiant($_POST["num_etudiant"])){
-              $this->action_error("Le numéro étudiant saisi est déjà utilisé par un autre client. Veuillez en saisir un autre.");
+            // si existe déjà, pas de modif, erreur
+            if ($m->verifNumEtudiant($_POST["num_etudiant"], "Admin")){
+              $this->action_error("Le numéro étudiant saisi est déjà utilisé par un admin, veuillez en saisir un autre.");
             }
+            elseif ($m->verifNumEtudiant($_POST["num_etudiant"], "Client")){
+              $this->action_error("Le numéro étudiant saisi est déjà utilisé par un autre client, veuillez en saisir un autre.");
+            }
+            // si existe pas déjà, modifie dans client puis dans authentif
             else{
-              $ajout = $m-> updateNumEtud($client["num_etudiant"], $_POST["num_etudiant"], "Client");
+              $ajout = $m->updateNumEtud($client["num_etudiant"], $_POST["num_etudiant"], "Client");
+            }
+          }
+          // si email existe déjà
+          elseif($v=="Email"){
+            if ($m->isInDatabaseAdmin($_POST["Email"])){
+              $this->action_error("Cette adresse mail est déjà utilisé par un admin. Veuillez saisir une autre adresse.");
+            }
+            elseif ($m->isInDatabaseClient($_POST["Email"])){
+              $this->action_error("Cette adresse mail est déjà utilisé par un autre client. Veuillez saisir une autre adresse.");
             }
           }
           else {
-          $ajout = $m->updateClient($_POST["id_client"], $c, $_POST[$c]);
+            $ajout = $m->updateClient($_POST["id_client"], $c, $_POST[$c]);
           }
         }
       }
@@ -899,14 +911,37 @@ class Controller_set extends Controller{
       // Préparation du tableau infos
       foreach($admin as $c=>$v){
         if ($v!=$_POST[$c]){
-          $ajout = $m->updateAdmin($_POST["id_admin"], $c, $_POST[$c]);
+          if ($v=="num_etudiant"){
+            // si existe déjà, pas de modif, erreur
+            if ($m->verifNumEtudiant($_POST["num_etudiant"], "Admin")){
+              $this->action_error("Le numéro étudiant saisi est déjà utilisé par un autre admin, veuillez en saisir un autre.");
+            }
+            elseif ($m->verifNumEtudiant($_POST["num_etudiant"], "Client")){
+              $this->action_error("Le numéro étudiant saisi est déjà utilisé par un client, veuillez en saisir un autre.");
+            }
+            // si existe pas déjà, modifie dans admin puis dans authentif
+            else{
+              $ajout = $m->updateNumEtud($admin["num_etudiant"], $_POST["num_etudiant"], "Client");
+            }
+          }
+          // si email existe déjà
+          elseif($v=="Email"){
+            if ($m->isInDatabaseAdmin($_POST["Email"])){
+              $this->action_error("Cette adresse mail est déjà utilisé par un autre admin. Veuillez saisir une autre adresse.");
+            }
+            elseif ($m->isInDatabaseClient($_POST["Email"])){
+              $this->action_error("Cette adresse mail est déjà utilisé par un client. Veuillez saisir une autre adresse.");
+            }
+          }
+          else {
+            $ajout = $m->updateClient($_POST["id_admin"], $c, $_POST[$c]);
+          }
         }
       }
 
       if (isset($_POST["Password"]) && 
         isset($_POST["Password_verify"]) && 
-        ! preg_match("/^ *$/", $_POST["Password"]))
-      {
+        ! preg_match("/^ *$/", $_POST["Password"])){
         if ($_POST["Password"]!=$_POST["Password_verify"]) {
           $this->action_error("Le mot de passe saisi ne correspond pas au mot de passe de confirmation. Néanmoins, si des informations admin ont été modifiés précédemment, ces changements ont bien été pris en compte.");
         }
@@ -1046,7 +1081,7 @@ class Controller_set extends Controller{
   }
 
   public function action_default(){
-    $this->action_form_add();
+    $this->action_error("Erreur dans le contrôleur set, action par défaut utilisé.");
   }
 
   

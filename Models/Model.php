@@ -260,7 +260,7 @@ class Model
 
     public function getAdminPrecis($id_admin){
       $req = $this->bd->prepare("SELECT * FROM Admin WHERE id_admin = :id");
-      $req->bindValue(':id', (int) $id_client, PDO::PARAM_INT);
+      $req->bindValue(':id', (int) $id_admin, PDO::PARAM_INT);
       $req->execute();
       return $req->fetch(PDO::FETCH_ASSOC);
     }
@@ -864,8 +864,13 @@ class Model
     //////
     
     
-    public function verifNumEtudiant($num_etud){
-      $req = $this->bd->prepare('SELECT * FROM Client WHERE num_etudiant = :num ');
+    public function verifNumEtudiant($num_etud, $table){
+      if($table=="Client"){
+        $req = $this->bd->prepare('SELECT * FROM Client WHERE num_etudiant = :num ');
+      }
+      elseif($table=="Admin"){
+        $req = $this->bd->prepare('SELECT * FROM Admin WHERE num_etudiant = :num ');      
+      }
       $req->bindValue(':num', $num_etud);
       $req->execute();
       return (bool) $req->rowCount();
@@ -899,7 +904,7 @@ class Model
 
       // Suppression de la table Authentification
       $req1 = $this->bd->prepare('DELETE FROM Authentification WHERE num_etudiant = (SELECT num_etudiant FROM Client WHERE id_client=:id)');
-      $req1->bindValue(':num_etud',$num_etud);
+      $req1->bindValue(':id',$id);
       $req1->execute();
 
 
@@ -908,7 +913,7 @@ class Model
       public function removeCompteAdmin($id){
 
       $req = $this->bd->prepare('DELETE FROM Admin where num_etudiant = (SELECT num_etudiant FROM Client WHERE id_client=:id) ');
-      $req->bindValue(':num_etud',$num_etud);
+      $req->bindValue(':id',$id);
       $req->execute();
       return (bool) $req->rowCount();
 

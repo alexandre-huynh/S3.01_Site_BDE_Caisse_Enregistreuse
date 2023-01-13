@@ -198,9 +198,9 @@ class Controller_auth extends Controller{
       if($m->isInDatabaseClient($_POST['Email'])){
         $this->action_error("Cette adresse mail est déjà utilisée, veuillez en saisir une autre.");
       }
-      elseif($m->verifNumEtudiant($_POST['num_etudiant'])){
+      elseif($m->verifNumEtudiant($_POST['num_etudiant'], "Client")){
         $this->action_error("Le numéro étudiant saisi est déjà utilisé, veuillez revérifiez votre saisie. 
-        Si le problème persiste, parlez-en aux responsables du BDE");
+        Si le problème persiste, parlez-en aux responsables du BDE.");
       }
       else{
         // !!
