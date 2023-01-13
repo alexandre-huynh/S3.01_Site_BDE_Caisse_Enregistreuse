@@ -930,28 +930,48 @@ class Model
       }
 
       public function updateNumEtudiant($num_etud,$new_num_etud,$table){
+      
+        //Désactivation temporaire de la clé étrangère num étudiant
+        $req4 = $this->bd->prepare('SET FOREIGN_KEY_CHECKS = 0');
+        $req4->execute();
 
-      $req1 = $this->bd->prepare('UPDATE Authentification SET num_etudiant =:newNum where num_etudiant= :num ');
-      $req1->bindValue(':newNum',$new_num_etud);
-      $req1->bindValue(':num',$num_etud);
-      $req1->execute();
+        // Update dans client puis dans authentification 
+        if($table=='Client'){
+          //Désactivation temporaire de la clé étrangère num étudiant (méthode alt)
+          //$req2 = $this->bd->prepare('ALTER TABLE Client DROP FOREIGN KEY Client_ibfk_1');
+          //$req2->execute();
+          
+          $req = $this->bd->prepare('UPDATE Client SET num_etudiant =:newNum where num_etudiant= :num ');
+          $req->bindValue(':newNum',$new_num_etud);
+          $req->bindValue(':num',$num_etud);
+          $req->execute();
+        }
+        // update dans Admin puis dans Authentification
+        elseif($table=='Admin'){
+          //Désactivation temporaire de la clé étrangère num étudiant (méthode alt)
+          //$req2 = $this->bd->prepare('ALTER TABLE Admin DROP FOREIGN KEY Admin_ibfk_1');
+          //$req2->execute();
 
-      // Update dans client puis dans authentification 
-      if($table=='Client'){
-        $req = $this->bd->prepare('UPDATE Client SET num_etudiant =:newNum where num_etudiant= :num ');
-        $req->bindValue(':newNum',$new_num_etud);
-        $req->bindValue(':num',$num_etud);
-        $req->execute();
-      }
-      // update dans Admin puis dans Authentification
-      elseif($table=='Admin'){
-        $req = $this->bd->prepare('UPDATE Admin SET num_etudiant =:newNum where num_etudiant= :num ');
-        $req->bindValue(':newNum',$new_num_etud);
-        $req->bindValue(':num',$num_etud);
-        $req->execute();
-      }
+          $req = $this->bd->prepare('UPDATE Admin SET num_etudiant =:newNum where num_etudiant= :num ');
+          $req->bindValue(':newNum',$new_num_etud);
+          $req->bindValue(':num',$num_etud);
+          $req->execute();
 
-      return (bool) $req->rowCount();
+          //Réactivation clé étrangère (méthode alt)
+          //$req3 = $this->bd->prepare('ALTER TABLE Admin ADD FOREIGN KEY (num_etudiant) REFERENCES Authentification(num_etudiant)');
+          //$req3->execute();
+        }
+
+        $req1 = $this->bd->prepare('UPDATE Authentification SET num_etudiant =:newNum where num_etudiant= :num ');
+        $req1->bindValue(':newNum',$new_num_etud);
+        $req1->bindValue(':num',$num_etud);
+        $req1->execute();
+
+        //Réactivation clé étrangère
+        $req5 = $this->bd->prepare('SET FOREIGN_KEY_CHECKS = 1');
+        $req5->execute();
+
+        return (bool) $req->rowCount();
 
     }
 
