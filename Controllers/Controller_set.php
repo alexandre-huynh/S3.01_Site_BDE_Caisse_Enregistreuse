@@ -581,6 +581,37 @@ class Controller_set extends Controller{
     $this->render("message", $data);
   }
 
+  public function action_remove_client() {
+
+  //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+
+    if(!isset($_GET['id_client'])){
+      $this->action_error("Erreur l'identifiant du client n'est pas valide");
+    }
+    else{
+    
+      // Afficher message, êtes vous sur de vouloir supprimer le client ? 
+      // Ceci entrainera la suppression des ventes associés à ce client 
+  
+    // Associer à la fonction removeProduit de model.php pour supprimer le produit 
+    $m->removeCompteClient($_GET['id']);
+    }
+
+
+    $data = [
+      "title" => "Supprimer un client",
+      "message" => "Le client à été supprimé avec succès",
+      "str_lien_retour" => "Retour à la page de gestion des clients",
+      "lien_retour" => "?controller=list&action=gestion_clients" 
+    ];
+    $this->render("message", $data);
+  }
+
   
 
   /*
