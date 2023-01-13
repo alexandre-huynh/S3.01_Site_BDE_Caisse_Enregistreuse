@@ -853,6 +853,9 @@ class Controller_set extends Controller{
             elseif ($m->isInDatabaseClient($_POST["Email"])){
               $this->action_error("L'adresse mail " . $_POST["Email"] . " est déjà utilisé par un autre client. Veuillez saisir une autre adresse.");
             }
+            else{
+              $ajout = $m->updateClient($_POST["id_client"], $c, $_POST[$c]);
+            }
           }
           else {
             $ajout = $m->updateClient($_POST["id_client"], $c, $_POST[$c]);
@@ -931,6 +934,9 @@ class Controller_set extends Controller{
             }
             elseif ($m->isInDatabaseClient($_POST["Email"])){
               $this->action_error("L'adresse mail " . $_POST["Email"] . " est déjà utilisé par un client. Veuillez saisir une autre adresse.");
+            }
+            else{
+              $ajout = $m->updateAdmin($_POST["id_admin"], $c, $_POST[$c]);
             }
           }
           else {
