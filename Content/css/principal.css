@@ -171,6 +171,10 @@ section div ul{
 
 }
 
+div.liste_produits_nouveautes{
+    margin: auto;
+}
+
 /* -------------------------------- 
 
 Title: Language Picker
