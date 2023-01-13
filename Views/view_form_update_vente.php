@@ -19,13 +19,13 @@
   ------------------------------->
   <p>
       <label>Numéro de vente* (prédéfini par le système):
-        <input type="number" name="num_vente" value="<?=e($infos["num_vente"])?>" step="1" min="0" readonly required /> 
+        <input type="number" name="num_vente" value="<?=e($infos["num_vente"])?>" step="1" min="0" readonly  /> 
       </label>
     </p>
     <!--Sélection client-->
     <p>
       <label>Client acheteur* :
-        <select name="id_client" required >
+        <select name="id_client"  >
           <?php foreach ($clients as $ligne): ?>
             <option value="<?=e($ligne["id_client"])?>" <?php if (isset($infos["id_client"]) && e($ligne["id_client"])==e($infos["id_client"])) : ?>selected<?php endif ?>>
               n°<?=e($ligne["id_client"])?> - <?=e($ligne["Prenom"])?> <?=e($ligne["Nom"])?> (n° étud : <?=e($ligne["num_etudiant"])?>)
@@ -37,7 +37,7 @@
     <!--Sélection responsable/admin-->
     <p>
       <label>Responsable de la vente (administrateur)* :
-        <select name="id_admin" required >
+        <select name="id_admin"  >
           <?php foreach ($admins as $ligne): ?>
             <option value="<?=e($ligne["id_admin"])?>" <?php if (isset($infos["id_admin"]) && e($ligne["id_admin"])==e($infos["id_admin"])) : ?>selected<?php endif ?>>
               n°<?=e($ligne["id_admin"])?> - <?=e($ligne["Prenom"])?> <?=e($ligne["Nom"])?> (n° étud : <?=e($ligne["num_etudiant"])?>)
@@ -54,7 +54,7 @@
     -->
     <p>
       <label>Produit vendu (si le même produit est acheté plusieurs fois, créer une autre vente)* :
-        <select name="id_produit" required >
+        <select name="id_produit"  >
           <optgroup label="-Snacks-">
             <?php foreach ($snacks as $ligne): ?>
               <option value="<?=e($ligne["id_produit"])?>" <?php if (isset($infos["id_produit"]) && e($ligne["id_produit"])==e($infos["id_produit"])) : ?>selected<?php endif ?>>
@@ -97,14 +97,14 @@
     </p>
     <p>
       <label>Date de la vente* (corriger si nécessaire) :
-        <input type="date" name="Date_vente" value="<?=e($infos["Date_vente"])?>" required /> 
+        <input type="date" name="Date_vente" value="<?=e($infos["Date_vente"])?>"  /> 
       </label>
     </p>
     <p>
       <label>Moyen de paiement utilisé* :
-        <input id="payer_espece" type="radio" name="Paiement" value="Espece" <?php if (isset($infos["Paiement"]) && e($infos["Use_fidelite"])=="Espece") : ?>checked<?php endif ?> required /> 
+        <input id="payer_espece" type="radio" name="Paiement" value="Espece" <?php if (isset($infos["Paiement"]) && e($infos["Paiement"])=="Espece") : ?>checked<?php endif ?>  /> 
         <label for="payer_espece">Espèce</label>
-        <input id="payer_carte" type="radio" name="Paiement" value="Carte bancaire" <?php if (isset($infos["Paiement"]) && e($infos["Use_fidelite"])=="Carte Bancaire") : ?>checked<?php endif ?> required />
+        <input id="payer_carte" type="radio" name="Paiement" value="Carte bancaire" <?php if (isset($infos["Paiement"]) && e($infos["Paiement"])=="Carte Bancaire") : ?>checked<?php endif ?>  />
         <label for="payer_carte">Carte bancaire</label>
       </label>
     </p>
