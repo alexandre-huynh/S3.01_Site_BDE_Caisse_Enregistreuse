@@ -655,7 +655,8 @@ class Controller_set extends Controller{
       $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
     }
     //===================================
-
+  }
+  
   public function action_update(){
 
     $m = Model::getModel();

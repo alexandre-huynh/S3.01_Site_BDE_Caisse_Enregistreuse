@@ -17,7 +17,7 @@
   <!----------------------------- 
             Update produit
   ------------------------------->
-  <p>
+    <p>
       <label>Identifiant client* (prédéfini par le système) :
         <input type="number" name="id_client" value="<?=e($infos["id_client"])?>" step="1" min="0" readonly  /> 
       </label>
