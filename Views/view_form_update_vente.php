@@ -118,7 +118,7 @@
     </p>
 
   <!--Validation-->
-  <p> <input type="submit" value="Modifier le produit"/> </p>
+  <p> <input type="submit" value="Modifier la vente"/> </p>
 </form>
 </main>
 
