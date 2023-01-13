@@ -27,7 +27,7 @@
       <label>Client acheteur* :
         <select name="id_client" required >
           <?php foreach ($clients as $ligne): ?>
-            <option value="<?=e($ligne["id_client"])?>" <?php if (isset(e($infos["id_client"])) && e($ligne["id_client"])==e($infos["id_client"])) : ?>selected<?php endif ?>>
+            <option value="<?=e($ligne["id_client"])?>" <?php if (isset($infos["id_client"]) && e($ligne["id_client"])==e($infos["id_client"])) : ?>selected<?php endif ?>>
               n°<?=e($ligne["id_client"])?> - <?=e($ligne["Prenom"])?> <?=e($ligne["Nom"])?> (n° étud : <?=e($ligne["num_etudiant"])?>)
             </option>
           <?php endforeach ?>
@@ -39,7 +39,7 @@
       <label>Responsable de la vente (administrateur)* :
         <select name="id_admin" required >
           <?php foreach ($admins as $ligne): ?>
-            <option value="<?=e($ligne["id_admin"])?>" <?php if (isset(e($infos["id_admin"])) && e($ligne["id_admin"])==e($infos["id_admin"])) : ?>selected<?php endif ?>>
+            <option value="<?=e($ligne["id_admin"])?>" <?php if (isset($infos["id_admin"]) && e($ligne["id_admin"])==e($infos["id_admin"])) : ?>selected<?php endif ?>>
               n°<?=e($ligne["id_admin"])?> - <?=e($ligne["Prenom"])?> <?=e($ligne["Nom"])?> (n° étud : <?=e($ligne["num_etudiant"])?>)
             </option>
           <?php endforeach ?>
@@ -57,28 +57,28 @@
         <select name="id_produit" required >
           <optgroup label="-Snacks-">
             <?php foreach ($snacks as $ligne): ?>
-              <option value="<?=e($ligne["id_produit"])?>" <?php if (isset(e($infos["id_produit"])) && e($ligne["id_produit"])==e($infos["id_produit"])) : ?>selected<?php endif ?>>
+              <option value="<?=e($ligne["id_produit"])?>" <?php if (isset($infos["id_produit"]) && e($ligne["id_produit"])==e($infos["id_produit"])) : ?>selected<?php endif ?>>
                 <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> € (en stock : <?=e($ligne["Stock"])?>)
               </option>
             <?php endforeach ?>
           </optgroup>
           <optgroup label="-Boissons-">
             <?php foreach ($boissons as $ligne): ?>
-              <option value="<?=e($ligne["id_produit"])?>" <?php if (isset(e($infos["id_produit"])) && e($ligne["id_produit"])==e($infos["id_produit"])) : ?>selected<?php endif ?>>
+              <option value="<?=e($ligne["id_produit"])?>" <?php if (isset($infos["id_produit"]) && e($ligne["id_produit"])==e($infos["id_produit"])) : ?>selected<?php endif ?>>
                 <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> € (en stock : <?=e($ligne["Stock"])?>)
               </option>
             <?php endforeach ?>
           </optgroup>
           <optgroup label="-Sodas-">
             <?php foreach ($sodas as $ligne): ?>
-              <option value="<?=e($ligne["id_produit"])?>" <?php if (isset(e($infos["id_produit"])) && e($ligne["id_produit"])==e($infos["id_produit"])) : ?>selected<?php endif ?>>
+              <option value="<?=e($ligne["id_produit"])?>" <?php if (isset($infos["id_produit"]) && e($ligne["id_produit"])==e($infos["id_produit"])) : ?>selected<?php endif ?>>
                 <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> € (en stock : <?=e($ligne["Stock"])?>)
               </option>
             <?php endforeach ?>
           </optgroup>
           <optgroup label="-Eau + Sirop-">
             <?php foreach ($sirops as $ligne): ?>
-              <option value="<?=e($ligne["id_produit"])?>" <?php if (isset(e($infos["id_produit"])) && e($ligne["id_produit"])==e($infos["id_produit"])) : ?>selected<?php endif ?>>
+              <option value="<?=e($ligne["id_produit"])?>" <?php if (isset($infos["id_produit"]) && e($ligne["id_produit"])==e($infos["id_produit"])) : ?>selected<?php endif ?>>
                 <?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> € (en stock : <?=e($ligne["Stock"])?>)
               </option>
             <?php endforeach ?>
@@ -102,17 +102,17 @@
     </p>
     <p>
       <label>Moyen de paiement utilisé* :
-        <input id="payer_espece" type="radio" name="Paiement" value="Espece" <?php if (isset(e($infos["Paiement"])) && e($infos["Use_fidelite"])=="Espece") : ?>checked<?php endif ?> required /> 
+        <input id="payer_espece" type="radio" name="Paiement" value="Espece" <?php if (isset($infos["Paiement"]) && e($infos["Use_fidelite"])=="Espece") : ?>checked<?php endif ?> required /> 
         <label for="payer_espece">Espèce</label>
-        <input id="payer_carte" type="radio" name="Paiement" value="Carte bancaire" <?php if (isset(e($infos["Paiement"])) && e($infos["Use_fidelite"])=="Carte Bancaire") : ?>checked<?php endif ?> required />
+        <input id="payer_carte" type="radio" name="Paiement" value="Carte bancaire" <?php if (isset($infos["Paiement"]) && e($infos["Use_fidelite"])=="Carte Bancaire") : ?>checked<?php endif ?> required />
         <label for="payer_carte">Carte bancaire</label>
       </label>
     </p>
     <p>
       <label>Le client a-t-il utilisé ses points de fidélité pour obtenir ce produit gratuitement ? :
-        <input id="oui" type="radio" name="Use_fidelite" value="True" <?php if (isset(e($infos["Use_fidelite"])) && e($infos["Use_fidelite"])) : ?>checked<?php endif ?>/> 
+        <input id="oui" type="radio" name="Use_fidelite" value="True" <?php if (isset($infos["Use_fidelite"]) && e($infos["Use_fidelite"])) : ?>checked<?php endif ?>/> 
         <label for="oui">Oui</label>
-        <input id="non" type="radio" name="Use_fidelite" value="False" <?php if (isset(e($infos["Use_fidelite"])) && e(!$infos["Use_fidelite"])) : ?>checked<?php endif ?>/>
+        <input id="non" type="radio" name="Use_fidelite" value="False" <?php if (isset($infos["Use_fidelite"]) && e(!$infos["Use_fidelite"])) : ?>checked<?php endif ?>/>
         <label for="non">Non</label>
       </label>
     </p>
