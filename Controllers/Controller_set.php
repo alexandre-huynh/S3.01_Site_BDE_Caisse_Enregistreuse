@@ -833,7 +833,18 @@ class Controller_set extends Controller{
       // Préparation du tableau infos
       foreach($client as $c=>$v){
         if ($v!=$_POST[$c]){
+          // si le num étudiant est modifié, modif dans client puis dans authentif
+          if ($v=="num_etudiant"){
+            if ($m->verifNumEtudiant($_POST["num_etudiant"])){
+              $this->action_error("Le numéro étudiant saisi est déjà utilisé par un autre client. Veuillez en saisir un autre.");
+            }
+            else{
+              $ajout = $m-> updateNumEtud($client["num_etudiant"], $_POST["num_etudiant"], "Client");
+            }
+          }
+          else {
           $ajout = $m->updateClient($_POST["id_client"], $c, $_POST[$c]);
+          }
         }
       }
 
@@ -854,7 +865,7 @@ class Controller_set extends Controller{
         "lien_retour" => "?controller=list&action=gestion_clients" 
     ];
     if ($ajout) {
-        $data["message"] = "Les informations du client  " . $_POST["Prenom"] . $_POST["Nom"] . " ont été mis à jour avec succès.";
+        $data["message"] = "Les informations du client  " . $_POST["Prenom"] . " " . $_POST["Nom"] . " ont été mis à jour avec succès.";
     } else {
         $data["message"] = "Erreur dans la saisie des informations, les informations du client n'ont pas été modifié.";
     }
@@ -910,7 +921,7 @@ class Controller_set extends Controller{
         "lien_retour" => "?controller=list&action=gestion_admins" 
     ];
     if ($ajout) {
-        $data["message"] = "Les informations de l'admin  " . $_POST["Prenom"] . $_POST["Nom"] . " ont été mis à jour avec succès.";
+        $data["message"] = "Les informations de l'admin  " . $_POST["Prenom"] . " " . $_POST["Nom"] . " ont été mis à jour avec succès.";
     } else {
         $data["message"] = "Erreur dans la saisie des informations, les informations du admin n'ont pas été modifié.";
     }
