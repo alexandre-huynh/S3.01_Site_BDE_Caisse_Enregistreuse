@@ -9,7 +9,7 @@
 
 <!--<form action = "?controller=set&action=add_< ?=e($element_to_add)?>" method="post">-->
 <!-- TODO: vérifier dans le cas où le lien redirigé ne marche pas / ou donne la page d'accueil-->
-<form action = "?controller=set&action=update_client" method="post">  
+<form action = "?controller=set&action=update_admin" method="post">  
   <!--
   Champs de saisie
   manuellement rédigé pour adapter le type de saisie
@@ -18,8 +18,8 @@
             Update produit
   ------------------------------->
   <p>
-      <label>Identifiant client* (prédéfini par le système) :
-        <input type="number" name="id_client" value="<?=e($infos["id_client"])?>" step="1" min="0" readonly  /> 
+      <label>Identifiant admin* (prédéfini par le système) :
+        <input type="number" name="id_admin" value="<?=e($infos["id_admin"])?>" step="1" min="0" readonly  /> 
       </label>
     </p>
     <p>
@@ -68,6 +68,11 @@
         <input type="password" name="Password_verify" minlength="8"  />
       </label>
     </p>
+    <p>
+        <label>Rôle de super-administrateur (ATTENTION: soyez-sûr de votre choix) :
+          <input type="checkbox" name="Create_superadmin" value="True"  />
+        </label>
+    </p>
   <!--
   Champs de saisie par défaut (toutes les saisies sont des champs textes)
   au cas où s'il peut être utile
@@ -78,7 +83,7 @@
   -->
 
   <!--Validation-->
-  <p> <input type="submit" value="Modifier les informations du client"/> </p>
+  <p> <input type="submit" value="Modifier les informations de l'admin"/> </p>
 </form>
 </main>
 
