@@ -99,6 +99,7 @@ footer{
   display: flex;
   width: 100%;
   margin-top: auto;
+  bottom : 0px;
   background-color: #15AABF;
 }
 
