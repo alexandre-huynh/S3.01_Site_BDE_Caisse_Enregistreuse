@@ -352,7 +352,7 @@ class Controller_auth extends Controller{
                 if ($_POST['NewPassword']==$_POST['New_password_verif']){
 
                   // Pour update le nouveau password dans la BDD 
-                  $m->updatePassword($_SESSION['email'], password_hash($_POST['NewPassword']), $table);
+                  $m->updatePassword($_SESSION['email'], password_hash($_POST['NewPassword'], PASSWORD_DEFAULT), $table);
                   $data= [
                     "title" => "Changement de mot de passe",
                     "message" => "Votre mot de passe a bien été modifié.",
