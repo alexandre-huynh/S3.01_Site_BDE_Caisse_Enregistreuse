@@ -1023,6 +1023,7 @@ class Controller_set extends Controller{
       ) 
     {
       $client = $m->getClientPrecis($_SESSION["id_client"]);
+      /*
       $client = [
         "num_etudiant"=>$client["num_etudiant"],
         "Nom"=>$client["Nom"],
@@ -1030,6 +1031,7 @@ class Controller_set extends Controller{
         "Email"=>$client["Email"],
         "Tel"=>$client["Tel"]
       ];
+      */
 
       // Préparation du tableau infos
       foreach($client as $c=>$v){
@@ -1089,6 +1091,7 @@ class Controller_set extends Controller{
       ) 
     {
       $admin = $m->getAdminPrecis($_SESSION["id_admin"]);
+      /*
       $admin = [
         "num_etudiant"=>$admin["num_etudiant"],
         "Nom"=>$admin["Nom"],
@@ -1096,6 +1099,7 @@ class Controller_set extends Controller{
         "Email"=>$admin["Email"],
         "Tel"=>$admin["Tel"]
       ];
+      */
 
       // Préparation du tableau infos
       foreach($admin as $c=>$v){
