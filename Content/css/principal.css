@@ -164,6 +164,7 @@ a[title="Se déconnecter"]{
 
 section div{
     width: 100%;
+    display: flex;
 }
 section div ul{
     flex-direction: column;
