@@ -161,7 +161,6 @@ a[title="Se déconnecter"]{
 
 section div{
     width: 100%;
-    display: flex;
 }
 section div ul{
     flex-direction: column;
@@ -169,12 +168,19 @@ section div ul{
     margin: auto;
     background-color: white;
     text-align: center;
-    width: 100px;
-    height: auto;
+    width: 150px;
+    flex-wrap: wrap;
+    height: 150px;
 
 }
 
+section div ul li img {
+    width: 100%;
+    height: 100%;
+}
+
 div.liste_produits_nouveautes{
+    flex-wrap: wrap;
     margin: auto;
 }
 
@@ -183,6 +189,8 @@ div.liste_produits_nouveautes{
     color: #000;
     margin: auto;
     padding: 10px;
+    border-radius: 5px;
+    width: 95%;
 }
 
 /* -------------------------------- 
