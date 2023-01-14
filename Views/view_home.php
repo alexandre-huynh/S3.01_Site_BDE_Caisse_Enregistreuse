@@ -5,6 +5,8 @@
 <?php endif ?>
 <link rel="stylesheet" type="text/css" href="Content/css/home.css">
 
+<link rel="stylesheet" type="text/css" href="Content/css/home.css">
+
         <section class="banniere_accueil">
             <div class="phrase_bienvenue">
                 <h1>Bienvenue au stand de confiseries du BDE</h1>

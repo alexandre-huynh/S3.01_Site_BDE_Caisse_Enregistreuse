@@ -1,4 +1,3 @@
-<link rel="stylesheet" type="text/css" href="Content/css/footer.css">
 <!-- JS langue-->
 <?php echo '<script src="Utils/langue.js"></script>'; ?>
 
