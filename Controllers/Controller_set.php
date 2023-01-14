@@ -1032,10 +1032,21 @@ class Controller_set extends Controller{
     {
       $vente = $m->getVentePrecis($_POST["num_vente"]);
 
+
       // Préparation du tableau infos
       foreach($vente as $c=>$v){
         if ($v!=$_POST[$c]){
-          $ajout = $m->updateVente($_POST["id_admin"], $c, $_POST[$c]);
+          if ($c=="Use_fidelite"){
+            if ($_POST["Use_fidelite"] == "True"){
+              $ajout = $m->updateVente($_POST["id_admin"], $c, 1);
+            }
+            elseif($_POST["Use_fidelite"] == "False"){
+              $ajout = $m->updateVente($_POST["id_admin"], $c, 0);
+            }
+          }
+          else{
+            $ajout = $m->updateVente($_POST["id_admin"], $c, $_POST[$c]);
+          }
         }
       }
     }
