@@ -70,7 +70,7 @@
     </p>
     <p>
         <label>Rôle de super-administrateur (ATTENTION: soyez-sûr de votre choix) :
-          <input type="checkbox" name="Create_superadmin" value="True" <?php if (isset(e($infos["super_admin"])) && e($infos["super_admin"])) : ?>ticked<?php endif ?> />
+          <input type="checkbox" name="Create_superadmin" value="True" <?php if (isset($infos["super_admin"]) && e($infos["super_admin"])) : ?>ticked<?php endif ?> />
         </label>
     </p>
   <!--

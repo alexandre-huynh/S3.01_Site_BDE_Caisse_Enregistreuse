@@ -903,7 +903,9 @@ class Controller_set extends Controller{
         if ($_POST["Password"]!=$_POST["Password_verify"]) {
           $this->action_error("Le mot de passe saisi ne correspond pas au mot de passe de confirmation. Néanmoins, si des informations client ont été modifiés précédemment, ces changements ont bien été pris en compte.");
         }
-        $m->updatePassword($_POST["Email"],password_hash($_POST["Password"], PASSWORD_DEFAULT),"Client");     
+        else{
+          $ajout = $m->updatePassword($_POST["Email"],password_hash($_POST["Password"], PASSWORD_DEFAULT),"Admin");     
+        }
       }
 
     //Préparation de $data pour l'affichage de la vue message
@@ -984,7 +986,9 @@ class Controller_set extends Controller{
         if ($_POST["Password"]!=$_POST["Password_verify"]) {
           $this->action_error("Le mot de passe saisi ne correspond pas au mot de passe de confirmation. Néanmoins, si des informations admin ont été modifiés précédemment, ces changements ont bien été pris en compte.");
         }
-        $m->updatePassword($_POST["Email"],password_hash($_POST["Password"], PASSWORD_DEFAULT),"Admin");     
+        else{
+          $ajout = $m->updatePassword($_POST["Email"],password_hash($_POST["Password"], PASSWORD_DEFAULT),"Admin");     
+        }
       }
 
       //TODO: Traitement si on veut créer un superadmin ou supprimer un superadmin jsp
