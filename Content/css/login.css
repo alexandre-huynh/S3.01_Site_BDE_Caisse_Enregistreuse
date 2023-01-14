@@ -17,6 +17,9 @@
 	text-align: center;
 	margin: auto;
 }
+main{
+	height: 80%;
+}
 
 .formulaire {
 	width: 50%;
