@@ -9,6 +9,7 @@ main{
 }
 
 section div{
+    text-align: center;
     width: 80%;
     display: flex;
     height: auto;
