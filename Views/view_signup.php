@@ -46,7 +46,7 @@
       </label>
     </p>
     <p>* : obligatoire</p>
-    <p> <input type="submit" value="Ajouter à la base de données"/> </p>
+    <p> <input type="submit" value="S'inscrire"/> </p>
   </form>
 </section>
 
