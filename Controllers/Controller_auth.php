@@ -332,9 +332,11 @@ class Controller_auth extends Controller{
     // verif si dans la DB de CLient ou Admin 
     if($m->isInDatabaseAdmin($_SESSION['email'])){
       $table = "Admin";
+      $str_msg = "admin";
     }
     elseif($m->isInDatabaseClient($_SESSION['email'])){
       $table = "Client";
+      $str_msg = "client";
     }
 
     // Vérif si l'utilisateur est bien connecté 
@@ -356,15 +358,15 @@ class Controller_auth extends Controller{
                   $data= [
                     "title" => "Changement de mot de passe",
                     "message" => "Votre mot de passe a bien été modifié.",
-                    "str_lien_retour" => "Retour à l'espace client",
-                    "lien_retour" => "?controller=list&action=espace_client",
+                    "str_lien_retour" => "Retour à l'espace " . $str_msg,
+                    "lien_retour" => "?controller=list&action=espace_" . $str_msg,
                   ];
               
                   $this->render("message", $data);
                 }
                 else {
                   // Temporaire
-                  $this->action_error("Mot de passe et confirmation non correspondant.");
+                  $this->action_error("Mot de passe et mot de passe de confirmation non correspondant.");
                 }
             }
             else {
