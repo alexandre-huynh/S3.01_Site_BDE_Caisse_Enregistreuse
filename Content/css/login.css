@@ -17,6 +17,10 @@
 	text-align: center;
 	margin: auto;
 }
+main{
+	height: 80%;
+	margin-top: 20%;
+}
 
 .formulaire {
 	width: 50%;
