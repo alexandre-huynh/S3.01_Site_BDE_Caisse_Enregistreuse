@@ -863,7 +863,7 @@ class Controller_set extends Controller{
 
       // Préparation du tableau infos
       foreach($client as $c=>$v){
-        if ($v!=$_POST[$c] && ($c!="id_admin" && $c!="Pts_fidelite" && $c!="Date_creation")){
+        if ($v!=$_POST[$c]){
           // si le num étudiant est modifié, modif dans client puis dans authentif
           if ($c=="num_etudiant"){
             // si existe déjà, pas de modif, erreur
@@ -1035,7 +1035,7 @@ class Controller_set extends Controller{
 
       // Préparation du tableau infos
       foreach($client as $c=>$v){
-        if ($v!=$_POST[$c] && ($c!="id_admin" && $c!="Pts_fidelite" && $c!="Date_creation")){
+        if (($c!="id_client" && $c!="Pts_fidelite" && $c!="Date_creation") && $v!=$_POST[$c] ){
           // si le num étudiant est modifié, modif dans client puis dans authentif
           if ($c=="num_etudiant"){
             // si existe déjà, pas de modif, erreur
@@ -1103,7 +1103,7 @@ class Controller_set extends Controller{
 
       // Préparation du tableau infos
       foreach($admin as $c=>$v){
-        if ($v!=$_POST[$c]){
+        if (($c!="id_admin" && $c!="Pts_fidelite" && $c!="Date_creation") && $v!=$_POST[$c]){
           // si le num étudiant est modifié, modif dans admin puis dans authentif
           if ($c=="num_etudiant"){
             // si existe déjà, pas de modif, erreur
