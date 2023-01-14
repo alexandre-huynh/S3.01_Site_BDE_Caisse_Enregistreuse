@@ -37,6 +37,7 @@ p a:hover{
 
 input {
   width: 50%;
+  margin-bottom: 20px;
 }
 
 button[type="submit"]{
