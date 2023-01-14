@@ -1038,14 +1038,14 @@ class Controller_set extends Controller{
         if ($v!=$_POST[$c]){
           if ($c=="Use_fidelite"){
             if ($_POST["Use_fidelite"] == "True"){
-              $ajout = $m->updateVente($_POST["id_admin"], $c, 1);
+              $ajout = $m->updateVente($_POST["num_vente"], $c, 1);
             }
             elseif($_POST["Use_fidelite"] == "False"){
-              $ajout = $m->updateVente($_POST["id_admin"], $c, 0);
+              $ajout = $m->updateVente($_POST["num_vente"], $c, 0);
             }
           }
           else{
-            $ajout = $m->updateVente($_POST["id_admin"], $c, $_POST[$c]);
+            $ajout = $m->updateVente($_POST["num_vente"], $c, $_POST[$c]);
           }
         }
       }
