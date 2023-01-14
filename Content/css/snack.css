@@ -1,4 +1,4 @@
-section .snacks{
+section div{
     width: 100%;
     display: flex;
 }
