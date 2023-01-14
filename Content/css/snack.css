@@ -9,10 +9,11 @@ main{
 }
 
 section div{
-    width: 100%;
+    width: 80%;
     display: flex;
     height: auto;
     flex-wrap: wrap;
+    margin: auto;
 }
 
 section div ul{
