@@ -1,7 +1,7 @@
 .connexion{
 	background: #D9D9D9;
 	margin: auto;
-	width:80%;
+	width:70%;
 	height: auto;
 	display: block;
 	padding: 20px;
@@ -17,7 +17,7 @@
 	margin: auto;
 }
 
-div form {
+.formulaire {
 	margin: auto;
 }
 label, p, a{
@@ -33,13 +33,13 @@ p a:hover{
 }
 
 input {
-  width: 80%;
+  width: 50%;
 }
 
-button [type="submit"]{
+button[type="submit"]{
 	margin: auto;
 	text-align: center;
 	background-color: #12B886;
-	width: 80%;
+	width: 50%;
 	color: #ffff;
 }

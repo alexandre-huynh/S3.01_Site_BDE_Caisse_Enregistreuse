@@ -6,7 +6,7 @@
             <h1>Connexion</h1>
         </div>
 
-         <div>
+         <div class="formulaire">
 
             <form action="?controller=auth&action=login" method="post" >
             <label for="adresse_mail"> Adresse mail :</label> <br>
