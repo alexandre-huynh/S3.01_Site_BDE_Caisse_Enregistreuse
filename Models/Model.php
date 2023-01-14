@@ -265,20 +265,6 @@ class Model
       return $req->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function getInfosIndividu($table, $id)
-    {
-      if ($table=="Client"){
-        $req = $this->bd->prepare('SELECT * FROM Client WHERE id_client = :id');
-      }
-      elseif ($table =="Admin"){
-        $req = $this->bd->prepare('SELECT * FROM Admin WHERE id_admin = :id');
-      }
-      $req->bindValue(':id', $id);
-      $req->execute();
-      return $req->fetch(PDO::FETCH_ASSOC);
-    }
-
-
     //==================================================
 
     public function getHistoriqueAchats($search="default") // ou getVentes
