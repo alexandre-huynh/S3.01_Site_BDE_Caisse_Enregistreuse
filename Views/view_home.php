@@ -26,7 +26,7 @@
               <ul>
                 <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                 <li><?=e($ligne["Nom"])?></li>
-                <li><?=e($ligne["Prix"])?> €</li>
+                <li class="prix"><?=e($ligne["Prix"])?> €</li>
               </ul>
               </br> <!-- à enlever si nécessaire--> 
             <?php endforeach ?>
@@ -41,7 +41,7 @@
               <ul>
                 <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                 <li><?=e($ligne["Nom"])?></li>
-                <li><?=e($ligne["Prix"])?> €</li>
+                <li class="prix"><?=e($ligne["Prix"])?> €</li>
               </ul>
               </br> <!-- à enlever si nécessaire--> 
             <?php endforeach ?>

@@ -52,7 +52,7 @@ section div ul{
     background-color: white;
     text-align: center;
     width: 150px;
-    height: 150px;
+    height: 170px;
 
 }
 
@@ -72,5 +72,9 @@ div.liste_produits_nouveautes{
     padding: 10px;
     border-radius: 5px;
     width: 95%;
+}
+
+.prix{
+    color: #15AABF;
 }
 
