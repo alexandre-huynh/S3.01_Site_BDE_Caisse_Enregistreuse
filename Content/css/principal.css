@@ -170,6 +170,7 @@ section div ul{
     background-color: white;
     text-align: center;
     width: 120px;
+    flex-wrap: wrap;
 
 }
 
