@@ -1,10 +1,9 @@
-<!--< ?php require "view_begin.php"; ?>-->
-
 <?php if (isset($_SESSION["connected"]) && $_SESSION["connected"]==True) : ?>
   <?php require "view_begin_connected.php";?>
 <?php else : ?>
   <?php require "view_begin.php";?>
 <?php endif ?>
+<link rel="stylesheet" type="text/css" href="Content/css/home.css">
 
 <link rel="stylesheet" type="text/css" href="Content/css/home.css">
 
@@ -27,7 +26,7 @@
               <ul>
                 <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                 <li><?=e($ligne["Nom"])?></li>
-                <li><?=e($ligne["Prix"])?> €</li>
+                <li class="prix"><?=e($ligne["Prix"])?> €</li>
               </ul>
               </br> <!-- à enlever si nécessaire--> 
             <?php endforeach ?>
@@ -42,7 +41,7 @@
               <ul>
                 <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                 <li><?=e($ligne["Nom"])?></li>
-                <li><?=e($ligne["Prix"])?> €</li>
+                <li class="prix"><?=e($ligne["Prix"])?> €</li>
               </ul>
               </br> <!-- à enlever si nécessaire--> 
             <?php endforeach ?>

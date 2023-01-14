@@ -38,9 +38,13 @@ section h4{
     margin-bottom: 20px;
 }
 
+section{
+    margin-bottom: 40px;
+}
 
 section div{
     width: 100%;
+    display: flex;
 }
 section div ul{
     padding: 15px;
@@ -48,13 +52,13 @@ section div ul{
     background-color: white;
     text-align: center;
     width: 150px;
-    height: 150px;
+    height: 200px;
 
 }
 
 section div ul li img {
     width: 100%;
-    height: 100%;
+    height:auto;
 }
 
 div.liste_produits_nouveautes{
@@ -68,5 +72,9 @@ div.liste_produits_nouveautes{
     padding: 10px;
     border-radius: 5px;
     width: 95%;
+}
+
+.prix{
+    color: #15AABF;
 }
 
