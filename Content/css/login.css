@@ -16,7 +16,7 @@
 	margin: auto;
 }
 
-form div {
+div form {
 	margin: auto;
 }
 p a{
@@ -28,5 +28,5 @@ p a:hover{
 }
 
 #adresse_mail, #mot_de_passe{
-	width: 20%;
+	width: 500px;
 }
