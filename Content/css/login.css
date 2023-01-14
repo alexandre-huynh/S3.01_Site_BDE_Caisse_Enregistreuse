@@ -18,6 +18,7 @@
 }
 
 .formulaire {
+	width: 100%;
 	margin: auto;
 }
 label, p, a{
@@ -42,4 +43,10 @@ button[type="submit"]{
 	background-color: #12B886;
 	width: 50%;
 	color: #ffff;
+	border: none;
+	border-radius: 5px;
+}
+
+button[type="submit"]:hover{
+	background-color: #000;
 }
