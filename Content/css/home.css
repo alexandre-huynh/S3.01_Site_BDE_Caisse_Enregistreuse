@@ -41,6 +41,7 @@ section h4{
 
 section div{
     width: 100%;
+    display: flex;
 }
 section div ul{
     padding: 15px;
