@@ -167,11 +167,19 @@ section div ul{
     flex-direction: column;
     padding: 15px;
     margin: auto;
+    background-color: white;
 
 }
 
 div.liste_produits_nouveautes{
     margin: auto;
+}
+
+.description{
+    background-color: white;
+    color: #000;
+    margin: auto;
+    padding: 10px;
 }
 
 /* -------------------------------- 

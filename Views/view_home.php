@@ -52,7 +52,7 @@
             <div>
                 <h4>Le Wolf BDE</h4>
             </div>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi nemo perspiciatis voluptatibus ex eos optio similique repellat eius quibusdam reiciendis, repellendus vel accusantium ipsa, libero assumenda et dignissimos fugiat deserunt.</p>
+            <p class="description"> Le Bureau Des Etudiants (BDE) de l’IUT de Villetaneuse est un espace de détente dédié aux étudiants et géré par eux-mêmes. On y trouve des jeux de société et des sièges de repos. </p>
         </section>
         </main>
 
