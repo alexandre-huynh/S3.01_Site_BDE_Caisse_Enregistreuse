@@ -6,6 +6,8 @@ body{
 section div{
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
+    margin-bottom :50px;
 }
 section div ul{
     padding: 15px;
