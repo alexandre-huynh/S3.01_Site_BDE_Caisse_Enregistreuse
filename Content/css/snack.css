@@ -11,6 +11,7 @@ main{
 section div{
     width: 100%;
     display: flex;
+    height: auto;
     flex-wrap: wrap;
 }
 
