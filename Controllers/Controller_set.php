@@ -1107,7 +1107,7 @@ class Controller_set extends Controller{
           // si le num étudiant est modifié, modif dans admin puis dans authentif
           if ($c=="num_etudiant"){
             // si existe déjà, pas de modif, erreur
-            if ($m->verifNumEtudiant($_POST["num_etudiant"], "Admin") || $m->verifNumEtudiant($_POST["num_etudiant"], "Admin")){
+            if ($m->verifNumEtudiant($_POST["num_etudiant"], "Admin") || $m->verifNumEtudiant($_POST["num_etudiant"], "Client")){
               $this->action_error("Le numéro étudiant " . $_POST["num_etudiant"] . " est déjà utilisé par un autre utilisateur, veuillez en saisir un autre.");
             }
             // si existe pas déjà, modifie dans admin puis dans authentif
@@ -1117,7 +1117,7 @@ class Controller_set extends Controller{
           }
           // si email existe déjà
           elseif($c=="Email"){
-            if ($m->isInDatabaseAdmin($_POST["Email"]) || $m->isInDatabaseAdmin($_POST["Email"])){
+            if ($m->isInDatabaseAdmin($_POST["Email"]) || $m->isInDatabaseClient($_POST["Email"])){
               $this->action_error("L'adresse mail " . $_POST["Email"] . " est déjà utilisé par un autre utilisateur. Veuillez saisir une autre adresse.");
             }
             else{
