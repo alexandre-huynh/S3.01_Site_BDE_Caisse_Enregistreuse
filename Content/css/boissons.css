@@ -7,6 +7,7 @@ section div{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    margin :75px;
 }
 section div ul{
     padding: 15px;
