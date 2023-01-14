@@ -67,9 +67,9 @@ section.banniere_accueil{
 }
 
 section.banniere_accueil .phrase_bienvenue{
-    position: relative;
     align-self: center;
     margin:auto;
+    text-align: center;
     
 }
 
