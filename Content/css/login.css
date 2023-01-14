@@ -19,7 +19,7 @@
 }
 
 .formulaire {
-	width: 70%;
+	width: 50%;
 	margin: auto;
 
 }
@@ -37,7 +37,7 @@ p a:hover{
 }
 
 input {
-  width: 50%;
+  width: 100%;
   padding: 5px;
   margin-bottom: 20px;
   font-size: 16px;
@@ -47,7 +47,7 @@ button[type="submit"]{
 	margin: auto;
 	text-align: center;
 	background-color: #12B886;
-	width: 50%;
+	width: 100%;
 	color: #ffff;
 	border: none;
 	border-radius: 5px;
