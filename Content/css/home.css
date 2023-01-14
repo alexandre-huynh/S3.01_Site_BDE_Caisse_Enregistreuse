@@ -52,13 +52,13 @@ section div ul{
     background-color: white;
     text-align: center;
     width: 150px;
-    height: 170px;
+    height: 200px;
 
 }
 
 section div ul li img {
     width: 100%;
-    height: 100%;
+    height:auto;
 }
 
 div.liste_produits_nouveautes{
