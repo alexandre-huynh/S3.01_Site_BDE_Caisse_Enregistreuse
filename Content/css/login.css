@@ -6,6 +6,8 @@
 	display: flex;
 	padding: 20px;
 	flex-direction: column;
+	border: none;
+	border-radius: 5px;
 
 }
 

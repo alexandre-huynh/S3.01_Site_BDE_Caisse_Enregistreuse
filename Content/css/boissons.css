@@ -1,6 +1,13 @@
+body{
+    width: 100%;
+    background-color: #E2F6F0;
+}
+
 section div{
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
+    margin :75px;
 }
 section div ul{
     padding: 15px;
@@ -16,7 +23,6 @@ section div ul li img {
     width: 100%;
     height:auto;
 }
-
 div.boissons{
     margin: auto;
 }
