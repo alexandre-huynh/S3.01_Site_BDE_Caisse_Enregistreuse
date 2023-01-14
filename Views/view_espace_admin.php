@@ -4,6 +4,7 @@
   <?php require "view_begin.php";?>
 <?php endif ?>
 
+
 <h1>Bonjour <?=e($nomprenom)?> !</h1>
 <hr>
 

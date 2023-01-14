@@ -3,6 +3,7 @@
 <?php else : ?>
   <?php require "view_begin.php";?>
 <?php endif ?>
+<link rel="stylesheet" href="Content/css/snacks.css">
 
       <section class="snacks">
           <h1>Nos snacks</h1>
