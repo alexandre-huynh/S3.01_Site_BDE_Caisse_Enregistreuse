@@ -904,7 +904,7 @@ class Controller_set extends Controller{
           $this->action_error("Le mot de passe saisi ne correspond pas au mot de passe de confirmation. Néanmoins, si des informations client ont été modifiés précédemment, ces changements ont bien été pris en compte.");
         }
         else{
-          $ajout = $m->updatePassword($_POST["Email"],password_hash($_POST["Password"], PASSWORD_DEFAULT),"Admin");     
+          $ajout = $m->updatePassword($_POST["Email"],password_hash($_POST["Password"], PASSWORD_DEFAULT),"Client");     
         }
       }
 
@@ -987,7 +987,7 @@ class Controller_set extends Controller{
           $this->action_error("Le mot de passe saisi ne correspond pas au mot de passe de confirmation. Néanmoins, si des informations admin ont été modifiés précédemment, ces changements ont bien été pris en compte.");
         }
         else{
-          $ajout = $m->updatePassword($_POST["Email"],password_hash($_POST["Password"], PASSWORD_DEFAULT), "Client");     
+          $ajout = $m->updatePassword($_POST["Email"],password_hash($_POST["Password"], PASSWORD_DEFAULT),"Admin");     
         }
       }
 
