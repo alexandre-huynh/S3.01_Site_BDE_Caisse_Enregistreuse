@@ -13,7 +13,7 @@ section div ul{
     background-color: white;
     text-align: center;
     width: 150px;
-    height: 200px;
+    height: 300px;
 
 }
 
@@ -23,5 +23,5 @@ section div ul li img {
 }
 
 div.liste_snacks{
-    margin: 50%;
+    margin: 100px;
 }
