@@ -46,7 +46,7 @@
       </label>
     </p>
     <p>
-      Date de création : <b><?=e($infos["Date_creation"])?></b>
+      Date de création : <b><?=date("d/m/Y",strtotime(e($infos["Date_creation"])))?></b>
     </p>
     <p>
       Points fidélité : <b><?=e($infos["Pts_fidelite"])?></b>
