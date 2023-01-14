@@ -169,9 +169,13 @@ section div ul{
     margin: auto;
     background-color: white;
     text-align: center;
-    width: 100px;
-    height: auto;
+    width: 120px;
 
+}
+
+section div ul li img {
+    width: 100%;
+    height: auto;
 }
 
 div.liste_produits_nouveautes{
@@ -183,6 +187,8 @@ div.liste_produits_nouveautes{
     color: #000;
     margin: auto;
     padding: 10px;
+    border-radius: 5px;
+    width: 95%;
 }
 
 /* -------------------------------- 
