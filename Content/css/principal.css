@@ -180,7 +180,6 @@ section div ul li img {
 }
 
 div.liste_produits_nouveautes{
-    flex-wrap: wrap;
     margin: auto;
 }
 
