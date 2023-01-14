@@ -3,8 +3,9 @@
 	margin: auto;
 	width:70%;
 	height: auto;
-	display: block;
+	display: flex;
 	padding: 20px;
+	flex-direction: column;
 
 }
 
@@ -20,6 +21,7 @@
 .formulaire {
 	width: 100%;
 	margin: auto;
+	align-self: center;
 }
 label, p, a{
 	font-size: 16px;
@@ -35,6 +37,9 @@ p a:hover{
 
 input {
   width: 50%;
+  padding: 20px;
+  margin-bottom: 20px;
+  font-size: 16px;
 }
 
 button[type="submit"]{
