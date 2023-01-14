@@ -26,6 +26,7 @@ label, p, a{
 p a{
 	text-decoration: none;
 	color: #15AABF;
+	margin: auto;
 }
 p a:hover{
 	text-decoration: underline;
@@ -33,4 +34,12 @@ p a:hover{
 
 input {
   width: 80%;
+}
+
+button [type="submit"]{
+	margin: auto;
+	text-align: center;
+	background-color: #12B886;
+	width: 80%;
+	color: #ffff;
 }
