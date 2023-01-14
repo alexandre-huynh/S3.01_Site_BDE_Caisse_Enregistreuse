@@ -168,14 +168,15 @@ section div ul{
     margin: auto;
     background-color: white;
     text-align: center;
-    width: 120px;
+    width: 150px;
     flex-wrap: wrap;
+    height: 150px;
 
 }
 
 section div ul li img {
     width: 100%;
-    height: auto;
+    height: 100%;
 }
 
 div.liste_produits_nouveautes{
