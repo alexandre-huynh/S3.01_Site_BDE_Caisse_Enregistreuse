@@ -759,7 +759,7 @@ class Model
         }
       }
 
-      return False;
+      //return False;
     }
 
     public function updateStock($id_produit)
