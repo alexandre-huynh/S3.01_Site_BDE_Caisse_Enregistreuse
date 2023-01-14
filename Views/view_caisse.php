@@ -108,7 +108,8 @@
             <td class="snacks">
                 <ul class="produit">
                     <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                    <li><?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> €</li>
+                    <li><?=e($ligne["Nom"])?></li>
+                    <li><?=e($ligne["Prix"])?> €</li>
                     <li><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></li>
                 </ul>
                 <!--
@@ -128,7 +129,8 @@
             <td class="boissons">
                 <ul class="produit">
                     <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                    <li><?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> €</li>
+                    <li><?=e($ligne["Nom"])?></li>
+                    <li><?=e($ligne["Prix"])?> €</li>
                     <li><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></li>
                 </ul>
             </td>
@@ -140,7 +142,8 @@
             <td class="sodas">
                 <ul class="produit">
                     <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                    <li><?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> €</li>
+                    <li><?=e($ligne["Nom"])?></li>
+                    <li><?=e($ligne["Prix"])?> €</li>
                     <li><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></li>
                 </ul>
             </td>
@@ -152,7 +155,8 @@
             <td class="sirops">
                 <ul class="produit">
                     <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                    <li><?=e($ligne["Nom"])?> - <?=e($ligne["Prix"])?> €</li>
+                    <li><?=e($ligne["Nom"])?></li>
+                    <li><?=e($ligne["Prix"])?> €</li>
                     <li><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></li>
                 </ul>
             </td>
