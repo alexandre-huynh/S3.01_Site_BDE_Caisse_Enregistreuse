@@ -1055,7 +1055,7 @@ class Controller_set extends Controller{
             }
           }
           else {
-            $ajout = $m->updateClient($_POST["id_client"], $c, $_POST[$c]);
+            $ajout = $m->updateClient($_SESSION["id_client"], $c, $_POST[$c]);
           }
         }
       }
@@ -1117,11 +1117,11 @@ class Controller_set extends Controller{
               $this->action_error("L'adresse mail " . $_POST["Email"] . " est déjà utilisé par un autre utilisateur. Veuillez saisir une autre adresse.");
             }
             else{
-              $ajout = $m->updateAdmin($_POST["id_admin"], $c, $_POST[$c]);
+              $ajout = $m->updateAdmin($_SESSION["id_admin"], $c, $_POST[$c]);
             }
           }
           else {
-            $ajout = $m->updateAdmin($_POST["id_admin"], $c, $_POST[$c]);
+            $ajout = $m->updateAdmin($_SESSION["id_admin"], $c, $_POST[$c]);
           }
         }
       }
