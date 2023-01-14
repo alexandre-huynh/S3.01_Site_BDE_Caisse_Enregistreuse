@@ -33,10 +33,7 @@ header nav div a{
 }
 
 
-header div.js{
-    padding: 30px;
-    color: white;
-}
+
 main{
     width: 100%;
     height: 100%;
@@ -47,102 +44,14 @@ header nav .contenu-menu a img.logo_bde{
 }
 
 
-main{
-    background-color: #E2F6F0;
-    /* 
-    Alex H. : ça crééait un mini espace sur la droite quand on était connecté
-    après ça enlève la marge entre la barre de navig en haut et le contenu mais bon
-    margin: 8px;
-    */
-}
 
-section.banniere_accueil{
-    width: 95%;
-    height: 300px;
-    background-image: url(../img/bg.jpg);
-    margin:auto;
-    border-radius: 10px;
-    display: flex;
-    margin-bottom: 20px;
-}
-
-
-section.banniere_accueil .phrase_bienvenue h1{
-    font-size: 30px;
-    padding: 20px;
-    font-family: medium, sans-serif;
-    background-color: rgba(0, 0, 0, .6);
-    color:#E2F6F0;
-    border-radius: 10px;
-    align-self: center;
-    margin:auto;
-    text-align: center;
-}
-
-
-section h4{
-    background-color: #15AABF;
-    border-radius: 5px;
-    margin: auto;
-    padding: 10px;
-    text-align: center;
-    width: 95%;
-    color:#E2F6F0;
-    font-size: 18px;
-    margin-bottom: 20px;
-}
-
-footer{
-  display: flex;
-  width: 100%;
-  margin-top: auto;
-  bottom : 0px;
-  background-color: #15AABF;
-}
-
-.contenu_footer{
-
-  display: inherit;
-}
 
 table td, table th{
     border: 1px solid black;
     padding: 5px;
 }
 
-footer{
-    background-color: #15AABF;
-    width: 100%;
-    height: auto;
-    display: flex;
-}
 
-
-.contenu-footer{
-    color: white;
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-    
-}
-
-.contenu-footer > div{
-    width: 200px;
-    text-align: center;
-    padding:15px;
-}
-
-.contenu-footer div a{
-    text-decoration: none;
-    color: #EAE3E5;
-}
-
-.contenu-footer div>a:hover{
-    text-decoration: underline;
-}
-.logo-univ{
-    padding-top: 30px;
-}
 
 a[title="Se connecter / S'inscrire"]{
     background-color: #12B886;
@@ -154,40 +63,4 @@ a[title="Se déconnecter"]{
     padding: 15px;
 }
 
-.language-picker{
-    background-color: #DEE2E6;
-    border-radius: 20px;
-}
-
-section div{
-    width: 100%;
-}
-section div ul{
-    padding: 15px;
-    margin: auto;
-    background-color: white;
-    text-align: center;
-    width: 150px;
-    flex-wrap: wrap;
-    height: 150px;
-
-}
-
-section div ul li img {
-    width: 100%;
-    height: 100%;
-}
-
-div.liste_produits_nouveautes{
-    margin: auto;
-}
-
-.description{
-    background-color: white;
-    color: #000;
-    margin: auto;
-    padding: 10px;
-    border-radius: 5px;
-    width: 95%;
-}
 

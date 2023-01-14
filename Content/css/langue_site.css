@@ -1,3 +1,14 @@
+header div.js{
+    padding: 30px;
+    color: white;
+}
+
+.language-picker{
+    background-color: #DEE2E6;
+    border-radius: 20px;
+}
+
+
 /* -------------------------------- 
 
 Title: Language Picker

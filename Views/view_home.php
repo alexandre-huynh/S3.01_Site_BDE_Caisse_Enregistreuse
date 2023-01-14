@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="Content/css/home.css">
 <!--< ?php require "view_begin.php"; ?>-->
 
 <?php if (isset($_SESSION["connected"]) && $_SESSION["connected"]==True) : ?>
