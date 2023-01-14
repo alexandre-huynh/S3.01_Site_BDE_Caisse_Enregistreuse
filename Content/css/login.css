@@ -1,7 +1,7 @@
 .connexion{
 	background: #D9D9D9;
 	margin: auto;
-	width:90%;
+	width:80%;
 	height: auto;
 	display: block;
 	padding: 20px;
@@ -20,6 +20,9 @@
 div form {
 	margin: auto;
 }
+label, p, a{
+	font-size: 16px;
+}
 p a{
 	text-decoration: none;
 	color: #15AABF;
@@ -28,6 +31,6 @@ p a:hover{
 	text-decoration: underline;
 }
 
-#adresse_mail, #mot_de_passe{
-	width: 500px;
+input {
+  width: 80%;
 }
