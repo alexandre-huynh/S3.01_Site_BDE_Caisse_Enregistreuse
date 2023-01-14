@@ -6,9 +6,9 @@ body{
 section div{
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
 }
 section div ul{
-    flex-wrap: wrap;
     padding: 15px;
     margin: auto;
     background-color: white;
