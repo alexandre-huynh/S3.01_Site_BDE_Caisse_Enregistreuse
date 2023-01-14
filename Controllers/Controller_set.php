@@ -1035,7 +1035,7 @@ class Controller_set extends Controller{
       // Préparation du tableau infos
       foreach($vente as $c=>$v){
         if ($v!=$_POST[$c]){
-          $ajout = $m->updateAdmin($_POST["id_admin"], $c, $_POST[$c]);
+          $ajout = $m->updateVente($_POST["id_admin"], $c, $_POST[$c]);
         }
       }
     }
