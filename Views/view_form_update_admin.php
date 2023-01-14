@@ -15,9 +15,9 @@
   manuellement rédigé pour adapter le type de saisie
   -->
   <!----------------------------- 
-            Update produit
+            Update admin
   ------------------------------->
-  <p>
+    <p>
       <label>Identifiant admin* (prédéfini par le système) :
         <input type="number" name="id_admin" value="<?=e($infos["id_admin"])?>" step="1" min="0" readonly  /> 
       </label>

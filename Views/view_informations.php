@@ -8,7 +8,7 @@
 
 <hr>
 
-<form action="?controller=set&action=update_infos" method="post">
+<form action="?controller=set&action=update_infos_<?php if (isset($_SESSION["statut"]) && $_SESSION["statut"]=="admin") : ?>admin<?php elseif (isset($_SESSION["statut"]) && $_SESSION["statut"]=="client") : ?>client<?php endif ?>" method="post">
     <h2>Informations personnelles</h2>
     <!-- 
       pour le traitement, 
@@ -21,35 +21,35 @@
 
     <p>
       <label>Numéro étudiant :
-        <input type="number" name="num_etudiant" step="1" min="0" />
+        <input type="number" name="num_etudiant" value="<?=e($infos["num_etudiant"])?>" step="1" min="0" />
       </label>
     </p>
     <p>
       <label>Nom :
-        <input type="text" name="Nom" maxlength="50" />
+        <input type="text" name="Nom" value="<?=e($infos["Nom"])?>" maxlength="50" />
       </label>
     </p>
     <p>
       <label>Prénom :
-        <input type="text" name="Prenom" maxlength="50"  />
+        <input type="text" name="Prenom" value="<?=e($infos["Prenom"])?>" maxlength="50"  />
       </label>
     </p>
     <p>
       <label>N° de Téléphone (facultatif) :
         <!--TODO: possible d'implémenter attribut pattern qui utilise une expression régulière-->
-        <input type="tel" name="Tel" maxlength="15" />
+        <input type="tel" name="Tel" value="<?=e($infos["Tel"])?>" maxlength="15" />
       </label>
     </p>
     <p>
       <label>Adresse mail :
-        <input type="email" name="Email" maxlength="255" />
+        <input type="email" name="Email" value="<?=e($infos["Email"])?>" maxlength="255" />
       </label>
     </p>
     <p>
-      Date de création : <!--< ?=e($infos["Date_creation"])?>-->
+      Date de création : <b><?=e($infos["Date_creation"])?></b>
     </p>
     <p>
-      Points fidélité : <!--< ?=e($date_today)?>-->
+      Points fidélité : <b><?=e($infos["Pts_fidelite"])?></b>
     </p>
 
     <!--Validation-->

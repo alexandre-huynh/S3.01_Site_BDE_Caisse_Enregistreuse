@@ -361,10 +361,10 @@ class Controller_list extends Controller{
     //===================================
     
     if($m->isInDatabaseAdmin($_SESSION['email'])){
-      $infos = $m->getInfosIndividu("Admin", $_SESSION["id_admin"]);
+      $infos = $m->getAdminPrecis($_SESSION["id_admin"]);
     }
     elseif($m->isInDatabaseClient($_SESSION['email'])){
-      $infos = $m->getInfosIndividu("Client", $_SESSION["id_client"]);
+      $infos = $m->getClientPrecis($_SESSION["id_client"]);
     }
 
     $data =

@@ -898,7 +898,8 @@ class Controller_set extends Controller{
 
       if (isset($_POST["Password"]) && 
         isset($_POST["Password_verify"]) && 
-        ! preg_match("/^ *$/", $_POST["Password"]))
+        ! preg_match("/^ *$/", $_POST["Password"])
+        )
       {
         if ($_POST["Password"]!=$_POST["Password_verify"]) {
           $this->action_error("Le mot de passe saisi ne correspond pas au mot de passe de confirmation. Néanmoins, si des informations client ont été modifiés précédemment, ces changements ont bien été pris en compte.");
@@ -907,7 +908,7 @@ class Controller_set extends Controller{
           $ajout = $m->updatePassword($_POST["Email"],password_hash($_POST["Password"], PASSWORD_DEFAULT),"Client");     
         }
       }
-
+    }
     //Préparation de $data pour l'affichage de la vue message
     $data = [
         "title" => "Modification des infos client",
@@ -921,7 +922,7 @@ class Controller_set extends Controller{
     }
 
     $this->render("message", $data);
-   }
+
   }
 
   public function action_update_admin(){
@@ -1009,8 +1010,122 @@ class Controller_set extends Controller{
     $this->render("message", $data);
   }
 
-  public function action_update_infos(){
-    
+  public function action_update_infos_client(){
+    $m = Model::getModel();
+
+    $ajout = false;
+
+    if ( 
+      isset($_POST["num_etudiant"]) && 
+      isset($_POST["Nom"]) && 
+      isset($_POST["Prenom"]) && 
+      isset($_POST["Email"])
+      ) 
+    {
+      $client = $m->getClientPrecis($_POST["id_client"]);
+
+      // Préparation du tableau infos
+      foreach($client as $c=>$v){
+        if ($v!=$_POST[$c] && $c!="id_client" && $c!="Pts_fidelite" && $c!="Date_Creation" ){
+          // si le num étudiant est modifié, modif dans client puis dans authentif
+          if ($c=="num_etudiant"){
+            // si existe déjà, pas de modif, erreur
+            if ($m->verifNumEtudiant($_POST["num_etudiant"], "Admin") || $m->verifNumEtudiant($_POST["num_etudiant"], "Client")){
+              $this->action_error("Le numéro étudiant " . $_POST["num_etudiant"] . " est déjà utilisé par un autre utilisateur, veuillez en saisir un autre.");
+            }
+            // si existe pas déjà, modifie dans client puis dans authentif
+            else{
+              $ajout = $m->updateNumEtudiant($client["num_etudiant"], $_POST["num_etudiant"], "Client");
+            }
+          }
+          // si email existe déjà
+          elseif($c=="Email"){
+            if ($m->isInDatabaseAdmin($_POST["Email"]) || $m->isInDatabaseClient($_POST["Email"])){
+              $this->action_error("L'adresse mail " . $_POST["Email"] . " est déjà utilisé par un autre utilisateur. Veuillez saisir une autre adresse.");
+            }
+            else{
+              $ajout = $m->updateClient($_POST["id_client"], $c, $_POST[$c]);
+            }
+          }
+          else {
+            $ajout = $m->updateClient($_POST["id_client"], $c, $_POST[$c]);
+          }
+        }
+      }
+    }
+
+    //Préparation de $data pour l'affichage de la vue message
+    $data = [
+        "title" => "Modification des infos client",
+        "str_lien_retour" => "Retour à votre espace client",
+        "lien_retour" => "?controller=list&action=espace_client" 
+    ];
+    if ($ajout) {
+        $data["message"] = "Vos informations ont été mises à jour avec succès.";
+    } else {
+        $data["message"] = "Erreur dans la saisie des informations, les informations n'ont pas été modifié.";
+    }
+
+    $this->render("message", $data);
+  }
+
+  public function action_update_infos_admin(){
+    $m = Model::getModel();
+
+    $ajout = false;
+
+    if ( 
+      isset($_POST["num_etudiant"]) && 
+      isset($_POST["Nom"]) && 
+      isset($_POST["Prenom"]) && 
+      isset($_POST["Email"])
+      ) 
+    {
+      $admin = $m->getAdminPrecis($_POST["id_admin"]);
+
+      // Préparation du tableau infos
+      foreach($admin as $c=>$v){
+        if ($v!=$_POST[$c] && $c!="id_admin" && $c!="Pts_fidelite" && $c!="Date_Creation" ){
+          // si le num étudiant est modifié, modif dans admin puis dans authentif
+          if ($c=="num_etudiant"){
+            // si existe déjà, pas de modif, erreur
+            if ($m->verifNumEtudiant($_POST["num_etudiant"], "Admin") || $m->verifNumEtudiant($_POST["num_etudiant"], "Admin")){
+              $this->action_error("Le numéro étudiant " . $_POST["num_etudiant"] . " est déjà utilisé par un autre utilisateur, veuillez en saisir un autre.");
+            }
+            // si existe pas déjà, modifie dans admin puis dans authentif
+            else{
+              $ajout = $m->updateNumEtudiant($admin["num_etudiant"], $_POST["num_etudiant"], "Admin");
+            }
+          }
+          // si email existe déjà
+          elseif($c=="Email"){
+            if ($m->isInDatabaseAdmin($_POST["Email"]) || $m->isInDatabaseAdmin($_POST["Email"])){
+              $this->action_error("L'adresse mail " . $_POST["Email"] . " est déjà utilisé par un autre utilisateur. Veuillez saisir une autre adresse.");
+            }
+            else{
+              $ajout = $m->updateAdmin($_POST["id_admin"], $c, $_POST[$c]);
+            }
+          }
+          else {
+            $ajout = $m->updateAdmin($_POST["id_admin"], $c, $_POST[$c]);
+          }
+        }
+      }
+    }
+
+    //Préparation de $data pour l'affichage de la vue message
+    $data = [
+        "title" => "Modification des infos admins",
+        "str_lien_retour" => "Retour à votre espace administrateur",
+        "lien_retour" => "?controller=list&action=espace_admin" 
+    ];
+    if ($ajout) {
+        $data["message"] = "Vos informations ont été mises à jour avec succès.";
+    } else {
+        $data["message"] = "Erreur dans la saisie des informations, les informations n'ont pas été modifié.";
+    }
+
+    $this->render("message", $data);
   }
 
   /*
