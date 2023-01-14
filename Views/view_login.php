@@ -6,8 +6,9 @@
             <h1>Connexion</h1>
         </div>
 
-        <form action="?controller=auth&action=login" method="post" >
-            <div>
+         <div>
+
+            <form action="?controller=auth&action=login" method="post" >
             <label for="adresse_mail"> Adresse mail :</label> <br>
 
             <input type="email" id="adresse_mail" name="Email" placeholder="jean.dupont@mail.com" required>
@@ -20,9 +21,8 @@
             <button type="submit">Connexion</button><br>
 
             <p>Tu n'as de compte ? <a href="?controller=auth&action=form_signup">Inscris-toi</a></p>
-
-            </div>
-        </form>
+            </form>
+        </div>
     </section>
     </main>
 
