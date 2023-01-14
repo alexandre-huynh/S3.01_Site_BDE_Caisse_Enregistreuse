@@ -13,8 +13,8 @@
             <hr>
             <div class="liste_boissons">
                 <!-- Boissons générales -->
+                <h4>Boissons</h4>
                 <div class="type_boissons">
-                    <h4>Boissons</h4>
                     <?php foreach ($boissons as $ligne): ?>
                       <ul class="produit">
                         <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
@@ -25,8 +25,8 @@
                 </div>
 
                 <!-- Sodas -->
+                <h4>Sodas</h4>
                 <div class="type_sodas">
-                    <h4>Sodas</h4>
                     <?php foreach ($sodas as $ligne): ?>
                       <ul class="produit">
                         <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
@@ -37,8 +37,8 @@
                 </div>
 
                 <!-- Eau + sirop -->
+                <h4>Eau + sirop</h4>
                 <div class="type_eau_sirop">
-                    <h4>Eau + sirop</h4>
                     <?php foreach ($sirops as $ligne): ?>
                       <ul class="produit">
                         <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
