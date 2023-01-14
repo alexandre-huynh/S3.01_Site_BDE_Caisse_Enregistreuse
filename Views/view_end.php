@@ -35,8 +35,8 @@
 
             <div class="reseaux-sociaux">
                 <h5>REJOINS-NOUS</h5>
-                <a href="#"><img src="Content/img/logo_instagram.png" width="40px" height="40px"></a>
-                <a href="#"><img src="Content/img/logo_tiktok.png" width="40px" height="40px"></a>
+                <a href="https://www.instagram.com/bdeup13/"><img src="Content/img/logo_instagram.png" width="40px" height="40px"></a>
+                <a href="https://www.tiktok.com/@bdeup13?is_from_webapp=1&sender_device=pc"><img src="Content/img/logo_tiktok.png" width="40px" height="40px"></a>
             </div>
 
         </div>
