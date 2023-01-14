@@ -1022,7 +1022,7 @@ class Controller_set extends Controller{
       isset($_POST["Email"])
       ) 
     {
-      $client = $m->getClientPrecis($_POST["id_client"]);
+      $client = $m->getClientPrecis($_SESSION["id_client"]);
 
       // Préparation du tableau infos
       foreach($client as $c=>$v){
@@ -1081,7 +1081,7 @@ class Controller_set extends Controller{
       isset($_POST["Email"])
       ) 
     {
-      $admin = $m->getAdminPrecis($_POST["id_admin"]);
+      $admin = $m->getAdminPrecis($_SESSION["id_admin"]);
 
       // Préparation du tableau infos
       foreach($admin as $c=>$v){
