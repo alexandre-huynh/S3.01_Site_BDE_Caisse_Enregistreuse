@@ -1032,15 +1032,16 @@ class Controller_set extends Controller{
     {
       $vente = $m->getVentePrecis($_POST["num_vente"]);
 
+      $vente["Use_fidelite"] = (bool) $vente["Use_fidelite"];
 
       // Préparation du tableau infos
       foreach($vente as $c=>$v){
         if ($v!=$_POST[$c]){
           if ($c=="Use_fidelite"){
-            if ($_POST["Use_fidelite"] == "True"){
+            if ($_POST["Use_fidelite"] == "True" || $_POST["Use_fidelite"]){
               $ajout = $m->updateVente($_POST["num_vente"], $c, 1);
             }
-            elseif($_POST["Use_fidelite"] == "False"){
+            elseif($_POST["Use_fidelite"] == "False" || !$_POST["Use_fidelite"]){
               $ajout = $m->updateVente($_POST["num_vente"], $c, 0);
             }
           }
