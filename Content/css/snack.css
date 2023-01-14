@@ -3,9 +3,15 @@ body{
     background-color: #E2F6F0;
 }
 
+main{
+    width: 100%;
+    height: 80%;
+}
+
 section div{
     width: 100%;
     display: flex;
+    height: auto;
     flex-wrap: wrap;
 }
 
