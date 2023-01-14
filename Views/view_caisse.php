@@ -3,6 +3,7 @@
 <?php else : ?>
   <?php require "view_begin.php";?>
 <?php endif ?>
+<link rel="stylesheet" type="text/css" href="Content/css/caisse.css">
 
 <!-- Implémenter un truc de vérification session aussi, si c'est bien un admin-->
 <h1>Caisse enregistreuse</h1>
@@ -88,16 +89,17 @@
 
     <hr>
 
-    <!-- TEST -->
+    <!-- TEST 
     <p id="snack">
-        <?php foreach ($snacks as $ligne): ?>
+        < ?php foreach ($snacks as $ligne): ?>
         <div class="produit">
-            <div><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image" height="60" /></div>
-            <div><?=e($ligne["Nom"])?></div>
-            <div><?=e($ligne["Prix"])?> €</div>
+            <div><img src="Content/img/< ?=e($ligne["Img_produit"])?>" alt="Image" height="60" /></div>
+            <div>< ?=e($ligne["Nom"])?></div>
+            <div>< ?=e($ligne["Prix"])?> €</div>
         </div>
-        <?php endforeach ?>
+        < ?php endforeach ?>
     </p>
+    -->
     <!-- boutons produits-->
     <table id="liste_produits">
         <tr>
