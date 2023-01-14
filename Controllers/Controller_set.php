@@ -1010,6 +1010,51 @@ class Controller_set extends Controller{
     $this->render("message", $data);
   }
 
+  public function action_update_vente(){
+    $m = Model::getModel();
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
+
+    $ajout = false;
+
+    if (isset($_POST["num_vente"]) &&
+    isset($_POST["id_client"]) &&
+    isset($_POST["id_admin"]) &&
+    isset($_POST["id_produit"]) &&
+    isset($_POST["Date_vente"]) && 
+    isset($_POST["Paiement"]) &&
+    isset($_POST["Use_fidelite"])) 
+    {
+      $vente = $m->getVentePrecis($_POST["num_vente"]);
+
+      // Préparation du tableau infos
+      foreach($vente as $c=>$v){
+        if ($v!=$_POST[$c]){
+          $ajout = $m->updateVente($_POST["id_admin"], $c, $_POST[$c]);
+        }
+      }
+    }
+
+    //Préparation de $data pour l'affichage de la vue message
+    $data = [
+        "title" => "Modification de la vente",
+        "str_lien_retour" => "Retour à la page de gestion des ventes",
+        "lien_retour" => "?controller=list&action=gestion_ventes" 
+    ];
+    if ($ajout) {
+        $data["message"] = "Les informations de la vente ont bien été mises à jour.";
+    } else {
+        $data["message"] = "Erreur dans la saisie des informations, les informations de la vente n'ont pas été modifié.";
+    }
+
+    $this->render("message", $data);
+  }
+
   public function action_update_infos_client(){
     $m = Model::getModel();
 
