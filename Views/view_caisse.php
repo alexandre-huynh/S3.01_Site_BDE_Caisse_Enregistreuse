@@ -38,7 +38,7 @@
                 Partie Formulaire
     ======================================
     -->
-    <form>  
+    <form action="?controller=set&action=traitement_caisse" method="post" >  
         <!--Client acheteur-->
         <p>
             <!-- SERA TRANSFORME EN ID dans le traitement en php-->
