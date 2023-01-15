@@ -54,7 +54,7 @@
         <!--<input type="hidden" name="Date_vente" value="" />-->
 
         <!--Méthode de paiement-->
-        <input type="hidden" name="Paiement" value="Espece" />
+        <input type="hidden" id="select_paiement" name="Paiement" value="Espece" />
 
         <!--Si a utilisé pts de fidélité, par défaut à False, si veut utiliser ça enverra sur vue différente-->
         <!-- <input type="hidden" name="Use_fidelite" />-->

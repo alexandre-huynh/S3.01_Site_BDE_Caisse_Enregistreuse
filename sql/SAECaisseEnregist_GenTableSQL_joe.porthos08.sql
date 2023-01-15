@@ -63,7 +63,8 @@ CREATE TABLE Produit
     Pts_fidelite_requis INT,
     Pts_fidelite_donner INT,
     Stock INT,
-    Nb_ventes INT
+    Nb_ventes INT,
+    Visible BOOLEAN
 );
 
 

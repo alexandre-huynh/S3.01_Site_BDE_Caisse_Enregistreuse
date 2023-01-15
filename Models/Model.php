@@ -43,7 +43,7 @@ class Model
       $use_marqueur = False;
       // Requête de base auquelle on ajoutera des conditions order by ou filtre
       //$texte_req = "SELECT * FROM Produit";
-      $texte_req = "SELECT id_produit, Nom, Categorie, ROUND(Prix,2) AS 'Prix' , Img_produit, DATE_FORMAT(Date_ajout, '%e/%c/%Y') AS 'Date_ajout', Pts_fidelite_requis, Pts_fidelite_donner, Stock, Nb_ventes FROM Produit";
+      $texte_req = "SELECT id_produit, Nom, Categorie, ROUND(Prix,2) AS 'Prix' , Img_produit, DATE_FORMAT(Date_ajout, '%e/%c/%Y') AS 'Date_ajout', Pts_fidelite_requis, Pts_fidelite_donner, Stock, Nb_ventes, Visible FROM Produit";
 
       // ------------------
       // $type
@@ -506,10 +506,10 @@ class Model
     public function addProduit($infos)
     {
         //Préparation de la requête
-        $requete = $this->bd->prepare('INSERT INTO Produit VALUES (:id_produit, :Nom, :Categorie, :Prix, :Img_produit, :Date_ajout, :Pts_fidelite_requis, :Pts_fidelite_donner, :Stock, :Nb_ventes)');
+        $requete = $this->bd->prepare('INSERT INTO Produit VALUES (:id_produit, :Nom, :Categorie, :Prix, :Img_produit, :Date_ajout, :Pts_fidelite_requis, :Pts_fidelite_donner, :Stock, :Nb_ventes, :Visible)');
 
         //Remplacement des marqueurs de place par les valeurs
-        $marqueurs = ["id_produit", "Nom", "Categorie", "Prix", "Img_produit", "Date_ajout", "Pts_fidelite_requis", "Pts_fidelite_donner", "Stock", "Nb_ventes"];
+        $marqueurs = ["id_produit", "Nom", "Categorie", "Prix", "Img_produit", "Date_ajout", "Pts_fidelite_requis", "Pts_fidelite_donner", "Stock", "Nb_ventes", "Visible"];
         foreach ($marqueurs as $value) {
             $requete->bindValue(':' . $value, $infos[$value]);
         }

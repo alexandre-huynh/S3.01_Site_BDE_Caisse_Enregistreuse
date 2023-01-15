@@ -251,6 +251,9 @@ class Controller_set extends Controller{
                 // ex: Coca - Cola -> coca_-_cola.png
                 //$infos["Img_produit"] = str_replace(" ", "_", strtolower($infos["Nom"])) . ".png";
 
+                //Image visible par défaut
+                $infos["Visible"] = 1;
+
                 //Récupération du modèle
                 $m = Model::getModel();
                 //Ajout du produit
@@ -769,7 +772,7 @@ class Controller_set extends Controller{
 
       // Préparation du tableau infos
       foreach($produit as $c=>$v){
-        if ($c!="Img_produit" && $v!=$_POST[$c]){
+        if ($c!="Img_produit" && $c!="Visible" && $v!=$_POST[$c]){
           $ajout = $m->updateProduit($_POST["id_produit"], $c, $_POST[$c]);
         }
       }

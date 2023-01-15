@@ -285,7 +285,7 @@ class Controller_list extends Controller{
         "id_element" => "id_produit",
         "redirect_add_element" => "produit",
         "str_add_element" => "un produit",
-        "colonnes" => ["Identifiant", "Date d'ajout", "Image", "Nom du produit", "Catégorie", "Prix", "Nb pts fidélité requis", "Nb pts fidélité donné", "En stock", "Vendus"],
+        "colonnes" => ["Identifiant", "Date d'ajout", "Image", "Nom du produit", "Catégorie", "Prix", "Nb pts fidélité requis", "Nb pts fidélité donné", "En stock", "Vendus", "Publié"],
         "liste" => $m->getProduits("default","default",$search)
       ];
 
