@@ -67,6 +67,9 @@
         -->
         
         <div id="panier_input_formulaire">
+            <!-- TEST-->
+            <input type="hidden" name="produit1" value="3" />
+            <input type="hidden" name="produit2" value="5" />
             <!--
             exemple:
             <input type="hidden" name="produit1" value="ID_PRODUIT_ICI" />
