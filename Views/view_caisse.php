@@ -25,7 +25,7 @@
         </ul>
         <p>TOTAL : <span id="totalprix">0</span></p>
 
-        <p>Payé : <span id="reste">0</span></p>
+        <p>Payé : <span id="dejapayer">0</span></p>
 
         <p>Reste à payer: <span id="reste">0</span></p>
 
@@ -47,11 +47,18 @@
             </label>
         </p>
 
-        <!--Méthode de paiement-->
-        <input type="hidden" name="Paiement" required />
-
         <!--Responsable de la vente-->
-        <input type="hidden" name="id_admin" value="<?=e($admin)?>" required /> 
+        <input type="hidden" name="id_admin" value="<?=e($admin)?>" /> 
+
+        <!--Date de vente-->
+        <!--<input type="hidden" name="Date_vente" value="" />-->
+
+        <!--Méthode de paiement-->
+        <input type="hidden" name="Paiement" value="Espece" />
+
+        <!--Si a utilisé pts de fidélité, par défaut à False, si veut utiliser ça enverra sur vue différente-->
+        <!-- <input type="hidden" name="Use_fidelite" />-->
+
 
         <!--
         ======================================================    
