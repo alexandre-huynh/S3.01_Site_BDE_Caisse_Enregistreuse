@@ -1265,7 +1265,7 @@ class Controller_set extends Controller{
     $produits_traite = [];
 
     foreach($_POST as $c=>$v){
-      if (strpos($c,"produit")!=False){
+      if (preg_match("/^produit/i", $c)){
         $ajout=false;
 
         $infos["id_produit"] = $v;
