@@ -85,7 +85,7 @@
         <td><?=e($ligne["Pts_fidelite_donner"])?> pts</td>
         <td><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Logo Illustration Stock" height=20 /></td>
         <td><?=e($ligne["Nb_ventes"])?><img src="Content/img/logo_ventes.png" alt="Logo Illustration Nb de Ventes" height=20 /></td>
-        <td><?php if ($ligne["Visible"]==1) : ?><a href="?controller=set&action=cacher_produit"><img src="Content/img/toggle_icon_true.png" alt="Bouton cacher produit" height=20 /><?php elseif ($ligne["Visible"]==0) : ?><a href="?controller=set&action=publier_produit"><img src="Content/img/toggle_icon_false.png" alt="Bouton publier produit" height=20 /><?php endif ?></a></td>
+        <td><?php if ($ligne["Visible"]==1) : ?><a href="?controller=set&action=cacher_produit"><img src="Content/img/toggle_icon_true.png" alt="Bouton cacher produit" height=50 /><?php elseif ($ligne["Visible"]==0) : ?><a href="?controller=set&action=publier_produit"><img src="Content/img/toggle_icon_false.png" alt="Bouton publier produit" height=50 /><?php endif ?></a></td>
       <!-- ------------------------------------------------------------------- -->
       <!--< ?php elseif ($_GET["action"]=="gestion_quelquechose") : ?>-->
       <!-- ------------------------------------------------------------------- 
