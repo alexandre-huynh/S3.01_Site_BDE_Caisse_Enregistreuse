@@ -22,13 +22,11 @@
             <h4>Nos produits du moment</h4>
             <div class="liste_produits_actuels">
             <?php foreach ($popular_prod as $ligne): ?>
-              <?php if ($ligne["Visible"]==1) : ?>
               <ul>
                 <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                 <li><?=e($ligne["Nom"])?></li>
                 <li class="prix"><?=e($ligne["Prix"])?> €</li>
               </ul>
-              <?php endif ?>
             <?php endforeach ?>
             </div>
 
@@ -38,13 +36,11 @@
             <h4>Nos nouveautés</h4>
             <div class="liste_produits_nouveautes">
             <?php foreach ($nouv_prod as $ligne): ?>
-              <?php if ($ligne["Visible"]==1) : ?>
               <ul>
                 <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                 <li><?=e($ligne["Nom"])?></li>
                 <li class="prix"><?=e($ligne["Prix"])?> €</li>
               </ul>
-              <?php endif ?>
             <?php endforeach ?>
             </div>
 
