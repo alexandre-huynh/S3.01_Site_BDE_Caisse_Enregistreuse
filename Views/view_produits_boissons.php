@@ -16,11 +16,13 @@
                 <h4>Boissons</h4>
                 <div class="type_boissons">
                     <?php foreach ($boissons as $ligne): ?>
+                      <?php if ($ligne["Visible"]==1) : ?>
                       <ul class="produit">
                         <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                         <li> <?=e($ligne["Nom"])?> </li>
                         <li> <?=e($ligne["Prix"])?> €</li>
                       </ul>
+                      <?php endif ?>
                     <?php endforeach ?>
                 </div>
 
@@ -28,11 +30,13 @@
                 <h4>Sodas</h4>
                 <div class="type_sodas">
                     <?php foreach ($sodas as $ligne): ?>
+                      <?php if ($ligne["Visible"]==1) : ?>
                       <ul class="produit">
                         <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                         <li> <?=e($ligne["Nom"])?> </li>
                         <li> <?=e($ligne["Prix"])?> €</li>
                       </ul>
+                      <?php endif ?>
                     <?php endforeach ?>
                 </div>
 
@@ -40,11 +44,13 @@
                 <h4>Eau + sirop</h4>
                 <div class="type_eau_sirop">
                     <?php foreach ($sirops as $ligne): ?>
+                      <?php if ($ligne["Visible"]==1) : ?>
                       <ul class="produit">
                         <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                         <li> <?=e($ligne["Nom"])?> </li>
                         <li> <?=e($ligne["Prix"])?> €</li>
                       </ul>
+                      <?php endif ?>
                     <?php endforeach ?>
                 </div>
 

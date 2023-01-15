@@ -134,7 +134,7 @@ class Model
 
     public function getProduitsNouveau($limit)
     {
-      $req = $this->bd->prepare("SELECT id_produit, Nom, ROUND(Prix,2) AS 'Prix' , Img_produit FROM Produit ORDER BY date_ajout DESC LIMIT :limit");
+      $req = $this->bd->prepare("SELECT id_produit, Nom, ROUND(Prix,2) AS 'Prix' , Img_produit, Visible FROM Produit ORDER BY date_ajout DESC LIMIT :limit");
       $req->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
       $req->execute();
       $reponse = [];
@@ -146,7 +146,7 @@ class Model
 
     public function getProduitsPopulaire($limit)
     {
-      $req = $this->bd->prepare("SELECT id_produit, Nom, ROUND(Prix,2) AS 'Prix' , Img_produit FROM Produit ORDER BY nb_ventes DESC LIMIT :limit");
+      $req = $this->bd->prepare("SELECT id_produit, Nom, ROUND(Prix,2) AS 'Prix' , Img_produit, Visible FROM Produit ORDER BY nb_ventes DESC LIMIT :limit");
       $req->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
       $req->execute();
       $reponse = [];

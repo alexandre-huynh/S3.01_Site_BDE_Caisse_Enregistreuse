@@ -10,11 +10,13 @@
           <hr>
           <div class="liste_snacks">
               <?php foreach ($snacks as $ligne): ?>
+                <?php if ($ligne["Visible"]==1) : ?>
                 <ul class="produit">
                   <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                   <li><?=e($ligne["Nom"])?></li>
                   <li><?=e($ligne["Prix"])?> €</li>
                 </ul>
+                <?php endif ?>
               <?php endforeach ?>
           </div>
       </section>
