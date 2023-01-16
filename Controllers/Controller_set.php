@@ -1354,7 +1354,7 @@ class Controller_set extends Controller{
     else{
       $this->action_error("Erreur lors de la modification de l'affichage");
     }
-
+    
     $data = [
       "title" => "Modification de l'affichage",
       "str_lien_retour" => "Retour à la page de gestion des produits",
