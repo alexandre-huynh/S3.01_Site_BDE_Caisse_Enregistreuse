@@ -4,7 +4,7 @@ footer{
     width: 100%;
     height: auto;
     display: flex;
-    position: relative;
+    position: absolute;
     bottom: 0;
 }
 
