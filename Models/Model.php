@@ -968,6 +968,33 @@ class Model
 
     }
 
+    public function afficher($id){
 
+      $req = $this->bd->prepare('UPDATE Produit SET Visible = 1 WHERE id_produit = :id');
+      $req->bindValue(':id',$id);
+      $req->execute();
+
+      return (bool) $req->rowCount();
+
+    }
+
+    public function masquer($id){
+      $req = $this->bd->prepare('UPDATE Produit SET Visible = 0 WHERE id_produit = :id');
+      $req->bindValue(':id',$id);
+      $req->execute();
+
+      return (bool) $req->rowCount();
+
+    }
+
+
+
+
+
+
+
+
+
+    
 
 } // fin model
