@@ -586,6 +586,8 @@ class Controller_set extends Controller{
 
   public function action_remove_client() {
     $m = Model::getModel();
+
+    $remove = false;
     //==================================
     //     TEST SI C'EST UN ADMIN
     //==================================
@@ -600,9 +602,8 @@ class Controller_set extends Controller{
     
       // Afficher message, êtes vous sur de vouloir supprimer le client ? 
       // Ceci entrainera la suppression des ventes associés à ce client 
-  
-    // Associer à la fonction removeclient de model.php pour supprimer le client 
-    $m->removeCompteClient($_GET['id']);
+      // Associer à la fonction removeclient de model.php pour supprimer le client 
+      $remove = $m->removeCompteClient($_GET['id']);
     }
 
 
@@ -613,17 +614,22 @@ class Controller_set extends Controller{
       "lien_retour" => "?controller=list&action=gestion_clients" 
     ];
 
-    if (isset($_GET['id'])) {
+    if ($remove) {
       $data["message"] = "Le compte client à été supprimé avec succès";
     } else {
       $data["message"] = "Le client n'a pas pu être supprimé .";
     }
 
-  $this->render("message", $data);
+    $this->render("message", $data);
   }
+
+
 
   public function action_remove_admin() {
     $m = Model::getModel();
+
+    $remove = False;
+
     //==================================
     //  TEST SI C'EST UN SUPER ADMIN
     //==================================
@@ -640,7 +646,7 @@ class Controller_set extends Controller{
         // Afficher message, êtes vous sur de vouloir supprimer l'admin ? 
     
       // Associer à la fonction removeAdmin de model.php pour supprimer l'admin 
-      $m->removeCompteAdmin($_GET['id']);
+      $remove = $m->removeCompteAdmin($_GET['id']);
       }
   
   
@@ -650,12 +656,18 @@ class Controller_set extends Controller{
         "str_lien_retour" => "Retour à la page de gestion des comptes",
         "lien_retour" => "?controller=list&action=gestion_admins" 
       ];
-      $this->render("message", $data);
+
+      if (isset($remove)) {
+        $data["message"] = "Le compte admin à été supprimé avec succès";
+      } else {
+        $data["message"] = "Le client n'a pas pu être supprimé .";
+      }
+  
+    $this->render("message", $data);
     }
 
 
 
-  
 
   /*
   ===========================================================
@@ -664,7 +676,9 @@ class Controller_set extends Controller{
   */
 
   public function action_form_update_produit(){
+
     $m = Model::getModel();
+    
     //==================================
     //     TEST SI C'EST UN ADMIN
     //==================================
