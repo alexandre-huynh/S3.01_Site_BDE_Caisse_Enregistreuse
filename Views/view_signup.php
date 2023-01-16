@@ -3,6 +3,7 @@
 <?php else : ?>
   <?php require "view_begin.php";?>
 <?php endif ?>
+<link rel="stylesheet" href="Content/css/signup.css">
 
 <section class="inscription">
   <h1>Formulaire d'inscription</h1>
