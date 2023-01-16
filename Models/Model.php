@@ -905,9 +905,15 @@ class Model
 
     public function removeCompteAdmin($id){
 
+      $req1 = $this->bd->prepare('DELETE FROM Superadmin where num_etudiant = (SELECT num_etudiant FROM Client WHERE id_client=:id) ');
+      $req1->bindValue(':id',$id);
+      $req1->execute();
+
+
       $req = $this->bd->prepare('DELETE FROM Admin where num_etudiant = (SELECT num_etudiant FROM Client WHERE id_client=:id) ');
       $req->bindValue(':id',$id);
       $req->execute();
+      
       return (bool) $req->rowCount();
 
     }
@@ -995,6 +1001,6 @@ class Model
 
 
 
-    
+
 
 } // fin model
