@@ -9,21 +9,6 @@
 
 }
 
-.connexion .se_connecter{
-	margin: auto;
-}
-
-.connexion .se_connecter h1{
-	text-align: center;
-	margin: auto;
-}
-
-.formulaire {
-	width: 50%;
-	margin: auto;
-
-}
-
 label, p, a{
 	font-size: 16px;
 }
