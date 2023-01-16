@@ -1317,9 +1317,64 @@ class Controller_set extends Controller{
     $this->render("message", $data);
   }
 
+  public function action_afficher_produit(){
+
+    $m = Model::getModel();
+
+    if(isset($_GET['id'])){
+      $m->afficher($_GET['id']);
+    }
+    else{
+      $this->action_error("Erreur lors de la modification de l'affichage");
+    }
+
+    $data = [
+      "title" => "Modification de l'affichage",
+      "str_lien_retour" => "Retour à la page de gestion des produits",
+      "lien_retour" => "?controller=list&action=gestion_inventaire" 
+    ];
+  if (isset($_GET['id'])) {
+      $data["message"] = "L'affichage à bien été mise à jour et le produit est bien affiché sur le site";
+  } else {
+      $data["message"] = "Erreur lors de la modification de l'affichage";
+  }
+
+  $this->render("message", $data);
+  }
+
+
+
+  public function action_masquer_produit(){
+
+    $m = Model::getModel();
+
+    if(isset($_GET['id'])){
+      $m->masquer($_GET['id']);
+    }
+    else{
+      $this->action_error("Erreur lors de la modification de l'affichage");
+    }
+
+    $data = [
+      "title" => "Modification de l'affichage",
+      "str_lien_retour" => "Retour à la page de gestion des produits",
+      "lien_retour" => "?controller=list&action=gestion_inventaire" 
+  ];
+  if (isset($_GET['id'])) {
+      $data["message"] = "L'affichage à bien été à bien été mise à jour et le produit est bien masqué sur le site .";
+  } else {
+      $data["message"] = "Erreur lors de la modification de l'affichage";
+  }
+
+  $this->render("message", $data);
+  }
+  
+
   public function action_default(){
     $this->action_error("Erreur dans le contrôleur set, action par défaut utilisé.");
   }
+
+
 
   
 
