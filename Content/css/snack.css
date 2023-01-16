@@ -7,14 +7,9 @@ main{
     width: 100%;
     height: 90%;
 }
-.snacks{
-    width: 100;
-    margin-bottom: 10%;
-}
 
-h1{
+section h1{
     text-align: center;
-    color:15AABF;
     margin: auto;
 }
 section div{
@@ -33,19 +28,19 @@ section div ul{
     text-align: center;
     justify-content: space-between;
     width: 150px;
-    height: 200px;
+    height: 205px;
 
 }
 
 section div ul li img {
     width: 100%;
-    height:100px;
+    height:90px;
 }
 
 div.liste_snacks{
     margin-bottom: 100px;
 }
 
-li.prix{
+.prix{
     color: #15AABF;
 }
