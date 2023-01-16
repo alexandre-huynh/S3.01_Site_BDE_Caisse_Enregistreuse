@@ -4,6 +4,9 @@
   <?php require "view_begin.php";?>
 <?php endif ?>
 
+<link rel="stylesheet" type="text/css" href="Content/css/message.css">
+
+
 <h1> 
     <?= e($title) ?> 
 </h1>

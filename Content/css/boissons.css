@@ -1,12 +1,8 @@
-body{
-    min-height: 100vh;
+main{
     display: flex;
     flex-direction: column;
-}
-
-main{
     width: 100%;
-    height: 80%;
+    height: auto;
 }
 
 section div{
@@ -34,4 +30,10 @@ section div ul li img {
 
 div.liste_snacks{
     margin-bottom: 100px;
+}
+
+div.liste_boissons .categorie {
+    padding: 10px;
+    background-color: #15AABF;
+    margin: 5px;
 }

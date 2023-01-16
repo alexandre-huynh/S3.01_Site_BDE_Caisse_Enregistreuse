@@ -1,11 +1,9 @@
 footer{
-    margin-top: auto;
+    margin-top: 60%;
     background-color: #15AABF;
-    width: 100%;
+    width: auto;
     height: auto;
     display: flex;
-    position: relative;
-    bottom: 0;
 }
 
 
