@@ -10,6 +10,11 @@
     <title>Stand de confiseries du BDE</title>
     <link rel="stylesheet" href="Content/css/principal.css">
     <link rel="stylesheet" href="Content/css/langue_site.css">
+    <?php if ($_GET["action"]=="snacks") : ?>
+      <link rel="stylesheet" href="Content/css/snack.css">
+    <?php elseif ($_GET["action"]=="boissons") : ?>
+      <link rel="stylesheet" href="Content/css/boissons.css">
+    <?php endif ?>
     <link rel="stylesheet" type="text/css" href="Content/css/footer.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
