@@ -1,14 +1,16 @@
-body{
-    width: 100%;
-    background-color: #E2F6F0;
-}
-
 main{
     width: 100%;
     height: 90%;
+    background-color: #E2F6F0;
 }
 
-section h1{
+.snacks{
+    width: 95%;
+     margin-bottom: 20px;
+
+}
+
+section.snacks h1{
     text-align: center;
     margin: auto;
 }
