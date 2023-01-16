@@ -556,6 +556,7 @@ class Controller_set extends Controller{
 
   public function action_remove_produit() {
     $m = Model::getModel();
+    $remove = False;
     //==================================
     //     TEST SI C'EST UN ADMIN
     //==================================
@@ -571,7 +572,7 @@ class Controller_set extends Controller{
       // Ceci entrainera la suppression des ventes associés à ce produit 
   
     // Associer à la fonction removeProduit de model.php pour supprimer le produit 
-    $m->removeProduit($_GET['id']);
+    $remove = $m->removeProduit($_GET['id']);
     }
 
 
@@ -581,6 +582,12 @@ class Controller_set extends Controller{
       "str_lien_retour" => "Retour à la page de l'inventaire",
       "lien_retour" => "?controller=list&action=gestion_inventaire" 
     ];
+    if ($remove) {
+      $data["message"] = "Le produit à été supprimé avec succès";
+    } else {
+      $data["message"] = "Le produit n'a pas pu être supprimé .";
+    }
+
     $this->render("message", $data);
   }
 
@@ -595,7 +602,7 @@ class Controller_set extends Controller{
       $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
     }
 
-    if(!isset($_GET['id_client'])){
+    if(!isset($_GET['id'])){
       $this->action_error("Erreur l'identifiant du client n'est pas valide");
     }
     else{
@@ -638,7 +645,7 @@ class Controller_set extends Controller{
     }
     //===================================
   
-      if(!isset($_GET['id_admin'])){
+      if(!isset($_GET['id'])){
         $this->action_error("Erreur l'identifiant de l'admin n'est pas valide");
       }
       else{
