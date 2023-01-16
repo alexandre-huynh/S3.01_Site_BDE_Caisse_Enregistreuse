@@ -612,7 +612,14 @@ class Controller_set extends Controller{
       "str_lien_retour" => "Retour à la page de gestion des clients",
       "lien_retour" => "?controller=list&action=gestion_clients" 
     ];
-    $this->render("message", $data);
+
+    if (isset($_GET['id'])) {
+      $data["message"] = "Le compte client à été supprimé avec succès";
+    } else {
+      $data["message"] = "Le client n'a pas pu être supprimé .";
+    }
+
+  $this->render("message", $data);
   }
 
   public function action_remove_admin() {
@@ -1354,7 +1361,7 @@ class Controller_set extends Controller{
     else{
       $this->action_error("Erreur lors de la modification de l'affichage");
     }
-    
+
     $data = [
       "title" => "Modification de l'affichage",
       "str_lien_retour" => "Retour à la page de gestion des produits",
