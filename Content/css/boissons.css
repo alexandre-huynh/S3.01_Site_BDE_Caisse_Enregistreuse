@@ -37,3 +37,9 @@ section div ul li img {
 div.liste_snacks{
     margin-bottom: 100px;
 }
+
+.categorie {
+    padding: 10px;
+    background-color: #15AABF;
+    margin: 5px;
+}
