@@ -901,20 +901,30 @@ class Model
       $req1->bindValue(':id',$id);
       $req1->execute();
 
+      return (bool) $req1->rowCount();
+
     } 
 
     public function removeCompteAdmin($id){
 
-      $req1 = $this->bd->prepare('DELETE FROM Superadmin where num_etudiant = (SELECT num_etudiant FROM Client WHERE id_client=:id) ');
+      $req2 = $this->bd->prepare('DELETE FROM Vente WHERE id_admin = :id');
+      $req2->bindValue(':id',$id);
+      $req2->execute();
+
+      $req1 = $this->bd->prepare('DELETE FROM Superadmin where num_etudiant = (SELECT num_etudiant FROM Admin WHERE id_admin=:id) ');
       $req1->bindValue(':id',$id);
       $req1->execute();
 
-
-      $req = $this->bd->prepare('DELETE FROM Admin where num_etudiant = (SELECT num_etudiant FROM Client WHERE id_client=:id) ');
+      $req = $this->bd->prepare('DELETE FROM Admin where num_etudiant = (SELECT num_etudiant FROM Admin WHERE id_admin=:id) ');
       $req->bindValue(':id',$id);
       $req->execute();
-      
-      return (bool) $req->rowCount();
+
+      // Suppression de la table Authentification
+      $req3 = $this->bd->prepare('DELETE FROM Authentification WHERE num_etudiant = (SELECT num_etudiant FROM Admin WHERE id_admin=:id)');
+      $req3->bindValue(':id',$id);
+      $req3->execute();
+
+      return (bool) $req3->rowCount();
 
     }
 
