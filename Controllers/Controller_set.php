@@ -610,7 +610,7 @@ class Controller_set extends Controller{
       // Afficher message, êtes vous sur de vouloir supprimer le client ? 
       // Ceci entrainera la suppression des ventes associés à ce client 
       // Associer à la fonction removeclient de model.php pour supprimer le client 
-      $remove = $m->removeCompteClient($_GET['id']);
+      $remove = $m->removeCompteClient($m->getNumEtudFromIdClient($_GET['id']), $_GET['id']);
     }
 
 
@@ -653,7 +653,7 @@ class Controller_set extends Controller{
         // Afficher message, êtes vous sur de vouloir supprimer l'admin ? 
     
       // Associer à la fonction removeAdmin de model.php pour supprimer l'admin 
-      $remove = $m->removeCompteAdmin($_GET['id']);
+      $remove = $m->removeCompteAdmin($m->getNumEtudFromIdAdmin($_GET['id']), $_GET['id']);
       }
   
   

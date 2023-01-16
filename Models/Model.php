@@ -409,6 +409,22 @@ class Model
         return $tab[0];
     }
 
+    public function getNumEtudFromIdClient($id){
+      $req = $this->bd->prepare('SELECT num_etudiant FROM Client WHERE id_client = :id_client');
+      $req->bindValue(':id_client', $id);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+
+    public function getNumEtudFromIdAdmin($id){
+      $req = $this->bd->prepare('SELECT num_etudiant FROM Admin WHERE id_admin = :id_admin');
+      $req->bindValue(':id_admin', $id);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+
     public function getIdClientFromNumEtud($num_etud){
       $req = $this->bd->prepare('SELECT id_client FROM Client WHERE num_etudiant = :num_etud');
       $req->bindValue(':num_etud', $num_etud);
@@ -883,45 +899,42 @@ class Model
       }
       */
    
-    public function removeCompteClient($id){
-      // Supprimer de ventes pour supprimer les ventes du client 
+    public function removeCompteClient($num_etud, $id){
 
       $req2 = $this->bd->prepare('DELETE FROM Vente WHERE id_client = :id');
       $req2->bindValue(':id',$id);
       $req2->execute();
-      
 
-      // Suppression de la table client
-      $req = $this->bd->prepare('DELETE FROM Client where num_etudiant = (SELECT num_etudiant FROM Client WHERE id_client=:id) ');
-      $req->bindValue(':id',$id);
+      $req = $this->bd->prepare('DELETE FROM Client where num_etudiant = :num_etud');
+      $req->bindValue(':num_etud',$num_etud);
       $req->execute();
 
       // Suppression de la table Authentification
-      $req1 = $this->bd->prepare('DELETE FROM Authentification WHERE num_etudiant = (SELECT num_etudiant FROM Client WHERE id_client=:id)');
-      $req1->bindValue(':id',$id);
-      $req1->execute();
+      $req3 = $this->bd->prepare('DELETE FROM Authentification WHERE num_etudiant = :num_etud');
+      $req3->bindValue(':num_etud',$num_etud);
+      $req3->execute();
 
-      return (bool) $req1->rowCount();
+      return (bool) $req3->rowCount();
 
     } 
 
-    public function removeCompteAdmin($id){
+    public function removeCompteAdmin($num_etud, $id){
 
       $req2 = $this->bd->prepare('DELETE FROM Vente WHERE id_admin = :id');
       $req2->bindValue(':id',$id);
       $req2->execute();
 
-      $req1 = $this->bd->prepare('DELETE FROM Superadmin where num_etudiant = (SELECT num_etudiant FROM Admin WHERE id_admin=:id) ');
+      $req1 = $this->bd->prepare('DELETE FROM Superadmin where id_admin = :id ');
       $req1->bindValue(':id',$id);
       $req1->execute();
 
-      $req = $this->bd->prepare('DELETE FROM Admin where num_etudiant = (SELECT num_etudiant FROM Admin WHERE id_admin=:id) ');
-      $req->bindValue(':id',$id);
+      $req = $this->bd->prepare('DELETE FROM Admin where num_etudiant = :num_etud');
+      $req->bindValue(':num_etud',$num_etud);
       $req->execute();
 
       // Suppression de la table Authentification
-      $req3 = $this->bd->prepare('DELETE FROM Authentification WHERE num_etudiant = (SELECT num_etudiant FROM Admin WHERE id_admin=:id)');
-      $req3->bindValue(':id',$id);
+      $req3 = $this->bd->prepare('DELETE FROM Authentification WHERE num_etudiant = :num_etud');
+      $req3->bindValue(':num_etud',$num_etud);
       $req3->execute();
 
       return (bool) $req3->rowCount();
