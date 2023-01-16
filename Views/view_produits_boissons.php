@@ -3,7 +3,7 @@
 <?php else : ?>
   <?php require "view_begin.php";?>
 <?php endif ?>
-<!--<link rel="stylesheet" type="text/css" href="Content/css/boissons.css">-->
+<link rel="stylesheet" type="text/css" href="Content/css/boissons.css">
 
 <!-- TODO: avec les 3 boutons pour choisir soit soda, soit boissons etc, cacher le contenu avec JavaScript-->
 <!-- Exemple: on clique sur soda, ça affichera les sodas et ça cachera le reste-->
