@@ -13,7 +13,7 @@
             <hr>
             <div class="liste_boissons">
                 <!-- Boissons générales -->
-                <h4>Boissons</h4>
+                <h4 class="categorie">Boissons</h4>
                 <div class="type_boissons">
                     <?php foreach ($boissons as $ligne): ?>
                       <?php if ($ligne["Visible"]==1) : ?>
@@ -27,7 +27,7 @@
                 </div>
 
                 <!-- Sodas -->
-                <h4>Sodas</h4>
+                <h4 class="categorie">Sodas</h4>
                 <div class="type_sodas">
                     <?php foreach ($sodas as $ligne): ?>
                       <?php if ($ligne["Visible"]==1) : ?>
@@ -41,7 +41,7 @@
                 </div>
 
                 <!-- Eau + sirop -->
-                <h4>Eau + sirop</h4>
+                <h4 class="categorie">Eau + sirop</h4>
                 <div class="type_eau_sirop">
                     <?php foreach ($sirops as $ligne): ?>
                       <?php if ($ligne["Visible"]==1) : ?>
