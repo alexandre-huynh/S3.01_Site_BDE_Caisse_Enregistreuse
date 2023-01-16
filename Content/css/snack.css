@@ -12,9 +12,10 @@ main{
     margin-bottom: 10%;
 }
 
-.snacks h1{
+h1{
     text-align: center;
     color:15AABF;
+    margin: auto;
 }
 section div{
     text-align: center;
@@ -44,6 +45,7 @@ section div ul li img {
 div.liste_snacks{
     margin-bottom: 100px;
 }
-.prix{
+
+li.prix{
     color: #15AABF;
 }
