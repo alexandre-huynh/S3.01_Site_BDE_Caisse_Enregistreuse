@@ -115,6 +115,7 @@
         <tr>
             <th>Snacks</th>
             <?php foreach ($snacks as $ligne): ?>
+            <?php if ($ligne["Visible"]==1) : ?>
             <td class="snacks">
                 <ul class="produit">
                     <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
@@ -130,12 +131,13 @@
                 </div>
                 -->
             </td>
-            
+            <?php endif ?>
             <?php endforeach ?>
         </tr>
         <tr id="boissons">
             <th>Boissons</th>
             <?php foreach ($boissons as $ligne): ?>
+            <?php if ($ligne["Visible"]==1) : ?>
             <td class="boissons">
                 <ul class="produit">
                     <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
@@ -144,11 +146,13 @@
                     <li><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></li>
                 </ul>
             </td>
+            <?php endif ?>
             <?php endforeach ?>
         </tr>
         <tr id="sodas">
             <th>Sodas</th>
             <?php foreach ($sodas as $ligne): ?>
+            <?php if ($ligne["Visible"]==1) : ?>
             <td class="sodas">
                 <ul class="produit">
                     <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
@@ -157,11 +161,13 @@
                     <li><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></li>
                 </ul>
             </td>
+            <?php endif ?>
             <?php endforeach ?>
         </tr>
         <tr id="sirops">
             <th>Sirops</th>
             <?php foreach ($sirops as $ligne): ?>
+            <?php if ($ligne["Visible"]==1) : ?>
             <td class="sirops">
                 <ul class="produit">
                     <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
@@ -170,6 +176,7 @@
                     <li><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></li>
                 </ul>
             </td>
+            <?php endif ?>
             <?php endforeach ?>
         </tr>
     </table>
