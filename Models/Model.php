@@ -924,7 +924,7 @@ class Model
       $req2->bindValue(':id',$id);
       $req2->execute();
 
-      $req1 = $this->bd->prepare('DELETE FROM Superadmin where id_admin = :id ');
+      $req1 = $this->bd->prepare('DELETE FROM SuperAdmin where id_admin = :id ');
       $req1->bindValue(':id',$id);
       $req1->execute();
 
