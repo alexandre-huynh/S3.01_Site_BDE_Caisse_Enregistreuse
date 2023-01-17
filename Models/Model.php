@@ -944,6 +944,10 @@ class Model
 
     public function removeProduit($id_produit){
 
+      $req2 = $this->bd->prepare('DELETE FROM Vente WHERE id_produit = :id');
+      $req2->bindValue(':id',$id_produit);
+      $req2->execute();
+
       $req = $this->bd->prepare('DELETE FROM Produit where Id_produit = :id ');
       $req->bindValue(':id',$id_produit);
       $req->execute();
