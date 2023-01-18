@@ -35,5 +35,6 @@ div.liste_snacks{
 div.liste_boissons .categorie {
     padding: 10px;
     background-color: #15AABF;
+    color: #fff;
     margin: 5px;
 }
