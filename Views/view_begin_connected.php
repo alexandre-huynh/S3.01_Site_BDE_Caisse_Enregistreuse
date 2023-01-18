@@ -24,7 +24,7 @@
                 <a href="?controller=list&action=boissons" title="Boissons" class="deco">Boissons</a>
                 <a href="?controller=list&action=<?php if (isset($_SESSION["statut"]) && $_SESSION["statut"]=="admin") : ?>espace_admin<?php elseif (isset($_SESSION["statut"]) && $_SESSION["statut"]=="client") : ?>espace_client<?php endif ?>" title="Mon Espace" class="deco">Mon Espace</a>
                 <a href="?controller=list&action=infos_compte" title="Mes infos" class="deco">Mes Infos</a>
-                <img src="Content/img/logo_user.png" width="40px" alt="Image Logo Utilisateur" />  <?=e($_SESSION["prenomnom"])?> (<?=e($_SESSION["num_etudiant"])?>)
+                <img src="Content/img/logo_user.png" width="40px" alt="Image Logo Utilisateur" /> <span class="decore_white"> <?=e($_SESSION["prenomnom"])?> (<?=e($_SESSION["num_etudiant"])?>)</span>
                 <a href="?controller=auth&action=logout" title="Se déconnecter" class="deco">Se déconnecter</a>
             </div>
         </nav>
