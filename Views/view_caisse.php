@@ -103,24 +103,9 @@
         </div>
     </form>
 
-</div>
+    </div>
 
-    <hr>
-</br>
-
-    <!-- TEST 
-    <p id="snack">
-        < ?php foreach ($snacks as $ligne): ?>
-        <div class="produit">
-            <div><img src="Content/img/< ?=e($ligne["Img_produit"])?>" alt="Image" height="60" /></div>
-            <div>< ?=e($ligne["Nom"])?></div>
-            <div>< ?=e($ligne["Prix"])?> €</div>
-        </div>
-        < ?php endforeach ?>
-    </p>
-    -->
-    <!-- boutons produits-->
-<div class="produits-panier">
+    <div class="produits-panier">
     <table id="liste_produits">
         <tr>
             <th>Snacks</th>
@@ -191,6 +176,23 @@
         </tr>
     </table>
     </div>
+
+    <hr>
+    </br>
+
+    <!-- TEST 
+    <p id="snack">
+        < ?php foreach ($snacks as $ligne): ?>
+        <div class="produit">
+            <div><img src="Content/img/< ?=e($ligne["Img_produit"])?>" alt="Image" height="60" /></div>
+            <div>< ?=e($ligne["Nom"])?></div>
+            <div>< ?=e($ligne["Prix"])?> €</div>
+        </div>
+        < ?php endforeach ?>
+    </p>
+    -->
+    <!-- boutons produits-->
+
 
 </div> <!--fin panier + produits-->  
 </main>
