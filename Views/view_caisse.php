@@ -117,10 +117,10 @@
                         </ul>
                         -->
                         <div class="produit">
-                            <div><img src="Content/img/< ?=e($ligne["Img_produit"])?>" alt="Image < ?=e($ligne["Nom"])?>" height="60" /></div>
-                            <div>< ?=e($ligne["Nom"])?></div>
-                            <div>< ?=e($ligne["Prix"])?> €</div>
-                            <div>< ?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></div>
+                            <div><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></div>
+                            <div><?=e($ligne["Nom"])?></div>
+                            <div><?=e($ligne["Prix"])?> €</div>
+                            <div><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></div>
                         </div>
                     </td>
                     <?php endif ?>
