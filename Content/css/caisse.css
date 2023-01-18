@@ -1,4 +1,5 @@
 #panier_et_produits{
+    display: flex;
     margin-bottom: 150px;
     width: 100%;
     height: 100%;
