@@ -204,6 +204,7 @@ function clickSnacks(){
     let ligne = document.createElement('li');
     ligne.textContent=event.target.textContent;
     addSnacks(ligne);
+    panier.append(ligne);
    /* let panier = document.querySelectorAll('panier li');
     panier.push(ligne);
             for(var value of panier.values()){
