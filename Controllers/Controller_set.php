@@ -1251,22 +1251,7 @@ class Controller_set extends Controller{
     }
     //===================================
     
-    // TODO: TRAITEMENT SPECIAL SI POINtS DE FIDELITE A FAIRE PLUS TARD
-    /*
-    if ($m->getPointsFidelite($m->getIdClientFromNumEtud($_POST["num_etudiant_client"]),"Client") > 0){
-      // envoyer sur une page proposition points fidélité
-      // Préparation du tableau infos
-      $infos = [];
-      $noms = ["num_vente", "id_client", "id_admin", "id_produit", "Date_vente", "Paiement", "Use_fidelite"];
-      foreach ($noms as $v) {
-        if (isset($_POST[$v]) && (is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])) || ((is_int($_POST[$v]) || is_float($_POST[$v])) && $_POST[$v]>=0)) {
-          $infos[$v] = $_POST[$v];
-        } else {
-          $infos[$v] = null;
-        }
-      }
-    }
-    */
+    
 
     $ajout = false;
 
@@ -1328,6 +1313,23 @@ class Controller_set extends Controller{
       }
     }
 
+    // A cette étape dans la validation de l'achat, les achats précédents sont déjà validés
+    // Maintenant, proposition s'il veut choisir un produit pour fidélité, dont il est éligible
+
+    if ($m->getPointsFidelite($id_client, "Client") > 0){
+      // envoyer sur une page proposition points fidélité
+      // Préparation du tableau infos
+      $infos = [];
+      $noms = ["num_vente", "id_client", "id_admin", "id_produit", "Date_vente", "Paiement", "Use_fidelite"];
+      foreach ($noms as $v) {
+        if (isset($_POST[$v]) && (is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])) || ((is_int($_POST[$v]) || is_float($_POST[$v])) && $_POST[$v]>=0)) {
+          $infos[$v] = $_POST[$v];
+        } else {
+          $infos[$v] = null;
+        }
+      }
+    }
+
     //Préparation de $data pour l'affichage de la vue message
     $data = [
         "title" => "Validation d'une vente",
@@ -1335,6 +1337,33 @@ class Controller_set extends Controller{
         "str_lien_retour" => "Retour à la caisse enregistreuse",
         "lien_retour" => "?controller=list&action=caisse",
         "produits_traite" => $produits_traite
+    ];
+    if ($ajout) {
+        $data["message"] = "La vente des produits ci-dessous géré par le responsable " . $m->getPrenomNomAdmin($_POST["id_admin"]) . " pour le client " . $m->getPrenomNomClient($_POST["id_client"]) . " a été comptabilisé avec succès.";
+    } else {
+        $data["message"] = "Erreur dans la saisie des informations, la vente n'a pas été ajouté.";
+    }
+
+    $this->render("message", $data);
+  }
+
+  public function action_form_panier_fidelite(){
+    $m = Model::getModel();
+    
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
+
+    $data = [
+      "title" => "Validation d'une vente",
+      "added_element" => "vente",
+      "str_lien_retour" => "Retour à la caisse enregistreuse",
+      "lien_retour" => "?controller=list&action=caisse",
+      "produits_traite" => $produits_traite
     ];
     if ($ajout) {
         $data["message"] = "La vente des produits ci-dessous géré par le responsable " . $m->getPrenomNomAdmin($_POST["id_admin"]) . " pour le client " . $m->getPrenomNomClient($_POST["id_client"]) . " a été comptabilisé avec succès.";

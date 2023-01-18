@@ -467,6 +467,22 @@ class Model
       return $tab[0];
     }
 
+    // Retourne bool true s'il est éligible pour au moins 1 produit fidélité
+    // sinon false et repasse à validation achat normal dans 
+    // controller set action traitement caisse
+    public function isEligibleFidelite($id_client){
+      
+      $req = $this->bd->prepare('SELECT id_client 
+        FROM Client JOIN Vente USING(id_client) 
+        JOIN Produit USING(id_produit) 
+          WHERE Client.id_client = :id_client 
+          AND Client.Pts_fidelite >= (SELECT MIN(Pts_fidelite_requis) FROM Produit)');
+      $req->bindValue(':id_client', (int) $id_client, PDO::PARAM_INT);
+      $req->execute();
+
+      return (bool) $req->rowCount();
+    }
+
     // retourne l'id s'il existe dans la BD, sinon retourne false
     // Idée abandonnée pour l'instant
     // TODO: Trouver un moyen de trouver un id disponible dans la table
