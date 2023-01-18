@@ -228,3 +228,8 @@ for(let i=0;i<pdt_snacks.length;i++){
 pdt_snacks[i].addEventListener('click',function(){
     console.log('Test1');
 });}
+
+
+// Test Github 
+
+console.log('ok');
