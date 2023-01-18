@@ -105,7 +105,7 @@ main div.produits-panier{
 
 
 td.snacks, td.boissons, td.sodas, td.sirops{
-    width: 100px;
+    width: 200px;
     border: 1px solid black;
     height: 100px;
     background-color: #fff;
