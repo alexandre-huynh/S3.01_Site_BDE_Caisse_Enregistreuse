@@ -10,24 +10,24 @@
 
 <div id="panier_et_produits">
 
-    <div>
+    <div class="aside_total">
         <!-- 
         ======================================
                     Partie Graphique
         ======================================
         -->
-        <p> Panier du client </p>
+        <h4 class="panier_client"> Panier du client </h4>
         <ul id="panier">
             <li>2 x Kinder Bueno (exemple)</li>
             <!-- 
                 Affichage des produits ici, genre 2x Kinder bueno etc
             -->
         </ul>
-        <p>TOTAL : <span id="totalprix">0</span></p>
+        <p class="total">TOTAL : <span id="totalprix">0 <span class="devise">€</span></span></p>
 
-        <p>Payé : <span id="dejapayer">0</span></p>
+        <p>Payé : <span id="dejapayer">0 <span class="devise">€</span></span></p>
 
-        <p>Reste à payer: <span id="reste">0</span></p>
+        <p>Reste à payer : <span id="reste">0 <span class="devise">€</span></span></p>
 
         <p>Paiement par : <b><span id="paiement">Espèce</span></b></p>
         
@@ -79,25 +79,31 @@
 
         <!-- boutons valider + abandon + méthode paiement-->
 
-        <table>
-            <tr>
-                <td id="valider">
-                    <!--Validation du panier-->
-                    <input type="submit" value="Valider" />
-                </td>
-                <td id="abandon">
-                    <p>Abandon</p>
-                </td>
-                <td id="espece">
-                    <p><img src="Content/img/logo_espece.png" alt="Payer par Espece" height="60" /></p>
-                </td>
-                <td id="carte">
-                    <p><img src="Content/img/logo_carte.png" alt="Payer par Carte" height="60" /></p>
-                </td>
-            </tr>
+        <div class="bouton-decision">
+            <div id="valider">
+                <!--Validation du panier-->
+                <input type="submit" value="Valider" />
+            </div>
+
+            <div id="abandon">
+                <!--Annulation du panier-->
+                <input type="submit" value="Abandon" />
+            </div>
+
+            <div id="espece">
+                <p><img src="Content/img/logo_espece.png" alt="Payer par Espece" height="60" /></p>
+            </div>
+
+            <div id="carte">
+                <p><img src="Content/img/logo_carte.png" alt="Payer par Carte" height="60" /></p>
+            </div>
+        </div>
     </form>
 
+</div>
+
     <hr>
+    <br>
 
     <!-- TEST 
     <p id="snack">
@@ -111,6 +117,7 @@
     </p>
     -->
     <!-- boutons produits-->
+<div class="produits-panier">
     <table id="liste_produits">
         <tr>
             <th>Snacks</th>
