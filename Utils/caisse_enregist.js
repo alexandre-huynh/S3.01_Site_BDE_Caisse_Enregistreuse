@@ -204,17 +204,8 @@ function clickSnacks(){
     let ligne = document.createElement('li');
     ligne.textContent=event.target.textContent;
     addSnacks(ligne);
-    panier.append(ligne);
-   /* let panier = document.querySelectorAll('panier li');
-    panier.push(ligne);
-            for(var value of panier.values()){
-            if (ligne.textContent==value){
-                panier.remove(ligne);
-                j++;
-                console.log(j);
-            }
-        }
-    */        });
+    let panier = document.querySelectorAll('panier li');
+    panier.append(ligne);});
     }  
 }             
 
