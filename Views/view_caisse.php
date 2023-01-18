@@ -103,7 +103,7 @@
         </form>
         <div class="produits-panier">
             <table id="liste_produits">
-                <th rowspan=5>Snacks</th>
+                <th colspan=5>Snacks</th>
                 <tr>
                     
                     <?php $i=0; ?>
@@ -138,7 +138,7 @@
                         <?php endif ?>
                     <?php endforeach ?>
                 </tr>
-                <th rowspan=5>Boissons</th>
+                <th colspan=5>Boissons</th>
                 <tr id="boissons">
                     <?php $j=0; ?>
                     <?php foreach ($boissons as $ligne): ?>
@@ -162,7 +162,7 @@
                         <?php endif ?>
                     <?php endforeach ?>
                 </tr>
-                <th rowspan=5>Sodas</th>
+                <th colspan=5>Sodas</th>
                 <tr id="sodas">
                     <?php $k=0; ?>
                     <?php foreach ($sodas as $ligne): ?>
@@ -186,7 +186,7 @@
                         <?php endif ?>
                     <?php endforeach ?>
                 </tr>
-                <th rowspan=5>Sodas</th>
+                <th colspan=5>Sodas</th>
                 <tr id="sirops">
                     <?php $l=0; ?>
                     <?php foreach ($sirops as $ligne): ?>
