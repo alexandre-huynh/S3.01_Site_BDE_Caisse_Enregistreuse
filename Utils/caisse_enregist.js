@@ -1,5 +1,4 @@
 // Fonctions  SNACKS
-
 function saveSnacks(snacks){
     localStorage.setItem("snacks",JSON.stringify(snacks));
 }
@@ -206,15 +205,7 @@ function clickSnacks(){
     ligne.textContent=event.target.textContent;
     addSnacks(ligne);
     let panier = document.querySelectorAll('panier li');
-    panier.push(ligne);
-            for(var value of panier.values()){
-            if (ligne.textContent==value){
-                panier.remove(ligne);
-                j++;
-                console.log(j);
-            }
-        }
-        });
+    panier.append(ligne);});
     }  
 }             
 
@@ -228,3 +219,5 @@ for(let i=0;i<pdt_snacks.length;i++){
 pdt_snacks[i].addEventListener('click',function(){
     console.log('Test1');
 });}
+
+
