@@ -106,7 +106,7 @@
 </div>
 
     <hr>
-    <br>
+</br>
 
     <!-- TEST 
     <p id="snack">

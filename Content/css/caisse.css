@@ -92,8 +92,8 @@ table#liste_produits {
 
 main div.produits-panier{
     border-radius: 5px;
-    position: relative;
-    top: 140px;
+    /*position: relative;*/
+    /*top: 140px;*/
     right: 30%;
     background-color: #D9D9D9;
 }
