@@ -483,6 +483,20 @@ class Model
       return (bool) $req->rowCount();
     }
 
+    // Retourne la liste des produits dont le client est éligible
+    // Pour un achat gratuit grâce au points fidélités.
+    public function getProduitEligible($id_client){
+
+      $req = $this->bd->prepare('SELECT * 
+        FROM Produit JOIN Vente USING(id_produit) JOIN Client USING (id_client) 
+          WHERE Client.id_client = :id_client 
+          AND Client.Pts_fidelite > Produit.Pts_fidelite_requis');
+      $req->bindValue(':id', $id_client);
+      $req->execute();
+      return $req->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
     // retourne l'id s'il existe dans la BD, sinon retourne false
     // Idée abandonnée pour l'instant
     // TODO: Trouver un moyen de trouver un id disponible dans la table

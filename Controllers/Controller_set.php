@@ -1315,20 +1315,26 @@ class Controller_set extends Controller{
 
     // A cette étape dans la validation de l'achat, les achats précédents sont déjà validés
     // Maintenant, proposition s'il veut choisir un produit pour fidélité, dont il est éligible
-
-    if ($m->getPointsFidelite($id_client, "Client") > 0){
+    // -------------------------------------------
+    //  SI LE CLIENT A DES POINTS DE FIDELITE
+    // --------------------------------------------
+    if ($m->getPointsFidelite($id_client, "Client") > 0 && $m->isEligibleFidelite($id_client)){
       // envoyer sur une page proposition points fidélité
       // Préparation du tableau infos
-      $infos = [];
-      $noms = ["num_vente", "id_client", "id_admin", "id_produit", "Date_vente", "Paiement", "Use_fidelite"];
-      foreach ($noms as $v) {
-        if (isset($_POST[$v]) && (is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])) || ((is_int($_POST[$v]) || is_float($_POST[$v])) && $_POST[$v]>=0)) {
-          $infos[$v] = $_POST[$v];
-        } else {
-          $infos[$v] = null;
-        }
-      }
+
+      $produits_eligible = $m->getProduitEligible();
+
+      $data = [
+        "produits_eligible" => $produits_eligible,
+        "produits_traite" => $produits_traite,
+        "solde_points" => $m->getPointsFidelite($id_client, "Client"),
+        "nom_client" => $m->getPrenomNomClient($_POST["id_client"])
+      ];
+      $this->render("confirm_fidelite", $data);
     }
+    // -------------------------------------------
+    //  FIN points fidelite
+    // --------------------------------------------
 
     //Préparation de $data pour l'affichage de la vue message
     $data = [
@@ -1339,7 +1345,7 @@ class Controller_set extends Controller{
         "produits_traite" => $produits_traite
     ];
     if ($ajout) {
-        $data["message"] = "La vente des produits ci-dessous géré par le responsable " . $m->getPrenomNomAdmin($_POST["id_admin"]) . " pour le client " . $m->getPrenomNomClient($_POST["id_client"]) . " a été comptabilisé avec succès.";
+        $data["message"] = "La vente des produits ci-dessous géré par le responsable " . $m->getPrenomNomAdmin($infos["id_admin"]) . " pour le client " . $m->getPrenomNomClient($infos["id_client"]) . " a été comptabilisé avec succès.";
     } else {
         $data["message"] = "Erreur dans la saisie des informations, la vente n'a pas été ajouté.";
     }
@@ -1347,7 +1353,9 @@ class Controller_set extends Controller{
     $this->render("message", $data);
   }
 
-  public function action_form_panier_fidelite(){
+  // -------------------
+
+  public function action_traitement_fidelite(){
     $m = Model::getModel();
     
     //==================================
@@ -1358,12 +1366,13 @@ class Controller_set extends Controller{
     }
     //===================================
 
+    $ajout = false;
+
     $data = [
       "title" => "Validation d'une vente",
       "added_element" => "vente",
       "str_lien_retour" => "Retour à la caisse enregistreuse",
       "lien_retour" => "?controller=list&action=caisse",
-      "produits_traite" => $produits_traite
     ];
     if ($ajout) {
         $data["message"] = "La vente des produits ci-dessous géré par le responsable " . $m->getPrenomNomAdmin($_POST["id_admin"]) . " pour le client " . $m->getPrenomNomClient($_POST["id_client"]) . " a été comptabilisé avec succès.";
@@ -1390,13 +1399,14 @@ class Controller_set extends Controller{
       "str_lien_retour" => "Retour à la page de gestion des produits",
       "lien_retour" => "?controller=list&action=gestion_inventaire" 
     ];
-  if (isset($_GET['id'])) {
-      $data["message"] = "L'affichage à bien été mise à jour et le produit est bien affiché sur le site";
-  } else {
-      $data["message"] = "Erreur lors de la modification de l'affichage";
-  }
 
-  $this->render("message", $data);
+    if (isset($_GET['id'])) {
+        $data["message"] = "L'affichage à bien été mise à jour et le produit est bien affiché sur le site";
+    } else {
+        $data["message"] = "Erreur lors de la modification de l'affichage";
+    }
+
+    $this->render("message", $data);
   }
 
 
@@ -1416,14 +1426,14 @@ class Controller_set extends Controller{
       "title" => "Modification de l'affichage",
       "str_lien_retour" => "Retour à la page de gestion des produits",
       "lien_retour" => "?controller=list&action=gestion_inventaire" 
-  ];
-  if (isset($_GET['id'])) {
-      $data["message"] = "L'affichage à bien été à bien été mise à jour et le produit est bien masqué sur le site .";
-  } else {
-      $data["message"] = "Erreur lors de la modification de l'affichage";
-  }
+    ];
+    if (isset($_GET['id'])) {
+        $data["message"] = "L'affichage à bien été à bien été mise à jour et le produit est bien masqué sur le site .";
+    } else {
+        $data["message"] = "Erreur lors de la modification de l'affichage";
+    }
 
-  $this->render("message", $data);
+    $this->render("message", $data);
   }
   
 
