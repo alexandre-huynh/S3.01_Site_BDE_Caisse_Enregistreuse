@@ -108,19 +108,20 @@
                     <?php foreach ($snacks as $ligne): ?>
                     <?php if ($ligne["Visible"]==1) : ?>
                     <td class="snacks">
+                        <!--
                         <ul class="produit">
                             <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                             <li><?=e($ligne["Nom"])?></li>
                             <li><?=e($ligne["Prix"])?> €</li>
                             <li><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></li>
                         </ul>
-                        <!--
+                        -->
                         <div class="produit">
                             <div><img src="Content/img/< ?=e($ligne["Img_produit"])?>" alt="Image < ?=e($ligne["Nom"])?>" height="60" /></div>
                             <div>< ?=e($ligne["Nom"])?></div>
                             <div>< ?=e($ligne["Prix"])?> €</div>
+                            <div>< ?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></div>
                         </div>
-                        -->
                     </td>
                     <?php endif ?>
                     <?php endforeach ?>
