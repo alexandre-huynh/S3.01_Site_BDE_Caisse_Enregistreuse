@@ -1,5 +1,4 @@
 // Fonctions  SNACKS
-
 function saveSnacks(snacks){
     localStorage.setItem("snacks",JSON.stringify(snacks));
 }
@@ -205,7 +204,7 @@ function clickSnacks(){
     let ligne = document.createElement('li');
     ligne.textContent=event.target.textContent;
     addSnacks(ligne);
-    let panier = document.querySelectorAll('panier li');
+   /* let panier = document.querySelectorAll('panier li');
     panier.push(ligne);
             for(var value of panier.values()){
             if (ligne.textContent==value){
@@ -214,7 +213,7 @@ function clickSnacks(){
                 console.log(j);
             }
         }
-        });
+    */        });
     }  
 }             
 
@@ -230,6 +229,3 @@ pdt_snacks[i].addEventListener('click',function(){
 });}
 
 
-// Test Github 
-
-console.log('ok');
