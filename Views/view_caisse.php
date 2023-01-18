@@ -40,142 +40,142 @@
     -->
 
     <div class="form_display">
+        <form action="?controller=set&action=traitement_caisse" method="post" >  
+            <!--Client acheteur-->
+            <p>
+                <!-- SERA TRANSFORME EN ID dans le traitement en php-->
+                <label>Numéro étudiant du client :
+                    <input type="number" name="num_etudiant_client" step="1" min="0" required />
+                </label>
+            </p>
 
-    <form action="?controller=set&action=traitement_caisse" method="post" >  
-        <!--Client acheteur-->
-        <p>
-            <!-- SERA TRANSFORME EN ID dans le traitement en php-->
-            <label>Numéro étudiant du client :
-                <input type="number" name="num_etudiant_client" step="1" min="0" required />
-            </label>
-        </p>
+            <!--Responsable de la vente-->
+            <input type="hidden" name="id_admin" value="<?=e($admin)?>" /> 
 
-        <!--Responsable de la vente-->
-        <input type="hidden" name="id_admin" value="<?=e($admin)?>" /> 
+            <!--Date de vente-->
+            <!--<input type="hidden" name="Date_vente" value="" />-->
 
-        <!--Date de vente-->
-        <!--<input type="hidden" name="Date_vente" value="" />-->
+            <!--Méthode de paiement-->
+            <input type="hidden" id="select_paiement" name="Paiement" value="Espece" />
 
-        <!--Méthode de paiement-->
-        <input type="hidden" id="select_paiement" name="Paiement" value="Espece" />
-
-        <!--Si a utilisé pts de fidélité, par défaut à False, si veut utiliser ça enverra sur vue différente-->
-        <!-- <input type="hidden" name="Use_fidelite" />-->
+            <!--Si a utilisé pts de fidélité, par défaut à False, si veut utiliser ça enverra sur vue différente-->
+            <!-- <input type="hidden" name="Use_fidelite" />-->
 
 
-        <!--
-        ======================================================    
-        Les produits seront ajoutés ici, mais en type=hidden
-        ======================================================
-        -->
-        
-        <div id="panier_input_formulaire">
-            <!-- TEST-->
-            <input type="hidden" name="produit1" value="3" />
-            <input type="hidden" name="produit2" value="5" />
             <!--
-            exemple:
-            <input type="hidden" name="produit1" value="ID_PRODUIT_ICI" />
-            <input type="hidden" name="produit2" value="ID_PRODUIT_ICI" />
+            ======================================================    
+            Les produits seront ajoutés ici, mais en type=hidden
+            ======================================================
             -->
-        </div>
-
-        <!-- boutons valider + abandon + méthode paiement-->
-
-        <div class="bouton-decision">
-            <div id="valider">
-                <!--Validation du panier-->
-                <input type="submit" value="Valider" />
-            </div>
-
-            <div id="abandon">
-                <!--Annulation du panier-->
-                <input type="submit" value="Abandon" />
-            </div>
-
-            <div id="espece">
-                <p><img src="Content/img/logo_espece.png" alt="Payer par Espece" height="60" /></p>
-            </div>
-
-            <div id="carte">
-                <p><img src="Content/img/logo_carte.png" alt="Payer par Carte" height="60" /></p>
-            </div>
-        </div>
-    </form>
-
-    </div>
-
-    <div class="produits-panier">
-    <table id="liste_produits">
-        <tr>
-            <th>Snacks</th>
-            <?php foreach ($snacks as $ligne): ?>
-            <?php if ($ligne["Visible"]==1) : ?>
-            <td class="snacks">
-                <ul class="produit">
-                    <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                    <li><?=e($ligne["Nom"])?></li>
-                    <li><?=e($ligne["Prix"])?> €</li>
-                    <li><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></li>
-                </ul>
+            
+            <div id="panier_input_formulaire">
+                <!-- TEST-->
+                <input type="hidden" name="produit1" value="3" />
+                <input type="hidden" name="produit2" value="5" />
                 <!--
-                <div class="produit">
-                    <div><img src="Content/img/< ?=e($ligne["Img_produit"])?>" alt="Image < ?=e($ligne["Nom"])?>" height="60" /></div>
-                    <div>< ?=e($ligne["Nom"])?></div>
-                    <div>< ?=e($ligne["Prix"])?> €</div>
-                </div>
+                exemple:
+                <input type="hidden" name="produit1" value="ID_PRODUIT_ICI" />
+                <input type="hidden" name="produit2" value="ID_PRODUIT_ICI" />
                 -->
-            </td>
-            <?php endif ?>
-            <?php endforeach ?>
-        </tr>
-        <tr id="boissons">
-            <th>Boissons</th>
-            <?php foreach ($boissons as $ligne): ?>
-            <?php if ($ligne["Visible"]==1) : ?>
-            <td class="boissons">
-                <ul class="produit">
-                    <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                    <li><?=e($ligne["Nom"])?></li>
-                    <li><?=e($ligne["Prix"])?> €</li>
-                    <li><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></li>
-                </ul>
-            </td>
-            <?php endif ?>
-            <?php endforeach ?>
-        </tr>
-        <tr id="sodas">
-            <th>Sodas</th>
-            <?php foreach ($sodas as $ligne): ?>
-            <?php if ($ligne["Visible"]==1) : ?>
-            <td class="sodas">
-                <ul class="produit">
-                    <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                    <li><?=e($ligne["Nom"])?></li>
-                    <li><?=e($ligne["Prix"])?> €</li>
-                    <li><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></li>
-                </ul>
-            </td>
-            <?php endif ?>
-            <?php endforeach ?>
-        </tr>
-        <tr id="sirops">
-            <th>Sirops</th>
-            <?php foreach ($sirops as $ligne): ?>
-            <?php if ($ligne["Visible"]==1) : ?>
-            <td class="sirops">
-                <ul class="produit">
-                    <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                    <li><?=e($ligne["Nom"])?></li>
-                    <li><?=e($ligne["Prix"])?> €</li>
-                    <li><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></li>
-                </ul>
-            </td>
-            <?php endif ?>
-            <?php endforeach ?>
-        </tr>
-    </table>
+            </div>
+
+            <!-- boutons valider + abandon + méthode paiement-->
+
+            <div class="bouton-decision">
+                <div id="valider">
+                    <!--Validation du panier-->
+                    <input type="submit" value="Valider" />
+                </div>
+
+                <div id="abandon">
+                    <!--Annulation du panier-->
+                    <input type="submit" value="Abandon" />
+                </div>
+
+                <div id="espece">
+                    <p><img src="Content/img/logo_espece.png" alt="Payer par Espece" height="60" /></p>
+                </div>
+
+                <div id="carte">
+                    <p><img src="Content/img/logo_carte.png" alt="Payer par Carte" height="60" /></p>
+                </div>
+            </div>
+        </form>
+        <div class="produits-panier">
+            <table id="liste_produits">
+                <tr>
+                    <th>Snacks</th>
+                    <?php foreach ($snacks as $ligne): ?>
+                    <?php if ($ligne["Visible"]==1) : ?>
+                    <td class="snacks">
+                        <ul class="produit">
+                            <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
+                            <li><?=e($ligne["Nom"])?></li>
+                            <li><?=e($ligne["Prix"])?> €</li>
+                            <li><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></li>
+                        </ul>
+                        <!--
+                        <div class="produit">
+                            <div><img src="Content/img/< ?=e($ligne["Img_produit"])?>" alt="Image < ?=e($ligne["Nom"])?>" height="60" /></div>
+                            <div>< ?=e($ligne["Nom"])?></div>
+                            <div>< ?=e($ligne["Prix"])?> €</div>
+                        </div>
+                        -->
+                    </td>
+                    <?php endif ?>
+                    <?php endforeach ?>
+                </tr>
+                <tr id="boissons">
+                    <th>Boissons</th>
+                    <?php foreach ($boissons as $ligne): ?>
+                    <?php if ($ligne["Visible"]==1) : ?>
+                    <td class="boissons">
+                        <ul class="produit">
+                            <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
+                            <li><?=e($ligne["Nom"])?></li>
+                            <li><?=e($ligne["Prix"])?> €</li>
+                            <li><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></li>
+                        </ul>
+                    </td>
+                    <?php endif ?>
+                    <?php endforeach ?>
+                </tr>
+                <tr id="sodas">
+                    <th>Sodas</th>
+                    <?php foreach ($sodas as $ligne): ?>
+                    <?php if ($ligne["Visible"]==1) : ?>
+                    <td class="sodas">
+                        <ul class="produit">
+                            <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
+                            <li><?=e($ligne["Nom"])?></li>
+                            <li><?=e($ligne["Prix"])?> €</li>
+                            <li><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></li>
+                        </ul>
+                    </td>
+                    <?php endif ?>
+                    <?php endforeach ?>
+                </tr>
+                <tr id="sirops">
+                    <th>Sirops</th>
+                    <?php foreach ($sirops as $ligne): ?>
+                    <?php if ($ligne["Visible"]==1) : ?>
+                    <td class="sirops">
+                        <ul class="produit">
+                            <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
+                            <li><?=e($ligne["Nom"])?></li>
+                            <li><?=e($ligne["Prix"])?> €</li>
+                            <li><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></li>
+                        </ul>
+                    </td>
+                    <?php endif ?>
+                    <?php endforeach ?>
+                </tr>
+            </table>
+        </div>
+
     </div>
+
+    
 
     <hr>
     </br>
