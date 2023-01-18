@@ -110,15 +110,16 @@
                     <td class="snacks">
                         <!--
                         <ul class="produit">
-                            <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                            <li><?=e($ligne["Nom"])?></li>
-                            <li><?=e($ligne["Prix"])?> €</li>
-                            <li><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></li>
+                            <li><img src="Content/img/< ?=e($ligne["Img_produit"])?>" alt="Image < ?=e($ligne["Nom"])?>" height="60" /></li>
+                            <li>< ?=e($ligne["Nom"])?></li>
+                            <li>< ?=e($ligne["Prix"])?> €</li>
+                            <li>< ?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></li>
                         </ul>
                         -->
                         <div class="produit">
+                            <div class="hidden"><span class="id_prod"><?=e($ligne["id_produit"])?></span></div>
                             <div><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></div>
-                            <div><?=e($ligne["Nom"])?></div>
+                            <div><b><?=e($ligne["Nom"])?></b></div>
                             <div><?=e($ligne["Prix"])?> €</div>
                             <div><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></div>
                         </div>
@@ -131,12 +132,13 @@
                     <?php foreach ($boissons as $ligne): ?>
                     <?php if ($ligne["Visible"]==1) : ?>
                     <td class="boissons">
-                        <ul class="produit">
-                            <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                            <li><?=e($ligne["Nom"])?></li>
-                            <li><?=e($ligne["Prix"])?> €</li>
-                            <li><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></li>
-                        </ul>
+                        <div class="produit">
+                            <div class="hidden"><span class="id_prod"><?=e($ligne["id_produit"])?></span></div>
+                            <div><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></div>
+                            <div><b><?=e($ligne["Nom"])?></b></div>
+                            <div><?=e($ligne["Prix"])?> €</div>
+                            <div><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></div>
+                        </div>
                     </td>
                     <?php endif ?>
                     <?php endforeach ?>
@@ -146,12 +148,13 @@
                     <?php foreach ($sodas as $ligne): ?>
                     <?php if ($ligne["Visible"]==1) : ?>
                     <td class="sodas">
-                        <ul class="produit">
-                            <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                            <li><?=e($ligne["Nom"])?></li>
-                            <li><?=e($ligne["Prix"])?> €</li>
-                            <li><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></li>
-                        </ul>
+                        <div class="produit">
+                            <div class="hidden"><span class="id_prod"><?=e($ligne["id_produit"])?></span></div>
+                            <div><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></div>
+                            <div><b><?=e($ligne["Nom"])?></b></div>
+                            <div><?=e($ligne["Prix"])?> €</div>
+                            <div><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></div>
+                        </div>
                     </td>
                     <?php endif ?>
                     <?php endforeach ?>
@@ -161,12 +164,13 @@
                     <?php foreach ($sirops as $ligne): ?>
                     <?php if ($ligne["Visible"]==1) : ?>
                     <td class="sirops">
-                        <ul class="produit">
-                            <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
-                            <li><?=e($ligne["Nom"])?></li>
-                            <li><?=e($ligne["Prix"])?> €</li>
-                            <li><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></li>
-                        </ul>
+                        <div class="produit">
+                            <div class="hidden"><span class="id_prod"><?=e($ligne["id_produit"])?></span></div>
+                            <div><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></div>
+                            <div><b><?=e($ligne["Nom"])?></b></div>
+                            <div><?=e($ligne["Prix"])?> €</div>
+                            <div><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></div>
+                        </div>
                     </td>
                     <?php endif ?>
                     <?php endforeach ?>
