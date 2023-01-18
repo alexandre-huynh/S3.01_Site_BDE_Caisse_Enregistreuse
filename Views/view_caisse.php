@@ -103,8 +103,9 @@
         </form>
         <div class="produits-panier">
             <table id="liste_produits">
+                <th rowspan=5>Snacks</th>
                 <tr>
-                    <th>Snacks</th>
+                    
                     <?php $i=0; ?>
                     <?php foreach ($snacks as $ligne): ?>     
                         <?php if ($ligne["Visible"]==1) : ?>
@@ -137,8 +138,8 @@
                         <?php endif ?>
                     <?php endforeach ?>
                 </tr>
+                <th rowspan=5>Boissons</th>
                 <tr id="boissons">
-                    <th>Boissons</th>
                     <?php $j=0; ?>
                     <?php foreach ($boissons as $ligne): ?>
                         <?php if ($ligne["Visible"]==1) : ?>
@@ -161,8 +162,8 @@
                         <?php endif ?>
                     <?php endforeach ?>
                 </tr>
+                <th rowspan=5>Sodas</th>
                 <tr id="sodas">
-                    <th>Sodas</th>
                     <?php $k=0; ?>
                     <?php foreach ($sodas as $ligne): ?>
                         <?php if ($ligne["Visible"]==1) : ?>
@@ -185,8 +186,8 @@
                         <?php endif ?>
                     <?php endforeach ?>
                 </tr>
+                <th rowspan=5>Sodas</th>
                 <tr id="sirops">
-                    <th>Sirops</th>
                     <?php $l=0; ?>
                     <?php foreach ($sirops as $ligne): ?>
                         <?php if ($ligne["Visible"]==1) : ?>
