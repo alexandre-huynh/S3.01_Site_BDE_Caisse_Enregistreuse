@@ -20,6 +20,7 @@
 
 <p>Sélectionnez 1 produit de la liste, ou <a href="?controller=list&action=caisse">retournez à la page Caisse enregistreuse</a></p>
 
+<form action="" >
 <table>
     <tr>
         <th>Image</th>
