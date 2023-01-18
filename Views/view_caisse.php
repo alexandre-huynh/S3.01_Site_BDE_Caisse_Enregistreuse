@@ -38,6 +38,9 @@
                 Partie Formulaire
     ======================================
     -->
+
+    <div class="form_display">
+
     <form action="?controller=set&action=traitement_caisse" method="post" >  
         <!--Client acheteur-->
         <p>
@@ -187,6 +190,7 @@
             <?php endforeach ?>
         </tr>
     </table>
+    </div>
 
 </div> <!--fin panier + produits-->  
 </main>
