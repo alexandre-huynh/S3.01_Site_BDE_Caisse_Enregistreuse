@@ -20,27 +20,31 @@
 
 <p>Sélectionnez 1 produit de la liste, ou <a href="?controller=list&action=caisse">retournez à la page Caisse enregistreuse</a></p>
 
-<form action="" >
-<table>
+<form action="?controller=set&action=traitement_fidelite" method="post">
+  <input type="hidden" name="id_client" value="<?=e($id_client)?>">
+  <table>
     <tr>
-        <th>Image</th>
-        <th>Nom</th>
-        <th>Categorie</th>
-        <th>Prix</th>
-        <th>Stock</th>
-        <th>Nb de points requis</th>
+      <th>Sélection</th>
+      <th>Image</th>
+      <th>Nom</th>
+      <th>Categorie</th>
+      <th>Prix</th>
+      <th>Stock</th>
+      <th>Nb de points requis</th>
     </tr>
-<?php foreach ($produits_eligible as $ligne): ?>
-  <tr>
-    <td><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height=60 /></td>
-    <td><?=e($ligne["Nom"])?></td>
-    <td><?=e($ligne["Categorie"])?></td>
-    <td><?=e($ligne["Prix"])?> €</td>
-    <td><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Logo Illustration Stock" height=20 /></td>
-    <td><?=e($ligne["Pts_fidelite_requis"])?> pts</td>
-  </tr>
-  <?php endforeach ?>
-</table>
+  <?php foreach ($produits_eligible as $ligne): ?>
+    <tr>
+      <td><input type="radio" name="produit_fidelite" value="<?=e($ligne["id_produit"])?>"></td>
+      <td><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height=60 /></td>
+      <td><?=e($ligne["Nom"])?></td>
+      <td><?=e($ligne["Categorie"])?></td>
+      <td><?=e($ligne["Prix"])?> €</td>
+      <td><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Logo Illustration Stock" height=20 /></td>
+      <td><?=e($ligne["Pts_fidelite_requis"])?> pts</td>
+    </tr>
+    <?php endforeach ?>
+  </table>
+</form>
 
 
 

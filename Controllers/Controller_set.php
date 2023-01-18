@@ -1327,6 +1327,7 @@ class Controller_set extends Controller{
       $data = [
         "produits_eligible" => $produits_eligible,
         "produits_traite" => $produits_traite,
+        "id_client" => $id_client,
         "solde_points" => $m->getPointsFidelite($id_client, "Client"),
         "nom_client" => $m->getPrenomNomClient($_POST["id_client"])
       ];
@@ -1368,16 +1369,37 @@ class Controller_set extends Controller{
 
     $ajout = false;
 
+    $infos=[
+      "num_vente" => $m->getDernierIdDisponible("Vente"),
+      "id_client" =>$_POST["id_client"],
+      "id_admin" => $_SESSION["id_admin"],
+      "id_produit" => $_POST["produit_fidelite"],
+      "Date_vente" => date("Y-m-d"),
+      "Paiement" => "Points Fidelité",
+      "Use_fidelite" => 1
+    ];
+
+    //Ajout de la vente
+    $ajout = $m->addVente($infos);
+
+    // - décrémente stock  
+    $m->updateStock($infos["id_produit"]);
+
+    // + incrémente nb vente
+    $m->updateNbVente($infos["id_produit"]);
+
+    // + incrément pts fidélité client selon produit acheté
+    $m->updatePtsFideliteClient($infos["id_client"], $infos["id_produit"]);
+
     $data = [
-      "title" => "Validation d'une vente",
-      "added_element" => "vente",
+      "title" => "Validation d'un produit fidélité",
       "str_lien_retour" => "Retour à la caisse enregistreuse",
       "lien_retour" => "?controller=list&action=caisse",
     ];
     if ($ajout) {
-        $data["message"] = "La vente des produits ci-dessous géré par le responsable " . $m->getPrenomNomAdmin($_POST["id_admin"]) . " pour le client " . $m->getPrenomNomClient($_POST["id_client"]) . " a été comptabilisé avec succès.";
+        $data["message"] = "Le produit " . $m->getNomProduit($infos["id_produit"]) . " a bien été offert grâce au programme fidélité.";
     } else {
-        $data["message"] = "Erreur dans la saisie des informations, la vente n'a pas été ajouté.";
+        $data["message"] = "Erreur, le produit n'a pas été offert ni comptabilisé.";
     }
 
     $this->render("message", $data);
