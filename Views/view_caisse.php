@@ -105,74 +105,108 @@
             <table id="liste_produits">
                 <tr>
                     <th>Snacks</th>
-                    <?php foreach ($snacks as $ligne): ?>
-                    <?php if ($ligne["Visible"]==1) : ?>
-                    <td class="snacks">
-                        <!--
-                        <ul class="produit">
-                            <li><img src="Content/img/< ?=e($ligne["Img_produit"])?>" alt="Image < ?=e($ligne["Nom"])?>" height="60" /></li>
-                            <li>< ?=e($ligne["Nom"])?></li>
-                            <li>< ?=e($ligne["Prix"])?> €</li>
-                            <li>< ?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></li>
-                        </ul>
-                        -->
-                        <div class="produit">
-                            <div class="hidden"><span class="id_prod"><?=e($ligne["id_produit"])?></span></div>
-                            <div><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></div>
-                            <div><b><?=e($ligne["Nom"])?></b></div>
-                            <div><?=e($ligne["Prix"])?> €</div>
-                            <div><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></div>
-                        </div>
-                    </td>
-                    <?php endif ?>
+                    <?php $i=0; ?>
+                    <?php foreach ($snacks as $ligne): ?>     
+                        <?php if ($ligne["Visible"]==1) : ?>
+                            <!-- max 5 produits par ligne, si + alors ferme tr ligne et commence nouvelle -->
+                            <?php if ($i>=5) : ?>
+                                </tr>
+                                <tr>
+                                <?php $i=0; ?>
+                            <?php endif ?>
+                            <td class="snacks">
+                                <!--
+                                <ul class="produit">
+                                    <li><img src="Content/img/< ?=e($ligne["Img_produit"])?>" alt="Image < ?=e($ligne["Nom"])?>" height="60" /></li>
+                                    <li>< ?=e($ligne["Nom"])?></li>
+                                    <li>< ?=e($ligne["Prix"])?> €</li>
+                                    <li>< ?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></li>
+                                </ul>
+                                -->
+
+                                <div class="produit">
+                                    <div class="hidden"><span class="id_prod"><?=e($ligne["id_produit"])?></span></div>
+                                    <div><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></div>
+                                    <div><b><?=e($ligne["Nom"])?></b></div>
+                                    <div><?=e($ligne["Prix"])?> €</div>
+                                    <div><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></div>
+                                </div>
+                            </td>
+                            <!-- incrément-->
+                            <?php $i+=1; ?>
+                        <?php endif ?>
                     <?php endforeach ?>
                 </tr>
                 <tr id="boissons">
                     <th>Boissons</th>
+                    <?php $j=0; ?>
                     <?php foreach ($boissons as $ligne): ?>
-                    <?php if ($ligne["Visible"]==1) : ?>
-                    <td class="boissons">
-                        <div class="produit">
-                            <div class="hidden"><span class="id_prod"><?=e($ligne["id_produit"])?></span></div>
-                            <div><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></div>
-                            <div><b><?=e($ligne["Nom"])?></b></div>
-                            <div><?=e($ligne["Prix"])?> €</div>
-                            <div><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></div>
-                        </div>
-                    </td>
-                    <?php endif ?>
+                        <?php if ($ligne["Visible"]==1) : ?>
+                            <?php if ($j>=5) : ?>
+                                </tr>
+                                <tr>
+                                <?php $j=0; ?>
+                            <?php endif ?>
+                            <td class="boissons">
+                                <div class="produit">
+                                    <div class="hidden"><span class="id_prod"><?=e($ligne["id_produit"])?></span></div>
+                                    <div><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></div>
+                                    <div><b><?=e($ligne["Nom"])?></b></div>
+                                    <div><?=e($ligne["Prix"])?> €</div>
+                                    <div><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></div>
+                                </div>
+                            </td>
+                            <!-- incrément-->
+                            <?php $j+=1; ?>
+                        <?php endif ?>
                     <?php endforeach ?>
                 </tr>
                 <tr id="sodas">
                     <th>Sodas</th>
+                    <?php $k=0; ?>
                     <?php foreach ($sodas as $ligne): ?>
-                    <?php if ($ligne["Visible"]==1) : ?>
-                    <td class="sodas">
-                        <div class="produit">
-                            <div class="hidden"><span class="id_prod"><?=e($ligne["id_produit"])?></span></div>
-                            <div><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></div>
-                            <div><b><?=e($ligne["Nom"])?></b></div>
-                            <div><?=e($ligne["Prix"])?> €</div>
-                            <div><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></div>
-                        </div>
-                    </td>
-                    <?php endif ?>
+                        <?php if ($ligne["Visible"]==1) : ?>
+                            <?php if ($k>=5) : ?>
+                                </tr>
+                                <tr>
+                                <?php $k=0; ?>
+                            <?php endif ?>
+                            <td class="sodas">
+                                <div class="produit">
+                                    <div class="hidden"><span class="id_prod"><?=e($ligne["id_produit"])?></span></div>
+                                    <div><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></div>
+                                    <div><b><?=e($ligne["Nom"])?></b></div>
+                                    <div><?=e($ligne["Prix"])?> €</div>
+                                    <div><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></div>
+                                </div>
+                            </td>
+                            <!-- incrément-->
+                            <?php $k+=1; ?>
+                        <?php endif ?>
                     <?php endforeach ?>
                 </tr>
                 <tr id="sirops">
                     <th>Sirops</th>
+                    <?php $l=0; ?>
                     <?php foreach ($sirops as $ligne): ?>
-                    <?php if ($ligne["Visible"]==1) : ?>
-                    <td class="sirops">
-                        <div class="produit">
-                            <div class="hidden"><span class="id_prod"><?=e($ligne["id_produit"])?></span></div>
-                            <div><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></div>
-                            <div><b><?=e($ligne["Nom"])?></b></div>
-                            <div><?=e($ligne["Prix"])?> €</div>
-                            <div><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></div>
-                        </div>
-                    </td>
-                    <?php endif ?>
+                        <?php if ($ligne["Visible"]==1) : ?>
+                            <?php if ($l>=5) : ?>
+                                </tr>
+                                <tr>
+                                <?php $l=0; ?>
+                            <?php endif ?>
+                            <td class="sirops">
+                                <div class="produit">
+                                    <div class="hidden"><span class="id_prod"><?=e($ligne["id_produit"])?></span></div>
+                                    <div><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></div>
+                                    <div><b><?=e($ligne["Nom"])?></b></div>
+                                    <div><?=e($ligne["Prix"])?> €</div>
+                                    <div><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></div>
+                                </div>
+                            </td>
+                            <!-- incrément-->
+                            <?php $l+=1; ?>
+                        <?php endif ?>
                     <?php endforeach ?>
                 </tr>
             </table>
