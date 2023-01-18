@@ -126,11 +126,11 @@
                                 -->
 
                                 <div class="produit">
-                                    <div class="hidden"><span class="id_prod"><?=e($ligne["id_produit"])?></span></div>
                                     <div><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></div>
                                     <div><b><?=e($ligne["Nom"])?></b></div>
                                     <div><?=e($ligne["Prix"])?> €</div>
                                     <div><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></div>
+                                    <div class="hidden"><span class="id_prod"><?=e($ligne["id_produit"])?></span></div>
                                 </div>
                             </td>
                             <!-- incrément-->
@@ -150,11 +150,11 @@
                             <?php endif ?>
                             <td class="boissons">
                                 <div class="produit">
-                                    <div class="hidden"><span class="id_prod"><?=e($ligne["id_produit"])?></span></div>
                                     <div><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></div>
                                     <div><b><?=e($ligne["Nom"])?></b></div>
                                     <div><?=e($ligne["Prix"])?> €</div>
                                     <div><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></div>
+                                    <div class="hidden"><span class="id_prod"><?=e($ligne["id_produit"])?></span></div>
                                 </div>
                             </td>
                             <!-- incrément-->
@@ -179,6 +179,7 @@
                                     <div><b><?=e($ligne["Nom"])?></b></div>
                                     <div><?=e($ligne["Prix"])?> €</div>
                                     <div><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></div>
+                                    <div class="hidden"><span class="id_prod"><?=e($ligne["id_produit"])?></span></div>
                                 </div>
                             </td>
                             <!-- incrément-->
@@ -203,6 +204,7 @@
                                     <div><b><?=e($ligne["Nom"])?></b></div>
                                     <div><?=e($ligne["Prix"])?> €</div>
                                     <div><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></div>
+                                    <div class="hidden"><span class="id_prod"><?=e($ligne["id_produit"])?></span></div>
                                 </div>
                             </td>
                             <!-- incrément-->
