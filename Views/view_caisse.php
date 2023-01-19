@@ -18,7 +18,6 @@
         -->
         <h4 class="panier_client"> Panier du client </h4>
         <ul id="panier">
-            <li>2 x Kinder Bueno (exemple)</li>
             <!-- 
                 Affichage des produits ici, genre 2x Kinder bueno etc
             -->
@@ -70,8 +69,7 @@
             
             <div id="panier_input_formulaire">
                 <!-- TEST-->
-                <input type="hidden" name="produit1" value="3" />
-                <input type="hidden" name="produit2" value="5" />
+
                 <!--
                 exemple:
                 <input type="hidden" name="produit1" value="ID_PRODUIT_ICI" />
@@ -98,6 +96,41 @@
 
                 <div id="carte">
                     <p><img src="Content/img/logo_carte.png" alt="Payer par Carte" height="60" /></p>
+                </div>
+            </div>
+            <div class="monnaie">
+                <div>
+                    <p><img src="Content/img/20euro.png" alt="20 euro" height="30" /></p>
+                </div>
+                <div>
+                    <p><img src="Content/img/10euro.png" alt="10 euro" height="30" /></p>
+                </div>
+                <div>
+                    <p><img src="Content/img/5euro.png" alt="5 euro" height="30" /></p>
+                </div>
+                <div>
+                    <p><img src="Content/img/2euro.png" alt="2 euro" height="30" /></p>
+                </div>
+                <div>
+                    <p><img src="Content/img/1euro.png" alt="1 euro" height="30" /></p>
+                </div>
+                <div>
+                    <p><img src="Content/img/50cent.png" alt="50 cent" height="30" /></p>
+                </div>
+                <div>
+                    <p><img src="Content/img/20cent.png" alt="20 cent" height="30" /></p>
+                </div>
+                <div>
+                    <p><img src="Content/img/10cent.png" alt="10 cent" height="30" /></p>
+                </div>
+                <div>
+                    <p><img src="Content/img/5cent.png" alt="5 cent" height="30" /></p>
+                </div>
+                <div>
+                    <p><img src="Content/img/2cent.png" alt="2 cent" height="30" /></p>
+                </div>
+                <div>
+                    <p><img src="Content/img/1cent.png" alt="1 cent" height="30" /></p>
                 </div>
             </div>
         </form>
