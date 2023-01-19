@@ -205,10 +205,10 @@ function clickSnacks(){
     addSnacks(ligne);
     let panier = document.getElementById('panier');
     panier.append(ligne);
-    let identifiant_produit=document.querySelectorAll('.hidden .id_prod');
+    let identifiant_produit=document.querySelectorAll('.snacks .hidden .id_prod');
     let form_ligne=document.createElement('input');
     form_ligne.setAttribute('type','hidden');
-    form_ligne.setAttribute('name', panier_id++);
+    form_ligne.setAttribute('name', 'produit_'+String(panier_id++));
     form_ligne.setAttribute('value',identifiant_produit[i].textContent);
     let panier_formulaire = document.getElementById('panier_input_formulaire');
     panier_formulaire.append(form_ligne);
@@ -231,7 +231,7 @@ function clickBoissons(){
     let identifiant_produit=document.querySelectorAll('.boissons .hidden .id_prod');
     let form_ligne=document.createElement('input');
     form_ligne.setAttribute('type','hidden');
-    form_ligne.setAttribute('name', panier_id++);
+    form_ligne.setAttribute('name', 'produit_'+String(panier_id++));
     form_ligne.setAttribute('value',identifiant_produit[i].textContent);
     let panier_formulaire = document.getElementById('panier_input_formulaire');
     panier_formulaire.append(form_ligne);
@@ -253,7 +253,7 @@ function clickSodas(){
     let identifiant_produit=document.querySelectorAll('.sodas .hidden .id_prod');
     let form_ligne=document.createElement('input');
     form_ligne.setAttribute('type','hidden');
-    form_ligne.setAttribute('name', panier_id++);
+    form_ligne.setAttribute('name', 'produit_'+String(panier_id++));
     form_ligne.setAttribute('value',identifiant_produit[i].textContent);
     let panier_formulaire = document.getElementById('panier_input_formulaire');
     panier_formulaire.append(form_ligne);
@@ -275,7 +275,7 @@ function clickSirops(){
     let identifiant_produit=document.querySelectorAll('.sirops .hidden .id_prod');
     let form_ligne=document.createElement('input');
     form_ligne.setAttribute('type','hidden');
-    form_ligne.setAttribute('name', panier_id++);
+    form_ligne.setAttribute('name', 'produit_'+String(panier_id++));
     form_ligne.setAttribute('value',identifiant_produit[i].textContent);
     let panier_formulaire = document.getElementById('panier_input_formulaire');
     panier_formulaire.append(form_ligne);
