@@ -1322,7 +1322,7 @@ class Controller_set extends Controller{
       // envoyer sur une page proposition points fidélité
       // Préparation du tableau infos
 
-      $produits_eligible = $m->getProduitEligible();
+      $produits_eligible = $m->getProduitEligible($id_client);
 
       $data = [
         "produits_eligible" => $produits_eligible,
