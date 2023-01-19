@@ -100,37 +100,37 @@
             </div>
             <div class="monnaie">
                 <div>
-                    <p><img src="Content/img/20euro.png" alt="20 euro" height="30" /></p>
+                    <p><img src="Content/img/20euro.png" alt="20 euro" height="60" /></p>
                 </div>
                 <div>
-                    <p><img src="Content/img/10euro.png" alt="10 euro" height="30" /></p>
+                    <p><img src="Content/img/10euro.png" alt="10 euro" height="60" /></p>
                 </div>
                 <div>
-                    <p><img src="Content/img/5euro.png" alt="5 euro" height="30" /></p>
+                    <p><img src="Content/img/5euro.png" alt="5 euro" height="60" /></p>
                 </div>
                 <div>
-                    <p><img src="Content/img/2euro.png" alt="2 euro" height="30" /></p>
+                    <p><img src="Content/img/2euro.png" alt="2 euro" height="60" /></p>
                 </div>
                 <div>
-                    <p><img src="Content/img/1euro.png" alt="1 euro" height="30" /></p>
+                    <p><img src="Content/img/1euro.png" alt="1 euro" height="60" /></p>
                 </div>
                 <div>
-                    <p><img src="Content/img/50cent.png" alt="50 cent" height="30" /></p>
+                    <p><img src="Content/img/50cent.png" alt="50 cent" height="60" /></p>
                 </div>
                 <div>
-                    <p><img src="Content/img/20cent.png" alt="20 cent" height="30" /></p>
+                    <p><img src="Content/img/20cent.png" alt="20 cent" height="60" /></p>
                 </div>
                 <div>
-                    <p><img src="Content/img/10cent.png" alt="10 cent" height="30" /></p>
+                    <p><img src="Content/img/10cent.png" alt="10 cent" height="60" /></p>
                 </div>
                 <div>
-                    <p><img src="Content/img/5cent.png" alt="5 cent" height="30" /></p>
+                    <p><img src="Content/img/5cent.png" alt="5 cent" height="60" /></p>
                 </div>
                 <div>
-                    <p><img src="Content/img/2cent.png" alt="2 cent" height="30" /></p>
+                    <p><img src="Content/img/2cent.png" alt="2 cent" height="60" /></p>
                 </div>
                 <div>
-                    <p><img src="Content/img/1cent.png" alt="1 cent" height="30" /></p>
+                    <p><img src="Content/img/1cent.png" alt="1 cent" height="60" /></p>
                 </div>
             </div>
         </form>
@@ -211,7 +211,7 @@
                         <?php endif ?>
                     <?php endforeach ?>
                 </tr>
-                <th colspan=5>Sodas</th>
+                <th colspan=5>Eau + Sirop</th>
                 <tr id="sirops">
                     <?php $l=0; ?>
                     <?php foreach ($sirops as $ligne): ?>
