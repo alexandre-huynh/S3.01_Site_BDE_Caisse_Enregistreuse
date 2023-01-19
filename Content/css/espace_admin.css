@@ -21,7 +21,9 @@ hr{
 }
 
 .menu-list p{
-    width: 100%;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
     background-color:#12B886;
     padding: 20px;
     border-radius: 5px;
