@@ -43,7 +43,7 @@ class Model
       $use_marqueur = False;
       // Requête de base auquelle on ajoutera des conditions order by ou filtre
       //$texte_req = "SELECT * FROM Produit";
-      $texte_req = "SELECT id_produit, Nom, Categorie, ROUND(Prix,2) AS 'Prix' , Img_produit, DATE_FORMAT(Date_ajout, '%e/%c/%Y') AS 'Date_ajout', Pts_fidelite_requis, Pts_fidelite_donner, Stock, Nb_ventes FROM Produit";
+      $texte_req = "SELECT id_produit, Nom, Categorie, ROUND(Prix,2) AS 'Prix' , Img_produit, DATE_FORMAT(Date_ajout, '%e/%c/%Y') AS 'Date_ajout', Pts_fidelite_requis, Pts_fidelite_donner, Stock, Nb_ventes, Visible FROM Produit";
 
       // ------------------
       // $type
@@ -134,7 +134,7 @@ class Model
 
     public function getProduitsNouveau($limit)
     {
-      $req = $this->bd->prepare("SELECT id_produit, Nom, ROUND(Prix,2) AS 'Prix' , Img_produit FROM Produit ORDER BY date_ajout DESC LIMIT :limit");
+      $req = $this->bd->prepare("SELECT id_produit, Nom, ROUND(Prix,2) AS 'Prix' , Img_produit FROM Produit WHERE Visible = 1 ORDER BY date_ajout DESC LIMIT :limit");
       $req->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
       $req->execute();
       $reponse = [];
@@ -146,7 +146,7 @@ class Model
 
     public function getProduitsPopulaire($limit)
     {
-      $req = $this->bd->prepare("SELECT id_produit, Nom, ROUND(Prix,2) AS 'Prix' , Img_produit FROM Produit ORDER BY nb_ventes DESC LIMIT :limit");
+      $req = $this->bd->prepare("SELECT id_produit, Nom, ROUND(Prix,2) AS 'Prix' , Img_produit FROM Produit WHERE Visible = 1 ORDER BY nb_ventes DESC LIMIT :limit");
       $req->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
       $req->execute();
       $reponse = [];
@@ -270,31 +270,37 @@ class Model
     public function getHistoriqueAchats($search="default") // ou getVentes
     {
       // $search si on veut chercher une vente en particulier
-      $search = "%" . $search . "%";
-
+      $use_marqueur = false;
       //$texte_req = 'SELECT * FROM Vente';
 
       //peut être:
       $texte_req = "SELECT num_vente, Vente.id_client, Vente.id_admin, Vente.id_produit, DATE_FORMAT(Date_vente, '%e/%c/%Y') AS 'Date_vente', Paiement, Use_fidelite ,Client.Nom, Client.Prenom, Admin.Nom, Admin.Prenom 
                       FROM Client JOIN Vente USING(id_client) 
-                                  JOIN Admin USING(id_admin) ORDER BY num_vente DESC,Date_vente DESC";
+                                  JOIN Produit USING(id_produit)
+                                  JOIN Admin USING(id_admin)";
       // TODO : rajouter quelque chose pour traiter les recherches par nom prénom 
       // sachant que la table ventes ne possède pas ces attributs
       // solution: jointure?
-      if ($search!="%default%") {
+      if ($search!="default") {
+        $search = "%" . $search . "%";
         $texte_req = $texte_req . " WHERE 
           num_vente LIKE :search OR 
-          Nom_produit LIKE :search OR 
+          Produit.Nom LIKE :search OR 
           Date_vente LIKE :search OR 
           Paiement LIKE :search OR
           Client.Nom LIKE :search OR
           Client.Prenom LIKE :search OR
           Admin.Nom LIKE :search OR
           Admin.Prenom LIKE :search ";//OR  enlever OR si à la fin
+        $use_marqueur = true;
       }
 
+      $texte_req = $texte_req . " ORDER BY num_vente DESC,Date_vente DESC";
+
       $req = $this->bd->prepare($texte_req);
-      $req->bindValue(':search', $search);
+      if ($use_marqueur==True){
+        $req->bindValue(':search', $search);
+      }
       $req->execute();
       return $req->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -347,7 +353,7 @@ class Model
 
     public function getRecettesJour()
     {
-      $req = $this->bd->prepare('SELECT sum(ROUND(Prix,2)) AS "Recettes_Quotidien" FROM Vente JOIN Produit USING(id_produit) WHERE DATE(Date_vente)=CURDATE() AND Paiement!=1');
+      $req = $this->bd->prepare('SELECT sum(ROUND(Prix,2)) AS "Recettes_Quotidien" FROM Vente JOIN Produit USING(id_produit) WHERE DATE(Date_vente)=CURDATE() AND Use_fidelite=0');
       $req->execute();
       $tab = $req->fetch(PDO::FETCH_NUM);
       if ($tab[0]==NULL || $req->rowCount()==0){
@@ -360,7 +366,7 @@ class Model
 
     public function getRecettesSemaine()
     {
-      $req = $this->bd->prepare('SELECT sum(ROUND(Prix,2)) AS "Recettes_Hebdo" FROM Vente JOIN Produit USING(id_produit) WHERE WEEK(Date_vente)=WEEK(now()) AND Paiement!=1');
+      $req = $this->bd->prepare('SELECT sum(ROUND(Prix,2)) AS "Recettes_Hebdo" FROM Vente JOIN Produit USING(id_produit) WHERE WEEK(Date_vente)=WEEK(now()) AND Use_fidelite=0');
       $req->execute();
       $tab = $req->fetch(PDO::FETCH_NUM);
       return $tab[0];
@@ -368,7 +374,7 @@ class Model
 
     public function getRecettesMois()
     {
-      $req = $this->bd->prepare('SELECT sum(ROUND(Prix,2)) AS "Recettes_Mois" FROM Vente JOIN Produit USING(id_produit) WHERE MONTH(Date_vente)=MONTH(now()) AND Paiement!=1');
+      $req = $this->bd->prepare('SELECT sum(ROUND(Prix,2)) AS "Recettes_Mois" FROM Vente JOIN Produit USING(id_produit) WHERE MONTH(Date_vente)=MONTH(now()) AND Use_fidelite=0');
       $req->execute();
       $tab = $req->fetch(PDO::FETCH_NUM);
       return $tab[0];
@@ -404,6 +410,22 @@ class Model
     public function getNumEtudiantAdminFromEmail($email){
       $req = $this->bd->prepare('SELECT num_etudiant FROM Admin WHERE Email = :email');
       $req->bindValue(':email', $email);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+
+    public function getNumEtudFromIdClient($id){
+      $req = $this->bd->prepare('SELECT num_etudiant FROM Client WHERE id_client = :id_client');
+      $req->bindValue(':id_client', $id);
+      $req->execute();
+      $tab = $req->fetch(PDO::FETCH_NUM);
+        return $tab[0];
+    }
+
+    public function getNumEtudFromIdAdmin($id){
+      $req = $this->bd->prepare('SELECT num_etudiant FROM Admin WHERE id_admin = :id_admin');
+      $req->bindValue(':id_admin', $id);
       $req->execute();
       $tab = $req->fetch(PDO::FETCH_NUM);
         return $tab[0];
@@ -449,6 +471,33 @@ class Model
       $req->execute();
       $tab = $req->fetch(PDO::FETCH_NUM);
       return $tab[0];
+    }
+
+    // Retourne bool true s'il est éligible pour au moins 1 produit fidélité
+    // sinon false et repasse à validation achat normal dans 
+    // controller set action traitement caisse
+    public function isEligibleFidelite($id_client){
+      
+      $req = $this->bd->prepare('SELECT id_client 
+        FROM Client JOIN Vente USING(id_client) 
+        JOIN Produit USING(id_produit) 
+          WHERE Client.id_client = :id_client 
+          AND Client.Pts_fidelite >= (SELECT MIN(Pts_fidelite_requis) FROM Produit)');
+      $req->bindValue(':id_client', (int) $id_client, PDO::PARAM_INT);
+      $req->execute();
+
+      return (bool) $req->rowCount();
+    }
+
+    // Retourne la liste des produits dont le client est éligible
+    // Pour un achat gratuit grâce au points fidélités.
+    public function getProduitEligible($nb_pts){
+
+      $req = $this->bd->prepare('SELECT * FROM Produit WHERE Pts_fidelite_requis <= :nb_pts');
+      $req->bindValue(':nb_pts', $nb_pts);
+      $req->execute();
+      return $req->fetchAll(PDO::FETCH_ASSOC);
+
     }
 
     // retourne l'id s'il existe dans la BD, sinon retourne false
@@ -506,10 +555,10 @@ class Model
     public function addProduit($infos)
     {
         //Préparation de la requête
-        $requete = $this->bd->prepare('INSERT INTO Produit VALUES (:id_produit, :Nom, :Categorie, :Prix, :Img_produit, :Date_ajout, :Pts_fidelite_requis, :Pts_fidelite_donner, :Stock, :Nb_ventes)');
+        $requete = $this->bd->prepare('INSERT INTO Produit VALUES (:id_produit, :Nom, :Categorie, :Prix, :Img_produit, :Date_ajout, :Pts_fidelite_requis, :Pts_fidelite_donner, :Stock, :Nb_ventes, :Visible)');
 
         //Remplacement des marqueurs de place par les valeurs
-        $marqueurs = ["id_produit", "Nom", "Categorie", "Prix", "Img_produit", "Date_ajout", "Pts_fidelite_requis", "Pts_fidelite_donner", "Stock", "Nb_ventes"];
+        $marqueurs = ["id_produit", "Nom", "Categorie", "Prix", "Img_produit", "Date_ajout", "Pts_fidelite_requis", "Pts_fidelite_donner", "Stock", "Nb_ventes", "Visible"];
         foreach ($marqueurs as $value) {
             $requete->bindValue(':' . $value, $infos[$value]);
         }
@@ -804,6 +853,21 @@ class Model
       return (bool) $requete->rowCount();
     }
 
+    public function substractPtsFideliteClient($id_client, $id_produit)
+    {
+      //Préparation de la requête
+      $requete = $this->bd->prepare('UPDATE Client SET Pts_fidelite = ((SELECT Pts_fidelite FROM Client WHERE id_client = :id_client) - (SELECT Pts_fidelite_requis FROM Produit WHERE id_produit = :id_produit)) WHERE id_client = :id_client');
+
+      //Remplacement des marqueurs de place par les valeurs
+      $requete->bindValue(':id_client', $id_client);
+      $requete->bindValue(':id_produit', $id_produit);
+
+      //Exécution de la requête
+      $requete->execute();
+
+      return (bool) $requete->rowCount();
+    }
+
     public function getPassword($email,$table){
 
       if($table=="Admin"){
@@ -883,43 +947,67 @@ class Model
       }
       */
    
-    public function removeCompteClient($id){
-      // Supprimer de ventes pour supprimer les ventes du client 
+    public function removeCompteClient($num_etud, $id){
 
       $req2 = $this->bd->prepare('DELETE FROM Vente WHERE id_client = :id');
       $req2->bindValue(':id',$id);
       $req2->execute();
-      
 
-      // Suppression de la table client
-      $req = $this->bd->prepare('DELETE FROM Client where num_etudiant = (SELECT num_etudiant FROM Client WHERE id_client=:id) ');
-      $req->bindValue(':id',$id);
+      $req = $this->bd->prepare('DELETE FROM Client where num_etudiant = :num_etud');
+      $req->bindValue(':num_etud',$num_etud);
       $req->execute();
 
       // Suppression de la table Authentification
-      $req1 = $this->bd->prepare('DELETE FROM Authentification WHERE num_etudiant = (SELECT num_etudiant FROM Client WHERE id_client=:id)');
-      $req1->bindValue(':id',$id);
-      $req1->execute();
+      $req3 = $this->bd->prepare('DELETE FROM Authentification WHERE num_etudiant = :num_etud');
+      $req3->bindValue(':num_etud',$num_etud);
+      $req3->execute();
+
+      return (bool) $req3->rowCount();
 
     } 
 
-    public function removeCompteAdmin($id){
+    public function removeCompteAdmin($num_etud, $id){
 
-      $req = $this->bd->prepare('DELETE FROM Admin where num_etudiant = (SELECT num_etudiant FROM Client WHERE id_client=:id) ');
-      $req->bindValue(':id',$id);
+      $req2 = $this->bd->prepare('DELETE FROM Vente WHERE id_admin = :id');
+      $req2->bindValue(':id',$id);
+      $req2->execute();
+
+      $req1 = $this->bd->prepare('DELETE FROM SuperAdmin where id_admin = :id ');
+      $req1->bindValue(':id',$id);
+      $req1->execute();
+
+      $req = $this->bd->prepare('DELETE FROM Admin where num_etudiant = :num_etud');
+      $req->bindValue(':num_etud',$num_etud);
       $req->execute();
-      return (bool) $req->rowCount();
+
+      // Suppression de la table Authentification
+      $req3 = $this->bd->prepare('DELETE FROM Authentification WHERE num_etudiant = :num_etud');
+      $req3->bindValue(':num_etud',$num_etud);
+      $req3->execute();
+
+      return (bool) $req3->rowCount();
 
     }
 
 
     public function removeProduit($id_produit){
 
+      $req2 = $this->bd->prepare('DELETE FROM Vente WHERE id_produit = :id');
+      $req2->bindValue(':id',$id_produit);
+      $req2->execute();
+
       $req = $this->bd->prepare('DELETE FROM Produit where Id_produit = :id ');
       $req->bindValue(':id',$id_produit);
       $req->execute();
       return (bool) $req->rowCount();
 
+    }
+
+    public function removeVente($num_vente){
+      $req = $this->bd->prepare('DELETE FROM Vente WHERE num_vente = :num_vente');
+      $req->bindValue(':num_vente', $num_vente);
+      $req->execute();
+      return (bool) $req->rowCount();
     }
 
     public function updateNumEtudiant($num_etud,$new_num_etud,$table){
@@ -967,6 +1055,33 @@ class Model
       return (bool) $req->rowCount();
 
     }
+
+    public function afficher($id){
+
+      $req = $this->bd->prepare('UPDATE Produit SET Visible = 1 WHERE id_produit = :id');
+      $req->bindValue(':id',$id);
+      $req->execute();
+
+      return (bool) $req->rowCount();
+
+    }
+
+    public function masquer($id){
+      $req = $this->bd->prepare('UPDATE Produit SET Visible = 0 WHERE id_produit = :id');
+      $req->bindValue(':id',$id);
+      $req->execute();
+
+      return (bool) $req->rowCount();
+
+    }
+
+
+
+
+
+
+
+
 
 
 

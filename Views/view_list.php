@@ -35,7 +35,7 @@
             <option value="Tel" < ?php if (isset($_GET["attribut"]) && $_GET["attribut"]=="Tel") : ?>selected< ?php endif ?>>Numéro de Téléphone</option>
             <option value="Email" < ?php if (isset($_GET["attribut"]) && $_GET["attribut"]=="Email") : ?>selected< ?php endif ?>>Email</option>
           < ?php endif ?>
-          <!-- Pour afficher tous les attributs possibles dont on veut trier avec
+          Pour afficher tous les attributs possibles dont on veut trier avec
           < ?php foreach ($colonnes as $v): ?>
             <option value="< ?=strtolower(e($v))?>">< ?=e($v)?></option>
           < ?php endforeach ?>
@@ -85,6 +85,7 @@
         <td><?=e($ligne["Pts_fidelite_donner"])?> pts</td>
         <td><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Logo Illustration Stock" height=20 /></td>
         <td><?=e($ligne["Nb_ventes"])?><img src="Content/img/logo_ventes.png" alt="Logo Illustration Nb de Ventes" height=20 /></td>
+        <td><?php if ($ligne["Visible"]==1) : ?><a href="?controller=set&action=masquer_produit&id=<?=e($ligne[$id_element])?>"><img src="Content/img/toggle_icon_true.png" alt="Bouton cacher produit" height=50 /><?php elseif ($ligne["Visible"]==0) : ?><a href="?controller=set&action=afficher_produit&id=<?=e($ligne[$id_element])?>"><img src="Content/img/toggle_icon_false.png" alt="Bouton publier produit" height=50 /><?php endif ?></a></td>
       <!-- ------------------------------------------------------------------- -->
       <!--< ?php elseif ($_GET["action"]=="gestion_quelquechose") : ?>-->
       <!-- ------------------------------------------------------------------- 
@@ -111,14 +112,14 @@
       
       <!-- Case modifier cette ligne -->
       <td>
-        <a href="?controller=set&action=form_update_<?=$redirect_add_element?>&id=<?=e($ligne[$id_element])?>">
+        <a href="?controller=set&action=form_update_<?=e($redirect_add_element)?>&id=<?=e($ligne[$id_element])?>">
           <img src="Content/img/edit-icon.png" alt="update"/>
         </a>
       </td>
       
       <!-- Case supprimer cette ligne -->
       <td>
-        <a href="?controller=set&action=remove_<?=$redirect_add_element?>&id=<?=e($ligne[$id_element])?>">
+        <a href="?controller=set&action=remove_<?=e($redirect_add_element)?>&id=<?=e($ligne[$id_element])?>">
           <img src="Content/img/remove-icon.png" alt="suppr"/>
         </a>
       </td>

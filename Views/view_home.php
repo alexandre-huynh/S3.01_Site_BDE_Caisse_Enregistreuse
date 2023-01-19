@@ -27,7 +27,6 @@
                 <li><?=e($ligne["Nom"])?></li>
                 <li class="prix"><?=e($ligne["Prix"])?> €</li>
               </ul>
-              </br> <!-- à enlever si nécessaire--> 
             <?php endforeach ?>
             </div>
 
@@ -42,7 +41,6 @@
                 <li><?=e($ligne["Nom"])?></li>
                 <li class="prix"><?=e($ligne["Prix"])?> €</li>
               </ul>
-              </br> <!-- à enlever si nécessaire--> 
             <?php endforeach ?>
             </div>
 

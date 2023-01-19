@@ -1,0 +1,143 @@
+#panier_et_produits{
+    display: flex;
+    margin-bottom: 150px;
+    width: 100%;
+    height: 100%;
+    margin-top: 40px;
+}
+
+.hidden{
+    display: none;
+}
+
+h1{
+    text-align: center;
+    margin: auto;
+    margin-bottom: 40px;
+    
+}
+
+h4.panier_client{
+    text-transform: uppercase;
+    font-size: 16px;
+    margin: auto;
+    text-align: center;
+    font-weight: bold;
+}
+
+.aside_total{
+    background-color: #D9D9D9;
+    padding: 30px;
+    margin-right: 100px;
+    border-radius: 5px;
+    margin-left: 8px;
+}
+
+#panier{
+    margin-top: 5px;
+    background-color: white;
+    width: 95%;
+    height: auto;
+    padding: 10px 40px;
+    
+}
+
+ul#panier li {
+    margin-bottom: 10px;
+}
+
+.total{
+    font-weight: bold;
+    text-transform: uppercase;
+
+}
+
+#totalprix, .totalprix.devise{
+    color: red;
+}
+
+input[name="num_etudiant_client"]{
+    width: 210px;
+    margin: auto;
+}
+
+.bouton-decision{
+    background-color: #FFCC4D;
+    display: flex;
+    margin-left: 10px;
+}
+
+.bouton-decision div{
+    border: 1px solid black;
+    width: 100px;  
+}
+
+.bouton-decision div:hover{
+    background-color: #9c970e;
+    cursor: pointer;
+}
+
+.bouton-decision input, .bouton-decision a{
+    border:none;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    margin: auto;
+    background-color:inherit
+}
+
+.monnaie{
+    display: flex;
+    margin-left: 10px;
+}
+
+.monnaie div{
+    border: 1px solid black;
+}
+
+.monnaie div:hover{
+    background-color: #D9D9D9;
+    cursor: pointer;
+}
+
+form{
+    display:inline-block;
+    margin: auto;
+}
+
+
+table#liste_produits {
+    margin: 40px;
+
+}
+
+main div.produits-panier{
+    border-radius: 5px;
+    /*position: relative;*/
+    /*top: 140px;*/
+    right: 30%;
+    background-color: #D9D9D9;
+}
+
+
+td.snacks, td.boissons, td.sodas, td.sirops{
+    width: 200px;
+    border: 1px solid black;
+    height: 100px;
+    background-color: #fff;
+    border-radius: 5px;
+    text-align: center;
+    margin: auto;
+}
+
+td.snacks:hover, td.boissons:hover, td.sodas:hover, td.sirops:hover{
+    background-color: #D9D9D9;
+    cursor: pointer;
+}
+
+th{
+    background-color:black;
+    color: white;
+    text-align: center;
+    margin-bottom: 10px;
+}

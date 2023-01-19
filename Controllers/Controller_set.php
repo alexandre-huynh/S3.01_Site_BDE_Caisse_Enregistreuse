@@ -184,21 +184,6 @@ class Controller_set extends Controller{
                   */
                     if (isset($_POST[$v]) && (is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])) || ((is_int($_POST[$v]) || is_float($_POST[$v])) && $_POST[$v]>=0)) {
                       $infos[$v] = $_POST[$v];
-                
-                    /*  même erreur
-                    if (isset($_POST[$v])) {
-                      // si c'est un STR
-                      if (is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])){
-                        $infos[$v] = $_POST[$v];
-                      }
-                      // si c'est un entier/float
-                      elseif ((is_int($_POST[$v]) || is_float($_POST[$v])) && $_POST[$v]>=0){
-                        $infos[$v] = $_POST[$v];
-                      } 
-                      else {
-                        $infos[$v] = null;
-                      }
-                    */
                     } else {
                       $infos[$v] = null;
                     }
@@ -226,6 +211,10 @@ class Controller_set extends Controller{
                   }
                 }
 
+                if(file_exists($target_file)) {
+                  unlink($target_file); //remove the already existing file
+                }
+
                 // Allow certain file formats
                 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" ) {
                   $msg_error = $msg_error . "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
@@ -250,6 +239,9 @@ class Controller_set extends Controller{
                 //ancienne idée
                 // ex: Coca - Cola -> coca_-_cola.png
                 //$infos["Img_produit"] = str_replace(" ", "_", strtolower($infos["Nom"])) . ".png";
+
+                //Image visible par défaut
+                $infos["Visible"] = 1;
 
                 //Récupération du modèle
                 $m = Model::getModel();
@@ -553,6 +545,7 @@ class Controller_set extends Controller{
 
   public function action_remove_produit() {
     $m = Model::getModel();
+    $remove = False;
     //==================================
     //     TEST SI C'EST UN ADMIN
     //==================================
@@ -568,21 +561,28 @@ class Controller_set extends Controller{
       // Ceci entrainera la suppression des ventes associés à ce produit 
   
     // Associer à la fonction removeProduit de model.php pour supprimer le produit 
-    $m->removeProduit($_GET['id']);
+    $remove = $m->removeProduit($_GET['id']);
     }
 
 
     $data = [
       "title" => "Supprimer un produit",
-      "message" => "Le produit à été supprimé avec succès",
       "str_lien_retour" => "Retour à la page de l'inventaire",
       "lien_retour" => "?controller=list&action=gestion_inventaire" 
     ];
+    if ($remove) {
+      $data["message"] = "Le produit à été supprimé avec succès";
+    } else {
+      $data["message"] = "Le produit n'a pas pu être supprimé .";
+    }
+
     $this->render("message", $data);
   }
 
   public function action_remove_client() {
     $m = Model::getModel();
+
+    $remove = false;
     //==================================
     //     TEST SI C'EST UN ADMIN
     //==================================
@@ -590,30 +590,38 @@ class Controller_set extends Controller{
       $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
     }
 
-    if(!isset($_GET['id_client'])){
+    if(!isset($_GET['id'])){
       $this->action_error("Erreur l'identifiant du client n'est pas valide");
     }
     else{
     
       // Afficher message, êtes vous sur de vouloir supprimer le client ? 
       // Ceci entrainera la suppression des ventes associés à ce client 
-  
-    // Associer à la fonction removeclient de model.php pour supprimer le client 
-    $m->removeCompteClient($_GET['id']);
+      // Associer à la fonction removeclient de model.php pour supprimer le client 
+      $remove = $m->removeCompteClient($m->getNumEtudFromIdClient($_GET['id']), $_GET['id']);
     }
 
 
     $data = [
       "title" => "Supprimer un client",
-      "message" => "Le client à été supprimé avec succès",
       "str_lien_retour" => "Retour à la page de gestion des clients",
       "lien_retour" => "?controller=list&action=gestion_clients" 
     ];
+
+    if ($remove) {
+      $data["message"] = "Le compte client à été supprimé avec succès";
+    } else {
+      $data["message"] = "Le client n'a pas pu être supprimé .";
+    }
+
     $this->render("message", $data);
   }
 
   public function action_remove_admin() {
     $m = Model::getModel();
+
+    $remove = False;
+
     //==================================
     //  TEST SI C'EST UN SUPER ADMIN
     //==================================
@@ -622,7 +630,7 @@ class Controller_set extends Controller{
     }
     //===================================
   
-      if(!isset($_GET['id_admin'])){
+      if(!isset($_GET['id'])){
         $this->action_error("Erreur l'identifiant de l'admin n'est pas valide");
       }
       else{
@@ -630,31 +638,71 @@ class Controller_set extends Controller{
         // Afficher message, êtes vous sur de vouloir supprimer l'admin ? 
     
       // Associer à la fonction removeAdmin de model.php pour supprimer l'admin 
-      $m->removeCompteAdmin($_GET['id']);
+      $remove = $m->removeCompteAdmin($m->getNumEtudFromIdAdmin($_GET['id']), $_GET['id']);
       }
   
   
       $data = [
         "title" => "Supprimer un admin",
-        "message" => "L'admin à été supprimé avec succès",
         "str_lien_retour" => "Retour à la page de gestion des comptes",
         "lien_retour" => "?controller=list&action=gestion_admins" 
       ];
-      $this->render("message", $data);
-    }
 
-
-
+      if (isset($remove)) {
+        $data["message"] = "Le compte admin à été supprimé avec succès";
+      } else {
+        $data["message"] = "Le compte admin n'a pas pu être supprimé .";
+      }
   
+    $this->render("message", $data);
+  }
 
-  /*
+  public function action_remove_vente() {
+    $m = Model::getModel();
+
+    $remove = false;
+
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
+  
+    // Associer à la fonction removeAdmin de model.php pour supprimer l'admin 
+    if (!isset($_GET["id"])){
+      $this->action_error("Erreur, le numéro de vente n'a pas été trouvé.");
+    }
+    else {
+      $remove = $m->removeVente($_GET["id"]);
+    }
+  
+    $data = [
+      "title" => "Supprimer une vente",
+      "str_lien_retour" => "Retour à la page de l'historique des ventes",
+      "lien_retour" => "?controller=list&action=gestion_ventes" 
+    ];
+
+    if (isset($remove)) {
+      $data["message"] = "La vente à été supprimé avec succès";
+    } else {
+      $data["message"] = "La vente n'a pas pu être supprimé.";
+    }
+  
+    $this->render("message", $data);
+  }
+
+    /*
   ===========================================================
                        MODIFICATION D'ELEMENT
   ===========================================================
   */
 
   public function action_form_update_produit(){
+
     $m = Model::getModel();
+    
     //==================================
     //     TEST SI C'EST UN ADMIN
     //==================================
@@ -769,7 +817,7 @@ class Controller_set extends Controller{
 
       // Préparation du tableau infos
       foreach($produit as $c=>$v){
-        if ($c!="Img_produit" && $v!=$_POST[$c]){
+        if ($c!="Img_produit" && $c!="Visible" && $v!=$_POST[$c]){
           $ajout = $m->updateProduit($_POST["id_produit"], $c, $_POST[$c]);
         }
       }
@@ -1220,28 +1268,13 @@ class Controller_set extends Controller{
     }
     //===================================
     
-    // TODO: TRAITEMENT SPECIAL SI POINtS DE FIDELITE A FAIRE PLUS TARD
-    /*
-    if ($m->getPointsFidelite($m->getIdClientFromNumEtud($_POST["num_etudiant_client"]),"Client") > 0){
-      // envoyer sur une page proposition points fidélité
-      // Préparation du tableau infos
-      $infos = [];
-      $noms = ["num_vente", "id_client", "id_admin", "id_produit", "Date_vente", "Paiement", "Use_fidelite"];
-      foreach ($noms as $v) {
-        if (isset($_POST[$v]) && (is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])) || ((is_int($_POST[$v]) || is_float($_POST[$v])) && $_POST[$v]>=0)) {
-          $infos[$v] = $_POST[$v];
-        } else {
-          $infos[$v] = null;
-        }
-      }
-    }
-    */
+    
 
     $ajout = false;
 
     $id_client = $m->getIdClientFromNumEtud($_POST["num_etudiant_client"]);
 
-    if (!$id_client || $id_client == null){
+    if ($id_client == null){
       $this->action_error("Le numéro étudiant fourni n'a pas permis à identifier le client.");
     }
     elseif (!isset($_POST["id_admin"])){
@@ -1265,7 +1298,7 @@ class Controller_set extends Controller{
     $produits_traite = [];
 
     foreach($_POST as $c=>$v){
-      if (str_contains($c,"produit")){
+      if (preg_match("/^produit/i", $c)){
         $ajout=false;
 
         $infos["id_produit"] = $v;
@@ -1297,6 +1330,30 @@ class Controller_set extends Controller{
       }
     }
 
+    // A cette étape dans la validation de l'achat, les achats précédents sont déjà validés
+    // Maintenant, proposition s'il veut choisir un produit pour fidélité, dont il est éligible
+    // -------------------------------------------
+    //  SI LE CLIENT A DES POINTS DE FIDELITE
+    // --------------------------------------------
+    if ($m->getPointsFidelite($id_client, "Client") > 0 && $m->isEligibleFidelite($id_client)){
+      // envoyer sur une page proposition points fidélité
+      // Préparation du tableau infos
+
+      $produits_eligible = $m->getProduitEligible(($m->getPointsFidelite($id_client, "Client")));
+
+      $data = [
+        "produits_eligible" => $produits_eligible,
+        "produits_traite" => $produits_traite,
+        "id_client" => $id_client,
+        "solde_points" => $m->getPointsFidelite($id_client, "Client"),
+        "nom_client" => $m->getPrenomNomClient($id_client)
+      ];
+      $this->render("confirm_fidelite", $data);
+    }
+    // -------------------------------------------
+    //  FIN points fidelite
+    // --------------------------------------------
+
     //Préparation de $data pour l'affichage de la vue message
     $data = [
         "title" => "Validation d'une vente",
@@ -1306,7 +1363,7 @@ class Controller_set extends Controller{
         "produits_traite" => $produits_traite
     ];
     if ($ajout) {
-        $data["message"] = "La vente des produits ci-dessous géré par le responsable " . $m->getPrenomNomAdmin($_POST["id_admin"]) . " pour le client " . $m->getPrenomNomClient($_POST["id_client"]) . " a été comptabilisé avec succès.";
+        $data["message"] = "La vente des produits ci-dessous géré par le responsable " . $m->getPrenomNomAdmin($infos["id_admin"]) . " pour le client " . $m->getPrenomNomClient($infos["id_client"]) . " a été comptabilisé avec succès.";
     } else {
         $data["message"] = "Erreur dans la saisie des informations, la vente n'a pas été ajouté.";
     }
@@ -1314,9 +1371,116 @@ class Controller_set extends Controller{
     $this->render("message", $data);
   }
 
+  // -------------------
+
+  public function action_traitement_fidelite(){
+    $m = Model::getModel();
+    
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
+    }
+    //===================================
+
+    $ajout = false;
+
+    $infos=[
+      "num_vente" => $m->getDernierIdDisponible("Vente"),
+      "id_client" =>$_POST["id_client"],
+      "id_admin" => $_SESSION["id_admin"],
+      "id_produit" => $_POST["produit_fidelite"],
+      "Date_vente" => date("Y-m-d"),
+      "Paiement" => "Points Fidelité",
+      "Use_fidelite" => 1
+    ];
+
+    //Ajout de la vente
+    $ajout = $m->addVente($infos);
+
+    // - décrémente stock  
+    $m->updateStock($infos["id_produit"]);
+
+    // + incrémente nb vente
+    $m->updateNbVente($infos["id_produit"]);
+
+    // - décremente pts fidélité client selon produit acheté
+    $m->substractPtsFideliteClient($infos["id_client"], $infos["id_produit"]);
+
+    $data = [
+      "title" => "Validation d'un produit fidélité",
+      "str_lien_retour" => "Retour à la caisse enregistreuse",
+      "lien_retour" => "?controller=list&action=caisse",
+    ];
+    if ($ajout) {
+        $data["message"] = "Le produit " . $m->getNomProduit($infos["id_produit"]) . " a bien été offert grâce au programme fidélité.";
+    } else {
+        $data["message"] = "Erreur, le produit n'a pas été offert ni comptabilisé.";
+    }
+
+    $this->render("message", $data);
+  }
+
+  public function action_afficher_produit(){
+
+    $m = Model::getModel();
+
+    if(isset($_GET['id'])){
+      $m->afficher($_GET['id']);
+    }
+    else{
+      $this->action_error("Erreur lors de la modification de l'affichage");
+    }
+
+    $data = [
+      "title" => "Modification de l'affichage",
+      "str_lien_retour" => "Retour à la page de gestion des produits",
+      "lien_retour" => "?controller=list&action=gestion_inventaire" 
+    ];
+
+    if (isset($_GET['id'])) {
+        $data["message"] = "L'affichage à bien été mise à jour et le produit est bien affiché sur le site";
+    } else {
+        $data["message"] = "Erreur lors de la modification de l'affichage";
+    }
+
+    $this->render("message", $data);
+  }
+
+
+
+  public function action_masquer_produit(){
+
+    $m = Model::getModel();
+
+    if(isset($_GET['id'])){
+      $m->masquer($_GET['id']);
+    }
+    else{
+      $this->action_error("Erreur lors de la modification de l'affichage");
+    }
+
+    $data = [
+      "title" => "Modification de l'affichage",
+      "str_lien_retour" => "Retour à la page de gestion des produits",
+      "lien_retour" => "?controller=list&action=gestion_inventaire" 
+    ];
+    if (isset($_GET['id'])) {
+        $data["message"] = "L'affichage à bien été à bien été mise à jour et le produit est bien masqué sur le site .";
+    } else {
+        $data["message"] = "Erreur lors de la modification de l'affichage";
+    }
+
+    $this->render("message", $data);
+  }
+  
+
   public function action_default(){
     $this->action_error("Erreur dans le contrôleur set, action par défaut utilisé.");
   }
+
+
 
   
 

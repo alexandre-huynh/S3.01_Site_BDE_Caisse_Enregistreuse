@@ -3,18 +3,19 @@
 <?php else : ?>
   <?php require "view_begin.php";?>
 <?php endif ?>
-<link rel="stylesheet" href="Content/css/snack.css">
-
+<link rel="stylesheet" type="text/css" href="Content/css/snack.css">
       <section class="snacks">
           <h1>Nos snacks</h1>
           <hr>
           <div class="liste_snacks">
               <?php foreach ($snacks as $ligne): ?>
+                <?php if ($ligne["Visible"]==1) : ?>
                 <ul class="produit">
                   <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                   <li><?=e($ligne["Nom"])?></li>
-                  <li><?=e($ligne["Prix"])?> €</li>
+                  <li class="prix"><?=e($ligne["Prix"])?> €</li>
                 </ul>
+                <?php endif ?>
               <?php endforeach ?>
           </div>
       </section>

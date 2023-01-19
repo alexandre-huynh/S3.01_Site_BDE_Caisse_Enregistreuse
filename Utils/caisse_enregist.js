@@ -1,5 +1,4 @@
 // Fonctions  SNACKS
-
 function saveSnacks(snacks){
     localStorage.setItem("snacks",JSON.stringify(snacks));
 }
@@ -195,32 +194,102 @@ function getTotalPanier(){
 }
 
 
-
 function clickSnacks(){
     console.log('Ca marche');
     let list_snacks = document.querySelectorAll('.snacks .produit');
     for(let i=0;i<list_snacks.length;i++){
     list_snacks[i].addEventListener('click', function(event){
-    console.log('click');//});
+    console.log('click');
     let ligne = document.createElement('li');
-    ligne.textContent=event.target.textContent;
+    ligne.textContent=list_snacks[i].textContent;
     addSnacks(ligne);
-    let panier = document.querySelectorAll('panier li');
-    panier.push(ligne);
-            for(var value of panier.values()){
-            if (ligne.textContent==value){
-                panier.remove(ligne);
-                j++;
-                console.log(j);
-            }
-        }
-        });
+    let panier = document.getElementById('panier');
+    panier.append(ligne);
+    let identifiant_produit=document.querySelectorAll('.snacks .hidden .id_prod');
+    let form_ligne=document.createElement('input');
+    form_ligne.setAttribute('type','hidden');
+    form_ligne.setAttribute('name', 'produit_'+String(panier_id++));
+    form_ligne.setAttribute('value',identifiant_produit[i].textContent);
+    let panier_formulaire = document.getElementById('panier_input_formulaire');
+    panier_formulaire.append(form_ligne);
+    console.log(form_ligne);});
+    
     }  
 }             
 
+function clickBoissons(){
+    console.log('Ca marche');
+    let list_boissons = document.querySelectorAll('.boissons .produit');
+    for(let i=0;i<list_boissons.length;i++){
+    list_boissons[i].addEventListener('click', function(event){
+    console.log('click');
+    let ligne = document.createElement('li');
+    ligne.textContent=list_boissons[i].textContent;
+    addBoissons(ligne);
+    let panier = document.getElementById('panier');
+    panier.append(ligne);
+    let identifiant_produit=document.querySelectorAll('.boissons .hidden .id_prod');
+    let form_ligne=document.createElement('input');
+    form_ligne.setAttribute('type','hidden');
+    form_ligne.setAttribute('name', 'produit_'+String(panier_id++));
+    form_ligne.setAttribute('value',identifiant_produit[i].textContent);
+    let panier_formulaire = document.getElementById('panier_input_formulaire');
+    panier_formulaire.append(form_ligne);
+    console.log(form_ligne)});
+    }  
+}      
+
+function clickSodas(){
+    console.log('Ca marche');
+    let list_sodas = document.querySelectorAll('.sodas .produit');
+    for(let i=0;i<list_sodas.length;i++){
+    list_sodas[i].addEventListener('click', function(event){
+    console.log('click');
+    let ligne = document.createElement('li');
+    ligne.textContent=list_sodas[i].textContent;
+    addBoissons(ligne);
+    let panier = document.getElementById('panier');
+    panier.append(ligne);
+    let identifiant_produit=document.querySelectorAll('.sodas .hidden .id_prod');
+    let form_ligne=document.createElement('input');
+    form_ligne.setAttribute('type','hidden');
+    form_ligne.setAttribute('name', 'produit_'+String(panier_id++));
+    form_ligne.setAttribute('value',identifiant_produit[i].textContent);
+    let panier_formulaire = document.getElementById('panier_input_formulaire');
+    panier_formulaire.append(form_ligne);
+    console.log(form_ligne)});
+    }  
+}             
+
+function clickSirops(){
+    console.log('Ca marche');
+    let list_sirops = document.querySelectorAll('.sirops .produit');
+    for(let i=0;i<list_sirops.length;i++){
+    list_sirops[i].addEventListener('click', function(event){
+    console.log('click');//});
+    let ligne = document.createElement('li');
+    ligne.textContent=list_sirops[i].textContent;
+    addBoissons(ligne);
+    let panier = document.getElementById('panier');
+    panier.append(ligne);
+    let identifiant_produit=document.querySelectorAll('.sirops .hidden .id_prod');
+    let form_ligne=document.createElement('input');
+    form_ligne.setAttribute('type','hidden');
+    form_ligne.setAttribute('name', 'produit_'+String(panier_id++));
+    form_ligne.setAttribute('value',identifiant_produit[i].textContent);
+    let panier_formulaire = document.getElementById('panier_input_formulaire');
+    panier_formulaire.append(form_ligne);
+    console.log(form_ligne)});
+    }  
+}     
 
 //initialisation addeventlistener
+let panier_id=0;
 clickSnacks();
+let tab_snack=document.querySelectorAll('.snacks .produit');
+clickBoissons();
+clickSodas();
+clickSirops();
 
 
 let pdt_snacks = document.querySelectorAll('.produit');
@@ -228,3 +297,5 @@ for(let i=0;i<pdt_snacks.length;i++){
 pdt_snacks[i].addEventListener('click',function(){
     console.log('Test1');
 });}
+
+

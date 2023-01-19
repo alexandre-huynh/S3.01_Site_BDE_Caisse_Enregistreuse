@@ -27,9 +27,12 @@ header nav div a{
     margin: 10px;
 }
 
+.deco{
+    border-radius: 10px;
+}
+
 .deco:hover{
     background-color: #1c1c21;
-    border-radius: 5px;
 }
 
 
@@ -67,4 +70,7 @@ a[title="Se déconnecter"]{
     padding: 15px;
 }
 
+.decore_white{
+    color:white;
+}
 
