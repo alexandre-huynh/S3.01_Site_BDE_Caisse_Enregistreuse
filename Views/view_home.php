@@ -8,7 +8,8 @@
 
         <section class="banniere_accueil">
             <div class="phrase_bienvenue">
-                <h1>Bienvenue au stand de confiseries du BDE</h1>
+                <h1>Bienvenue au stand de confiseries du Wolf BDE !</h1>
+                <p>IUT de Villetaneuse – Bureau Q101</p>
             </div>
         </section>
 
