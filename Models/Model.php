@@ -270,7 +270,6 @@ class Model
     public function getHistoriqueAchats($search="default") // ou getVentes
     {
       // $search si on veut chercher une vente en particulier
-      $search = "%" . $search . "%";
 
       //$texte_req = 'SELECT * FROM Vente';
 
@@ -281,7 +280,8 @@ class Model
       // TODO : rajouter quelque chose pour traiter les recherches par nom prénom 
       // sachant que la table ventes ne possède pas ces attributs
       // solution: jointure?
-      if ($search!="%default%") {
+      if ($search!="default") {
+        $search = "%" . $search . "%";
         $texte_req = $texte_req . " WHERE 
           num_vente LIKE :search OR 
           Nom_produit LIKE :search OR 
