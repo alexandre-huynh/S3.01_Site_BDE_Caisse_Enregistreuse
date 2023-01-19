@@ -66,7 +66,7 @@
 
 <!-- Liste des éléments sous forme de table -->
 <!-- Peut contenir par exemple la liste de produits, des clients inscrits, des ventes etc -->
-<div class="tabeau-vente">
+<div class="tabeau-produit">
 <table>
   <!-- Titres de colonnes / attributs -->
   <tr>
