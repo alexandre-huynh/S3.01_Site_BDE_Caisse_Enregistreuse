@@ -70,6 +70,9 @@ input.search-by{
 
 .creer_produit{
     margin: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
 }
 
 .creer_produit a{
