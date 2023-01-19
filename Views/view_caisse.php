@@ -22,9 +22,9 @@
                 Affichage des produits ici, genre 2x Kinder bueno etc
             -->
         </ul>
-        <p class="total">TOTAL : <span id="totalprix">0 <span class="devise">€</span></span></p>
-        <p>Payé : <span id="dejapayer">0 <span class="devise">€</span></span></p>
-        <p>Reste à payer : <span id="reste">0 <span class="devise">€</span></span></p>
+        <p class="total">TOTAL : <span id="totalprix">0</span><span class="devise"> €</span></p>
+        <p>Payé : <span id="dejapayer">0</span><span class="devise"> €</span></p>
+        <p>Reste à payer : <span id="reste">0</span><span class="devise"> €</span></p>
         <p>Paiement par : <b><span id="paiement">Espèce</span></b></p>
     </div>
     <!-- 
