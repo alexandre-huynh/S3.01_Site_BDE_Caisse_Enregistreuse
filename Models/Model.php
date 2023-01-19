@@ -270,7 +270,7 @@ class Model
     public function getHistoriqueAchats($search="default") // ou getVentes
     {
       // $search si on veut chercher une vente en particulier
-
+      $use_marqueur = false;
       //$texte_req = 'SELECT * FROM Vente';
 
       //peut être:
