@@ -1,0 +1,43 @@
+body{
+    background-color: #E2F6F0;
+    margin: 8px;
+}
+
+main{
+    width: 100%;
+}
+h1.greeting{
+    margin: 20px;
+}
+hr{
+    width: 100%;
+}
+.content-main{
+    width: 100%;
+    padding: 30px 100px;
+    margin: auto;
+}
+.menu-list{
+    width: 100%;
+}
+
+.menu-list p{
+    width: 100%;
+    background-color:#12B886;
+    padding: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+div.menu-list p a{
+    text-decoration: none;
+    color: white;
+    width: 100%;
+    padding: 20px;
+    margin: 5px;
+    text-transform: uppercase;
+}
+div.menu-list p:hover{
+    background-color: #000;
+}

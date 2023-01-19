@@ -3,6 +3,7 @@
 <?php else : ?>
   <?php require "view_begin.php";?>
 <?php endif ?>
+<link rel="stylesheet" type="text/css" href="Content/css/mes_infos.css">
 
 <h1>Mes informations</h1>
 
@@ -10,6 +11,7 @@
 
 <form action="?controller=set&action=update_infos_<?php if (isset($_SESSION["statut"]) && $_SESSION["statut"]=="admin") : ?>admin<?php elseif (isset($_SESSION["statut"]) && $_SESSION["statut"]=="client") : ?>client<?php endif ?>" method="post">
     <h2>Informations personnelles</h2>
+    <br>
     <!-- 
       pour le traitement, 
       vérifier si la valeur est changé, 
@@ -60,21 +62,24 @@
     <h2>Modification de mot de passe</h2>
     <p>
       <label>Ancien mot de passe* :
+        <br>
         <input type="password" name="Password" minlength="8" required />
       </label>
     </p>
     <p>
       <label>Nouveau mot de passe (min 8 caractères)* :
+        <br>
         <input type="password" name="NewPassword" minlength="8" required />
       </label>
     </p>
     <p>
       <label>Confirmer le nouveau mot de passe* :
+        <br>
         <input type="password" name="New_password_verif" minlength="8" required />
       </label>
     </p>
     <!--Validation-->
-    <p>* : obligatoire</p>
+    <p><span>* </span> : obligatoire</p>
     <p> <input type="submit" value="Modifier le mot de passe"/> </p>
 </form>
 </main>

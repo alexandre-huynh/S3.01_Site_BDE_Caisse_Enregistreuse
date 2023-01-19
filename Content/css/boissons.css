@@ -1,8 +1,16 @@
+body{
+    background-color: #E2F6F0;
+}
 main{
     display: flex;
     flex-direction: column;
     width: 100%;
     height: auto;
+    background-color: #E2F6F0;
+    
+}
+h1{
+    text-align: center;
 }
 
 section div{
@@ -14,18 +22,24 @@ section div{
 
 section div ul{
     padding: 15px;
-    margin: auto;
+    margin: 20px auto;
     background-color: white;
     text-align: center;
     justify-content: space-between;
     width: 150px;
-    height: 250px;
+    height: 300px;
 
 }
+section div ul li{
+    background-color: inherit;
+    width: 100%;
+}
+
 
 section div ul li img {
+    margin: 10px auto;
     width: 100%;
-    height:80%;
+    height:60%;
 }
 
 div.liste_snacks{
@@ -36,5 +50,9 @@ div.liste_boissons .categorie {
     padding: 10px;
     background-color: #15AABF;
     color: #fff;
-    margin: 5px;
+    margin: 20px;
+}
+
+.prix{
+    color: #15AABF;
 }

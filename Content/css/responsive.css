@@ -1,0 +1,17 @@
+@media only screen and (max-width: 1110px) {
+    body { 
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        border-radius: 4px;
+      }
+      
+    header a {
+        margin: auto;
+          float: none;
+          display: flex;
+          text-align: left;
+          flex-wrap: wrap;
+          justify-content: space-between;
+        }
+    }
+  

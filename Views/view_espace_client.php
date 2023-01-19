@@ -3,6 +3,7 @@
 <?php else : ?>
   <?php require "view_begin.php";?>
 <?php endif ?>
+<link rel="stylesheet" type="text/css" href="Content/css/espace_client.css">
 
 <h1>Bonjour <?=e($nomprenom)?> !</h1>
 <hr>
@@ -11,7 +12,7 @@
 <hr>
 <!--peut être inclure une liste des articles dont il est éligible avec autant de points-->
 
-<h2>Historique de vos achats</h2>
+<h2 class="historique_achat">Historique de vos achats</h2>
 
 <?php foreach ($historique as $date=>$ligne): ?>
     <h3><?=date("d/m/Y",strtotime(e($date)))?></h3>

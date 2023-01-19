@@ -3,6 +3,7 @@
 <?php else : ?>
   <?php require "view_begin.php";?>
 <?php endif ?>
+<link rel="stylesheet" type="text/css" href="Content/css/creer_produit.css">
 
 <!-- Titre de la liste d'élements -->
 <h1> <?= e($titre) ?> </h1>
@@ -54,7 +55,7 @@
     </p>
     <p>
       <label>Image du produit* (format .png / .jpg / .jpeg, taille de fichier max : 5 Mo) :
-        <input type="file" name="produit_<?=e($infos["id_produit"])?>" accept=".png,.jpeg,.jpg"  />    
+        <input class = "custom-file-input" type="file" name="produit_<?=e($infos["id_produit"])?>" accept=".png,.jpeg,.jpg"  />    
       </label>
       </br>
       <span>Fond transparent de préférence : Google Images > Outils > Couleur > Transparent</span>

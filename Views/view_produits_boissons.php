@@ -20,7 +20,7 @@
                       <ul class="produit">
                         <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                         <li> <?=e($ligne["Nom"])?> </li>
-                        <li> <?=e($ligne["Prix"])?> €</li>
+                        <li class="prix"> <?=e($ligne["Prix"])?> €</li>
                       </ul>
                       <?php endif ?>
                     <?php endforeach ?>
@@ -34,7 +34,7 @@
                       <ul class="produit">
                         <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                         <li> <?=e($ligne["Nom"])?> </li>
-                        <li> <?=e($ligne["Prix"])?> €</li>
+                        <li class="prix"> <?=e($ligne["Prix"])?> €</li>
                       </ul>
                       <?php endif ?>
                     <?php endforeach ?>
@@ -48,7 +48,7 @@
                       <ul class="produit">
                         <li><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></li>
                         <li> <?=e($ligne["Nom"])?> </li>
-                        <li> <?=e($ligne["Prix"])?> €</li>
+                        <li class="prix"> <?=e($ligne["Prix"])?> €</li>
                       </ul>
                       <?php endif ?>
                     <?php endforeach ?>
