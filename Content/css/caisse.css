@@ -72,6 +72,11 @@ input[name="num_etudiant_client"]{
     width: 100px;  
 }
 
+.bouton-decision div:hover{
+    background-color: #9c970e;
+    cursor: pointer;
+}
+
 .bouton-decision input, .bouton-decision a{
     border:none;
     width: 100%;
