@@ -65,16 +65,14 @@ input[name="num_etudiant_client"]{
     background-color: #FFCC4D;
     display: flex;
     margin-left: 10px;
-
 }
 
 .bouton-decision div{
     border: 1px solid black;
-    width: 100px;
-    
+    width: 100px;  
 }
 
-.bouton-decision input{
+.bouton-decision input, .bouton-decision a{
     border:none;
     width: 100%;
     height: 100%;
@@ -83,6 +81,14 @@ input[name="num_etudiant_client"]{
     background-color:inherit
 }
 
+.monnaie{
+    display: flex;
+    margin-left: 10px;
+}
+
+.monnaie div{
+    border: 1px solid black;
+}
 
 form{
     display:inline-block;

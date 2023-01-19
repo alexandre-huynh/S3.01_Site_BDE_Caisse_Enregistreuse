@@ -270,31 +270,37 @@ class Model
     public function getHistoriqueAchats($search="default") // ou getVentes
     {
       // $search si on veut chercher une vente en particulier
-      $search = "%" . $search . "%";
-
+      $use_marqueur = false;
       //$texte_req = 'SELECT * FROM Vente';
 
       //peut être:
       $texte_req = "SELECT num_vente, Vente.id_client, Vente.id_admin, Vente.id_produit, DATE_FORMAT(Date_vente, '%e/%c/%Y') AS 'Date_vente', Paiement, Use_fidelite ,Client.Nom, Client.Prenom, Admin.Nom, Admin.Prenom 
                       FROM Client JOIN Vente USING(id_client) 
-                                  JOIN Admin USING(id_admin) ORDER BY num_vente DESC,Date_vente DESC";
+                                  JOIN Produit USING(id_produit)
+                                  JOIN Admin USING(id_admin)";
       // TODO : rajouter quelque chose pour traiter les recherches par nom prénom 
       // sachant que la table ventes ne possède pas ces attributs
       // solution: jointure?
-      if ($search!="%default%") {
+      if ($search!="default") {
+        $search = "%" . $search . "%";
         $texte_req = $texte_req . " WHERE 
           num_vente LIKE :search OR 
-          Nom_produit LIKE :search OR 
+          Produit.Nom LIKE :search OR 
           Date_vente LIKE :search OR 
           Paiement LIKE :search OR
           Client.Nom LIKE :search OR
           Client.Prenom LIKE :search OR
           Admin.Nom LIKE :search OR
           Admin.Prenom LIKE :search ";//OR  enlever OR si à la fin
+        $use_marqueur = true;
       }
 
+      $texte_req = $texte_req . " ORDER BY num_vente DESC,Date_vente DESC";
+
       $req = $this->bd->prepare($texte_req);
-      $req->bindValue(':search', $search);
+      if ($use_marqueur==True){
+        $req->bindValue(':search', $search);
+      }
       $req->execute();
       return $req->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -485,13 +491,10 @@ class Model
 
     // Retourne la liste des produits dont le client est éligible
     // Pour un achat gratuit grâce au points fidélités.
-    public function getProduitEligible($id_client){
+    public function getProduitEligible($nb_pts){
 
-      $req = $this->bd->prepare('SELECT * 
-        FROM Produit JOIN Vente USING(id_produit) JOIN Client USING (id_client) 
-          WHERE Client.id_client = :id_client 
-          AND Client.Pts_fidelite > Produit.Pts_fidelite_requis');
-      $req->bindValue(':id_client', $id_client);
+      $req = $this->bd->prepare('SELECT * FROM Produit WHERE Pts_fidelite_requis <= :nb_pts');
+      $req->bindValue(':nb_pts', $nb_pts);
       $req->execute();
       return $req->fetchAll(PDO::FETCH_ASSOC);
 

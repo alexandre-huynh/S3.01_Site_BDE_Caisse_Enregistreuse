@@ -184,21 +184,6 @@ class Controller_set extends Controller{
                   */
                     if (isset($_POST[$v]) && (is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])) || ((is_int($_POST[$v]) || is_float($_POST[$v])) && $_POST[$v]>=0)) {
                       $infos[$v] = $_POST[$v];
-                
-                    /*  même erreur
-                    if (isset($_POST[$v])) {
-                      // si c'est un STR
-                      if (is_string($_POST[$v]) && ! preg_match("/^ *$/", $_POST[$v])){
-                        $infos[$v] = $_POST[$v];
-                      }
-                      // si c'est un entier/float
-                      elseif ((is_int($_POST[$v]) || is_float($_POST[$v])) && $_POST[$v]>=0){
-                        $infos[$v] = $_POST[$v];
-                      } 
-                      else {
-                        $infos[$v] = null;
-                      }
-                    */
                     } else {
                       $infos[$v] = null;
                     }
@@ -224,6 +209,10 @@ class Controller_set extends Controller{
                     $msg_error = $msg_error . "File is not an image.";
                     $uploadOk = 0;
                   }
+                }
+
+                if(file_exists($target_file)) {
+                  unlink($target_file); //remove the already existing file
                 }
 
                 // Allow certain file formats
@@ -1333,8 +1322,8 @@ class Controller_set extends Controller{
         // + incrémente nb vente
         $m->updateNbVente($infos["id_produit"]);
 
-        // - décremente pts fidélité client selon produit acheté
-        $m->substractPtsFideliteClient($infos["id_client"], $infos["id_produit"]);
+        // + incrément pts fidélité client selon produit acheté
+        $m->updatePtsFideliteClient($infos["id_client"], $infos["id_produit"]);
 
         // + incrément numéro de vente
         $infos["num_vente"] = $m->getDernierIdDisponible("Vente");
@@ -1350,7 +1339,7 @@ class Controller_set extends Controller{
       // envoyer sur une page proposition points fidélité
       // Préparation du tableau infos
 
-      $produits_eligible = $m->getProduitEligible($id_client);
+      $produits_eligible = $m->getProduitEligible(($m->getPointsFidelite($id_client, "Client")));
 
       $data = [
         "produits_eligible" => $produits_eligible,
@@ -1416,8 +1405,8 @@ class Controller_set extends Controller{
     // + incrémente nb vente
     $m->updateNbVente($infos["id_produit"]);
 
-    // + incrément pts fidélité client selon produit acheté
-    $m->updatePtsFideliteClient($infos["id_client"], $infos["id_produit"]);
+    // - décremente pts fidélité client selon produit acheté
+    $m->substractPtsFideliteClient($infos["id_client"], $infos["id_produit"]);
 
     $data = [
       "title" => "Validation d'un produit fidélité",
