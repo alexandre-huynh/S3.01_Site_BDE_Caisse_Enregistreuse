@@ -81,6 +81,11 @@ input[name="num_etudiant_client"]{
     background-color:inherit
 }
 
+.bouton-decision img{
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .monnaie{
     display: flex;
     margin-left: 10px;
@@ -88,9 +93,7 @@ input[name="num_etudiant_client"]{
 
 .monnaie div{
     border: 1px solid black;
-    width: 100px;
 }
-
 
 form{
     display:inline-block;

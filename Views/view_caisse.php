@@ -23,11 +23,8 @@
             -->
         </ul>
         <p class="total">TOTAL : <span id="totalprix">0 <span class="devise">€</span></span></p>
-        </br>
         <p>Payé : <span id="dejapayer">0 <span class="devise">€</span></span></p>
-        </br>
         <p>Reste à payer : <span id="reste">0 <span class="devise">€</span></span></p>
-        </br>
         <p>Paiement par : <b><span id="paiement">Espèce</span></b></p>
     </div>
     <!-- 
