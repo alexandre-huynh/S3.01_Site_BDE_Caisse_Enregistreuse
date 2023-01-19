@@ -95,6 +95,10 @@ input[name="num_etudiant_client"]{
     border: 1px solid black;
 }
 
+.monnaie div:hover{
+    background-color: #D9D9D9;
+}
+
 form{
     display:inline-block;
     margin: auto;
