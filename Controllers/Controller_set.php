@@ -1333,11 +1333,8 @@ class Controller_set extends Controller{
         // + incrémente nb vente
         $m->updateNbVente($infos["id_produit"]);
 
-        // + incrément pts fidélité client selon produit acheté
-        $m->updatePtsFideliteClient($infos["id_client"], $infos["id_produit"]);
-
-        // + incrément numéro de vente
-        $infos["num_vente"] = $m->getDernierIdDisponible("Vente");
+        // - décremente pts fidélité client selon produit acheté
+        $m->substractPtsFideliteClient($infos["id_client"], $infos["id_produit"]);
       }
     }
 

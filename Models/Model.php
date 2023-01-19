@@ -347,7 +347,7 @@ class Model
 
     public function getRecettesJour()
     {
-      $req = $this->bd->prepare('SELECT sum(ROUND(Prix,2)) AS "Recettes_Quotidien" FROM Vente JOIN Produit USING(id_produit) WHERE DATE(Date_vente)=CURDATE() AND Paiement!=1');
+      $req = $this->bd->prepare('SELECT sum(ROUND(Prix,2)) AS "Recettes_Quotidien" FROM Vente JOIN Produit USING(id_produit) WHERE DATE(Date_vente)=CURDATE() AND Use_fidelite=0');
       $req->execute();
       $tab = $req->fetch(PDO::FETCH_NUM);
       if ($tab[0]==NULL || $req->rowCount()==0){
@@ -360,7 +360,7 @@ class Model
 
     public function getRecettesSemaine()
     {
-      $req = $this->bd->prepare('SELECT sum(ROUND(Prix,2)) AS "Recettes_Hebdo" FROM Vente JOIN Produit USING(id_produit) WHERE WEEK(Date_vente)=WEEK(now()) AND Paiement!=1');
+      $req = $this->bd->prepare('SELECT sum(ROUND(Prix,2)) AS "Recettes_Hebdo" FROM Vente JOIN Produit USING(id_produit) WHERE WEEK(Date_vente)=WEEK(now()) AND Use_fidelite=0');
       $req->execute();
       $tab = $req->fetch(PDO::FETCH_NUM);
       return $tab[0];
@@ -368,7 +368,7 @@ class Model
 
     public function getRecettesMois()
     {
-      $req = $this->bd->prepare('SELECT sum(ROUND(Prix,2)) AS "Recettes_Mois" FROM Vente JOIN Produit USING(id_produit) WHERE MONTH(Date_vente)=MONTH(now()) AND Paiement!=1');
+      $req = $this->bd->prepare('SELECT sum(ROUND(Prix,2)) AS "Recettes_Mois" FROM Vente JOIN Produit USING(id_produit) WHERE MONTH(Date_vente)=MONTH(now()) AND Use_fidelite=0');
       $req->execute();
       $tab = $req->fetch(PDO::FETCH_NUM);
       return $tab[0];
@@ -839,6 +839,21 @@ class Model
     {
       //Préparation de la requête
       $requete = $this->bd->prepare('UPDATE Client SET Pts_fidelite = ((SELECT Pts_fidelite FROM Client WHERE id_client = :id_client) + (SELECT Pts_fidelite_donner FROM Produit WHERE id_produit = :id_produit)) WHERE id_client = :id_client');
+
+      //Remplacement des marqueurs de place par les valeurs
+      $requete->bindValue(':id_client', $id_client);
+      $requete->bindValue(':id_produit', $id_produit);
+
+      //Exécution de la requête
+      $requete->execute();
+
+      return (bool) $requete->rowCount();
+    }
+
+    public function substractPtsFideliteClient($id_client, $id_produit)
+    {
+      //Préparation de la requête
+      $requete = $this->bd->prepare('UPDATE Client SET Pts_fidelite = ((SELECT Pts_fidelite FROM Client WHERE id_client = :id_client) - (SELECT Pts_fidelite_requis FROM Produit WHERE id_produit = :id_produit)) WHERE id_client = :id_client');
 
       //Remplacement des marqueurs de place par les valeurs
       $requete->bindValue(':id_client', $id_client);
