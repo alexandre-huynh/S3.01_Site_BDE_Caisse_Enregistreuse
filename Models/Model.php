@@ -283,8 +283,7 @@ class Model
       // solution: jointure?
       if ($search!="default") {
         $search = "%" . $search . "%";
-        $texte_req = $texte_req . " WHERE 
-          num_vente LIKE :search OR 
+        $texte_req = $texte_req . " WHERE  
           Produit.Nom LIKE :search OR 
           Date_vente LIKE :search OR 
           Paiement LIKE :search OR
