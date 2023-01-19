@@ -33,6 +33,7 @@
       <th>Nb de points requis</th>
     </tr>
   <?php foreach ($produits_eligible as $ligne): ?>
+    <?php if ($ligne["Visible"]==1) : ?>
     <tr>
       <td><input type="radio" name="produit_fidelite" value="<?=e($ligne["id_produit"])?>"></td>
       <td><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height=60 /></td>
@@ -42,7 +43,8 @@
       <td><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Logo Illustration Stock" height=20 /></td>
       <td><?=e($ligne["Pts_fidelite_requis"])?> pts</td>
     </tr>
-    <?php endforeach ?>
+    <?php endif ?>
+  <?php endforeach ?>
   </table>
   <input type="submit" value="Valider" />
 </form>
