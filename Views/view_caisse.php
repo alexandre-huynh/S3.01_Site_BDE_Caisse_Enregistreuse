@@ -163,7 +163,7 @@
                     <?php endforeach ?>
                 </tr>
                 <th colspan=5>Boissons</th>
-                <tr id="boissons">
+                <tr>
                     <?php $j=0; ?>
                     <?php foreach ($boissons as $ligne): ?>
                         <?php if ($ligne["Visible"]==1) : ?>
@@ -187,7 +187,7 @@
                     <?php endforeach ?>
                 </tr>
                 <th colspan=5>Sodas</th>
-                <tr id="sodas">
+                <tr>
                     <?php $k=0; ?>
                     <?php foreach ($sodas as $ligne): ?>
                         <?php if ($ligne["Visible"]==1) : ?>
@@ -198,7 +198,6 @@
                             <?php endif ?>
                             <td class="sodas">
                                 <div class="produit">
-                                    <div class="hidden"><span class="id_prod"><?=e($ligne["id_produit"])?></span></div>
                                     <div><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></div>
                                     <div><b><?=e($ligne["Nom"])?></b></div>
                                     <div><?=e($ligne["Prix"])?> €</div>
@@ -212,7 +211,7 @@
                     <?php endforeach ?>
                 </tr>
                 <th colspan=5>Eau + Sirop</th>
-                <tr id="sirops">
+                <tr>
                     <?php $l=0; ?>
                     <?php foreach ($sirops as $ligne): ?>
                         <?php if ($ligne["Visible"]==1) : ?>
@@ -223,7 +222,6 @@
                             <?php endif ?>
                             <td class="sirops">
                                 <div class="produit">
-                                    <div class="hidden"><span class="id_prod"><?=e($ligne["id_produit"])?></span></div>
                                     <div><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></div>
                                     <div><b><?=e($ligne["Nom"])?></b></div>
                                     <div><?=e($ligne["Prix"])?> €</div>
