@@ -276,6 +276,7 @@ class Model
       //peut être:
       $texte_req = "SELECT num_vente, Vente.id_client, Vente.id_admin, Vente.id_produit, DATE_FORMAT(Date_vente, '%e/%c/%Y') AS 'Date_vente', Paiement, Use_fidelite ,Client.Nom, Client.Prenom, Admin.Nom, Admin.Prenom 
                       FROM Client JOIN Vente USING(id_client) 
+                                  JOIN Produit USING(id_produit)
                                   JOIN Admin USING(id_admin) ORDER BY num_vente DESC,Date_vente DESC";
       // TODO : rajouter quelque chose pour traiter les recherches par nom prénom 
       // sachant que la table ventes ne possède pas ces attributs
@@ -284,7 +285,7 @@ class Model
         $search = "%" . $search . "%";
         $texte_req = $texte_req . " WHERE 
           num_vente LIKE :search OR 
-          Nom_produit LIKE :search OR 
+          Produit.Nom LIKE :search OR 
           Date_vente LIKE :search OR 
           Paiement LIKE :search OR
           Client.Nom LIKE :search OR
