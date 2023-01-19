@@ -130,6 +130,11 @@ td.snacks, td.boissons, td.sodas, td.sirops{
     margin: auto;
 }
 
+td.snacks:hover, td.boissons:hover, td.sodas:hover, td.sirops:hover{
+    background-color: #D9D9D9;
+    cursor: pointer;
+}
+
 th{
     background-color:black;
     color: white;
