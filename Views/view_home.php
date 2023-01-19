@@ -9,7 +9,6 @@
         <section class="banniere_accueil">
             <div class="phrase_bienvenue">
                 <h1>Bienvenue au stand de confiseries du Wolf BDE !</h1>
-                <p>IUT de Villetaneuse – Bureau Q101</p>
             </div>
         </section>
 
@@ -51,7 +50,14 @@
             <div>
                 <h4>Le Wolf BDE</h4>
             </div>
-            <p class="description"> Le Bureau Des Etudiants (BDE) de l’IUT de Villetaneuse est un espace de détente dédié aux étudiants et géré par eux-mêmes. On y trouve des jeux de société et des sièges de repos. </p>
+            <p class="description">
+              Le Wolf BDE, aussi connu sous le nom de Bureau Des Etudiants (BDE) de l'IUT de Villetaneuse, 
+              est une association au profit des étudiants, géré par des étudiants, 
+              afin de leur permettre un épanouissement extrascolaire. 
+              Nous possédons un espace de détente avec plein d'activités, des jeux de société, des sièges de repos, 
+              un piano, un micro-onde et bien évidemment, notre propre stand de confiseries !
+            </p>
+            <h1>Rendez-vous en salle Q101 !</h1>
         </section>
         </main>
 

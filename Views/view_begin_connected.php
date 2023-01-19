@@ -7,7 +7,7 @@
     <meta name="keywords" content="bde, stand, confiseries, snack, boissons, iut, villetaneuse, iutv, université, paris, paris13, sorbonne, paris nord">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stand de confiseries du BDE</title>
+    <title>Wolf BDE - IUT de Villetaneuse</title>
     <link rel="stylesheet" type="text/css" href="Content/css/principal.css">
     <link rel="stylesheet" type="text/css" href="Content/css/langue_site.css">
     <link rel="stylesheet" type="text/css" href="Content/css/footer.css">
