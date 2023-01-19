@@ -491,7 +491,7 @@ class Model
         FROM Produit JOIN Vente USING(id_produit) JOIN Client USING (id_client) 
           WHERE Client.id_client = :id_client 
           AND Client.Pts_fidelite > Produit.Pts_fidelite_requis');
-      $req->bindValue(':id', $id_client);
+      $req->bindValue(':id_client', $id_client);
       $req->execute();
       return $req->fetchAll(PDO::FETCH_ASSOC);
 
