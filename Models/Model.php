@@ -277,13 +277,14 @@ class Model
       $texte_req = "SELECT num_vente, Vente.id_client, Vente.id_admin, Vente.id_produit, DATE_FORMAT(Date_vente, '%e/%c/%Y') AS 'Date_vente', Paiement, Use_fidelite ,Client.Nom, Client.Prenom, Admin.Nom, Admin.Prenom 
                       FROM Client JOIN Vente USING(id_client) 
                                   JOIN Produit USING(id_produit)
-                                  JOIN Admin USING(id_admin) ORDER BY num_vente DESC,Date_vente DESC";
+                                  JOIN Admin USING(id_admin)";
       // TODO : rajouter quelque chose pour traiter les recherches par nom prénom 
       // sachant que la table ventes ne possède pas ces attributs
       // solution: jointure?
       if ($search!="default") {
         $search = "%" . $search . "%";
-        $texte_req = $texte_req . " WHERE  
+        $texte_req = $texte_req . " WHERE 
+          num_vente LIKE :search OR 
           Produit.Nom LIKE :search OR 
           Date_vente LIKE :search OR 
           Paiement LIKE :search OR
@@ -293,6 +294,8 @@ class Model
           Admin.Prenom LIKE :search ";//OR  enlever OR si à la fin
         $use_marqueur = true;
       }
+
+      $texte_req = $texte_req . " ORDER BY num_vente DESC,Date_vente DESC";
 
       $req = $this->bd->prepare($texte_req);
       if ($use_marqueur==True){
