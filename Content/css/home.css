@@ -78,3 +78,9 @@ div.liste_produits_nouveautes{
     color: #15AABF;
 }
 
+#invitation{
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}
+

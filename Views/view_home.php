@@ -57,7 +57,7 @@
               Nous possédons un espace de détente avec plein d'activités, des jeux de société, des sièges de repos, 
               un piano, un micro-onde et bien évidemment, notre propre stand de confiseries !
             </p>
-            <h1>Rendez-vous en salle Q101 !</h1>
+            <h1 id="invitation">Rendez-vous en salle Q101 !</h1>
         </section>
         </main>
 
