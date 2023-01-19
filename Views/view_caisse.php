@@ -94,6 +94,7 @@
                 </div>
             </div>
         </form>
+        </br>
         <div class="monnaie">
             <div>
                 <img src="Content/img/20euro.png" alt="20 euro" height="60" />
