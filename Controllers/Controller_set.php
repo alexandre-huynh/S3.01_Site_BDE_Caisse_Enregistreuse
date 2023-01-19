@@ -1257,7 +1257,7 @@ class Controller_set extends Controller{
 
     $id_client = $m->getIdClientFromNumEtud($_POST["num_etudiant_client"]);
 
-    if (!$id_client || $id_client == null){
+    if ($id_client == null){
       $this->action_error("Le numéro étudiant fourni n'a pas permis à identifier le client.");
     }
     elseif (!isset($_POST["id_admin"])){
