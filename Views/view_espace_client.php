@@ -5,10 +5,12 @@
 <?php endif ?>
 <link rel="stylesheet" type="text/css" href="Content/css/espace_client.css">
 
+<div class="content-main">
+
 <h1>Bonjour <?=e($nomprenom)?> !</h1>
 <hr>
 
-<h3>Vous avez <?=e($ptsfidelite)?> points de fidélité.</h3>
+<h5>Vous avez <?=e($ptsfidelite)?> points de fidélité.</h5>
 <hr>
 <!--peut être inclure une liste des articles dont il est éligible avec autant de points-->
 
@@ -31,6 +33,8 @@
         <?php endforeach ?>
     </table>
 <?php endforeach ?>
+
+</div>
 </main>
 
 <?php require "view_end.php";?>

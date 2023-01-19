@@ -56,7 +56,9 @@ span{
 }
 
 input{
+    /* causait des problèmes pour les inputs radio 
     width: 300px;
+    */
     margin-bottom: 10px;
     border-radius: 5px;
     border: none;
