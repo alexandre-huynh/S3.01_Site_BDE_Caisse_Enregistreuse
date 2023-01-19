@@ -89,7 +89,7 @@
 
                 <div id="abandon">
                     <!--Annulation du panier-->
-                    <input type="submit" value="Abandon" />
+                    <a href="">Abandon</a>
                 </div>
 
                 <div id="espece">
