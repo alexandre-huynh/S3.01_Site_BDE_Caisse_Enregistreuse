@@ -57,15 +57,19 @@ table td, table th{
 
 
 a[title="Se connecter / S'inscrire"]{
+    /* ne marche pas trop 
     float: left;
     width: 20%;
+    */
     background-color: #12B886;
     padding: 15px;
 }
 
 a[title="Se déconnecter"]{
+    /* ne marche pas trop 
     float: left;
     width: 20%;
+    */
     background-color: #d10000;
     padding: 15px;
 }
