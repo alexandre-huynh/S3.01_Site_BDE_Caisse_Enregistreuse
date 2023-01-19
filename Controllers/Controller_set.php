@@ -1357,7 +1357,7 @@ class Controller_set extends Controller{
         "produits_traite" => $produits_traite,
         "id_client" => $id_client,
         "solde_points" => $m->getPointsFidelite($id_client, "Client"),
-        "nom_client" => $m->getPrenomNomClient($_POST["id_client"])
+        "nom_client" => $m->getPrenomNomClient($id_client)
       ];
       $this->render("confirm_fidelite", $data);
     }

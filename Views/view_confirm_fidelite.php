@@ -16,7 +16,7 @@
   </ul>
 <?php endif ?>
 
-<p><?=e($nom_client)?> possède <?=e($solde_points)?> et peut bénéficier d'<b>un produit gratuit</b> grâce au programme fidélité :</p>
+<p><?=e($nom_client)?> possède <?=e($solde_points)?> points et peut bénéficier d'<b>un produit gratuit</b> grâce au programme fidélité :</p>
 
 <p>Sélectionnez 1 produit de la liste, ou <a href="?controller=list&action=caisse">retournez à la page Caisse enregistreuse</a></p>
 
@@ -44,6 +44,7 @@
     </tr>
     <?php endforeach ?>
   </table>
+  <input type="submit" value="Valider" />
 </form>
 
 
