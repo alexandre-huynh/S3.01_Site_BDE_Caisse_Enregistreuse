@@ -485,13 +485,10 @@ class Model
 
     // Retourne la liste des produits dont le client est éligible
     // Pour un achat gratuit grâce au points fidélités.
-    public function getProduitEligible($id_client){
+    public function getProduitEligible($nb_pts){
 
-      $req = $this->bd->prepare('SELECT * 
-        FROM Produit JOIN Vente USING(id_produit) JOIN Client USING (id_client) 
-          WHERE Client.id_client = :id_client 
-          AND Client.Pts_fidelite > Produit.Pts_fidelite_requis');
-      $req->bindValue(':id_client', $id_client);
+      $req = $this->bd->prepare('SELECT * FROM Produit WHERE Pts_fidelite_requis <= :nb_pts');
+      $req->bindValue(':nb_pts', $nb_pts);
       $req->execute();
       return $req->fetchAll(PDO::FETCH_ASSOC);
 

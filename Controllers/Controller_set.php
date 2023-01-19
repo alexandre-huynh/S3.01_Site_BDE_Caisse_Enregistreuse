@@ -1333,8 +1333,8 @@ class Controller_set extends Controller{
         // + incrémente nb vente
         $m->updateNbVente($infos["id_produit"]);
 
-        // - décremente pts fidélité client selon produit acheté
-        $m->substractPtsFideliteClient($infos["id_client"], $infos["id_produit"]);
+        // + incrément pts fidélité client selon produit acheté
+        $m->updatePtsFideliteClient($infos["id_client"], $infos["id_produit"]);
 
         // + incrément numéro de vente
         $infos["num_vente"] = $m->getDernierIdDisponible("Vente");
@@ -1350,7 +1350,7 @@ class Controller_set extends Controller{
       // envoyer sur une page proposition points fidélité
       // Préparation du tableau infos
 
-      $produits_eligible = $m->getProduitEligible($id_client);
+      $produits_eligible = $m->getProduitEligible(($m->getPointsFidelite($id_client, "Client")));
 
       $data = [
         "produits_eligible" => $produits_eligible,
@@ -1416,8 +1416,8 @@ class Controller_set extends Controller{
     // + incrémente nb vente
     $m->updateNbVente($infos["id_produit"]);
 
-    // + incrément pts fidélité client selon produit acheté
-    $m->updatePtsFideliteClient($infos["id_client"], $infos["id_produit"]);
+    // - décremente pts fidélité client selon produit acheté
+    $m->substractPtsFideliteClient($infos["id_client"], $infos["id_produit"]);
 
     $data = [
       "title" => "Validation d'un produit fidélité",
