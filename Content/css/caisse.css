@@ -82,7 +82,6 @@ input[name="num_etudiant_client"]{
 }
 
 .monnaie{
-    background-color: #00a3c4;
     display: flex;
     margin-left: 10px;
 }

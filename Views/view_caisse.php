@@ -23,14 +23,12 @@
             -->
         </ul>
         <p class="total">TOTAL : <span id="totalprix">0 <span class="devise">€</span></span></p>
-
+        </br>
         <p>Payé : <span id="dejapayer">0 <span class="devise">€</span></span></p>
-
+        </br>
         <p>Reste à payer : <span id="reste">0 <span class="devise">€</span></span></p>
-
+        </br>
         <p>Paiement par : <b><span id="paiement">Espèce</span></b></p>
-        
-
     </div>
     <!-- 
     ======================================
@@ -91,49 +89,49 @@
                 </div>
 
                 <div id="espece">
-                    <p><img src="Content/img/logo_espece.png" alt="Payer par Espece" height="60" /></p>
+                    <img src="Content/img/logo_espece.png" alt="Payer par Espece" height="60" />
                 </div>
 
                 <div id="carte">
-                    <p><img src="Content/img/logo_carte.png" alt="Payer par Carte" height="60" /></p>
-                </div>
-            </div>
-            <div class="monnaie">
-                <div>
-                    <p><img src="Content/img/20euro.png" alt="20 euro" height="60" /></p>
-                </div>
-                <div>
-                    <p><img src="Content/img/10euro.png" alt="10 euro" height="60" /></p>
-                </div>
-                <div>
-                    <p><img src="Content/img/5euro.png" alt="5 euro" height="60" /></p>
-                </div>
-                <div>
-                    <p><img src="Content/img/2euro.png" alt="2 euro" height="60" /></p>
-                </div>
-                <div>
-                    <p><img src="Content/img/1euro.png" alt="1 euro" height="60" /></p>
-                </div>
-                <div>
-                    <p><img src="Content/img/50cent.png" alt="50 cent" height="60" /></p>
-                </div>
-                <div>
-                    <p><img src="Content/img/20cent.png" alt="20 cent" height="60" /></p>
-                </div>
-                <div>
-                    <p><img src="Content/img/10cent.png" alt="10 cent" height="60" /></p>
-                </div>
-                <div>
-                    <p><img src="Content/img/5cent.png" alt="5 cent" height="60" /></p>
-                </div>
-                <div>
-                    <p><img src="Content/img/2cent.png" alt="2 cent" height="60" /></p>
-                </div>
-                <div>
-                    <p><img src="Content/img/1cent.png" alt="1 cent" height="60" /></p>
+                    <img src="Content/img/logo_carte.png" alt="Payer par Carte" height="60" />
                 </div>
             </div>
         </form>
+        <div class="monnaie">
+            <div>
+                <img src="Content/img/20euro.png" alt="20 euro" height="60" />
+            </div>
+            <div>
+                <img src="Content/img/10euro.png" alt="10 euro" height="60" />
+            </div>
+            <div>
+                <img src="Content/img/5euro.png" alt="5 euro" height="60" />
+            </div>
+            <div>
+                <img src="Content/img/2euro.png" alt="2 euro" height="60" />
+            </div>
+            <div>
+                <img src="Content/img/1euro.png" alt="1 euro" height="60" />
+            </div>
+            <div>
+                <img src="Content/img/50cent.png" alt="50 cent" height="60" />
+            </div>
+            <div>
+                <img src="Content/img/20cent.png" alt="20 cent" height="60" />
+            </div>
+            <div>
+                <img src="Content/img/10cent.png" alt="10 cent" height="60" />
+            </div>
+            <div>
+                <img src="Content/img/5cent.png" alt="5 cent" height="60" />
+            </div>
+            <div>
+                <img src="Content/img/2cent.png" alt="2 cent" height="60" />
+            </div>
+            <div>
+                <img src="Content/img/1cent.png" alt="1 cent" height="60" />
+            </div>
+        </div>
         <div class="produits-panier">
             <table id="liste_produits">
                 <th colspan=5>Snacks</th>
