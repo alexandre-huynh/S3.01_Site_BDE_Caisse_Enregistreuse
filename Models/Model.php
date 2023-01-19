@@ -985,6 +985,13 @@ class Model
 
     }
 
+    public function removeVente($num_vente){
+      $req = $this->bd->prepare('DELETE FROM Vente WHERE num_vente = :num_vente');
+      $req->bindValue(':num_vente', $num_vente);
+      $req->execute();
+      return (bool) $req->rowCount();
+    }
+
     public function updateNumEtudiant($num_etud,$new_num_etud,$table){
     
       //Désactivation temporaire de la clé étrangère num étudiant

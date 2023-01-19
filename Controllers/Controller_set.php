@@ -578,7 +578,6 @@ class Controller_set extends Controller{
 
     $data = [
       "title" => "Supprimer un produit",
-      "message" => "Le produit à été supprimé avec succès",
       "str_lien_retour" => "Retour à la page de l'inventaire",
       "lien_retour" => "?controller=list&action=gestion_inventaire" 
     ];
@@ -616,7 +615,6 @@ class Controller_set extends Controller{
 
     $data = [
       "title" => "Supprimer un client",
-      "message" => "Le client à été supprimé avec succès",
       "str_lien_retour" => "Retour à la page de gestion des clients",
       "lien_retour" => "?controller=list&action=gestion_clients" 
     ];
@@ -629,8 +627,6 @@ class Controller_set extends Controller{
 
     $this->render("message", $data);
   }
-
-
 
   public function action_remove_admin() {
     $m = Model::getModel();
@@ -659,7 +655,6 @@ class Controller_set extends Controller{
   
       $data = [
         "title" => "Supprimer un admin",
-        "message" => "L'admin à été supprimé avec succès",
         "str_lien_retour" => "Retour à la page de gestion des comptes",
         "lien_retour" => "?controller=list&action=gestion_admins" 
       ];
@@ -667,16 +662,49 @@ class Controller_set extends Controller{
       if (isset($remove)) {
         $data["message"] = "Le compte admin à été supprimé avec succès";
       } else {
-        $data["message"] = "Le client n'a pas pu être supprimé .";
+        $data["message"] = "Le compte admin n'a pas pu être supprimé .";
       }
   
     $this->render("message", $data);
+  }
+
+  public function action_remove_vente() {
+    $m = Model::getModel();
+
+    $remove = false;
+
+    //==================================
+    //     TEST SI C'EST UN ADMIN
+    //==================================
+    if (!isset($_SESSION['connected']) || !isset($_SESSION['statut']) || !isset($_SESSION['id_admin']) || !$_SESSION['connected'] || $_SESSION['statut']!='admin' || !$m->isInDatabaseAdmin($_SESSION["email"])){
+      $this->action_error("Vous ne possédez pas les droits administrateurs pour consulter cette page.");
     }
+    //===================================
+  
+    // Associer à la fonction removeAdmin de model.php pour supprimer l'admin 
+    if (!isset($_GET["id"])){
+      $this->action_error("Erreur, le numéro de vente n'a pas été trouvé.");
+    }
+    else {
+      $remove = $m->removeVente($_GET["id"]);
+    }
+  
+    $data = [
+      "title" => "Supprimer une vente",
+      "str_lien_retour" => "Retour à la page de l'historique des ventes",
+      "lien_retour" => "?controller=list&action=gestion_ventes" 
+    ];
 
+    if (isset($remove)) {
+      $data["message"] = "La vente à été supprimé avec succès";
+    } else {
+      $data["message"] = "La vente n'a pas pu être supprimé.";
+    }
+  
+    $this->render("message", $data);
+  }
 
-
-
-  /*
+    /*
   ===========================================================
                        MODIFICATION D'ELEMENT
   ===========================================================
