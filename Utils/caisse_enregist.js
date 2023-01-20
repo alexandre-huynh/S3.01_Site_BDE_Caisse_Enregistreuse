@@ -295,7 +295,7 @@ function choisirMethodePaiement(){
         let paiement = document.querySelector('#paiement');
         paiement.textContent="Carte Bancaire";
         let select_paiement = document.getElementById('select_paiement');
-        select_paiement.setAttribute('value','Carte_Bancaire');
+        select_paiement.setAttribute('value','Cartebancaire');
         console.log(select_paiement);
     });
     espece.addEventListener('click',function(){
