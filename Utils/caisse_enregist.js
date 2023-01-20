@@ -173,25 +173,7 @@ function getNumberProducts(){
     return number;
 }
 
-function getTotalPanier(){
-    let total = 0;
-    let snacks = getSnacks();
-    for(let product of snacks) {
-        total+=product.quantity*product.price;}
-    let boissons = getBoissons();
-    for(let product of boissons){
-        total+=product.quantity*product.price;
-    }
-    let sodas = getSodas();
-    for(let product of sodas){
-        total+=product.quantity*product.price;
-    }
-    let sirops = getSirops();
-    for(let product of sirops){
-        total+=product.quantity*product.price;
-    }
-    return total;
-}
+
 
 
 function clickSnacks(){
@@ -205,6 +187,11 @@ function clickSnacks(){
     addSnacks(ligne);
     let panier = document.getElementById('panier');
     panier.append(ligne);
+    let prix_ind = document.querySelectorAll('.snacks .prix');
+    prix_temp=prix_temp+parseFloat(prix_ind[i].textContent);
+    console.log(prix_temp);
+    prix_total.textContent=Number((prix_temp).toFixed(1));
+    // prix_total.textContent=parseFloat(String(prix_ind[i].textContent.substring(0,4)));
     let identifiant_produit=document.querySelectorAll('.snacks .hidden .id_prod');
     let form_ligne=document.createElement('input');
     form_ligne.setAttribute('type','hidden');
@@ -212,7 +199,9 @@ function clickSnacks(){
     form_ligne.setAttribute('value',identifiant_produit[i].textContent);
     let panier_formulaire = document.getElementById('panier_input_formulaire');
     panier_formulaire.append(form_ligne);
-    console.log(form_ligne);});
+    console.log(form_ligne);
+    
+    });
     
     }  
 }             
@@ -228,6 +217,10 @@ function clickBoissons(){
     addBoissons(ligne);
     let panier = document.getElementById('panier');
     panier.append(ligne);
+    let prix_ind = document.querySelectorAll('.boissons .prix');
+    prix_temp=prix_temp+parseFloat(prix_ind[i].textContent);
+    console.log(prix_temp);
+    prix_total.textContent=Number((prix_temp).toFixed(1));
     let identifiant_produit=document.querySelectorAll('.boissons .hidden .id_prod');
     let form_ligne=document.createElement('input');
     form_ligne.setAttribute('type','hidden');
@@ -250,6 +243,10 @@ function clickSodas(){
     addBoissons(ligne);
     let panier = document.getElementById('panier');
     panier.append(ligne);
+    let prix_ind = document.querySelectorAll('.sodas .prix');
+    prix_temp=prix_temp+parseFloat(prix_ind[i].textContent);
+    console.log(prix_temp);
+    prix_total.textContent=Number((prix_temp).toFixed(1));
     let identifiant_produit=document.querySelectorAll('.sodas .hidden .id_prod');
     let form_ligne=document.createElement('input');
     form_ligne.setAttribute('type','hidden');
@@ -272,6 +269,10 @@ function clickSirops(){
     addBoissons(ligne);
     let panier = document.getElementById('panier');
     panier.append(ligne);
+    let prix_ind = document.querySelectorAll('.sirops .prix');
+    prix_temp=prix_temp+parseFloat(prix_ind[i].textContent);
+    console.log(prix_temp);
+    prix_total.textContent=Number((prix_temp).toFixed(1));
     let identifiant_produit=document.querySelectorAll('.sirops .hidden .id_prod');
     let form_ligne=document.createElement('input');
     form_ligne.setAttribute('type','hidden');
@@ -281,15 +282,40 @@ function clickSirops(){
     panier_formulaire.append(form_ligne);
     console.log(form_ligne)});
     }  
-}     
+}
+function choisirMethodePaiement(){
+    let carte = document.getElementById('carte');
+    let espece = document.getElementById('espece');
+    carte.addEventListener('click',function(){
+        console.log('ok');
+        let dejapayer = document.querySelector('.dejapayer');
+        dejapayer.textContent="";
+        let reste = document.querySelector('.reste');
+        reste.textContent="";
+        let paiement = document.querySelector('#paiement');
+        paiement.textContent="Carte Bancaire";
+        let select_paiement = document.getElementById('select_paiement');
+        select_paiement.setAttribute('value','Carte_Bancaire');
+        console.log(select_paiement);
+    });
+    espece.addEventListener('click',function(){
+        let p_dejapaye = document.createElement('p');
+        
+
+
+    });
+}
 
 //initialisation addeventlistener
 let panier_id=0;
+let prix_temp=0;
+let prix_total = document.getElementById('totalprix');
 clickSnacks();
 let tab_snack=document.querySelectorAll('.snacks .produit');
 clickBoissons();
 clickSodas();
 clickSirops();
+choisirMethodePaiement();
 
 
 let pdt_snacks = document.querySelectorAll('.produit');
@@ -297,5 +323,6 @@ for(let i=0;i<pdt_snacks.length;i++){
 pdt_snacks[i].addEventListener('click',function(){
     console.log('Test1');
 });}
+
 
 
