@@ -98,36 +98,47 @@
         <div class="monnaie">
             <div>
                 <img src="Content/img/20euro.png" alt="20 euro" height="60" />
+                <span class="hidden" id="20euro">20</span>
             </div>
             <div>
                 <img src="Content/img/10euro.png" alt="10 euro" height="60" />
+                <span class="hidden" id="10euro">10</span>
             </div>
             <div>
                 <img src="Content/img/5euro.png" alt="5 euro" height="60" />
+                <span class="hidden" id="5euro">5</span>
             </div>
             <div>
                 <img src="Content/img/2euro.png" alt="2 euro" height="60" />
+                <span class="hidden" id="2euro">2</span>
             </div>
             <div>
                 <img src="Content/img/1euro.png" alt="1 euro" height="60" />
+                <span class="hidden" id="1euro">1</span>
             </div>
             <div>
                 <img src="Content/img/50cent.png" alt="50 cent" height="60" />
+                <span class="hidden" id="50cent">0.5</span>
             </div>
             <div>
                 <img src="Content/img/20cent.png" alt="20 cent" height="60" />
+                <span class="hidden" id="20cent">0.2</span>
             </div>
             <div>
                 <img src="Content/img/10cent.png" alt="10 cent" height="60" />
+                <span class="hidden" id="10cent">0.1</span>
             </div>
             <div>
                 <img src="Content/img/5cent.png" alt="5 cent" height="60" />
+                <span class="hidden" id="5cent">0.05</span>
             </div>
             <div>
                 <img src="Content/img/2cent.png" alt="2 cent" height="60" />
+                <span class="hidden" id="2cent">0.02</span>
             </div>
             <div>
                 <img src="Content/img/1cent.png" alt="1 cent" height="60" />
+                <span class="hidden" id="1cent">0.01</span>
             </div>
         </div>
         <div class="produits-panier">
