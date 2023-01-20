@@ -22,9 +22,9 @@
                 Affichage des produits ici, genre 2x Kinder bueno etc
             -->
         </ul>
-        <p class="total">TOTAL : <span id="totalprix">0 <span class="devise">€</span></span></p>
-        <p>Payé : <span id="dejapayer">0 <span class="devise">€</span></span></p>
-        <p>Reste à payer : <span id="reste">0 <span class="devise">€</span></span></p>
+        <p class="total">TOTAL : <span id="totalprix">0</span><span class="devise"> €</span></p>
+        <p class="dejapayer">Payé : <span id="dejapayer">0</span><span class="devise"> €</span></p>
+        <p class="reste">Reste à payer : <span id="reste">0</span><span class="devise"> €</span></p>
         <p>Paiement par : <b><span id="paiement">Espèce</span></b></p>
     </div>
     <!-- 
@@ -148,7 +148,7 @@
                                 <div class="produit">
                                     <div><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></div>
                                     <div><b><?=e($ligne["Nom"])?></b></div>
-                                    <div><?=e($ligne["Prix"])?> €</div>
+                                    <span class="prix"><?=e($ligne["Prix"])?></span><span> €</span>
                                 </div>
                                 <div><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></div>
                                 <div class="hidden"><span class="id_prod"><?=e($ligne["id_produit"])?></span></div>
@@ -172,7 +172,7 @@
                                 <div class="produit">
                                     <div><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></div>
                                     <div><b><?=e($ligne["Nom"])?></b></div>
-                                    <div><?=e($ligne["Prix"])?> €</div>
+                                    <span class="prix"><?=e($ligne["Prix"])?></span><span> €</span>
                                 </div>
                                 <div><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></div>
                                 <div class="hidden"><span class="id_prod"><?=e($ligne["id_produit"])?></span></div>
@@ -196,7 +196,7 @@
                                 <div class="produit">
                                     <div><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></div>
                                     <div><b><?=e($ligne["Nom"])?></b></div>
-                                    <div><?=e($ligne["Prix"])?> €</div>
+                                    <span class="prix"><?=e($ligne["Prix"])?></span><span> €</span>
                                 </div>
                                 <div><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></div>
                                 <div class="hidden"><span class="id_prod"><?=e($ligne["id_produit"])?></span></div>
@@ -220,7 +220,7 @@
                                 <div class="produit">
                                     <div><img src="Content/img/<?=e($ligne["Img_produit"])?>" alt="Image <?=e($ligne["Nom"])?>" height="60" /></div>
                                     <div><b><?=e($ligne["Nom"])?></b></div>
-                                    <div><?=e($ligne["Prix"])?> €</div>
+                                    <span class="prix"><?=e($ligne["Prix"])?></span><span> €</span>
                                 </div>
                                 <div><?=e($ligne["Stock"])?><img src="Content/img/logo_stock.png" alt="Image illustration stock" height="20px" /></div>
                                 <div class="hidden"><span class="id_prod"><?=e($ligne["id_produit"])?></span></div>

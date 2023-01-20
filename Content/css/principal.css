@@ -27,9 +27,12 @@ header nav div a{
     margin: 10px;
 }
 
+.deco{
+    border-radius: 10px;
+}
+
 .deco:hover{
     background-color: #1c1c21;
-    border-radius: 5px;
 }
 
 
@@ -54,11 +57,19 @@ table td, table th{
 
 
 a[title="Se connecter / S'inscrire"]{
+    /* ne marche pas trop 
+    float: left;
+    width: 20%;
+    */
     background-color: #12B886;
     padding: 15px;
 }
 
 a[title="Se déconnecter"]{
+    /* ne marche pas trop 
+    float: left;
+    width: 20%;
+    */
     background-color: #d10000;
     padding: 15px;
 }

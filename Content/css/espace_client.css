@@ -1,0 +1,35 @@
+body{
+    background-color: #E2F6F0;
+}
+
+main{
+    width: 100%;
+}
+
+.content-main{
+    width: 100%;
+    padding: 30px 100px;
+    margin: auto;
+    text-align: center;
+}
+
+.content-main table {
+    margin: 20px auto;
+}
+.content-main table th{
+    width: 200px;
+    background-color: #15AABF;
+    color: white;
+}
+
+h1{
+    text-align: center;
+}
+
+.content-main h2{
+    background-color: #12B886;
+    padding: 5px;
+    color: white;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}

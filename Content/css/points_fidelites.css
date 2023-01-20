@@ -1,0 +1,46 @@
+h1{
+    text-align: center;
+}
+
+main{
+    width: 100%;
+
+}
+
+.content-main{
+    padding: 50px;
+    margin: auto;
+}
+
+.content-main table th{
+    background-color: #15AABF;
+    color: white;
+    width: 200px;
+}
+
+input[type="submit"]{
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    background-color: #12B886;
+    border: none;
+    width: 100px;
+}
+
+input[type="submit"]:hover{
+    background-color:#000;
+}
+
+.back{
+    padding: 5px;
+    background-color: #12B886;
+    color:white;
+    margin: 8px;
+    border-radius: 5px;
+    border: none;
+    text-decoration: none;
+}
+
+.back:hover{
+    background-color: black;
+}

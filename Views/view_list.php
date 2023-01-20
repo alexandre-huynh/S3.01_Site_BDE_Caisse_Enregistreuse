@@ -3,6 +3,7 @@
 <?php else : ?>
   <?php require "view_begin.php";?>
 <?php endif ?>
+<link rel="stylesheet" type="text/css" href="Content/css/inventaire.css">
 
 <!-- Titre de la liste d'élements -->
 <h1> <?= e($titre) ?> </h1>
@@ -12,8 +13,9 @@
 <form action ="">
   <input type="hidden" name="controller" value="list" />
   <input type="hidden" name="action" value="<?=e($listed_elements)?>" />
-   <p>
-      <label> Rechercher : <input type="search" 
+    <p class="barre_recherche">
+    <img src="Content/img/search.png" alt="image-recherche">
+      <label><input class="search-by" type="search" 
                                   name="search" 
                                   <?php if (isset($_GET["search"]) && $_GET["search"]!="") : ?>
                                     value=<?=e($_GET["search"])?>
@@ -45,19 +47,26 @@
    </p>
    ========================================================================================================================
     -->
+  <div class="centrer">
    <p>
      <input type="submit" value="Rechercher"/>
    </p>
+
+   <!-- Réinitialiser recherche -->
+    <p class="init-recherche">
+      <a href="?controller=list&action=<?=e($listed_elements)?>">Réinitialiser la recherche</a>
+    </p>
+  </div>
 </form>
 
-<!-- Réinitialiser recherche -->
-<p>
-  <a href="?controller=list&action=<?=e($listed_elements)?>">Réinitialiser la recherche</a>
-</p>
+
+
+<br>
 <!--=======================================================-->
 
 <!-- Liste des éléments sous forme de table -->
 <!-- Peut contenir par exemple la liste de produits, des clients inscrits, des ventes etc -->
+<div class="tabeau-produit">
 <table>
   <!-- Titres de colonnes / attributs -->
   <tr>
@@ -131,7 +140,7 @@
   Risque de ne pas être vu ? étant donné que le tableau va peut-être être long
   Solution : pagination PHP ou Javascript(mieux)
 -->
-<p>
+<p class="creer_produit">
   <a href="?controller=set&action=form_add_<?=e($redirect_add_element)?>">
     Créer <?=e($str_add_element)?>
     <!-- 
@@ -140,6 +149,7 @@
     -->
   </a>
 </p>
+<br>
 </main>
 
 <?php require "view_end.php";?>

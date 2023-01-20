@@ -3,13 +3,14 @@
 <?php else : ?>
   <?php require "view_begin.php";?>
 <?php endif ?>
+<link rel="stylesheet" type="text/css" href="Content/css/espace_admin.css">
 
-
-<h1>Bonjour <?=e($nomprenom)?> !</h1>
+<h1 class="greeting">Bonjour <?=e($nomprenom)?> !</h1>
 <hr>
+<div class="content-main">
 
 <!--Stats recettes-->
-<p>Le Wolf BDE a réalisé :
+<p class="bilan">Le Wolf BDE a réalisé :
     <ul>
         <li><?=e($recettes_today)?> € de recettes <b>aujourd'hui</b></li>
         <li><?=e($recettes_week)?> € de recettes <b>cette semaine</b></li>
@@ -19,7 +20,7 @@
 <hr>
 
 <!--TODO: Mettre des images d'illustration à côté des boutons liens, OPTIONEL-->
-<div>
+<div class="menu-list">
     <p>
         <a href="?controller=list&action=caisse" title="Caisse enregistreuse">Caisse enregistreuse</a>
     </p>

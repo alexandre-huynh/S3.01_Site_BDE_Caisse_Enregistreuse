@@ -3,6 +3,7 @@
 <?php else : ?>
   <?php require "view_begin.php";?>
 <?php endif ?>
+<link rel="stylesheet" href="Content/css/creer_produit.css">
 
 <!-- Titre de la liste d'élements -->
 <h1> <?= e($titre) ?> </h1>
@@ -51,7 +52,7 @@
     </p>
     <p>
       <label>Image du produit* (format .png / .jpg / .jpeg, taille de fichier max : 5 Mo) :
-        <input type="file" name="produit_<?=e($id_disponible)?>" accept=".png,.jpeg,.jpg" required /> 
+        <input class = "custom-file-input" type="file" name="produit_<?=e($id_disponible)?>" accept=".png,.jpeg,.jpg" required /> 
         <input type="hidden" name="Img_produit" value="produit_<?=e($id_disponible)?>" />
       </label>
       </br>
@@ -276,7 +277,7 @@
   -->
 
   <!--Validation-->
-  <p>* : obligatoire</p>
+  <p><span>* </span> : obligatoire</p>
   <p> <input type="submit" value="Ajouter à la base de données"/> </p>
 </form>
 </main>

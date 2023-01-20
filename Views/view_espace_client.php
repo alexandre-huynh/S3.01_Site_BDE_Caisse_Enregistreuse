@@ -3,15 +3,18 @@
 <?php else : ?>
   <?php require "view_begin.php";?>
 <?php endif ?>
+<link rel="stylesheet" type="text/css" href="Content/css/espace_client.css">
+
+<div class="content-main">
 
 <h1>Bonjour <?=e($nomprenom)?> !</h1>
 <hr>
 
-<h3>Vous avez <?=e($ptsfidelite)?> points de fidélité.</h3>
+<h5>Vous avez <?=e($ptsfidelite)?> points de fidélité.</h5>
 <hr>
 <!--peut être inclure une liste des articles dont il est éligible avec autant de points-->
 
-<h2>Historique de vos achats</h2>
+<h2 class="historique_achat">Historique de vos achats</h2>
 
 <?php foreach ($historique as $date=>$ligne): ?>
     <h3><?=date("d/m/Y",strtotime(e($date)))?></h3>
@@ -30,6 +33,8 @@
         <?php endforeach ?>
     </table>
 <?php endforeach ?>
+
+</div>
 </main>
 
 <?php require "view_end.php";?>

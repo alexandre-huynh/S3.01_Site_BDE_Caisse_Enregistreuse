@@ -3,9 +3,11 @@
 <?php else : ?>
   <?php require "view_begin.php";?>
 <?php endif ?>
+<link rel="stylesheet" type="text/css" href="Content/css/points_fidelites.css">
 
 <h1>Programme fidélité</h1>
-
+<hr>
+<div class="content-main">
 <p>Les produits suivants ont été vendus pour le client <?=e($nom_client)?> : </p>
 
 <?php if (isset($produits_traite)) : ?>
@@ -18,7 +20,7 @@
 
 <p><?=e($nom_client)?> possède <?=e($solde_points)?> points et peut bénéficier d'<b>un produit gratuit</b> grâce au programme fidélité :</p>
 
-<p>Sélectionnez 1 produit de la liste, ou <a href="?controller=list&action=caisse">retournez à la page Caisse enregistreuse</a></p>
+<p>Sélectionnez 1 produit de la liste, ou <a class="back" href="?controller=list&action=caisse">retournez à la page Caisse enregistreuse</a></p>
 
 <form action="?controller=set&action=traitement_fidelite" method="post">
   <input type="hidden" name="id_client" value="<?=e($id_client)?>">
@@ -46,10 +48,11 @@
     <?php endif ?>
   <?php endforeach ?>
   </table>
+  <br>
   <input type="submit" value="Valider" />
 </form>
 
-
-
+</div>
+</main>
 
 <?php require "view_end.php";?>
