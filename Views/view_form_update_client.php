@@ -3,7 +3,7 @@
 <?php else : ?>
   <?php require "view_begin.php";?>
 <?php endif ?>
-<link rel="stylesheet" type="text/css" href="Content/css/modif_compte_client.css">
+<link rel="stylesheet" type="text/css" href="Content/css/creer_produit.css">
 
 <!-- Titre de la liste d'élements -->
 <h1> <?= e($titre) ?> </h1>
