@@ -286,43 +286,72 @@ function clickSirops(){
 function choisirMethodePaiement(){
     let carte = document.getElementById('carte');
     let espece = document.getElementById('espece');
+    let reste = document.querySelector('.reste');
+    let select_paiement = document.getElementById('select_paiement');
+    let span_devise= document.querySelector('.devise');
+    let paiement = document.querySelector('#paiement');
     carte.addEventListener('click',function(){
         console.log('ok');
-        let dejapayer = document.querySelector('.dejapayer');
         dejapayer.textContent="";
-        let reste = document.querySelector('.reste');
         reste.textContent="";
-        let paiement = document.querySelector('#paiement');
         paiement.textContent="Carte Bancaire";
-        let select_paiement = document.getElementById('select_paiement');
-        select_paiement.setAttribute('value','Cartebancaire');
+        select_paiement.setAttribute('value','Carte_Bancaire');
         console.log(select_paiement);
     });
     espece.addEventListener('click',function(){
-        let p_dejapaye = document.createElement('p');
+        dejapayer.textContent="Payé : ";
+        let span_dejapaye = document.createElement('span');
+        span_dejapaye.id='dejapayer';
+        span_dejapaye.textContent=0;
+        dejapayer.append(span_dejapaye);
+        dejapayer.append(span_devise);
+        reste.textContent='Reste à payer : ';
+        let span_reste = document.createElement('span');
+        span_reste.id='reste';
+        span_reste.textContent=0;
+        reste.append(span_reste);
+        reste.append(span_devise);
+        paiement.textContent="Espèces";
+        select_paiement.setAttribute('value','Espèces');
+        console.log(select_paiement);
+
+
         
 
 
     });
 }
+//Pas opérationnel
+function renduMonnaie(){
+    let monnaie=document.querySelectorAll('.monnaie div');
+    let span_rendu = document.querySelectorAll('.hidden');
+    for (let index = 0; index < monnaie.length; index++) {
+        monnaie[index].addEventListener('click',function(){
+        euros_clique=span_rendu[index].textContent;
+        console.log(euros_clique);
+        dejapayer.textContent='Payé :' + String(prix_total.textContent - euros_clique);
+        });
+    }
 
+}
 //initialisation addeventlistener
 let panier_id=0;
 let prix_temp=0;
 let prix_total = document.getElementById('totalprix');
+let dejapayer = document.querySelector('.dejapayer');
 clickSnacks();
 let tab_snack=document.querySelectorAll('.snacks .produit');
 clickBoissons();
 clickSodas();
 clickSirops();
 choisirMethodePaiement();
+renduMonnaie();
 
-
+/*
 let pdt_snacks = document.querySelectorAll('.produit');
 for(let i=0;i<pdt_snacks.length;i++){
 pdt_snacks[i].addEventListener('click',function(){
     console.log('Test1');
 });}
 
-
-
+*/
