@@ -1,8 +1,6 @@
 # S3.01_Site_BDE_Caisse_Enregistreuse
-SAÉ S3.01 - Développement d'une application | Conception d'un site Web en équipe dédié au stand de confiseries du BDE de l'IUT de Villetaneuse
+SAÉ S3.01 - Développement d'une application | Conception d'un site Web en équipe de 5 étudiants dédié au stand de confiseries du BDE de l'IUT de Villetaneuse
 
-SAÉ S3.01 - Développement d'une application
-Conception d'un site Web en équipe de 5 étudiants, dédié au stand de confiseries du BDE de l'IUT de Villetaneuse.
 Acquis : expérience de développement d'application Web en architecture MVC, avec hébergement du site et de la base de données sur Raspberry Pi via serveur Web LAMP
 
 Ce site web permet aux responsables de gérer les achats des clients à travers une caisse enregistreuse automatique, de gérer l'inventaire des produits et les comptes clients à travers leur espace administrateur, ainsi que de consulter l'historique des ventes, les recettes quotidiennes, hebdomadaires et mensuelles du stand.
