@@ -7,4 +7,5 @@ Ce site web permet aux responsables de gérer les achats des clients à travers 
 
 Les internautes peuvent consulter le catalogue des produits proposés au stand, et les clients inscrits ont la possibilité de consulter leurs achats effectués ainsi que leur solde de points de fidélité.
 
+<h2>Alexandre Huynh</h2>
 Mes missions comprennent la mise en place de la structure MVC en PHP, SQL et HTML, la réalisation des fonctions principales d’affichage et de liens entre les différentes pages du site, et des fonctions importantes en PHP et SQL d’ajout, de modification et de suppression de données en interaction avec la base de données.
